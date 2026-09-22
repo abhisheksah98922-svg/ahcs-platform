@@ -80,21 +80,25 @@ export async function POST(request: NextRequest) {
       verifiedByOfficerId: null,
     });
 
-    db.logAudit({
-      actorId: null,
-      actorRole: 'HEALTHCARE_PROVIDER_APPLICANT',
-      action: 'PROVIDER_REGISTRATION_SUBMITTED',
-      targetResource: 'providers',
-      targetId: newProvider.id,
-      ipAddress: request.headers.get('x-forwarded-for') || null,
-      userAgent: request.headers.get('user-agent') || null,
-      metadata: {
-        providerId: newProvider.id,
-        name: newProvider.name,
-        category: newProvider.category,
-        registrationNumber: newProvider.registrationNumber,
-      },
-    });
+    try {
+      db.logAudit({
+        actorId: null,
+        actorRole: 'HEALTHCARE_PROVIDER_APPLICANT',
+        action: 'PROVIDER_REGISTRATION_SUBMITTED',
+        targetResource: 'providers',
+        targetId: newProvider.id,
+        ipAddress: request.headers.get('x-forwarded-for') || null,
+        userAgent: request.headers.get('user-agent') || null,
+        metadata: {
+          providerId: newProvider.id,
+          name: newProvider.name,
+          category: newProvider.category,
+          registrationNumber: newProvider.registrationNumber,
+        },
+      });
+    } catch (e) {
+      // Non-blocking audit log
+    }
 
     return NextResponse.json({
       success: true,
@@ -103,6 +107,6 @@ export async function POST(request: NextRequest) {
     }, { status: 201 });
   } catch (error: any) {
     console.error('Error registering provider:', error);
-    return NextResponse.json({ error: 'Failed to process provider registration' }, { status: 500 });
+    return NextResponse.json({ error: error?.message || 'Failed to process provider registration' }, { status: 500 });
   }
 }
