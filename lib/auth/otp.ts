@@ -127,16 +127,20 @@ export function requestOtp(mobileNumber: string): {
   smsProvider.sendOtp(cleanMobile, rawCode);
 
   // Log audit event
-  db.logAudit({
-    actorId: null,
-    actorRole: 'ANONYMOUS',
-    action: 'OTP_REQUESTED',
-    targetResource: 'MOBILE_AUTH',
-    targetId: cleanMobile,
-    ipAddress: null,
-    userAgent: null,
-    metadata: { mobile: cleanMobile },
-  });
+  try {
+    db.logAudit({
+      actorId: null,
+      actorRole: 'ANONYMOUS',
+      action: 'OTP_REQUESTED',
+      targetResource: 'MOBILE_AUTH',
+      targetId: cleanMobile,
+      ipAddress: null,
+      userAgent: null,
+      metadata: { mobile: cleanMobile },
+    });
+  } catch (err) {
+    // Non-blocking audit log
+  }
 
   const hasLiveSmsGateway = Boolean(process.env.FAST2SMS_API_KEY || process.env.TWILIO_ACCOUNT_SID);
   const shouldExposeDevCode = process.env.ALLOW_TEST_OTP === 'true' || !hasLiveSmsGateway || process.env.NODE_ENV !== 'production';

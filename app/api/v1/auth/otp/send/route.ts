@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   } catch (err: any) {
     console.error('OTP Send Error:', err);
     return NextResponse.json(
-      { success: false, error: 'Internal server error processing OTP request' },
+      { success: false, error: err?.message || 'Internal server error processing OTP request' },
       { status: 500 }
     );
   }
