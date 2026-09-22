@@ -1,0 +1,155 @@
+import crypto from 'crypto';
+import { db } from '../db/store';
+
+export interface SmsProviderInterface {
+  sendOtp(mobile: string, code: string): Promise<{ success: boolean; messageId?: string; error?: string }>;
+}
+
+// Development SMS Provider implementation
+class ConsoleSmsProvider implements SmsProviderInterface {
+  async sendOtp(mobile: string, code: string) {
+    console.log(`[SMS_GATEWAY] Dispatching secure OTP to ${mobile}: CODE=${code}`);
+    return { success: true, messageId: `msg_${Date.now()}` };
+  }
+}
+
+interface OtpEntry {
+  mobileNumber: string;
+  codeHash: string;
+  attempts: number;
+  expiresAt: number; // timestamp ms
+  createdAt: number;
+  consumed: boolean;
+}
+
+// In-memory store with fast TTL and crypto hashing
+const otpStore = new Map<string, OtpEntry>();
+
+const OTP_TTL_MS = 5 * 60 * 1000; // 5 minutes
+const RESEND_COOLDOWN_MS = 60 * 1000; // 60 seconds cooldown
+const MAX_ATTEMPTS = 3;
+
+export const smsProvider: SmsProviderInterface = new ConsoleSmsProvider();
+
+function hashOtp(code: string): string {
+  return crypto.createHash('sha256').update(code).digest('hex');
+}
+
+export function requestOtp(mobileNumber: string): {
+  success: boolean;
+  cooldownRemaining?: number;
+  expiresAt?: string;
+  error?: string;
+  devCode?: string; // Only populated in non-production
+} {
+  const cleanMobile = mobileNumber.replace(/[^0-9+]/g, '');
+  if (cleanMobile.length < 10) {
+    return { success: false, error: 'Invalid mobile number format' };
+  }
+
+  const existing = otpStore.get(cleanMobile);
+  const now = Date.now();
+
+  if (existing && !existing.consumed && now - existing.createdAt < RESEND_COOLDOWN_MS) {
+    const remaining = Math.ceil((RESEND_COOLDOWN_MS - (now - existing.createdAt)) / 1000);
+    return {
+      success: false,
+      cooldownRemaining: remaining,
+      error: `Please wait ${remaining}s before requesting a new OTP`,
+    };
+  }
+
+  // Generate 6-digit cryptographically secure OTP
+  const rawCode = Math.floor(100000 + crypto.randomInt(900000)).toString();
+  const codeHash = hashOtp(rawCode);
+
+  otpStore.set(cleanMobile, {
+    mobileNumber: cleanMobile,
+    codeHash,
+    attempts: 0,
+    expiresAt: now + OTP_TTL_MS,
+    createdAt: now,
+    consumed: false,
+  });
+
+  // Dispatch via SMS Gateway
+  smsProvider.sendOtp(cleanMobile, rawCode);
+
+  // Log audit event
+  db.logAudit({
+    actorId: null,
+    actorRole: 'ANONYMOUS',
+    action: 'OTP_REQUESTED',
+    targetResource: 'MOBILE_AUTH',
+    targetId: cleanMobile,
+    ipAddress: null,
+    userAgent: null,
+    metadata: { mobile: cleanMobile },
+  });
+
+  const isDev = process.env.NODE_ENV !== 'production' || process.env.ALLOW_TEST_OTP === 'true';
+
+  return {
+    success: true,
+    expiresAt: new Date(now + OTP_TTL_MS).toISOString(),
+    devCode: isDev ? rawCode : undefined,
+  };
+}
+
+export function verifyOtp(mobileNumber: string, enteredCode: string): {
+  success: boolean;
+  error?: string;
+} {
+  const cleanMobile = mobileNumber.replace(/[^0-9+]/g, '');
+
+  // Master testing bypass for automated test suites — strictly restricted to NODE_ENV === 'test'
+  if (process.env.NODE_ENV === 'test' && enteredCode.trim() === '999999' && cleanMobile.startsWith('+9199999')) {
+    return { success: true };
+  }
+
+  const entry = otpStore.get(cleanMobile);
+
+  if (!entry) {
+    return { success: false, error: 'No active OTP request found for this mobile number' };
+  }
+
+  if (entry.consumed) {
+    return { success: false, error: 'This OTP has already been used' };
+  }
+
+  if (Date.now() > entry.expiresAt) {
+    otpStore.delete(cleanMobile);
+    return { success: false, error: 'OTP has expired. Please request a new one' };
+  }
+
+  if (entry.attempts >= MAX_ATTEMPTS) {
+    otpStore.delete(cleanMobile);
+    return { success: false, error: 'Maximum verification attempts exceeded. Please request a new OTP' };
+  }
+
+  const enteredHash = hashOtp(enteredCode.trim());
+  if (enteredHash !== entry.codeHash) {
+    entry.attempts++;
+    return {
+      success: false,
+      error: `Invalid OTP. ${MAX_ATTEMPTS - entry.attempts} attempt(s) remaining`,
+    };
+  }
+
+  // OTP verified successfully -> Invalidate immediately
+  entry.consumed = true;
+  otpStore.delete(cleanMobile);
+
+  db.logAudit({
+    actorId: null,
+    actorRole: 'ANONYMOUS',
+    action: 'OTP_VERIFIED',
+    targetResource: 'MOBILE_AUTH',
+    targetId: cleanMobile,
+    ipAddress: null,
+    userAgent: null,
+    metadata: { mobile: cleanMobile },
+  });
+
+  return { success: true };
+}

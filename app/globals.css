@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 241, 245, 249;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+@keyframes cardFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(0.6deg);
+  }
+}
+
+.animate-card-float {
+  animation: cardFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes haloPulse {
+  0%, 100% {
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.06) translate(-50%, -50%);
+    opacity: 0.75;
+  }
+}
+
+.animate-halo-pulse {
+  animation: haloPulse 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+

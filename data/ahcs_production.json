@@ -1,0 +1,5146 @@
+{
+  "users": [
+    {
+      "id": "usr_officer_ananya_01",
+      "mobileNumber": "+919999900001",
+      "mobileVerifiedAt": "2026-09-22T14:47:05.359Z",
+      "email": "officer.ananya@ahcs.in",
+      "emailVerifiedAt": "2026-09-22T14:47:05.359Z",
+      "role": "VERIFICATION_OFFICER",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "createdAt": "2026-09-22T14:47:05.359Z",
+      "updatedAt": "2026-09-22T14:47:05.359Z"
+    },
+    {
+      "id": "usr_admin_system_01",
+      "mobileNumber": "+919999900002",
+      "mobileVerifiedAt": "2026-09-22T14:47:05.359Z",
+      "email": "admin@ahcs.in",
+      "emailVerifiedAt": "2026-09-22T14:47:05.359Z",
+      "role": "SUPER_ADMIN",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "createdAt": "2026-09-22T14:47:05.359Z",
+      "updatedAt": "2026-09-22T14:47:05.359Z"
+    },
+    {
+      "mobileNumber": "+919888877777",
+      "mobileVerifiedAt": "2026-09-22T15:12:51.311Z",
+      "email": "877777@apollocitycare.org",
+      "emailVerifiedAt": "2026-09-22T15:12:51.311Z",
+      "role": "DOCTOR",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_026c134846dfcb8deec5969f",
+      "createdAt": "2026-09-22T15:12:51.311Z",
+      "updatedAt": "2026-09-22T15:12:51.311Z"
+    },
+    {
+      "mobileNumber": "+919878679537",
+      "mobileVerifiedAt": "2026-09-22T15:12:55.996Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_fb983123e504c1a02ede9d06",
+      "createdAt": "2026-09-22T15:12:55.996Z",
+      "updatedAt": "2026-09-22T15:12:55.996Z"
+    },
+    {
+      "mobileNumber": "+919745585151",
+      "mobileVerifiedAt": "2026-09-22T15:12:56.097Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_3f414c0857248991a351a49a",
+      "createdAt": "2026-09-22T15:12:56.097Z",
+      "updatedAt": "2026-09-22T15:12:56.097Z"
+    },
+    {
+      "mobileNumber": "+919889984171",
+      "mobileVerifiedAt": "2026-09-22T15:13:04.189Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_846490583f1c2969c24df47f",
+      "createdAt": "2026-09-22T15:13:04.189Z",
+      "updatedAt": "2026-09-22T15:13:04.189Z"
+    },
+    {
+      "mobileNumber": "+919811223344",
+      "mobileVerifiedAt": "2026-09-22T15:28:53.252Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_d3eb236b8d77e3478db6bb7e",
+      "createdAt": "2026-09-22T15:28:53.252Z",
+      "updatedAt": "2026-09-22T15:28:53.252Z"
+    },
+    {
+      "mobileNumber": "+919891108530",
+      "mobileVerifiedAt": "2026-09-22T15:31:48.547Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_7a3cff92e0bc92d3288b63b2",
+      "createdAt": "2026-09-22T15:31:48.547Z",
+      "updatedAt": "2026-09-22T15:31:48.547Z"
+    }
+  ],
+  "sessions": [
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "c9c1905baea67fe94a1bf9fe3317c03778643842b7917cdf3fb746f72749fa6a",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:38.404Z",
+      "revokedAt": null,
+      "id": "ses_4eafea887729e90b7ee94da74ede59a8",
+      "createdAt": "2026-09-22T15:12:38.404Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "8603ad304313cd3403bc57c46dd6a13b7a1cbbf0fa09106e6ba65edeeebb47a4",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:51.255Z",
+      "revokedAt": null,
+      "id": "ses_461ccb7a471cb00a3e0822652deb0095",
+      "createdAt": "2026-09-22T15:12:51.255Z"
+    },
+    {
+      "userId": "usr_026c134846dfcb8deec5969f",
+      "sessionTokenHash": "92f9c8a9ea12f9eaf390e2e50e5f8f7097d1335f489aa9a89d00f99ab9c48744",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:51.312Z",
+      "revokedAt": null,
+      "id": "ses_ddb95d5b9366a0e69f288cd0891f2657",
+      "createdAt": "2026-09-22T15:12:51.312Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "4b7cf3a3a4d1b14e68554225ccb5e1a96e6c902c5ff2a348dae56ff0ae4dd78c",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:55.970Z",
+      "revokedAt": null,
+      "id": "ses_4448b708c8ce7c23e2800e622d8d7ce1",
+      "createdAt": "2026-09-22T15:12:55.970Z"
+    },
+    {
+      "userId": "usr_fb983123e504c1a02ede9d06",
+      "sessionTokenHash": "6897b351f712cb124c6f80f5a8ad5412d65e76fb99cabd602f98be0b0617e550",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:55.999Z",
+      "revokedAt": null,
+      "id": "ses_1a30ee819dd6746d184cc98f5cb2708a",
+      "createdAt": "2026-09-22T15:12:55.999Z"
+    },
+    {
+      "userId": "usr_3f414c0857248991a351a49a",
+      "sessionTokenHash": "32220483e8e78cd97a5e9988c4f0abac9fecfb5aa4681b82b35a718924b31bc0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:12:56.100Z",
+      "revokedAt": null,
+      "id": "ses_99d8b9e1079dd60a6656ecf15c856e51",
+      "createdAt": "2026-09-22T15:12:56.101Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "3d710e1d0f4732ee77769a5e3851fa9cf2671f9307ca09cf7702b566e60565b1",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:13:04.160Z",
+      "revokedAt": null,
+      "id": "ses_973c6d5186cb33fc6500caaf48ee6319",
+      "createdAt": "2026-09-22T15:13:04.160Z"
+    },
+    {
+      "userId": "usr_846490583f1c2969c24df47f",
+      "sessionTokenHash": "b717fc43f18c824ffbc962690b159fd9b058ba12fa8c87fa2999358a30c0f609",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:13:04.196Z",
+      "revokedAt": null,
+      "id": "ses_0addb60865844f3b99f98b78b0e18fbd",
+      "createdAt": "2026-09-22T15:13:04.196Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "8e6ce858b09da6f699ad85d728da583f3394d7c133a6b39f3eae6b310df5d0f5",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:28:07.634Z",
+      "revokedAt": null,
+      "id": "ses_96028f55b4477ec989ccf1c98e3d7569",
+      "createdAt": "2026-09-22T15:28:07.634Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "2439201ee5cd48f25c8216a74b54f79ea12fe1ca21d95db7e17c7b5a232806c5",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:28:19.760Z",
+      "revokedAt": null,
+      "id": "ses_ffb377750da17a421c8a2fc961220da6",
+      "createdAt": "2026-09-22T15:28:19.760Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "38c6e0a84badde3b1937adeea2ee49562c9fa5abe9a423bb752b432a35672178",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:28:39.789Z",
+      "revokedAt": null,
+      "id": "ses_050590365b6f55697251078dfca6bae8",
+      "createdAt": "2026-09-22T15:28:39.789Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "dedc81df020e367e911a2890162ee322747184e0d54b4bc7a0bd30a4ab4ee928",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:28:53.231Z",
+      "revokedAt": null,
+      "id": "ses_04fe7f4f96e834b0205ac0f93e56992a",
+      "createdAt": "2026-09-22T15:28:53.231Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "ee125d0b5f8930c78ed7f8092249a3ddd2f9a713abe729c07e63c1f5410e0eb6",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:28:53.259Z",
+      "revokedAt": null,
+      "id": "ses_eda2d026a26da4369855e3056cfb32a5",
+      "createdAt": "2026-09-22T15:28:53.259Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "097f5ca6fa7e5e18ab58a2f1ca9cc89d5663d81b666d807779c010563fc55756",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:10.473Z",
+      "revokedAt": null,
+      "id": "ses_1f71ea61d80725b9faffdefac5b42df7",
+      "createdAt": "2026-09-22T15:29:10.473Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "b838db5c88d4f1f00b8f7314113ee0b37b6bec844c982aa2ee9d7990da416a5e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:10.500Z",
+      "revokedAt": null,
+      "id": "ses_1e8c027f79630d897458b31ad83f0cf1",
+      "createdAt": "2026-09-22T15:29:10.500Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "f4987c3dee5412a04415892a454ba3d8852967a055563dcf605d7288c0eb7506",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:21.874Z",
+      "revokedAt": null,
+      "id": "ses_0a022b8b2b9aa0b7ae88ea8627cc563e",
+      "createdAt": "2026-09-22T15:29:21.874Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "94f8a4ad4b6c0c5597e017a14ca3dfc96052e4c57b2c0ac8414bd6493e388746",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:21.901Z",
+      "revokedAt": null,
+      "id": "ses_d51d35ed666898f579afd10fb21f34df",
+      "createdAt": "2026-09-22T15:29:21.901Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "cb2d14148df6bcd737b6d0f4b50e84cda7ad6a31fefd5f3517ce335a3a09c334",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:34.761Z",
+      "revokedAt": null,
+      "id": "ses_4acdc7c73d8cea15696f629ebcc8d08a",
+      "createdAt": "2026-09-22T15:29:34.761Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "923ebbaebd57a9fe105e4a21d40bbab15834cbacb4dddd87c07f54a44deb82ed",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:34.791Z",
+      "revokedAt": null,
+      "id": "ses_2af988b553026424d86019c32dab925e",
+      "createdAt": "2026-09-22T15:29:34.791Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "ebf38b9a8c71e91c095a4454edb176e6f5ae0a8f7b93fa68bf511ec572e4a436",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:50.965Z",
+      "revokedAt": null,
+      "id": "ses_982ec20df29850713e9f51ac3ea73c8c",
+      "createdAt": "2026-09-22T15:29:50.965Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "2d53acecadc67866f2adb5c9e4b60e85d8978a7479f2d628d5136c56eb145999",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:29:50.990Z",
+      "revokedAt": null,
+      "id": "ses_4a009d8445a265201c3041d4a4a48587",
+      "createdAt": "2026-09-22T15:29:50.990Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "8552d02e88e0b6cf55a586d4bfe49aabcfce7a630bdb67e1e579aa11556ed4d8",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:10.728Z",
+      "revokedAt": null,
+      "id": "ses_5323c20f788986c6f730d38f8b9f1673",
+      "createdAt": "2026-09-22T15:30:10.728Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "9ef497f97ce8383736ab4c31a33c4ea00793f974fa6a5f9490c299de513ab976",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:10.757Z",
+      "revokedAt": null,
+      "id": "ses_43686d2f0c79c580117d8ebcc389026d",
+      "createdAt": "2026-09-22T15:30:10.757Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "b46aee36038c58b101c4f88bca84aea036987f87a5abd25420203d6128fd4809",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:20.880Z",
+      "revokedAt": null,
+      "id": "ses_4087c589f8a7f4f49b9aa79d100eaf66",
+      "createdAt": "2026-09-22T15:30:20.880Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "9c124a7eeac53ee1023d2034a74ecabbcf0d6cef34be2a3e2d9a54dec0c435d4",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:20.900Z",
+      "revokedAt": null,
+      "id": "ses_7177dc12577a18fb281342f5410d2cc7",
+      "createdAt": "2026-09-22T15:30:20.900Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "8a2d8d41aaa99e0165fd8d640682588bb47d6a27d2582333bb9d97e912379bf2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:38.260Z",
+      "revokedAt": null,
+      "id": "ses_82609f433fe37fadfb1e7637a8cf6117",
+      "createdAt": "2026-09-22T15:30:38.260Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "e50f48d7cb7d7dc2538a5fdcfed5357d21a43fb21f945bfd810b931e73906c28",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:30:38.284Z",
+      "revokedAt": null,
+      "id": "ses_7a0059ee78106099d6cf62f3018b69a0",
+      "createdAt": "2026-09-22T15:30:38.284Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "00d4dfae2f3403a2794db065d1c8e343adc050b593fd5d8f6601f52d9271ab51",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:14.364Z",
+      "revokedAt": null,
+      "id": "ses_3461f3e9d5beda6c553790f69fa2028a",
+      "createdAt": "2026-09-22T15:31:14.364Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "ad1dee663688a6fe1ef4643cdbb6010e6dd048fd7e9b225c69d6a2209a0477b9",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:14.386Z",
+      "revokedAt": null,
+      "id": "ses_eec648776937d6de2cfaa828e246dbba",
+      "createdAt": "2026-09-22T15:31:14.386Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "e1dc526b687db410fae738bb1e9943992f8bf7fda0602dec30442d8e23f0df01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:28.636Z",
+      "revokedAt": null,
+      "id": "ses_0b581ed230ddd53baaeac5e7214783be",
+      "createdAt": "2026-09-22T15:31:28.636Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "sessionTokenHash": "d483776ff5d922d43eeef941fc0ba02d3dc842f9006103579dd92bc73ec96dd8",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:28.659Z",
+      "revokedAt": null,
+      "id": "ses_6c7d881513081454c2b9fae93f548eff",
+      "createdAt": "2026-09-22T15:31:28.659Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "16bddb8cf56470b334ab2b04c29bc192de26c4d8eba9f5e9d0de5e1aad8a7fb6",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:41.793Z",
+      "revokedAt": null,
+      "id": "ses_82ee633744ff768be18e5fac0266295a",
+      "createdAt": "2026-09-22T15:31:41.793Z"
+    },
+    {
+      "userId": "usr_026c134846dfcb8deec5969f",
+      "sessionTokenHash": "f43ef3c90dd34521a3449271f42b56cfc4a8f694714c24195103060cb30e4268",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:41.840Z",
+      "revokedAt": null,
+      "id": "ses_ea0419004e419626fea8afd1e64b5f90",
+      "createdAt": "2026-09-22T15:31:41.840Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "ee034e922d2d608c5930a032161ed698c1803a61b2b4f4b3efe734797d88c066",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:48.515Z",
+      "revokedAt": null,
+      "id": "ses_192b06ed05f289d0a4e5fbf54863677e",
+      "createdAt": "2026-09-22T15:31:48.515Z"
+    },
+    {
+      "userId": "usr_7a3cff92e0bc92d3288b63b2",
+      "sessionTokenHash": "bee86dc7322f97b894594edb8a8a6b474bc2f205f87b351a700322765d71315a",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T15:31:48.551Z",
+      "revokedAt": null,
+      "id": "ses_071104e0d9c14330b51c87d4b1000fd4",
+      "createdAt": "2026-09-22T15:31:48.551Z"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acc_c21623342736d0b65432f9ec",
+      "userId": "usr_fb983123e504c1a02ede9d06",
+      "accountNumber": "ACC-501419",
+      "state": "CLIENT_ID_ACTIVE",
+      "createdAt": "2026-09-22T15:12:55.997Z",
+      "updatedAt": "2026-09-22T15:12:56.078Z"
+    },
+    {
+      "id": "acc_dc2505a027bc5706fda39596",
+      "userId": "usr_3f414c0857248991a351a49a",
+      "accountNumber": "ACC-431454",
+      "state": "APPROVED_FOR_ID_GENERATION",
+      "createdAt": "2026-09-22T15:12:56.098Z",
+      "updatedAt": "2026-09-22T15:12:56.138Z"
+    },
+    {
+      "id": "acc_508ccb1067ce29a9150fbc95",
+      "userId": "usr_846490583f1c2969c24df47f",
+      "accountNumber": "ACC-254218",
+      "state": "CLIENT_ID_ACTIVE",
+      "createdAt": "2026-09-22T15:13:04.191Z",
+      "updatedAt": "2026-09-22T15:13:04.243Z"
+    },
+    {
+      "id": "acc_d3921d34196bea3f733524b6",
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "accountNumber": "ACC-772983",
+      "state": "REGISTERED",
+      "createdAt": "2026-09-22T15:28:53.253Z",
+      "updatedAt": "2026-09-22T15:28:53.253Z"
+    },
+    {
+      "id": "acc_0d6fbce8616bf3ebf016e5e9",
+      "userId": "usr_7a3cff92e0bc92d3288b63b2",
+      "accountNumber": "ACC-139316",
+      "state": "CLIENT_ID_ACTIVE",
+      "createdAt": "2026-09-22T15:31:48.549Z",
+      "updatedAt": "2026-09-22T15:31:48.635Z"
+    }
+  ],
+  "profiles": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "fullName": "Vikramaditya Sengupta 976001",
+      "dateOfBirth": "1981-11-22",
+      "gender": "MALE",
+      "bloodGroup": "B_POS",
+      "bloodGroupSource": "DOCUMENT_VERIFIED",
+      "addressLine1": "Villa 14, Palm Meadows, Whitefield",
+      "district": "Bengaluru Urban",
+      "stateProvince": "Karnataka",
+      "pinCode": "560066",
+      "countryCode": "IN",
+      "emergencyContactName": "Ananya Sengupta",
+      "emergencyContactPhone": "+919876500001",
+      "emergencyContactRelation": "SPOUSE",
+      "id": "prf_a0bc5fea996bf5483a93997f",
+      "createdAt": "2026-09-22T15:12:56.012Z",
+      "updatedAt": "2026-09-22T15:12:56.012Z"
+    },
+    {
+      "accountId": "acc_dc2505a027bc5706fda39596",
+      "fullName": "Ananya Sengupta 976104",
+      "dateOfBirth": "1998-04-18",
+      "gender": "FEMALE",
+      "bloodGroup": "A_POS",
+      "bloodGroupSource": "DOCUMENT_VERIFIED",
+      "addressLine1": "Villa 14, Palm Meadows, Whitefield",
+      "district": "Bengaluru Urban",
+      "stateProvince": "Karnataka",
+      "pinCode": "560066",
+      "countryCode": "IN",
+      "emergencyContactName": "Vikramaditya Sengupta",
+      "emergencyContactPhone": "+919876500002",
+      "emergencyContactRelation": "SPOUSE",
+      "id": "prf_144db1eb4ced073df86d14a0",
+      "createdAt": "2026-09-22T15:12:56.110Z",
+      "updatedAt": "2026-09-22T15:12:56.110Z"
+    },
+    {
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "fullName": "Rohit Deshmukh 4198",
+      "dateOfBirth": "1992-06-15",
+      "gender": "MALE",
+      "bloodGroup": "O_POS",
+      "bloodGroupSource": "DOCUMENT_VERIFIED",
+      "addressLine1": "Flat 402, Greenview Heights",
+      "district": "Bengaluru Urban",
+      "stateProvince": "Karnataka",
+      "pinCode": "560034",
+      "countryCode": "IN",
+      "emergencyContactName": "Sunita Deshmukh",
+      "emergencyContactPhone": "+919879984198",
+      "emergencyContactRelation": "SPOUSE",
+      "id": "prf_cb2ee6e9c15712f76dcda965",
+      "createdAt": "2026-09-22T15:13:04.201Z",
+      "updatedAt": "2026-09-22T15:13:04.201Z"
+    },
+    {
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "fullName": "Rohit Deshmukh 8554",
+      "dateOfBirth": "1992-06-15",
+      "gender": "MALE",
+      "bloodGroup": "O_POS",
+      "bloodGroupSource": "DOCUMENT_VERIFIED",
+      "addressLine1": "Flat 402, Greenview Heights",
+      "district": "Bengaluru Urban",
+      "stateProvince": "Karnataka",
+      "pinCode": "560034",
+      "countryCode": "IN",
+      "emergencyContactName": "Sunita Deshmukh",
+      "emergencyContactPhone": "+919871108554",
+      "emergencyContactRelation": "SPOUSE",
+      "id": "prf_7d72e0ad72177bb196421a1f",
+      "createdAt": "2026-09-22T15:31:48.565Z",
+      "updatedAt": "2026-09-22T15:31:48.565Z"
+    }
+  ],
+  "verificationRequests": [
+    {
+      "id": "vrf_966b72c2f8e2e273e387d008",
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "status": "VERIFIED",
+      "assignedOfficerId": "usr_officer_ananya_01",
+      "duplicateCheckResult": "NO_MATCH",
+      "duplicateScore": 0,
+      "duplicateMatchDetails": {
+        "matchedFields": []
+      },
+      "reviewNotes": "KYC documents verified against passport database",
+      "reviewedAt": "2026-09-22T15:12:56.050Z",
+      "createdAt": "2026-09-22T15:12:56.030Z",
+      "updatedAt": "2026-09-22T15:12:56.030Z"
+    },
+    {
+      "id": "vrf_437353df9b311c7136714d5f",
+      "accountId": "acc_dc2505a027bc5706fda39596",
+      "status": "VERIFIED",
+      "assignedOfficerId": "usr_officer_ananya_01",
+      "duplicateCheckResult": "NO_MATCH",
+      "duplicateScore": 10,
+      "duplicateMatchDetails": {
+        "matchedFields": [
+          "DISTRICT_EXACT"
+        ],
+        "candidateId": "prf_a0bc5fea996bf5483a93997f"
+      },
+      "reviewNotes": "Aadhaar identity confirmed",
+      "reviewedAt": "2026-09-22T15:12:56.138Z",
+      "createdAt": "2026-09-22T15:12:56.125Z",
+      "updatedAt": "2026-09-22T15:12:56.125Z"
+    },
+    {
+      "id": "vrf_8a7999886d97bfe94739dd0c",
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "status": "VERIFIED",
+      "assignedOfficerId": "usr_officer_ananya_01",
+      "duplicateCheckResult": "NO_MATCH",
+      "duplicateScore": 10,
+      "duplicateMatchDetails": {
+        "matchedFields": [
+          "DISTRICT_EXACT"
+        ],
+        "candidateId": "prf_a0bc5fea996bf5483a93997f"
+      },
+      "reviewNotes": "Documents verified clean for full platform test",
+      "reviewedAt": "2026-09-22T15:13:04.224Z",
+      "createdAt": "2026-09-22T15:13:04.213Z",
+      "updatedAt": "2026-09-22T15:13:04.213Z"
+    },
+    {
+      "id": "vrf_a2a94bc3b107a234c1c593c5",
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "status": "VERIFIED",
+      "assignedOfficerId": "usr_officer_ananya_01",
+      "duplicateCheckResult": "POSSIBLE_DUPLICATE",
+      "duplicateScore": 45,
+      "duplicateMatchDetails": {
+        "matchedFields": [
+          "DOB_EXACT",
+          "DISTRICT_EXACT"
+        ],
+        "candidateId": "prf_cb2ee6e9c15712f76dcda965"
+      },
+      "reviewNotes": "Documents verified clean for full platform test",
+      "reviewedAt": "2026-09-22T15:31:48.602Z",
+      "createdAt": "2026-09-22T15:31:48.584Z",
+      "updatedAt": "2026-09-22T15:31:48.584Z"
+    }
+  ],
+  "verificationDocuments": [
+    {
+      "verificationRequestId": "vrf_966b72c2f8e2e273e387d008",
+      "documentType": "PASSPORT",
+      "documentNumberHash": "66469d12894c31119e4688cb4660bdeb9e77035e5ee14534fedea2ab2e4b695b",
+      "documentNumberMasked": "XXXX-XXXX-6018",
+      "s3ObjectKey": "vault/documents/acc_c21623342736d0b65432f9ec/1790089976032_documents/vikram_passport.pdf",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 102400,
+      "status": "VERIFIED",
+      "verificationNotes": null,
+      "verifiedBy": "usr_officer_ananya_01",
+      "verifiedAt": "2026-09-22T15:12:56.050Z",
+      "id": "doc_fce92e5ba73c74d5301af01a",
+      "createdAt": "2026-09-22T15:12:56.033Z"
+    },
+    {
+      "verificationRequestId": "vrf_437353df9b311c7136714d5f",
+      "documentType": "AADHAAR",
+      "documentNumberHash": "b92e4286024edb0c6b7eb55ca6aef9624e7ca3d23d1c388461106fc5afbe3077",
+      "documentNumberMasked": "XXXX-XXXX-6119",
+      "s3ObjectKey": "vault/documents/acc_dc2505a027bc5706fda39596/1790089976126_documents/ananya_aadhaar.pdf",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 102400,
+      "status": "VERIFIED",
+      "verificationNotes": null,
+      "verifiedBy": "usr_officer_ananya_01",
+      "verifiedAt": "2026-09-22T15:12:56.138Z",
+      "id": "doc_773074cb115eeab7bd49fc05",
+      "createdAt": "2026-09-22T15:12:56.126Z"
+    },
+    {
+      "verificationRequestId": "vrf_8a7999886d97bfe94739dd0c",
+      "documentType": "PASSPORT",
+      "documentNumberHash": "956d0d35eb5f6219627b66c724b9fef189a083c87eb219ea36fb2989a799c7e6",
+      "documentNumberMasked": "XXXX-XXXX-4209",
+      "s3ObjectKey": "vault/documents/acc_508ccb1067ce29a9150fbc95/1790089984214_documents/passport_scan_e2e.pdf",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 204800,
+      "status": "VERIFIED",
+      "verificationNotes": null,
+      "verifiedBy": "usr_officer_ananya_01",
+      "verifiedAt": "2026-09-22T15:13:04.224Z",
+      "id": "doc_aeb83eff568d7ade3999d8eb",
+      "createdAt": "2026-09-22T15:13:04.214Z"
+    },
+    {
+      "verificationRequestId": "vrf_a2a94bc3b107a234c1c593c5",
+      "documentType": "PASSPORT",
+      "documentNumberHash": "63200dcdddc2eb83483dc8a83b23e0be8e1b2b75009b8791c1690a05bc0378bb",
+      "documentNumberMasked": "XXXX-XXXX-8572",
+      "s3ObjectKey": "vault/documents/acc_0d6fbce8616bf3ebf016e5e9/1790091108586_documents/passport_scan_e2e.pdf",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 204800,
+      "status": "VERIFIED",
+      "verificationNotes": null,
+      "verifiedBy": "usr_officer_ananya_01",
+      "verifiedAt": "2026-09-22T15:31:48.602Z",
+      "id": "doc_73b34c5ce22b15b0e25abb5b",
+      "createdAt": "2026-09-22T15:31:48.586Z"
+    }
+  ],
+  "clientIds": [
+    {
+      "id": "cid_8e78af01d569a8bbd23cbabc",
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "clientId": "AHCS-IN-CD265H3V",
+      "checksum": "V",
+      "issuedAt": "2026-09-22T15:12:56.052Z",
+      "isActive": true
+    },
+    {
+      "id": "cid_544174c6a93b791aaba3a725",
+      "accountId": "acc_dc2505a027bc5706fda39596",
+      "clientId": "AHCS-IN-YFQQ67J1",
+      "checksum": "1",
+      "issuedAt": "2026-09-22T15:12:56.140Z",
+      "isActive": true
+    },
+    {
+      "id": "cid_fed87c7fabb70beec3993ed3",
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "clientId": "AHCS-IN-F8PWW47H",
+      "checksum": "H",
+      "issuedAt": "2026-09-22T15:13:04.225Z",
+      "isActive": true
+    },
+    {
+      "id": "cid_37792426c0f17a0dae6184d5",
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "clientId": "AHCS-IN-A16N99V3",
+      "checksum": "3",
+      "issuedAt": "2026-09-22T15:31:48.605Z",
+      "isActive": true
+    }
+  ],
+  "cards": [
+    {
+      "clientIdFk": "cid_8e78af01d569a8bbd23cbabc",
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "cardNumber": "CRD-4857-6793",
+      "version": 1,
+      "status": "ACTIVE",
+      "activationCodeHash": "8ae5422eb643120ccccedbb26b7a2eeee8735275fd3013fd153d881b873a12d2",
+      "activatedAt": "2026-09-22T15:12:56.077Z",
+      "activatedByUserId": "usr_fb983123e504c1a02ede9d06",
+      "expiresAt": "2031-09-21T15:12:56.053Z",
+      "id": "crd_3dbff4969f69916a5957940b",
+      "createdAt": "2026-09-22T15:12:56.053Z",
+      "updatedAt": "2026-09-22T15:12:56.077Z"
+    },
+    {
+      "clientIdFk": "cid_544174c6a93b791aaba3a725",
+      "accountId": "acc_dc2505a027bc5706fda39596",
+      "cardNumber": "CRD-9481-7027",
+      "version": 1,
+      "status": "PENDING_ACTIVATION",
+      "activationCodeHash": "959573532361913c9d1d237b87d139a48f9a00456dc049c1ad547d39b5fe8c14",
+      "activatedAt": null,
+      "activatedByUserId": null,
+      "expiresAt": "2031-09-21T15:12:56.141Z",
+      "id": "crd_f8ab3cce2463e2a7de5185dd",
+      "createdAt": "2026-09-22T15:12:56.141Z",
+      "updatedAt": "2026-09-22T15:12:56.141Z"
+    },
+    {
+      "clientIdFk": "cid_fed87c7fabb70beec3993ed3",
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "cardNumber": "CRD-4055-6584",
+      "version": 1,
+      "status": "ACTIVE",
+      "activationCodeHash": "67e9d0909f7b01d16931a0344872604cae04474c01e6e28cf951a9307242839c",
+      "activatedAt": "2026-09-22T15:13:04.241Z",
+      "activatedByUserId": "usr_846490583f1c2969c24df47f",
+      "expiresAt": "2031-09-21T15:13:04.226Z",
+      "id": "crd_bab337b07734482f5995c409",
+      "createdAt": "2026-09-22T15:13:04.226Z",
+      "updatedAt": "2026-09-22T15:13:04.241Z"
+    },
+    {
+      "clientIdFk": "cid_37792426c0f17a0dae6184d5",
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "cardNumber": "CRD-9250-5250",
+      "version": 1,
+      "status": "ACTIVE",
+      "activationCodeHash": "1b7e289a0834ea258568136a23165e1220637c0473911e5220d1b22d7119dd48",
+      "activatedAt": "2026-09-22T15:31:48.633Z",
+      "activatedByUserId": "usr_7a3cff92e0bc92d3288b63b2",
+      "expiresAt": "2031-09-21T15:31:48.607Z",
+      "id": "crd_a00759aeb6d133449e4e0aae",
+      "createdAt": "2026-09-22T15:31:48.607Z",
+      "updatedAt": "2026-09-22T15:31:48.633Z"
+    }
+  ],
+  "qrTokens": [
+    {
+      "cardId": "crd_3dbff4969f69916a5957940b",
+      "tokenHash": "74fe6b91a5d57044b8fd4847551c8340c142e1802670139d3eed8876e9190f84",
+      "tokenRaw": "ff6e744a3094bcbe8e9835cdd281db6246708b590aa5e67e299fdc46ffce89a9",
+      "tokenType": "EMERGENCY_QR",
+      "isRevoked": false,
+      "scanCount": 0,
+      "lastScannedAt": null,
+      "expiresAt": "2031-09-21T15:12:56.054Z",
+      "id": "qrt_15cf0de9163ef7dc18efc539",
+      "createdAt": "2026-09-22T15:12:56.054Z"
+    },
+    {
+      "cardId": "crd_f8ab3cce2463e2a7de5185dd",
+      "tokenHash": "ea04681b939b176696df90bd20f0c477545b6fa698610ec953fe6850bc7d2028",
+      "tokenRaw": "e9cdb669b7ac01c33e315eed3bf6b7269ae6a0254687c9580babb7cc0113bcbb",
+      "tokenType": "EMERGENCY_QR",
+      "isRevoked": false,
+      "scanCount": 0,
+      "lastScannedAt": null,
+      "expiresAt": "2031-09-21T15:12:56.142Z",
+      "id": "qrt_071f13b242d5a8096a056ef5",
+      "createdAt": "2026-09-22T15:12:56.142Z"
+    },
+    {
+      "cardId": "crd_bab337b07734482f5995c409",
+      "tokenHash": "2ca35af650b728f309cd084f152cd2f792cdb1f64023260a5b898ec7abed9592",
+      "tokenRaw": "71de26e12021d1cba44a1ad142bd5f7ca9688dacf9c104de993a49330c3a117e",
+      "tokenType": "EMERGENCY_QR",
+      "isRevoked": false,
+      "scanCount": 0,
+      "lastScannedAt": null,
+      "expiresAt": "2031-09-21T15:13:04.227Z",
+      "id": "qrt_c170e63384cc32a02c35fa88",
+      "createdAt": "2026-09-22T15:13:04.227Z"
+    },
+    {
+      "cardId": "crd_a00759aeb6d133449e4e0aae",
+      "tokenHash": "d950d191f8f1f34097395efdbd621ef5505fe349f1b53ef43a6fa4ae395a3868",
+      "tokenRaw": "f71f57fcb948aaf43badd414924bd5c0d8fcb5c83f0ba987ca29eb961ba44d29",
+      "tokenType": "EMERGENCY_QR",
+      "isRevoked": false,
+      "scanCount": 0,
+      "lastScannedAt": null,
+      "expiresAt": "2031-09-21T15:31:48.611Z",
+      "id": "qrt_af734ebef70cf72bdd2f7f1a",
+      "createdAt": "2026-09-22T15:31:48.611Z"
+    }
+  ],
+  "emergencyProfiles": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "isActive": true,
+      "allergies": [
+        "None declared"
+      ],
+      "criticalConditions": [],
+      "currentMedications": [],
+      "organDonor": false,
+      "preferredHospital": null,
+      "id": "emg_7ba7b46467066fec6d98911d",
+      "updatedAt": "2026-09-22T15:12:56.015Z"
+    },
+    {
+      "accountId": "acc_dc2505a027bc5706fda39596",
+      "isActive": true,
+      "allergies": [
+        "None declared"
+      ],
+      "criticalConditions": [],
+      "currentMedications": [],
+      "organDonor": false,
+      "preferredHospital": null,
+      "id": "emg_ee671d52b02afbf3a27a4124",
+      "updatedAt": "2026-09-22T15:12:56.113Z"
+    },
+    {
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "isActive": true,
+      "allergies": [
+        "None declared"
+      ],
+      "criticalConditions": [],
+      "currentMedications": [],
+      "organDonor": false,
+      "preferredHospital": null,
+      "id": "emg_db52febcd57fce26d82d8a38",
+      "updatedAt": "2026-09-22T15:13:04.206Z"
+    },
+    {
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "isActive": true,
+      "allergies": [
+        "None declared"
+      ],
+      "criticalConditions": [],
+      "currentMedications": [],
+      "organDonor": false,
+      "preferredHospital": null,
+      "id": "emg_1ca4e2c186f86a930d9aca35",
+      "updatedAt": "2026-09-22T15:31:48.568Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-8351",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-8351",
+        "name": "Apollo City Care Clinic",
+        "category": "CLINIC",
+        "registrationNumber": "REG-KA-2026-8054"
+      },
+      "id": "aud_61c457eebcc8681ed63177ee",
+      "createdAt": "2026-09-22T15:12:38.353Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_af780102590fdbae4c0d5d05",
+      "createdAt": "2026-09-22T15:12:38.384Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_a823fa57466831447e983f0f",
+      "createdAt": "2026-09-22T15:12:38.402Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_9a099a08467080ae83115fc0",
+      "createdAt": "2026-09-22T15:12:38.405Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-1222",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1222",
+        "name": "Apollo City Care Clinic",
+        "category": "CLINIC",
+        "registrationNumber": "REG-KA-2026-1142"
+      },
+      "id": "aud_62d681258510a0eaf60a98b5",
+      "createdAt": "2026-09-22T15:12:51.223Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_1dbbca0994e70187bc819e69",
+      "createdAt": "2026-09-22T15:12:51.243Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_9bb1245c091a9b06f2d5c3e8",
+      "createdAt": "2026-09-22T15:12:51.254Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_6d3ef52541b18c2adf0f8d2a",
+      "createdAt": "2026-09-22T15:12:51.256Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROVIDER_STATUS_VERIFIED",
+      "targetResource": "providers",
+      "targetId": "PRV-1222",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1222",
+        "newStatus": "VERIFIED",
+        "reviewNotes": "Valid license inspected against Karnataka Medical Council database. Authorized for AHCS clinical operations."
+      },
+      "id": "aud_09c08a1e5bf295c5c04257b2",
+      "createdAt": "2026-09-22T15:12:51.289Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919888877777",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919888877777"
+      },
+      "id": "aud_a100562162323488420731a4",
+      "createdAt": "2026-09-22T15:12:51.296Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919888877777",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919888877777"
+      },
+      "id": "aud_05e0dc317a4dc3d603984cc6",
+      "createdAt": "2026-09-22T15:12:51.310Z"
+    },
+    {
+      "actorId": "usr_026c134846dfcb8deec5969f",
+      "actorRole": "DOCTOR",
+      "action": "PROVIDER_STAFF_LOGIN",
+      "targetResource": "PROVIDER_PORTAL",
+      "targetId": "PRV-1222",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1222",
+        "providerName": "Apollo City Care Clinic",
+        "doctorName": "Dr. Sameer Kapoor, MBBS",
+        "medicalCouncilNumber": "KMC-2022-81729"
+      },
+      "id": "aud_053973c164b46c2fbc7a2166",
+      "createdAt": "2026-09-22T15:12:51.312Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_6ebe24f77c28f7e62ad128aa",
+      "createdAt": "2026-09-22T15:12:55.939Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_9545b0cd5dd0c47dd65d3877",
+      "createdAt": "2026-09-22T15:12:55.966Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_e792b94f4e0216cff28ae8ad",
+      "createdAt": "2026-09-22T15:12:55.969Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919878679537",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919878679537"
+      },
+      "id": "aud_3aa625e8947c165d5265b084",
+      "createdAt": "2026-09-22T15:12:55.987Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919878679537",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919878679537"
+      },
+      "id": "aud_6f0aca041e4073dad7dcbb59",
+      "createdAt": "2026-09-22T15:12:55.994Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_fb983123e504c1a02ede9d06",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919878679537"
+      },
+      "id": "aud_8c37e18b02b883e90e70699d",
+      "createdAt": "2026-09-22T15:12:55.998Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "PROFILE_UPDATED",
+      "targetResource": "PROFILE",
+      "targetId": "prf_a0bc5fea996bf5483a93997f",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "bloodGroupSource": "USER_DECLARED"
+      },
+      "id": "aud_1b3fa8a38988e91b6b863abb",
+      "createdAt": "2026-09-22T15:12:56.016Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "DOCUMENT_UPLOADED",
+      "targetResource": "VERIFICATION_DOCUMENT",
+      "targetId": "doc_fce92e5ba73c74d5301af01a",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "docType": "PASSPORT",
+        "duplicateResult": "NO_MATCH",
+        "duplicateScore": 0
+      },
+      "id": "aud_7e2d2341ac18c6a1e89da186",
+      "createdAt": "2026-09-22T15:12:56.036Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROFILE_APPROVED",
+      "targetResource": "ACCOUNT",
+      "targetId": "acc_c21623342736d0b65432f9ec",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-CD265H3V",
+        "cardNumber": "CRD-4857-6793"
+      },
+      "id": "aud_e724bca443193bbc2e90d0fc",
+      "createdAt": "2026-09-22T15:12:56.054Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLIENT_ID_GENERATED",
+      "targetResource": "CLIENT_ID",
+      "targetId": "cid_8e78af01d569a8bbd23cbabc",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-CD265H3V"
+      },
+      "id": "aud_531dcb48f50eb90e471e0b0c",
+      "createdAt": "2026-09-22T15:12:56.055Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "CARD_ACTIVATED",
+      "targetResource": "CARD",
+      "targetId": "crd_3dbff4969f69916a5957940b",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "cardNumber": "CRD-4857-6793"
+      },
+      "id": "aud_52f00efeb2e247a9006bbe23",
+      "createdAt": "2026-09-22T15:12:56.079Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919745585151",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919745585151"
+      },
+      "id": "aud_f51085816da69cff0c4e4f35",
+      "createdAt": "2026-09-22T15:12:56.086Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919745585151",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919745585151"
+      },
+      "id": "aud_8bea6043daad25e162a0c990",
+      "createdAt": "2026-09-22T15:12:56.096Z"
+    },
+    {
+      "actorId": "usr_3f414c0857248991a351a49a",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_3f414c0857248991a351a49a",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919745585151"
+      },
+      "id": "aud_7f485bba6aea8e1c66f22766",
+      "createdAt": "2026-09-22T15:12:56.099Z"
+    },
+    {
+      "actorId": "usr_3f414c0857248991a351a49a",
+      "actorRole": "PATIENT",
+      "action": "PROFILE_UPDATED",
+      "targetResource": "PROFILE",
+      "targetId": "prf_144db1eb4ced073df86d14a0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "bloodGroupSource": "USER_DECLARED"
+      },
+      "id": "aud_6c10f83caf894b78b5593e14",
+      "createdAt": "2026-09-22T15:12:56.114Z"
+    },
+    {
+      "actorId": "usr_3f414c0857248991a351a49a",
+      "actorRole": "PATIENT",
+      "action": "DOCUMENT_UPLOADED",
+      "targetResource": "VERIFICATION_DOCUMENT",
+      "targetId": "doc_773074cb115eeab7bd49fc05",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "docType": "AADHAAR",
+        "duplicateResult": "NO_MATCH",
+        "duplicateScore": 10
+      },
+      "id": "aud_574b158a7f78d031e5bc571b",
+      "createdAt": "2026-09-22T15:12:56.132Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROFILE_APPROVED",
+      "targetResource": "ACCOUNT",
+      "targetId": "acc_dc2505a027bc5706fda39596",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-YFQQ67J1",
+        "cardNumber": "CRD-9481-7027"
+      },
+      "id": "aud_25adde049fe1214f167bf9e9",
+      "createdAt": "2026-09-22T15:12:56.145Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLIENT_ID_GENERATED",
+      "targetResource": "CLIENT_ID",
+      "targetId": "cid_544174c6a93b791aaba3a725",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-YFQQ67J1"
+      },
+      "id": "aud_b8238467ebd926d96d486b5c",
+      "createdAt": "2026-09-22T15:12:56.147Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_df9aac1752af39ac6963",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_df9aac1752af39ac6963",
+        "providerId": "PRV-101",
+        "doctorId": "doc-test-76173",
+        "appointmentDate": "2026-11-17",
+        "timeSlot": "11:10 AM"
+      },
+      "id": "aud_2243564d4722ac5ed8e3a8f5",
+      "createdAt": "2026-09-22T15:12:56.189Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_CHECKED_IN",
+      "targetResource": "appointments",
+      "targetId": "apt_df9aac1752af39ac6963",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_df9aac1752af39ac6963",
+        "newStatus": "CHECKED_IN"
+      },
+      "id": "aud_e21f6cb551483fd4cfa469eb",
+      "createdAt": "2026-09-22T15:12:56.208Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "FAMILY_MEMBER_LINKED",
+      "targetResource": "family_members",
+      "targetId": "fam_70796e6a99c109f609cf",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "relationship": "SPOUSE",
+        "permissionLevel": "LIMITED_READ"
+      },
+      "id": "aud_5df9f0a3ddf4f2b5c7d38c32",
+      "createdAt": "2026-09-22T15:12:56.224Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "FAMILY_PERMISSIONS_UPDATED",
+      "targetResource": "family_members",
+      "targetId": "fam_70796e6a99c109f609cf",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "familyMemberId": "fam_70796e6a99c109f609cf",
+        "newPermissionLevel": "FULL_ACCESS"
+      },
+      "id": "aud_ace2076ebb4d39dad068bee1",
+      "createdAt": "2026-09-22T15:12:56.239Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_68d38b615756c4bacbe11d82",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "DISCHARGE_SUMMARY",
+        "title": "Cardiac Post-Operative Discharge Summary",
+        "size": 51,
+        "documentHash": "0d287b7f5c13f34e91bfc6d078f7084eef9051876104806da796a2fcb8254472"
+      },
+      "id": "aud_032dab6a6932613c1db680f2",
+      "createdAt": "2026-09-22T15:12:56.255Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_DOWNLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_68d38b615756c4bacbe11d82",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentHash": "0d287b7f5c13f34e91bfc6d078f7084eef9051876104806da796a2fcb8254472",
+        "fileMimeType": "text/plain"
+      },
+      "id": "aud_53b4e37eb2f69fd0e3816f4c",
+      "createdAt": "2026-09-22T15:12:56.265Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "HEALTH_TIMELINE_ACCESSED",
+      "targetResource": "health_timeline",
+      "targetId": "acc_c21623342736d0b65432f9ec",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "eventCount": 2
+      },
+      "id": "aud_b01ce950f7544c9d889de844",
+      "createdAt": "2026-09-22T15:12:56.273Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "MEDICATION_ADHERENCE_LOGGED",
+      "targetResource": "medication_schedules",
+      "targetId": "sch_a72f47f5de9775b0ba9e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "date": "2026-09-22",
+        "taken": true
+      },
+      "id": "aud_ae972d385900efe9d69ac286",
+      "createdAt": "2026-09-22T15:12:56.287Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "LAB_ORDER_CREATED",
+      "targetResource": "lab_orders",
+      "targetId": "lab_faf0b61680c25e4e9096",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderNumber": "LBO-976300-CC6D",
+        "testName": "Complete Metabolic Panel + Lipid Profile"
+      },
+      "id": "aud_5cb5dfd9fc379f8109abf93a",
+      "createdAt": "2026-09-22T15:12:56.301Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "LAB_REPORT_UPLOADED",
+      "targetResource": "medical_records",
+      "targetId": "med_91217279fd7f5c0419b25def",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "patientClientId": "AHCS-IN-CD265H3V",
+        "testName": "Complete Metabolic Panel + Lipid Profile",
+        "documentHash": "51d92c26953dae978394999838a83faf48a8fa223ba25f9f763ea5d158fcb0de"
+      },
+      "id": "aud_fd9722b0f0ff4772da424087",
+      "createdAt": "2026-09-22T15:12:56.318Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_b8e6fc0d7d3900015871",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AHCS-1790089976381"
+      },
+      "id": "aud_d2a11147a08e8a14cfeed8b7",
+      "createdAt": "2026-09-22T15:12:56.391Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLAIM_SETTLED",
+      "targetResource": "claims",
+      "targetId": "clm_b8e6fc0d7d3900015871",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "decision": "SETTLED"
+      },
+      "id": "aud_263f122307f813f18032650c",
+      "createdAt": "2026-09-22T15:12:56.411Z"
+    },
+    {
+      "actorId": "usr_fb983123e504c1a02ede9d06",
+      "actorRole": "PATIENT",
+      "action": "AI_HEALTH_ASSISTANT_QUERY",
+      "targetResource": "ai_assistant",
+      "targetId": null,
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mode": "EXPLAIN_TERM",
+        "queryLength": 58
+      },
+      "id": "aud_a2a6c9860ef639104fd789f1",
+      "createdAt": "2026-09-22T15:12:56.429Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "DEVELOPER_API_KEY_CREATED",
+      "targetResource": "developer_api_keys",
+      "targetId": "key_3f138dcf193d68776683",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "keyPrefix": "ahcs_live_a8ea",
+        "scopes": [
+          "patient.read",
+          "appointment.read",
+          "records.read"
+        ]
+      },
+      "id": "aud_cca8ffa642dd786672974a2c",
+      "createdAt": "2026-09-22T15:12:56.449Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-4141",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-4141",
+        "name": "Apex Super Specialty Care",
+        "category": "HOSPITAL",
+        "registrationNumber": "KA-MED-APEX-4129"
+      },
+      "id": "aud_0ca1357d4d21d2468dd44c7e",
+      "createdAt": "2026-09-22T15:13:04.143Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_da79bbef7d3d155212957bce",
+      "createdAt": "2026-09-22T15:13:04.150Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_3c2df1db022ccededf5edc75",
+      "createdAt": "2026-09-22T15:13:04.158Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_49f5d5ca0547889f4f314cf7",
+      "createdAt": "2026-09-22T15:13:04.159Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROVIDER_STATUS_VERIFIED",
+      "targetResource": "providers",
+      "targetId": "PRV-4141",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-4141",
+        "newStatus": "VERIFIED",
+        "reviewNotes": "Medical registration certificate confirmed with KMC portal"
+      },
+      "id": "aud_d56fdcde68d93d25834cd373",
+      "createdAt": "2026-09-22T15:13:04.167Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919889984171",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919889984171"
+      },
+      "id": "aud_dbcfb02e4749fc2f04b2d862",
+      "createdAt": "2026-09-22T15:13:04.176Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919889984171",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919889984171"
+      },
+      "id": "aud_f9af147a69738c438cf0d0e4",
+      "createdAt": "2026-09-22T15:13:04.183Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_846490583f1c2969c24df47f",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919889984171"
+      },
+      "id": "aud_f0c40ef595f817227ceb3676",
+      "createdAt": "2026-09-22T15:13:04.195Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "PROFILE_UPDATED",
+      "targetResource": "PROFILE",
+      "targetId": "prf_cb2ee6e9c15712f76dcda965",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "bloodGroupSource": "USER_DECLARED"
+      },
+      "id": "aud_1858aca6054114ea744dbe82",
+      "createdAt": "2026-09-22T15:13:04.207Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "DOCUMENT_UPLOADED",
+      "targetResource": "VERIFICATION_DOCUMENT",
+      "targetId": "doc_aeb83eff568d7ade3999d8eb",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "docType": "PASSPORT",
+        "duplicateResult": "NO_MATCH",
+        "duplicateScore": 10
+      },
+      "id": "aud_0739c28bde1a118e8921b198",
+      "createdAt": "2026-09-22T15:13:04.215Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROFILE_APPROVED",
+      "targetResource": "ACCOUNT",
+      "targetId": "acc_508ccb1067ce29a9150fbc95",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-F8PWW47H",
+        "cardNumber": "CRD-4055-6584"
+      },
+      "id": "aud_c1253b76a8a6d296fad2235b",
+      "createdAt": "2026-09-22T15:13:04.228Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLIENT_ID_GENERATED",
+      "targetResource": "CLIENT_ID",
+      "targetId": "cid_fed87c7fabb70beec3993ed3",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-F8PWW47H"
+      },
+      "id": "aud_aa9db3c00db49e1925d41dde",
+      "createdAt": "2026-09-22T15:13:04.229Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "CARD_ACTIVATED",
+      "targetResource": "CARD",
+      "targetId": "crd_bab337b07734482f5995c409",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "cardNumber": "CRD-4055-6584"
+      },
+      "id": "aud_e376b74a8b60c7bcf4db9a09",
+      "createdAt": "2026-09-22T15:13:04.244Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_508ccb1067ce29a9150fbc95",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-F8PWW47H",
+        "providerId": "PRV-4141",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_0ad510dfe52f50dd11e515e1",
+      "createdAt": "2026-09-22T15:13:04.259Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER",
+      "action": "CONSENT_REQUESTED",
+      "targetResource": "consents",
+      "targetId": "cst_81ea938e12e9316c1864cec0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_81ea938e12e9316c1864cec0",
+        "providerId": "PRV-4141",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "purpose": "DIAGNOSIS",
+        "scope": "ALL_RECORDS",
+        "targetAccountId": "acc_508ccb1067ce29a9150fbc95"
+      },
+      "id": "aud_578cd4e9810fe5b73dc739f8",
+      "createdAt": "2026-09-22T15:13:04.270Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_GRANTED",
+      "targetResource": "consents",
+      "targetId": "cst_81ea938e12e9316c1864cec0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_81ea938e12e9316c1864cec0",
+        "decision": "GRANTED",
+        "providerId": "PRV-4141",
+        "durationHours": 24
+      },
+      "id": "aud_f097b621e24be9098d251984",
+      "createdAt": "2026-09-22T15:13:04.287Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_508ccb1067ce29a9150fbc95",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-F8PWW47H",
+        "providerId": "PRV-4141",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": true
+      },
+      "id": "aud_13c643ee70461ab243e581ee",
+      "createdAt": "2026-09-22T15:13:04.294Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_DOCTOR",
+      "action": "MEDICAL_RECORD_CREATED",
+      "targetResource": "medical_records",
+      "targetId": "med_294e6cd16dd5c97ac70fb3fd",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "recordId": "med_294e6cd16dd5c97ac70fb3fd",
+        "accountId": "acc_508ccb1067ce29a9150fbc95",
+        "providerId": "PRV-4141",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "recordType": "PRESCRIPTION",
+        "medicationCount": 2
+      },
+      "id": "aud_a1d38cdd7a18565c7e571c73",
+      "createdAt": "2026-09-22T15:13:04.309Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_REVOKED",
+      "targetResource": "consents",
+      "targetId": "cst_81ea938e12e9316c1864cec0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_81ea938e12e9316c1864cec0",
+        "providerId": "PRV-4141",
+        "revokedAt": "2026-09-22T15:13:04.327Z"
+      },
+      "id": "aud_13526613f00f964a2059f830",
+      "createdAt": "2026-09-22T15:13:04.328Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_508ccb1067ce29a9150fbc95",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-F8PWW47H",
+        "providerId": "PRV-4141",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_7a382b1176e4b780f4ef5536",
+      "createdAt": "2026-09-22T15:13:04.332Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "ORGANIZATION_REGISTERED",
+      "targetResource": "organizations",
+      "targetId": "org_43a0fbb6ac5c73635ab2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_43a0fbb6ac5c73635ab2",
+        "orgName": "Acme Technologies Pvt Ltd",
+        "registrationNumber": "U72200KA2021PTC145678"
+      },
+      "id": "aud_88bbd952e4691ed9e2e5e13c",
+      "createdAt": "2026-09-22T15:13:04.345Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "EMPLOYEE_CARD_SPONSORED",
+      "targetResource": "corporate_sponsorships",
+      "targetId": "spons_8c84492b004ea5390ebc",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_43a0fbb6ac5c73635ab2",
+        "employeeId": "ACME-E-4421",
+        "clientId": "AHCS-IN-F8PWW47H"
+      },
+      "id": "aud_4fd37026b72e90d706f7c064",
+      "createdAt": "2026-09-22T15:13:04.351Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_CREATED",
+      "targetResource": "payment_orders",
+      "targetId": "ord_35ea9a654e7327aea338598b",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_35ea9a654e7327aea338598b",
+        "planId": "AHCS-PLAN-PREMIUM",
+        "amountPaise": 219900,
+        "gatewayOrderId": "order_ra_6c5f9eb7186f7812"
+      },
+      "id": "aud_8769215fdfca5a0b7850a5b9",
+      "createdAt": "2026-09-22T15:13:04.370Z"
+    },
+    {
+      "actorId": "usr_846490583f1c2969c24df47f",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_VERIFIED_PAID",
+      "targetResource": "payment_orders",
+      "targetId": "ord_35ea9a654e7327aea338598b",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_35ea9a654e7327aea338598b",
+        "gatewayPaymentId": "pay_test_1790089984374",
+        "amountPaise": 219900,
+        "planId": "AHCS-PLAN-PREMIUM"
+      },
+      "id": "aud_e415ef2eb2b2c6d4666cf24b",
+      "createdAt": "2026-09-22T15:13:04.383Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_311e3e0dd8da1191a290c2f8",
+      "createdAt": "2026-09-22T15:28:07.574Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_8b6256115733e0c820aedf8f",
+      "createdAt": "2026-09-22T15:28:07.597Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_4c4a61120d5587938bc113db",
+      "createdAt": "2026-09-22T15:28:07.619Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_5e4c517443108918a5e43f7e",
+      "createdAt": "2026-09-22T15:28:07.629Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_ab2e9c41b86e8949df073bb2",
+      "createdAt": "2026-09-22T15:28:07.636Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_1784eecb6dc9253e8ca0ac0f",
+      "createdAt": "2026-09-22T15:28:19.729Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_0c30089fa84cf8b5c9d8dea4",
+      "createdAt": "2026-09-22T15:28:19.739Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_80c0d32e3c1a7ab3f3d04b49",
+      "createdAt": "2026-09-22T15:28:19.750Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_f82969e6fa44b2b557ba5ff7",
+      "createdAt": "2026-09-22T15:28:19.758Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_cb39480aaef742c187dd3c4e",
+      "createdAt": "2026-09-22T15:28:19.761Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_e766ca0d3534a61fc5043f83",
+      "createdAt": "2026-09-22T15:28:39.763Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_bdac9ae2a3aced5d32049ff7",
+      "createdAt": "2026-09-22T15:28:39.772Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_0f1431ab049a5b3bc45fafaa",
+      "createdAt": "2026-09-22T15:28:39.780Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_5a9347d31be3b97ad27f9a1e",
+      "createdAt": "2026-09-22T15:28:39.787Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_2d247bdcaf47c8f9f8e59267",
+      "createdAt": "2026-09-22T15:28:39.791Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_c05cd1c3050c51733162888c",
+      "createdAt": "2026-09-22T15:28:53.203Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_a551e3877722f9c83fe2e402",
+      "createdAt": "2026-09-22T15:28:53.213Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_8df715c36b272c9519334cd2",
+      "createdAt": "2026-09-22T15:28:53.222Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_87b4e7f832f0c2e0d436edd6",
+      "createdAt": "2026-09-22T15:28:53.230Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_4017a843cfc643d7526559ee",
+      "createdAt": "2026-09-22T15:28:53.232Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_d5d7f322d7c7ba0f7b5ad68a",
+      "createdAt": "2026-09-22T15:28:53.245Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_c2ec7cd36b3ffb03c22bedf2",
+      "createdAt": "2026-09-22T15:28:53.251Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_661d4c55a35feb0066aa722a",
+      "createdAt": "2026-09-22T15:28:53.257Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_f9bd8423968c9e66d7bdec03",
+      "createdAt": "2026-09-22T15:29:10.445Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_9562c283dcb76b7712b18792",
+      "createdAt": "2026-09-22T15:29:10.452Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_64d2adf5228eaaf9df416737",
+      "createdAt": "2026-09-22T15:29:10.465Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_cc0a7c5d25f4bea28c6b2a9f",
+      "createdAt": "2026-09-22T15:29:10.470Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_6118e8cef86c98ec9253c645",
+      "createdAt": "2026-09-22T15:29:10.475Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_32590dff3ab60040f888e73c",
+      "createdAt": "2026-09-22T15:29:10.487Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_82435b924d1be51a65096473",
+      "createdAt": "2026-09-22T15:29:10.497Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_3a0b9cf9b5b29b97a22a2489",
+      "createdAt": "2026-09-22T15:29:10.498Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_8e7e4b3833e8f085c147",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_8e7e4b3833e8f085c147",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2026-11-20",
+        "timeSlot": "10:00 AM"
+      },
+      "id": "aud_749d4a0247b5acfb4c0b1ed5",
+      "createdAt": "2026-09-22T15:29:10.511Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_2cb9d39d5e7b80fdb143dd7c",
+      "createdAt": "2026-09-22T15:29:21.846Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_e4b3a59f4546e875b7adcd73",
+      "createdAt": "2026-09-22T15:29:21.854Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_123905d430c89c7bbe43c322",
+      "createdAt": "2026-09-22T15:29:21.864Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_c51c1445a6bd00a6d714335c",
+      "createdAt": "2026-09-22T15:29:21.872Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_e9bd5fef9816db556e3d19c3",
+      "createdAt": "2026-09-22T15:29:21.875Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_8318eb8ad085b80572707620",
+      "createdAt": "2026-09-22T15:29:21.889Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_6afa564a1e8c45b47945c187",
+      "createdAt": "2026-09-22T15:29:21.896Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_5a1cc497670880a84745a71f",
+      "createdAt": "2026-09-22T15:29:21.898Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_6f176283c738ef7477095603",
+      "createdAt": "2026-09-22T15:29:34.731Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_39be1a2f1b46b3559e64b924",
+      "createdAt": "2026-09-22T15:29:34.743Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_d06ec5bb2e880a65df511910",
+      "createdAt": "2026-09-22T15:29:34.754Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_93b3da796dfeeded07ebf3b4",
+      "createdAt": "2026-09-22T15:29:34.760Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_1b50ed304e489009a3d1ff36",
+      "createdAt": "2026-09-22T15:29:34.763Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_1010e73fe02dd70183f18b4a",
+      "createdAt": "2026-09-22T15:29:34.776Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_946513890bfa38036354907b",
+      "createdAt": "2026-09-22T15:29:34.788Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_1cdaae642bbc2fb913ce3631",
+      "createdAt": "2026-09-22T15:29:34.790Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_348b9d709b8e60023735",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_348b9d709b8e60023735",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-13",
+        "timeSlot": "1:00 PM"
+      },
+      "id": "aud_bb52ee792cbb4f80c9842185",
+      "createdAt": "2026-09-22T15:29:34.804Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_22d4a39267e9d509fee626ba",
+      "createdAt": "2026-09-22T15:29:50.940Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_f924153d8a643509b880920f",
+      "createdAt": "2026-09-22T15:29:50.947Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_12df0e54dcc0c9170f139aff",
+      "createdAt": "2026-09-22T15:29:50.958Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_0677dc9e8a9e66b5a4a3d9e5",
+      "createdAt": "2026-09-22T15:29:50.963Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_351ef80afbc5faa642a362e1",
+      "createdAt": "2026-09-22T15:29:50.966Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_d846cf8a227f21a1228cf8af",
+      "createdAt": "2026-09-22T15:29:50.979Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_550c2468b6d136649af90c8b",
+      "createdAt": "2026-09-22T15:29:50.986Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_965ae019ad4c97129b6bd3fd",
+      "createdAt": "2026-09-22T15:29:50.988Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_0a17a50cb2a7f9126ae3",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_0a17a50cb2a7f9126ae3",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-17",
+        "timeSlot": "4:00 PM"
+      },
+      "id": "aud_ee9932986dc9999545d75eb9",
+      "createdAt": "2026-09-22T15:29:50.998Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_0e12b5d6ce9db67c84f35975",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_fe2a2739a58a450a560a130c",
+      "createdAt": "2026-09-22T15:29:51.013Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_a85d72b2fd392de803c2adc3",
+      "createdAt": "2026-09-22T15:30:10.702Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_bda331fb55f1c1537bdd8919",
+      "createdAt": "2026-09-22T15:30:10.709Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_6b0654f8786a887d55acb29a",
+      "createdAt": "2026-09-22T15:30:10.721Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_e776090fc3914f1179561737",
+      "createdAt": "2026-09-22T15:30:10.727Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_1663a1ed7aa78df1fe1b0ad5",
+      "createdAt": "2026-09-22T15:30:10.729Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_0b5edbd9e8b967bfd16d7e63",
+      "createdAt": "2026-09-22T15:30:10.741Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_7e80c7cbc47e93921083de7c",
+      "createdAt": "2026-09-22T15:30:10.747Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_8e5839781ff23fcd75e84b47",
+      "createdAt": "2026-09-22T15:30:10.754Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_e53d7de4289582ec132e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_e53d7de4289582ec132e",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-13",
+        "timeSlot": "12:00 PM"
+      },
+      "id": "aud_e9cda4bd636af8b87ef8e460",
+      "createdAt": "2026-09-22T15:30:10.767Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_b6d1fe43e8151195ac40a612",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_dadb881303b28809bcc53f5e",
+      "createdAt": "2026-09-22T15:30:10.781Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_7af4967207bd17d4c973",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AUDIT-1790091010789"
+      },
+      "id": "aud_daf5b7e932f1102c14eabff1",
+      "createdAt": "2026-09-22T15:30:10.794Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_e7ab0ba3cd95ef1413c0702d",
+      "createdAt": "2026-09-22T15:30:20.852Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_1620c6aa58f1240d1ab695af",
+      "createdAt": "2026-09-22T15:30:20.863Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_bb7b78652b054e2e29b647ad",
+      "createdAt": "2026-09-22T15:30:20.870Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_3d8c980944d65be8fd24bb59",
+      "createdAt": "2026-09-22T15:30:20.879Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_d11d03ac79f2d80efa0bf7c4",
+      "createdAt": "2026-09-22T15:30:20.881Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_3a66454dd11c766b6cbda529",
+      "createdAt": "2026-09-22T15:30:20.891Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_8771fb6feba81228d02fb483",
+      "createdAt": "2026-09-22T15:30:20.898Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_947880977bc342fe054891b6",
+      "createdAt": "2026-09-22T15:30:20.899Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_622fa01232d3dfd4f2dc",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_622fa01232d3dfd4f2dc",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-12",
+        "timeSlot": "5:00 PM"
+      },
+      "id": "aud_a5f3c56dc95d8daa788b6e91",
+      "createdAt": "2026-09-22T15:30:20.933Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_891de253d68cb2ffa84eccc7",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_4757b6e2c4d3e95c23739e94",
+      "createdAt": "2026-09-22T15:30:20.946Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_91d24847a746469f3ac0",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AUDIT-1790091020949"
+      },
+      "id": "aud_a74a234894d5654d692cf477",
+      "createdAt": "2026-09-22T15:30:20.953Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_aabfb2982e319c33887c4c65",
+      "createdAt": "2026-09-22T15:30:38.234Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_da7cc39e1756ac7e7137c56c",
+      "createdAt": "2026-09-22T15:30:38.242Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_4a944af562c42ba9fff9cc79",
+      "createdAt": "2026-09-22T15:30:38.251Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_cc7f4ab39a730e8ca730d37b",
+      "createdAt": "2026-09-22T15:30:38.258Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_25d754f24ce806d2d64c1475",
+      "createdAt": "2026-09-22T15:30:38.262Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_b5db040e06995953259d4075",
+      "createdAt": "2026-09-22T15:30:38.272Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_80f82068c241d162ca0be71d",
+      "createdAt": "2026-09-22T15:30:38.280Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_84dbb1836da5743e62662384",
+      "createdAt": "2026-09-22T15:30:38.282Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_d1428564086f2629bacf",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_d1428564086f2629bacf",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-14",
+        "timeSlot": "5:00 PM"
+      },
+      "id": "aud_2c56a9f12c232b020511bb70",
+      "createdAt": "2026-09-22T15:30:38.297Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_28c5d7c79b64591299350f51",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_b7c55229c8a8562d26540960",
+      "createdAt": "2026-09-22T15:30:38.314Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_7ca6682e5f1a74802ae6",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AUDIT-1790091038317"
+      },
+      "id": "aud_942902d6b0f120d4430c05bc",
+      "createdAt": "2026-09-22T15:30:38.322Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "AI_HEALTH_ASSISTANT_QUERY",
+      "targetResource": "ai_assistant",
+      "targetId": null,
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mode": "EXPLAIN_TERM",
+        "queryLength": 51
+      },
+      "id": "aud_5467f4b0fafbb337c40e9b89",
+      "createdAt": "2026-09-22T15:30:38.336Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "AI_HEALTH_ASSISTANT_QUERY",
+      "targetResource": "ai_assistant",
+      "targetId": null,
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mode": "EXPLAIN_TERM",
+        "queryLength": 68
+      },
+      "id": "aud_6df17b73fb658b100534f4bf",
+      "createdAt": "2026-09-22T15:30:38.349Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_35b8949ec290807e182eb7f9",
+      "createdAt": "2026-09-22T15:31:14.336Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_b004d1dbc144a013daed51e5",
+      "createdAt": "2026-09-22T15:31:14.347Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_db05ba96711c7224627b885a",
+      "createdAt": "2026-09-22T15:31:14.354Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_f2892a60b54b6410faa0d4da",
+      "createdAt": "2026-09-22T15:31:14.363Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_c87ddec57c05cc840a6aa17b",
+      "createdAt": "2026-09-22T15:31:14.365Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_2b25639e1afd6bf371bcc62a",
+      "createdAt": "2026-09-22T15:31:14.376Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_4957f79c5412e25b3d5b8f59",
+      "createdAt": "2026-09-22T15:31:14.382Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_7542fc4b0c1b88b269e22748",
+      "createdAt": "2026-09-22T15:31:14.384Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_9fae75f4b46e3432f982",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_9fae75f4b46e3432f982",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-25",
+        "timeSlot": "1:00 PM"
+      },
+      "id": "aud_2fede9aa9af8081698bf4afd",
+      "createdAt": "2026-09-22T15:31:14.397Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_01c15b20c50bc7c8cf6edd56",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_921c4ea7256c91daa28f12fe",
+      "createdAt": "2026-09-22T15:31:14.408Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_aec879f28cdc6314de24",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AUDIT-1790091074413"
+      },
+      "id": "aud_cc504ed6e9225e24ca935e9e",
+      "createdAt": "2026-09-22T15:31:14.418Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "AI_HEALTH_ASSISTANT_QUERY",
+      "targetResource": "ai_assistant",
+      "targetId": null,
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mode": "EXPLAIN_TERM",
+        "queryLength": 58
+      },
+      "id": "aud_3799602fb1b69bc369f58cef",
+      "createdAt": "2026-09-22T15:31:14.431Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_64e456f3c5e355480f77a0d2",
+      "createdAt": "2026-09-22T15:31:28.608Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_1ecaa14f05063e1bd18acead",
+      "createdAt": "2026-09-22T15:31:28.618Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_2ef3c545c9369fbba769e713",
+      "createdAt": "2026-09-22T15:31:28.627Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_0b4eabf915562ea58885c296",
+      "createdAt": "2026-09-22T15:31:28.635Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_cf4953513bb2f65c47232534",
+      "createdAt": "2026-09-22T15:31:28.638Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_6f2ad60df4f85b53b1366ac4",
+      "createdAt": "2026-09-22T15:31:28.650Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919811223344",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919811223344"
+      },
+      "id": "aud_5bb2905e5d758e284bed7dd6",
+      "createdAt": "2026-09-22T15:31:28.655Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_d3eb236b8d77e3478db6bb7e",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_a6959f37296830d9a52c1de8",
+      "createdAt": "2026-09-22T15:31:28.657Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "APPOINTMENT_BOOKED",
+      "targetResource": "appointments",
+      "targetId": "apt_0bcf4afc8fd587141f5c",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "appointmentId": "apt_0bcf4afc8fd587141f5c",
+        "providerId": "PRV-101",
+        "doctorId": "DOC-AUDIT-99",
+        "appointmentDate": "2027-01-14",
+        "timeSlot": "11:00 PM"
+      },
+      "id": "aud_3f9b9fc902b718fa7c66f926",
+      "createdAt": "2026-09-22T15:31:28.675Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "VAULT_DOCUMENT_UPLOADED",
+      "targetResource": "medical_documents_vault",
+      "targetId": "vlt_05d3abdbab92e4c29fc01cd5",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "documentType": "LAB_REPORT",
+        "title": "Echo Cardiogram Report",
+        "size": 42,
+        "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9"
+      },
+      "id": "aud_3c85712d76c9e83c3955edd1",
+      "createdAt": "2026-09-22T15:31:28.688Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "CLAIM_SUBMITTED",
+      "targetResource": "claims",
+      "targetId": "clm_4e2405bafa7778645d6b",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "claimNumber": "INV-AUDIT-1790091088691"
+      },
+      "id": "aud_4e7a604454d76e68952240c6",
+      "createdAt": "2026-09-22T15:31:28.698Z"
+    },
+    {
+      "actorId": "usr_d3eb236b8d77e3478db6bb7e",
+      "actorRole": "PATIENT",
+      "action": "AI_HEALTH_ASSISTANT_QUERY",
+      "targetResource": "ai_assistant",
+      "targetId": null,
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mode": "EXPLAIN_TERM",
+        "queryLength": 58
+      },
+      "id": "aud_1c0e8442812e01c4fbd976b4",
+      "createdAt": "2026-09-22T15:31:28.708Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-1766",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1766",
+        "name": "Apollo City Care Clinic",
+        "category": "CLINIC",
+        "registrationNumber": "REG-KA-2026-1592"
+      },
+      "id": "aud_ee70a4bad1347c886bb2e09c",
+      "createdAt": "2026-09-22T15:31:41.768Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_fb2ba9fe0701b9f77787784c",
+      "createdAt": "2026-09-22T15:31:41.784Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_e187836801325b092c96bb9a",
+      "createdAt": "2026-09-22T15:31:41.792Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "OFFICER_PORTAL_LOGIN",
+      "targetResource": "OFFICER_PORTAL",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "badgeId": "OFFICER-DEL-01"
+      },
+      "id": "aud_46b7fafeb522f7813ec490e8",
+      "createdAt": "2026-09-22T15:31:41.795Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROVIDER_STATUS_VERIFIED",
+      "targetResource": "providers",
+      "targetId": "PRV-1766",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1766",
+        "newStatus": "VERIFIED",
+        "reviewNotes": "Valid license inspected against Karnataka Medical Council database. Authorized for AHCS clinical operations."
+      },
+      "id": "aud_ebaefcab021faac79fdb9d57",
+      "createdAt": "2026-09-22T15:31:41.816Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919888877777",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919888877777"
+      },
+      "id": "aud_379cb2df5d110d6e823afad0",
+      "createdAt": "2026-09-22T15:31:41.825Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919888877777",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919888877777"
+      },
+      "id": "aud_a9f2d4022fee8144a6d57e85",
+      "createdAt": "2026-09-22T15:31:41.838Z"
+    },
+    {
+      "actorId": "usr_026c134846dfcb8deec5969f",
+      "actorRole": "DOCTOR",
+      "action": "PROVIDER_STAFF_LOGIN",
+      "targetResource": "PROVIDER_PORTAL",
+      "targetId": "PRV-1766",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1766",
+        "providerName": "Apollo City Care Clinic",
+        "doctorName": "Dr. Sameer Kapoor, MBBS",
+        "medicalCouncilNumber": "KMC-2022-81729"
+      },
+      "id": "aud_8867d902dbf4b4d140974a4f",
+      "createdAt": "2026-09-22T15:31:41.841Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-8485",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-8485",
+        "name": "Apex Super Specialty Care",
+        "category": "HOSPITAL",
+        "registrationNumber": "KA-MED-APEX-8470"
+      },
+      "id": "aud_f788b5466e6979b165c1448a",
+      "createdAt": "2026-09-22T15:31:48.486Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_aa04e8aea77970a8767e3650",
+      "createdAt": "2026-09-22T15:31:48.498Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_0f89728f5915d132405031da",
+      "createdAt": "2026-09-22T15:31:48.507Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_4f51fc8eca28d86cc801ef37",
+      "createdAt": "2026-09-22T15:31:48.512Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROVIDER_STATUS_VERIFIED",
+      "targetResource": "providers",
+      "targetId": "PRV-8485",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-8485",
+        "newStatus": "VERIFIED",
+        "reviewNotes": "Medical registration certificate confirmed with KMC portal"
+      },
+      "id": "aud_02cb40e7c59132f45ba1d3c7",
+      "createdAt": "2026-09-22T15:31:48.523Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919891108530",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919891108530"
+      },
+      "id": "aud_486b9067713bcf910b4a1ea4",
+      "createdAt": "2026-09-22T15:31:48.535Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919891108530",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919891108530"
+      },
+      "id": "aud_0f1b509e316638fa1650415d",
+      "createdAt": "2026-09-22T15:31:48.541Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_7a3cff92e0bc92d3288b63b2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919891108530"
+      },
+      "id": "aud_29acce128e8f86dcf3de6216",
+      "createdAt": "2026-09-22T15:31:48.550Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "PROFILE_UPDATED",
+      "targetResource": "PROFILE",
+      "targetId": "prf_7d72e0ad72177bb196421a1f",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "bloodGroupSource": "USER_DECLARED"
+      },
+      "id": "aud_7261f88daef4abad238548a8",
+      "createdAt": "2026-09-22T15:31:48.570Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "DOCUMENT_UPLOADED",
+      "targetResource": "VERIFICATION_DOCUMENT",
+      "targetId": "doc_73b34c5ce22b15b0e25abb5b",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "docType": "PASSPORT",
+        "duplicateResult": "POSSIBLE_DUPLICATE",
+        "duplicateScore": 45
+      },
+      "id": "aud_e114db9c3b7d9a1ad83ab3a8",
+      "createdAt": "2026-09-22T15:31:48.589Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROFILE_APPROVED",
+      "targetResource": "ACCOUNT",
+      "targetId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-A16N99V3",
+        "cardNumber": "CRD-9250-5250"
+      },
+      "id": "aud_ebb93fa732fae8d146cc133f",
+      "createdAt": "2026-09-22T15:31:48.613Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLIENT_ID_GENERATED",
+      "targetResource": "CLIENT_ID",
+      "targetId": "cid_37792426c0f17a0dae6184d5",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-A16N99V3"
+      },
+      "id": "aud_6f04a06259b69d876f6c4bdd",
+      "createdAt": "2026-09-22T15:31:48.615Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "CARD_ACTIVATED",
+      "targetResource": "CARD",
+      "targetId": "crd_a00759aeb6d133449e4e0aae",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "cardNumber": "CRD-9250-5250"
+      },
+      "id": "aud_bbc96df19c4859671c2ab72a",
+      "createdAt": "2026-09-22T15:31:48.637Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-A16N99V3",
+        "providerId": "PRV-8485",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_d8fc4b7c99e2a6966df60914",
+      "createdAt": "2026-09-22T15:31:48.651Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER",
+      "action": "CONSENT_REQUESTED",
+      "targetResource": "consents",
+      "targetId": "cst_67d5d43923d025f8b22839aa",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_67d5d43923d025f8b22839aa",
+        "providerId": "PRV-8485",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "purpose": "DIAGNOSIS",
+        "scope": "ALL_RECORDS",
+        "targetAccountId": "acc_0d6fbce8616bf3ebf016e5e9"
+      },
+      "id": "aud_59ff9a93371e1145ac962ef7",
+      "createdAt": "2026-09-22T15:31:48.664Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_GRANTED",
+      "targetResource": "consents",
+      "targetId": "cst_67d5d43923d025f8b22839aa",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_67d5d43923d025f8b22839aa",
+        "decision": "GRANTED",
+        "providerId": "PRV-8485",
+        "durationHours": 24
+      },
+      "id": "aud_201ed555ad23ea6f06ffcee4",
+      "createdAt": "2026-09-22T15:31:48.676Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-A16N99V3",
+        "providerId": "PRV-8485",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": true
+      },
+      "id": "aud_27da9506b02885ebea0b7198",
+      "createdAt": "2026-09-22T15:31:48.685Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_DOCTOR",
+      "action": "MEDICAL_RECORD_CREATED",
+      "targetResource": "medical_records",
+      "targetId": "med_5acfe1299a7878887746f3cf",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "recordId": "med_5acfe1299a7878887746f3cf",
+        "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+        "providerId": "PRV-8485",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "recordType": "PRESCRIPTION",
+        "medicationCount": 2
+      },
+      "id": "aud_54c9795ab70ad8fc6a88cf21",
+      "createdAt": "2026-09-22T15:31:48.697Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_REVOKED",
+      "targetResource": "consents",
+      "targetId": "cst_67d5d43923d025f8b22839aa",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_67d5d43923d025f8b22839aa",
+        "providerId": "PRV-8485",
+        "revokedAt": "2026-09-22T15:31:48.712Z"
+      },
+      "id": "aud_b8b82983c4c558cec52d2011",
+      "createdAt": "2026-09-22T15:31:48.715Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-A16N99V3",
+        "providerId": "PRV-8485",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_cc6ff41607db12f9eac53fa9",
+      "createdAt": "2026-09-22T15:31:48.720Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "ORGANIZATION_REGISTERED",
+      "targetResource": "organizations",
+      "targetId": "org_8c8ec45f8a33d0ba0b1d",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_8c8ec45f8a33d0ba0b1d",
+        "orgName": "Acme Technologies Pvt Ltd",
+        "registrationNumber": "U72200KA2021PTC145678"
+      },
+      "id": "aud_29805f1a904183f8e1c70439",
+      "createdAt": "2026-09-22T15:31:48.733Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "EMPLOYEE_CARD_SPONSORED",
+      "targetResource": "corporate_sponsorships",
+      "targetId": "spons_62fbb2461f23e9837bb8",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_8c8ec45f8a33d0ba0b1d",
+        "employeeId": "ACME-E-4421",
+        "clientId": "AHCS-IN-A16N99V3"
+      },
+      "id": "aud_18c687745389d9cb9a2bfff7",
+      "createdAt": "2026-09-22T15:31:48.740Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_CREATED",
+      "targetResource": "payment_orders",
+      "targetId": "ord_a48bace1755ab2f8d44343ba",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_a48bace1755ab2f8d44343ba",
+        "planId": "AHCS-PLAN-PREMIUM",
+        "amountPaise": 219900,
+        "gatewayOrderId": "order_ra_d0e744f0c7ee5eb2"
+      },
+      "id": "aud_8bdf79d4c7a2e5a0d10b8b47",
+      "createdAt": "2026-09-22T15:31:48.759Z"
+    },
+    {
+      "actorId": "usr_7a3cff92e0bc92d3288b63b2",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_VERIFIED_PAID",
+      "targetResource": "payment_orders",
+      "targetId": "ord_a48bace1755ab2f8d44343ba",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_a48bace1755ab2f8d44343ba",
+        "gatewayPaymentId": "pay_test_1790091108764",
+        "amountPaise": 219900,
+        "planId": "AHCS-PLAN-PREMIUM"
+      },
+      "id": "aud_e89047a80f5a81a6934d675d",
+      "createdAt": "2026-09-22T15:31:48.772Z"
+    }
+  ],
+  "providers": [
+    {
+      "id": "PRV-101",
+      "name": "City Care Multi-Specialty Hospital",
+      "category": "HOSPITAL",
+      "registrationNumber": "KA-MED-HOSP-2018-0912",
+      "medicalCouncil": "Karnataka Medical Council",
+      "address": "84 Ring Road, Koramangala 4th Block",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560034",
+      "phone": "+91 80 4912 8000",
+      "email": "desk@citycarehospital.in",
+      "services": [
+        "24/7 Emergency",
+        "Cardiology",
+        "Trauma Unit",
+        "ICU",
+        "Radiology"
+      ],
+      "partnerTier": "PREMIUM_NETWORK",
+      "operatingHours": "24 Hours Open",
+      "status": "VERIFIED",
+      "latitude": 12.9352,
+      "longitude": 77.6245,
+      "emergency24x7": true,
+      "specialities": [
+        "Cardiology",
+        "Emergency Medicine",
+        "Neurology",
+        "Orthopedics"
+      ],
+      "rating": 4.8,
+      "verifiedAt": "2026-09-22T15:36:11.054Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "createdAt": "2026-09-22T15:36:11.055Z",
+      "updatedAt": "2026-09-22T15:36:11.055Z"
+    },
+    {
+      "id": "PRV-102",
+      "name": "Sunrise Family Healthcare Clinic",
+      "category": "CLINIC",
+      "registrationNumber": "KA-MED-CLN-2020-4102",
+      "medicalCouncil": "Karnataka Medical Council",
+      "address": "12 100ft Road, Indiranagar",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560038",
+      "phone": "+91 80 2521 3400",
+      "email": "care@sunrisefamilyclinic.in",
+      "services": [
+        "General Practice",
+        "Pediatrics",
+        "Vaccinations",
+        "Preventive Health"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "08:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "latitude": 12.9716,
+      "longitude": 77.6412,
+      "emergency24x7": false,
+      "specialities": [
+        "General Medicine",
+        "Pediatrics"
+      ],
+      "rating": 4.6,
+      "verifiedAt": "2026-09-22T15:36:11.055Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "createdAt": "2026-09-22T15:36:11.055Z",
+      "updatedAt": "2026-09-22T15:36:11.055Z"
+    },
+    {
+      "id": "PRV-103",
+      "name": "LifeCare Diagnostics & Pathology",
+      "category": "LAB",
+      "registrationNumber": "KA-DIAG-2019-8831",
+      "medicalCouncil": "National Accreditation Board for Testing and Calibration Laboratories (NABL)",
+      "address": "45 HSR Layout, Sector 2",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560102",
+      "phone": "+91 80 6710 4500",
+      "email": "reports@lifecarediagnostics.in",
+      "services": [
+        "Comprehensive Blood Panels",
+        "MRI / CT Scan",
+        "Digital X-Ray",
+        "Biochemistry"
+      ],
+      "partnerTier": "PREMIUM_NETWORK",
+      "operatingHours": "07:00 AM - 09:00 PM",
+      "status": "VERIFIED",
+      "latitude": 12.9121,
+      "longitude": 77.6446,
+      "emergency24x7": false,
+      "specialities": [
+        "Pathology",
+        "Radiology",
+        "Biochemistry"
+      ],
+      "rating": 4.7,
+      "verifiedAt": "2026-09-22T15:36:11.055Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "createdAt": "2026-09-22T15:36:11.056Z",
+      "updatedAt": "2026-09-22T15:36:11.056Z"
+    },
+    {
+      "id": "PRV-104",
+      "name": "MedPlus 24x7 Network Pharmacy",
+      "category": "PHARMACY",
+      "registrationNumber": "KA-PHARM-2021-0044",
+      "medicalCouncil": "Pharmacy Council of India",
+      "address": "Shop 4, Main Market, Indiranagar",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560038",
+      "phone": "+91 80 2345 6789",
+      "email": "orders@medplusnetwork.in",
+      "services": [
+        "Prescription Medicines",
+        "Emergency First Aid",
+        "Cold-Chain Insulin Storage"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "24 Hours Open",
+      "status": "VERIFIED",
+      "latitude": 12.9784,
+      "longitude": 77.6408,
+      "emergency24x7": true,
+      "specialities": [
+        "Pharmacy",
+        "First Aid"
+      ],
+      "rating": 4.5,
+      "verifiedAt": "2026-09-22T15:36:11.056Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "createdAt": "2026-09-22T15:36:11.056Z",
+      "updatedAt": "2026-09-22T15:36:11.056Z"
+    },
+    {
+      "name": "Apollo City Care Clinic",
+      "category": "CLINIC",
+      "registrationNumber": "REG-KA-2026-8054",
+      "medicalCouncil": "Karnataka Medical Council / NMC",
+      "address": "42 MG Road, Central District",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560001",
+      "phone": "+919876543210",
+      "email": "contact@apollocitycare.org",
+      "services": [
+        "General Consultation",
+        "Digital Prescriptions (Rx)"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "PENDING_VERIFICATION",
+      "verifiedAt": null,
+      "verifiedByOfficerId": null,
+      "id": "PRV-8351",
+      "createdAt": "2026-09-22T15:12:38.351Z",
+      "updatedAt": "2026-09-22T15:12:38.351Z"
+    },
+    {
+      "name": "Apollo City Care Clinic",
+      "category": "CLINIC",
+      "registrationNumber": "REG-KA-2026-1142",
+      "medicalCouncil": "Karnataka Medical Council / NMC",
+      "address": "42 MG Road, Central District",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560001",
+      "phone": "+919876543210",
+      "email": "contact@apollocitycare.org",
+      "services": [
+        "General Consultation",
+        "Digital Prescriptions (Rx)"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "verifiedAt": "2026-09-22T15:12:51.286Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "id": "PRV-1222",
+      "createdAt": "2026-09-22T15:12:51.222Z",
+      "updatedAt": "2026-09-22T15:12:51.286Z"
+    },
+    {
+      "name": "Apex Super Specialty Care",
+      "category": "HOSPITAL",
+      "registrationNumber": "KA-MED-APEX-4129",
+      "medicalCouncil": "Karnataka Medical Council",
+      "address": "100 Outer Ring Road, Bellandur",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560103",
+      "phone": "+91 80 9988 7766",
+      "email": "admin@apexhealth.in",
+      "services": [
+        "Critical Care",
+        "Neuro Surgery",
+        "24x7 Trauma"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "verifiedAt": "2026-09-22T15:13:04.166Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "id": "PRV-4141",
+      "createdAt": "2026-09-22T15:13:04.141Z",
+      "updatedAt": "2026-09-22T15:13:04.166Z"
+    },
+    {
+      "name": "Apollo City Care Clinic",
+      "category": "CLINIC",
+      "registrationNumber": "REG-KA-2026-1592",
+      "medicalCouncil": "Karnataka Medical Council / NMC",
+      "address": "42 MG Road, Central District",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560001",
+      "phone": "+919876543210",
+      "email": "contact@apollocitycare.org",
+      "services": [
+        "General Consultation",
+        "Digital Prescriptions (Rx)"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "verifiedAt": "2026-09-22T15:31:41.812Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "id": "PRV-1766",
+      "createdAt": "2026-09-22T15:31:41.766Z",
+      "updatedAt": "2026-09-22T15:31:41.812Z"
+    },
+    {
+      "name": "Apex Super Specialty Care",
+      "category": "HOSPITAL",
+      "registrationNumber": "KA-MED-APEX-8470",
+      "medicalCouncil": "Karnataka Medical Council",
+      "address": "100 Outer Ring Road, Bellandur",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560103",
+      "phone": "+91 80 9988 7766",
+      "email": "admin@apexhealth.in",
+      "services": [
+        "Critical Care",
+        "Neuro Surgery",
+        "24x7 Trauma"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "verifiedAt": "2026-09-22T15:31:48.521Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "id": "PRV-8485",
+      "createdAt": "2026-09-22T15:31:48.485Z",
+      "updatedAt": "2026-09-22T15:31:48.521Z"
+    }
+  ],
+  "medicalRecords": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "authorProviderId": "PRV-103",
+      "authorProviderName": "LifeCare Diagnostics & Pathology",
+      "authorDoctorName": "Pathologist On-Duty",
+      "recordType": "LAB_REPORT",
+      "title": "Diagnostic Pathology Report: Complete Metabolic Panel + Lipid Profile",
+      "clinicalDiagnosis": "Laboratory Analysis Completed",
+      "clinicalNotes": "All metabolic parameters within normal clinical thresholds.",
+      "medications": [],
+      "labObservations": "All metabolic parameters within normal clinical thresholds.",
+      "recordDate": "2026-09-22T15:12:56.315Z",
+      "id": "med_91217279fd7f5c0419b25def",
+      "createdAt": "2026-09-22T15:12:56.315Z"
+    },
+    {
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "authorProviderId": "PRV-4141",
+      "authorProviderName": "Apex Super Specialty Care",
+      "authorDoctorName": "Dr. Arjun Kulkarni, MS",
+      "recordType": "PRESCRIPTION",
+      "title": "Outpatient Consultation: Acute Gastritis",
+      "clinicalDiagnosis": "Acute Gastritis with Epigastric Pain",
+      "clinicalNotes": "Advised bland diet, adequate hydration and follow up in 5 days.",
+      "medications": [
+        {
+          "medicineName": "Pantoprazole",
+          "dosage": "40mg",
+          "frequency": "1-0-0 (Before food)",
+          "duration": "14 days"
+        },
+        {
+          "medicineName": "Sucralfate Syrup",
+          "dosage": "10ml",
+          "frequency": "1-1-1 (Before food)",
+          "duration": "7 days"
+        }
+      ],
+      "recordDate": "2026-09-22",
+      "id": "med_294e6cd16dd5c97ac70fb3fd",
+      "createdAt": "2026-09-22T15:13:04.307Z"
+    },
+    {
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "authorProviderId": "PRV-8485",
+      "authorProviderName": "Apex Super Specialty Care",
+      "authorDoctorName": "Dr. Arjun Kulkarni, MS",
+      "recordType": "PRESCRIPTION",
+      "title": "Outpatient Consultation: Acute Gastritis",
+      "clinicalDiagnosis": "Acute Gastritis with Epigastric Pain",
+      "clinicalNotes": "Advised bland diet, adequate hydration and follow up in 5 days.",
+      "medications": [
+        {
+          "medicineName": "Pantoprazole",
+          "dosage": "40mg",
+          "frequency": "1-0-0 (Before food)",
+          "duration": "14 days"
+        },
+        {
+          "medicineName": "Sucralfate Syrup",
+          "dosage": "10ml",
+          "frequency": "1-1-1 (Before food)",
+          "duration": "7 days"
+        }
+      ],
+      "recordDate": "2026-09-22",
+      "id": "med_5acfe1299a7878887746f3cf",
+      "createdAt": "2026-09-22T15:31:48.694Z"
+    }
+  ],
+  "consents": [
+    {
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "providerId": "PRV-4141",
+      "providerName": "Apex Super Specialty Care",
+      "doctorName": "Dr. Arjun Kulkarni, MS",
+      "purpose": "DIAGNOSIS",
+      "scope": "ALL_RECORDS",
+      "status": "REVOKED",
+      "requestedAt": "2026-09-22T15:13:04.269Z",
+      "id": "cst_81ea938e12e9316c1864cec0",
+      "grantedAt": "2026-09-22T15:13:04.286Z",
+      "expiresAt": "2026-09-23T15:13:04.286Z",
+      "revokedAt": "2026-09-22T15:13:04.327Z",
+      "createdAt": "2026-09-22T15:13:04.269Z"
+    },
+    {
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "providerId": "PRV-8485",
+      "providerName": "Apex Super Specialty Care",
+      "doctorName": "Dr. Arjun Kulkarni, MS",
+      "purpose": "DIAGNOSIS",
+      "scope": "ALL_RECORDS",
+      "status": "REVOKED",
+      "requestedAt": "2026-09-22T15:31:48.661Z",
+      "id": "cst_67d5d43923d025f8b22839aa",
+      "grantedAt": "2026-09-22T15:31:48.674Z",
+      "expiresAt": "2026-09-23T15:31:48.674Z",
+      "revokedAt": "2026-09-22T15:31:48.712Z",
+      "createdAt": "2026-09-22T15:31:48.661Z"
+    }
+  ],
+  "paymentOrders": [
+    {
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "planId": "AHCS-PLAN-PREMIUM",
+      "planName": "Smart Physical Card & Family Shield",
+      "amountPaise": 219900,
+      "currency": "INR",
+      "status": "PAID",
+      "gateway": "RAZORPAY",
+      "gatewayOrderId": "order_ra_6c5f9eb7186f7812",
+      "gatewayPaymentId": "pay_test_1790089984374",
+      "id": "ord_35ea9a654e7327aea338598b",
+      "paidAt": "2026-09-22T15:13:04.382Z",
+      "createdAt": "2026-09-22T15:13:04.366Z"
+    },
+    {
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "planId": "AHCS-PLAN-PREMIUM",
+      "planName": "Smart Physical Card & Family Shield",
+      "amountPaise": 219900,
+      "currency": "INR",
+      "status": "PAID",
+      "gateway": "RAZORPAY",
+      "gatewayOrderId": "order_ra_d0e744f0c7ee5eb2",
+      "gatewayPaymentId": "pay_test_1790091108764",
+      "id": "ord_a48bace1755ab2f8d44343ba",
+      "paidAt": "2026-09-22T15:31:48.771Z",
+      "createdAt": "2026-09-22T15:31:48.756Z"
+    }
+  ],
+  "organizations": [
+    {
+      "orgName": "Acme Technologies Pvt Ltd",
+      "registrationNumber": "U72200KA2021PTC145678",
+      "contactEmail": "benefits@acme.com",
+      "contactPhone": "+91 80 4455 6677",
+      "domain": "acme.com",
+      "activePlan": "CORPORATE_ENTERPRISE_SHIELD",
+      "id": "org_43a0fbb6ac5c73635ab2",
+      "createdAt": "2026-09-22T15:13:04.344Z"
+    },
+    {
+      "orgName": "Acme Technologies Pvt Ltd",
+      "registrationNumber": "U72200KA2021PTC145678",
+      "contactEmail": "benefits@acme.com",
+      "contactPhone": "+91 80 4455 6677",
+      "domain": "acme.com",
+      "activePlan": "CORPORATE_ENTERPRISE_SHIELD",
+      "id": "org_8c8ec45f8a33d0ba0b1d",
+      "createdAt": "2026-09-22T15:31:48.732Z"
+    }
+  ],
+  "corporateSponsorships": [
+    {
+      "orgId": "org_43a0fbb6ac5c73635ab2",
+      "accountId": "acc_508ccb1067ce29a9150fbc95",
+      "employeeId": "ACME-E-4421",
+      "status": "ACTIVE",
+      "id": "spons_8c84492b004ea5390ebc",
+      "sponsoredAt": "2026-09-22T15:13:04.349Z"
+    },
+    {
+      "orgId": "org_8c8ec45f8a33d0ba0b1d",
+      "accountId": "acc_0d6fbce8616bf3ebf016e5e9",
+      "employeeId": "ACME-E-4421",
+      "status": "ACTIVE",
+      "id": "spons_62fbb2461f23e9837bb8",
+      "sponsoredAt": "2026-09-22T15:31:48.739Z"
+    }
+  ],
+  "appointments": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "doc-test-76173",
+      "doctorName": "Dr. Ramesh Kumar, MD",
+      "appointmentDate": "2026-11-17",
+      "timeSlot": "11:10 AM",
+      "status": "CHECKED_IN",
+      "reason": "Hypertension Clinical Review",
+      "id": "apt_df9aac1752af39ac6963",
+      "bookedAt": "2026-09-22T15:12:56.187Z",
+      "updatedAt": "2026-09-22T15:12:56.207Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2026-11-20",
+      "timeSlot": "10:00 AM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_8e7e4b3833e8f085c147",
+      "bookedAt": "2026-09-22T15:29:10.506Z",
+      "updatedAt": "2026-09-22T15:29:10.506Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-13",
+      "timeSlot": "1:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_348b9d709b8e60023735",
+      "bookedAt": "2026-09-22T15:29:34.798Z",
+      "updatedAt": "2026-09-22T15:29:34.798Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-17",
+      "timeSlot": "4:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_0a17a50cb2a7f9126ae3",
+      "bookedAt": "2026-09-22T15:29:50.996Z",
+      "updatedAt": "2026-09-22T15:29:50.996Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-13",
+      "timeSlot": "12:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_e53d7de4289582ec132e",
+      "bookedAt": "2026-09-22T15:30:10.763Z",
+      "updatedAt": "2026-09-22T15:30:10.763Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-12",
+      "timeSlot": "5:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_622fa01232d3dfd4f2dc",
+      "bookedAt": "2026-09-22T15:30:20.905Z",
+      "updatedAt": "2026-09-22T15:30:20.905Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-14",
+      "timeSlot": "5:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_d1428564086f2629bacf",
+      "bookedAt": "2026-09-22T15:30:38.291Z",
+      "updatedAt": "2026-09-22T15:30:38.291Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-25",
+      "timeSlot": "1:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_9fae75f4b46e3432f982",
+      "bookedAt": "2026-09-22T15:31:14.393Z",
+      "updatedAt": "2026-09-22T15:31:14.393Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "doctorId": "DOC-AUDIT-99",
+      "doctorName": "Dr. Ramesh Audit, MD",
+      "appointmentDate": "2027-01-14",
+      "timeSlot": "11:00 PM",
+      "status": "CONFIRMED",
+      "reason": "Routine Cardiac Follow-up",
+      "id": "apt_0bcf4afc8fd587141f5c",
+      "bookedAt": "2026-09-22T15:31:28.672Z",
+      "updatedAt": "2026-09-22T15:31:28.672Z"
+    }
+  ],
+  "familyMembers": [
+    {
+      "primaryAccountId": "acc_c21623342736d0b65432f9ec",
+      "memberAccountId": "acc_dc2505a027bc5706fda39596",
+      "memberName": "Ananya Sengupta 976104",
+      "memberClientId": "AHCS-IN-YFQQ67J1",
+      "relationship": "SPOUSE",
+      "permissionLevel": "FULL_ACCESS",
+      "isGuardian": false,
+      "status": "ACTIVE",
+      "id": "fam_70796e6a99c109f609cf",
+      "createdAt": "2026-09-22T15:12:56.222Z"
+    }
+  ],
+  "vaultDocuments": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "documentType": "DISCHARGE_SUMMARY",
+      "title": "Cardiac Post-Operative Discharge Summary",
+      "documentKey": "vault/acc_c21623342736d0b65432f9ec/3d28acd1c51df2870f7d7818dfab8fd2",
+      "fileMimeType": "text/plain",
+      "fileSizeBytes": 51,
+      "documentHash": "0d287b7f5c13f34e91bfc6d078f7084eef9051876104806da796a2fcb8254472",
+      "uploadedByUserId": "usr_fb983123e504c1a02ede9d06",
+      "id": "vlt_68d38b615756c4bacbe11d82",
+      "createdAt": "2026-09-22T15:12:56.254Z"
+    },
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "documentType": "LAB_REPORT",
+      "title": "Verified Lab Report: Complete Metabolic Panel + Lipid Profile",
+      "documentKey": "lab-reports/acc_c21623342736d0b65432f9ec/2214f212e9adc864d8711b2e",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 2048,
+      "documentHash": "51d92c26953dae978394999838a83faf48a8fa223ba25f9f763ea5d158fcb0de",
+      "uploadedByUserId": "usr_officer_ananya_01",
+      "id": "vlt_7a4eedbdb00a950a138907ad",
+      "createdAt": "2026-09-22T15:12:56.313Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/5a019716596732763b592d83ee066d4d",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_0e12b5d6ce9db67c84f35975",
+      "createdAt": "2026-09-22T15:29:51.012Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/b8e709775073ce9742c8e8e4db2b8049",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_b6d1fe43e8151195ac40a612",
+      "createdAt": "2026-09-22T15:30:10.779Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/8e48a1612d4639279c2171d12e2610a8",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_891de253d68cb2ffa84eccc7",
+      "createdAt": "2026-09-22T15:30:20.944Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/9663e514427cee274952e8d95689baae",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_28c5d7c79b64591299350f51",
+      "createdAt": "2026-09-22T15:30:38.311Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/c7f95cf6c04675bd56ccda9dcc1b04fd",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_01c15b20c50bc7c8cf6edd56",
+      "createdAt": "2026-09-22T15:31:14.406Z"
+    },
+    {
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "documentType": "LAB_REPORT",
+      "title": "Echo Cardiogram Report",
+      "documentKey": "vault/acc_d3921d34196bea3f733524b6/216b5b7fcf7b7b1adc46ac189f71f311",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 42,
+      "documentHash": "8058415c6414d4d110c95c64f378643bd87f878b8a89fd80c5e94454e95c92c9",
+      "uploadedByUserId": "usr_d3eb236b8d77e3478db6bb7e",
+      "id": "vlt_05d3abdbab92e4c29fc01cd5",
+      "createdAt": "2026-09-22T15:31:28.686Z"
+    }
+  ],
+  "medicationSchedules": [
+    {
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "medicineName": "Amlodipine 5mg",
+      "dosage": "5mg",
+      "frequency": "Once Daily",
+      "duration": "30 days",
+      "startDate": "2026-09-22",
+      "endDate": "2026-10-22",
+      "status": "ACTIVE",
+      "adherenceLog": [
+        {
+          "date": "2026-09-22",
+          "taken": true,
+          "loggedAt": "2026-09-22T15:12:56.286Z"
+        }
+      ],
+      "id": "sch_a72f47f5de9775b0ba9e"
+    }
+  ],
+  "labOrders": [
+    {
+      "orderNumber": "LBO-976300-CC6D",
+      "patientClientId": "AHCS-IN-CD265H3V",
+      "providerId": "PRV-103",
+      "providerName": "LifeCare Diagnostics & Pathology",
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "testName": "Complete Metabolic Panel + Lipid Profile",
+      "status": "COMPLETED",
+      "id": "lab_faf0b61680c25e4e9096",
+      "createdAt": "2026-09-22T15:12:56.300Z",
+      "reportDocumentId": "vlt_7a4eedbdb00a950a138907ad",
+      "verifiedByDoctorId": "usr_officer_ananya_01",
+      "completedAt": "2026-09-22T15:12:56.316Z"
+    }
+  ],
+  "notifications": [
+    {
+      "userId": "usr_fb983123e504c1a02ede9d06",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Kumar, MD at City Care Multi-Specialty Hospital is confirmed for 2026-11-17 at 11:10 AM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_e8a54dfdbde57698bfff",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:12:56.188Z"
+    },
+    {
+      "userId": "usr_fb983123e504c1a02ede9d06",
+      "title": "Appointment CHECKED_IN",
+      "message": "Your appointment with Dr. Dr. Ramesh Kumar, MD status is now CHECKED_IN.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_bb8076cb9fcc981a547f",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:12:56.211Z"
+    },
+    {
+      "userId": "usr_fb983123e504c1a02ede9d06",
+      "title": "Lab Report Ready",
+      "message": "Your verified diagnostic report for Complete Metabolic Panel + Lipid Profile is now available in your health records.",
+      "category": "LAB",
+      "channel": "IN_APP",
+      "id": "notif_0d8dc292d297f1fba5b8",
+      "isRead": true,
+      "createdAt": "2026-09-22T15:12:56.317Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2026-11-20 at 10:00 AM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_01ff43829ca1e6592670",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:29:10.508Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-13 at 1:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_799d8a9c31e0b1675e92",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:29:34.801Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-17 at 4:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_43c68924029ead6d28a7",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:29:50.997Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-13 at 12:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_6c730616836a42d525ae",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:30:10.764Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-12 at 5:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_945054e1153cad460922",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:30:20.931Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-14 at 5:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_26e47a487094e3c92b64",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:30:38.294Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-25 at 1:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_ee08209442b325a7bd80",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:31:14.395Z"
+    },
+    {
+      "userId": "usr_d3eb236b8d77e3478db6bb7e",
+      "title": "Appointment Confirmed",
+      "message": "Your appointment with Dr. Dr. Ramesh Audit, MD at City Care Multi-Specialty Hospital is confirmed for 2027-01-14 at 11:00 PM.",
+      "category": "APPOINTMENT",
+      "channel": "IN_APP",
+      "id": "notif_8dc5c95fbadb98953342",
+      "isRead": false,
+      "createdAt": "2026-09-22T15:31:28.673Z"
+    }
+  ],
+  "cardDeliveries": [
+    {
+      "cardId": "crd_3dbff4969f69916a5957940b",
+      "cardNumber": "CRD-4857-6793",
+      "trackingNumber": "TRK-IN-89976355",
+      "courierPartner": "India Post SpeedPost Health Logistics",
+      "currentStage": "DELIVERED",
+      "estimatedDelivery": "2026-09-25",
+      "history": [
+        {
+          "stage": "REQUESTED",
+          "timestamp": "2026-09-22T15:12:56.053Z",
+          "location": "AHCS Central Issuance Center, Bengaluru",
+          "note": "Smart card personalization requisition created"
+        },
+        {
+          "stage": "PRINTING",
+          "timestamp": "2026-09-21T15:12:56.355Z",
+          "location": "Secure Card Personalization Facility, Bengaluru",
+          "note": "ISO/IEC 7810 ID-1 card substrate engraved and cryptographic keys initialized"
+        }
+      ],
+      "id": "del_a37148b24ea15f61f3d1"
+    }
+  ],
+  "benefitRules": [
+    {
+      "id": "ben_core_consult",
+      "planId": "AHCS-PLAN-CORE",
+      "planName": "Core Health ID",
+      "category": "CONSULTATION",
+      "discountPercent": 15,
+      "maxCoveragePaise": 50000,
+      "copayPercent": 85
+    },
+    {
+      "id": "ben_core_diag",
+      "planId": "AHCS-PLAN-CORE",
+      "planName": "Core Health ID",
+      "category": "DIAGNOSTICS",
+      "discountPercent": 10,
+      "maxCoveragePaise": 100000,
+      "copayPercent": 90
+    },
+    {
+      "id": "ben_prem_consult",
+      "planId": "AHCS-PLAN-PREMIUM",
+      "planName": "Smart Physical Card & Shield",
+      "category": "CONSULTATION",
+      "discountPercent": 30,
+      "maxCoveragePaise": 150000,
+      "copayPercent": 70
+    },
+    {
+      "id": "ben_prem_emerg",
+      "planId": "AHCS-PLAN-PREMIUM",
+      "planName": "Smart Physical Card & Shield",
+      "category": "EMERGENCY",
+      "discountPercent": 50,
+      "maxCoveragePaise": 5000000,
+      "copayPercent": 50
+    }
+  ],
+  "claims": [
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_c21623342736d0b65432f9ec",
+      "claimNumber": "INV-AHCS-1790089976381",
+      "serviceDate": "2026-09-20",
+      "serviceType": "INPATIENT_SURGERY",
+      "totalBillPaise": 2500000,
+      "claimedAmountPaise": 2500000,
+      "status": "SETTLED",
+      "id": "clm_b8e6fc0d7d3900015871",
+      "approvedAmountPaise": 2300000,
+      "createdAt": "2026-09-22T15:12:56.390Z",
+      "updatedAt": "2026-09-22T15:12:56.408Z",
+      "invoiceNumber": "INV-AHCS-1790089976381"
+    },
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "claimNumber": "INV-AUDIT-1790091010789",
+      "serviceDate": "2026-09-22",
+      "serviceType": "INPATIENT_SURGERY",
+      "status": "SUBMITTED",
+      "id": "clm_7af4967207bd17d4c973",
+      "approvedAmountPaise": 0,
+      "createdAt": "2026-09-22T15:30:10.792Z",
+      "updatedAt": "2026-09-22T15:30:10.792Z",
+      "invoiceNumber": "INV-AUDIT-1790091010789"
+    },
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "claimNumber": "INV-AUDIT-1790091020949",
+      "serviceDate": "2026-09-22",
+      "serviceType": "INPATIENT_SURGERY",
+      "status": "SUBMITTED",
+      "id": "clm_91d24847a746469f3ac0",
+      "approvedAmountPaise": 0,
+      "createdAt": "2026-09-22T15:30:20.952Z",
+      "updatedAt": "2026-09-22T15:30:20.952Z",
+      "invoiceNumber": "INV-AUDIT-1790091020949"
+    },
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "claimNumber": "INV-AUDIT-1790091038317",
+      "serviceDate": "2026-09-22",
+      "serviceType": "INPATIENT_SURGERY",
+      "status": "SUBMITTED",
+      "id": "clm_7ca6682e5f1a74802ae6",
+      "approvedAmountPaise": 0,
+      "createdAt": "2026-09-22T15:30:38.320Z",
+      "updatedAt": "2026-09-22T15:30:38.320Z",
+      "invoiceNumber": "INV-AUDIT-1790091038317"
+    },
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "claimNumber": "INV-AUDIT-1790091074413",
+      "serviceDate": "2026-09-22",
+      "serviceType": "INPATIENT_SURGERY",
+      "status": "SUBMITTED",
+      "id": "clm_aec879f28cdc6314de24",
+      "approvedAmountPaise": 0,
+      "createdAt": "2026-09-22T15:31:14.416Z",
+      "updatedAt": "2026-09-22T15:31:14.416Z",
+      "invoiceNumber": "INV-AUDIT-1790091074413"
+    },
+    {
+      "providerId": "PRV-101",
+      "providerName": "City Care Multi-Specialty Hospital",
+      "accountId": "acc_d3921d34196bea3f733524b6",
+      "claimNumber": "INV-AUDIT-1790091088691",
+      "serviceDate": "2026-09-22",
+      "serviceType": "INPATIENT_SURGERY",
+      "status": "SUBMITTED",
+      "id": "clm_4e2405bafa7778645d6b",
+      "approvedAmountPaise": 0,
+      "createdAt": "2026-09-22T15:31:28.696Z",
+      "updatedAt": "2026-09-22T15:31:28.696Z",
+      "invoiceNumber": "INV-AUDIT-1790091088691"
+    }
+  ],
+  "fraudAlerts": [],
+  "apiKeys": [
+    {
+      "accountId": "usr_officer_ananya_01",
+      "name": "Apollo Hospital HIS Integration Service",
+      "keyHash": "9fc453d8cea0cf0bda691078970a23818771f07a10552c1257832a4c2a8c401c",
+      "keyPrefix": "ahcs_live_a8ea",
+      "scopes": [
+        "patient.read",
+        "appointment.read",
+        "records.read"
+      ],
+      "status": "ACTIVE",
+      "id": "key_3f138dcf193d68776683",
+      "createdAt": "2026-09-22T15:12:56.447Z"
+    }
+  ]
+}

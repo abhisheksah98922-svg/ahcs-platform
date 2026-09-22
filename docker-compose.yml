@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  ahcs-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ahcs_production_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - NEXT_PUBLIC_APP_URL=https://ahcs.in
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/ahcs?schema=public
+      - REDIS_URL=redis://redis:6379
+      - DYNAMIC_TOKEN_SECRET=ahcs_prod_crypto_entropy_token_secret_key_2026
+      - SESSION_COOKIE_SECRET=ahcs_secure_session_encryption_key_production
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ahcs_data:/app/data
+
+  db:
+    image: postgres:16-alpine
+    container_name: ahcs_production_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: ahcs
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: ahcs_production_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  pgdata:
+  ahcs_data:
