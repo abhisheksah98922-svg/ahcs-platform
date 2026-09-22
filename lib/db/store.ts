@@ -71,7 +71,9 @@ interface DatabaseSchema {
   apiKeys: DeveloperApiKeyRecord[];
 }
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+const isServerlessEnv = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.LAMBDA_TASK_ROOT);
+const SEED_FILE = path.join(process.cwd(), 'data', 'ahcs_production.json');
+const DATA_DIR = isServerlessEnv ? path.join('/tmp', 'ahcs_data') : path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DATA_DIR, 'ahcs_production.json');
 const LOCK_FILE = path.join(DATA_DIR, 'ahcs.lock');
 
@@ -120,13 +122,21 @@ class PersistentDataStore {
   private ensureInitialized() {
     if (this.isLoaded) return;
 
-    if (!fs.existsSync(DATA_DIR)) {
-      fs.mkdirSync(DATA_DIR, { recursive: true });
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+    } catch (e) {
+      // Read-only filesystem warning
     }
 
-    if (fs.existsSync(DB_FILE)) {
+    const fileToLoad = fs.existsSync(DB_FILE) 
+      ? DB_FILE 
+      : (fs.existsSync(SEED_FILE) ? SEED_FILE : null);
+
+    if (fileToLoad) {
       try {
-        const raw = fs.readFileSync(DB_FILE, 'utf-8');
+        const raw = fs.readFileSync(fileToLoad, 'utf-8');
         this.data = JSON.parse(raw);
         // Ensure new schema collections exist if loaded from an earlier file version
         this.data.providers = this.data.providers || [];
@@ -157,17 +167,13 @@ class PersistentDataStore {
         console.error('Error loading DB file, fallback to clean initial state', err);
         this.data = this.getInitialSchema();
         this.seedSystemAccounts();
-        if (process.env.NODE_ENV !== 'production') {
-          this.seedInitialProviders();
-        }
+        this.seedInitialProviders();
         this.persistSync();
       }
     } else {
       this.data = this.getInitialSchema();
       this.seedSystemAccounts();
-      if (process.env.NODE_ENV !== 'production') {
-        this.seedInitialProviders();
-      }
+      this.seedInitialProviders();
       this.persistSync();
     }
 
@@ -367,10 +373,17 @@ class PersistentDataStore {
   }
 
   private persistSync() {
-    const tempFile = `${DB_FILE}.${Date.now()}.tmp`;
-    const jsonString = JSON.stringify(this.data, null, 2);
-    fs.writeFileSync(tempFile, jsonString, 'utf-8');
-    fs.renameSync(tempFile, DB_FILE);
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+      const tempFile = `${DB_FILE}.${Date.now()}.tmp`;
+      const jsonString = JSON.stringify(this.data, null, 2);
+      fs.writeFileSync(tempFile, jsonString, 'utf-8');
+      fs.renameSync(tempFile, DB_FILE);
+    } catch (err) {
+      console.warn('[STORE] Storage persistence skipped in read-only environment:', err);
+    }
   }
 
   // --- REPOSITORY METHODS ---

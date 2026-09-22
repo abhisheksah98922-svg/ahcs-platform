@@ -103,6 +103,19 @@
       "id": "usr_7a3cff92e0bc92d3288b63b2",
       "createdAt": "2026-09-22T15:31:48.547Z",
       "updatedAt": "2026-09-22T15:31:48.547Z"
+    },
+    {
+      "mobileNumber": "+919898851323",
+      "mobileVerifiedAt": "2026-09-22T17:40:51.344Z",
+      "email": null,
+      "emailVerifiedAt": null,
+      "role": "PATIENT",
+      "status": "ACTIVE",
+      "authProvider": "MOBILE_OTP",
+      "googleSub": null,
+      "id": "usr_8684db67f2279a6b1905c601",
+      "createdAt": "2026-09-22T17:40:51.344Z",
+      "updatedAt": "2026-09-22T17:40:51.344Z"
     }
   ],
   "sessions": [
@@ -455,6 +468,26 @@
       "revokedAt": null,
       "id": "ses_071104e0d9c14330b51c87d4b1000fd4",
       "createdAt": "2026-09-22T15:31:48.551Z"
+    },
+    {
+      "userId": "usr_officer_ananya_01",
+      "sessionTokenHash": "aa712a0f4deb094a19815654ef3ca4d63c7b1bbef47600796b5f6d4bf9ce0036",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T17:40:51.264Z",
+      "revokedAt": null,
+      "id": "ses_0f785206c3af617f277174387cd18a24",
+      "createdAt": "2026-09-22T17:40:51.264Z"
+    },
+    {
+      "userId": "usr_8684db67f2279a6b1905c601",
+      "sessionTokenHash": "b48dafeca9c60f008712b2932bd507c293827b969a10bb6c591ee7a666729ee3",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "expiresAt": "2026-10-06T17:40:51.350Z",
+      "revokedAt": null,
+      "id": "ses_b5e49dfed1dd7c44ada5bb0d622cd062",
+      "createdAt": "2026-09-22T17:40:51.350Z"
     }
   ],
   "accounts": [
@@ -497,6 +530,14 @@
       "state": "CLIENT_ID_ACTIVE",
       "createdAt": "2026-09-22T15:31:48.549Z",
       "updatedAt": "2026-09-22T15:31:48.635Z"
+    },
+    {
+      "id": "acc_904e9075921abdda00959a32",
+      "userId": "usr_8684db67f2279a6b1905c601",
+      "accountNumber": "ACC-768001",
+      "state": "CLIENT_ID_ACTIVE",
+      "createdAt": "2026-09-22T17:40:51.346Z",
+      "updatedAt": "2026-09-22T17:40:51.634Z"
     }
   ],
   "profiles": [
@@ -575,6 +616,25 @@
       "id": "prf_7d72e0ad72177bb196421a1f",
       "createdAt": "2026-09-22T15:31:48.565Z",
       "updatedAt": "2026-09-22T15:31:48.565Z"
+    },
+    {
+      "accountId": "acc_904e9075921abdda00959a32",
+      "fullName": "Rohit Deshmukh 1354",
+      "dateOfBirth": "1992-06-15",
+      "gender": "MALE",
+      "bloodGroup": "O_POS",
+      "bloodGroupSource": "DOCUMENT_VERIFIED",
+      "addressLine1": "Flat 402, Greenview Heights",
+      "district": "Bengaluru Urban",
+      "stateProvince": "Karnataka",
+      "pinCode": "560034",
+      "countryCode": "IN",
+      "emergencyContactName": "Sunita Deshmukh",
+      "emergencyContactPhone": "+919878851354",
+      "emergencyContactRelation": "SPOUSE",
+      "id": "prf_ff3061e31ed4a0a2e822d684",
+      "createdAt": "2026-09-22T17:40:51.423Z",
+      "updatedAt": "2026-09-22T17:40:51.423Z"
     }
   ],
   "verificationRequests": [
@@ -647,6 +707,26 @@
       "reviewedAt": "2026-09-22T15:31:48.602Z",
       "createdAt": "2026-09-22T15:31:48.584Z",
       "updatedAt": "2026-09-22T15:31:48.584Z"
+    },
+    {
+      "id": "vrf_43bf797eb6d01e55e203ae75",
+      "accountId": "acc_904e9075921abdda00959a32",
+      "status": "VERIFIED",
+      "assignedOfficerId": "usr_officer_ananya_01",
+      "duplicateCheckResult": "POSSIBLE_DUPLICATE",
+      "duplicateScore": 85,
+      "duplicateMatchDetails": {
+        "matchedFields": [
+          "DOB_EXACT",
+          "NAME_SIMILARITY_88%",
+          "DISTRICT_EXACT"
+        ],
+        "candidateId": "prf_7d72e0ad72177bb196421a1f"
+      },
+      "reviewNotes": "Documents verified clean for full platform test",
+      "reviewedAt": "2026-09-22T17:40:51.548Z",
+      "createdAt": "2026-09-22T17:40:51.492Z",
+      "updatedAt": "2026-09-22T17:40:51.492Z"
     }
   ],
   "verificationDocuments": [
@@ -709,6 +789,21 @@
       "verifiedAt": "2026-09-22T15:31:48.602Z",
       "id": "doc_73b34c5ce22b15b0e25abb5b",
       "createdAt": "2026-09-22T15:31:48.586Z"
+    },
+    {
+      "verificationRequestId": "vrf_43bf797eb6d01e55e203ae75",
+      "documentType": "PASSPORT",
+      "documentNumberHash": "8ad71323551c531005effebc6851f9fb3ad64147beb86a081e976615b68d2268",
+      "documentNumberMasked": "XXXX-XXXX-1435",
+      "s3ObjectKey": "vault/documents/acc_904e9075921abdda00959a32/1790098851494_documents/passport_scan_e2e.pdf",
+      "fileMimeType": "application/pdf",
+      "fileSizeBytes": 204800,
+      "status": "VERIFIED",
+      "verificationNotes": null,
+      "verifiedBy": "usr_officer_ananya_01",
+      "verifiedAt": "2026-09-22T17:40:51.548Z",
+      "id": "doc_9696be91aaff86f2fc312885",
+      "createdAt": "2026-09-22T17:40:51.494Z"
     }
   ],
   "clientIds": [
@@ -742,6 +837,14 @@
       "clientId": "AHCS-IN-A16N99V3",
       "checksum": "3",
       "issuedAt": "2026-09-22T15:31:48.605Z",
+      "isActive": true
+    },
+    {
+      "id": "cid_f4eecc33fe1e9405c831e7b2",
+      "accountId": "acc_904e9075921abdda00959a32",
+      "clientId": "AHCS-IN-9TRKM3BS",
+      "checksum": "S",
+      "issuedAt": "2026-09-22T17:40:51.550Z",
       "isActive": true
     }
   ],
@@ -801,6 +904,20 @@
       "id": "crd_a00759aeb6d133449e4e0aae",
       "createdAt": "2026-09-22T15:31:48.607Z",
       "updatedAt": "2026-09-22T15:31:48.633Z"
+    },
+    {
+      "clientIdFk": "cid_f4eecc33fe1e9405c831e7b2",
+      "accountId": "acc_904e9075921abdda00959a32",
+      "cardNumber": "CRD-9009-4117",
+      "version": 1,
+      "status": "ACTIVE",
+      "activationCodeHash": "26906aa9fb437f3e8c3fcbf563c10c1569d30ccf4a00a66f9d0e78ced95272ed",
+      "activatedAt": "2026-09-22T17:40:51.632Z",
+      "activatedByUserId": "usr_8684db67f2279a6b1905c601",
+      "expiresAt": "2031-09-21T17:40:51.553Z",
+      "id": "crd_88b9f70bbc8081386d7182b7",
+      "createdAt": "2026-09-22T17:40:51.554Z",
+      "updatedAt": "2026-09-22T17:40:51.632Z"
     }
   ],
   "qrTokens": [
@@ -851,6 +968,18 @@
       "expiresAt": "2031-09-21T15:31:48.611Z",
       "id": "qrt_af734ebef70cf72bdd2f7f1a",
       "createdAt": "2026-09-22T15:31:48.611Z"
+    },
+    {
+      "cardId": "crd_88b9f70bbc8081386d7182b7",
+      "tokenHash": "9c3e30f9fa3bb3e1d705936cbb0239dfa2011ed86b4eb9403cbbbe9cfaa8c05c",
+      "tokenRaw": "62da10def8a41a0e0c6fb5b04b8ffd516562303f24cdc3252e1dba11d97c69d9",
+      "tokenType": "EMERGENCY_QR",
+      "isRevoked": false,
+      "scanCount": 0,
+      "lastScannedAt": null,
+      "expiresAt": "2031-09-21T17:40:51.556Z",
+      "id": "qrt_eb85d0cd9b567fad4dd31fe1",
+      "createdAt": "2026-09-22T17:40:51.556Z"
     }
   ],
   "emergencyProfiles": [
@@ -905,6 +1034,19 @@
       "preferredHospital": null,
       "id": "emg_1ca4e2c186f86a930d9aca35",
       "updatedAt": "2026-09-22T15:31:48.568Z"
+    },
+    {
+      "accountId": "acc_904e9075921abdda00959a32",
+      "isActive": true,
+      "allergies": [
+        "None declared"
+      ],
+      "criticalConditions": [],
+      "currentMedications": [],
+      "organDonor": false,
+      "preferredHospital": null,
+      "id": "emg_8dde57fe85e1ea71b30e126c",
+      "updatedAt": "2026-09-22T17:40:51.427Z"
     }
   ],
   "auditLogs": [
@@ -4149,6 +4291,387 @@
       },
       "id": "aud_e89047a80f5a81a6934d675d",
       "createdAt": "2026-09-22T15:31:48.772Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_APPLICANT",
+      "action": "PROVIDER_REGISTRATION_SUBMITTED",
+      "targetResource": "providers",
+      "targetId": "PRV-1082",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1082",
+        "name": "Apex Super Specialty Care",
+        "category": "HOSPITAL",
+        "registrationNumber": "KA-MED-APEX-1058"
+      },
+      "id": "aud_d51761d54c8081fe05a6787e",
+      "createdAt": "2026-09-22T17:40:51.090Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_fd358a1d30122630f58b2e3c",
+      "createdAt": "2026-09-22T17:40:51.161Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919999900001",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919999900001"
+      },
+      "id": "aud_270901c12395284fc705fa5b",
+      "createdAt": "2026-09-22T17:40:51.260Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "LOGIN",
+      "targetResource": "USER",
+      "targetId": "usr_officer_ananya_01",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "method": "MOBILE_OTP"
+      },
+      "id": "aud_d50f8ea0ec207a801eacec08",
+      "createdAt": "2026-09-22T17:40:51.262Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROVIDER_STATUS_VERIFIED",
+      "targetResource": "providers",
+      "targetId": "PRV-1082",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "providerId": "PRV-1082",
+        "newStatus": "VERIFIED",
+        "reviewNotes": "Medical registration certificate confirmed with KMC portal"
+      },
+      "id": "aud_0efd186a6bafd8a0034b71ae",
+      "createdAt": "2026-09-22T17:40:51.317Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_REQUESTED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919898851323",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919898851323"
+      },
+      "id": "aud_cafdbe21c1ef27f8c3a0c915",
+      "createdAt": "2026-09-22T17:40:51.328Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ANONYMOUS",
+      "action": "OTP_VERIFIED",
+      "targetResource": "MOBILE_AUTH",
+      "targetId": "+919898851323",
+      "ipAddress": null,
+      "userAgent": null,
+      "metadata": {
+        "mobile": "+919898851323"
+      },
+      "id": "aud_387c9070efd1273857b3194c",
+      "createdAt": "2026-09-22T17:40:51.342Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "ACCOUNT_CREATED",
+      "targetResource": "USER",
+      "targetId": "usr_8684db67f2279a6b1905c601",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "mobile": "+919898851323"
+      },
+      "id": "aud_086e14baf6f2a0d7f5faeccd",
+      "createdAt": "2026-09-22T17:40:51.348Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "PROFILE_UPDATED",
+      "targetResource": "PROFILE",
+      "targetId": "prf_ff3061e31ed4a0a2e822d684",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "bloodGroupSource": "USER_DECLARED"
+      },
+      "id": "aud_229ede600b831aa0931186b6",
+      "createdAt": "2026-09-22T17:40:51.432Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "DOCUMENT_UPLOADED",
+      "targetResource": "VERIFICATION_DOCUMENT",
+      "targetId": "doc_9696be91aaff86f2fc312885",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "docType": "PASSPORT",
+        "duplicateResult": "POSSIBLE_DUPLICATE",
+        "duplicateScore": 85
+      },
+      "id": "aud_52dc2db46558eb0e766b8898",
+      "createdAt": "2026-09-22T17:40:51.497Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "PROFILE_APPROVED",
+      "targetResource": "ACCOUNT",
+      "targetId": "acc_904e9075921abdda00959a32",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-9TRKM3BS",
+        "cardNumber": "CRD-9009-4117"
+      },
+      "id": "aud_a06a7c73b3a2dbbf08efab12",
+      "createdAt": "2026-09-22T17:40:51.558Z"
+    },
+    {
+      "actorId": "usr_officer_ananya_01",
+      "actorRole": "VERIFICATION_OFFICER",
+      "action": "CLIENT_ID_GENERATED",
+      "targetResource": "CLIENT_ID",
+      "targetId": "cid_f4eecc33fe1e9405c831e7b2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-9TRKM3BS"
+      },
+      "id": "aud_6847ff29dcdea8acee23e638",
+      "createdAt": "2026-09-22T17:40:51.561Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "CARD_ACTIVATED",
+      "targetResource": "CARD",
+      "targetId": "crd_88b9f70bbc8081386d7182b7",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "cardNumber": "CRD-9009-4117"
+      },
+      "id": "aud_e3b2af4e10fb46738f842c68",
+      "createdAt": "2026-09-22T17:40:51.637Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_904e9075921abdda00959a32",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-9TRKM3BS",
+        "providerId": "PRV-1082",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_7d8128e8196610cf3bdd9c5e",
+      "createdAt": "2026-09-22T17:40:51.681Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER",
+      "action": "CONSENT_REQUESTED",
+      "targetResource": "consents",
+      "targetId": "cst_1e83c85d916d042e4d1091c2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_1e83c85d916d042e4d1091c2",
+        "providerId": "PRV-1082",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "purpose": "DIAGNOSIS",
+        "scope": "ALL_RECORDS",
+        "targetAccountId": "acc_904e9075921abdda00959a32"
+      },
+      "id": "aud_c885520f824f6bf2d1c547ae",
+      "createdAt": "2026-09-22T17:40:51.727Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_GRANTED",
+      "targetResource": "consents",
+      "targetId": "cst_1e83c85d916d042e4d1091c2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_1e83c85d916d042e4d1091c2",
+        "decision": "GRANTED",
+        "providerId": "PRV-1082",
+        "durationHours": 24
+      },
+      "id": "aud_829c51d0fb4cd98eba101ac2",
+      "createdAt": "2026-09-22T17:40:51.741Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_904e9075921abdda00959a32",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-9TRKM3BS",
+        "providerId": "PRV-1082",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": true
+      },
+      "id": "aud_3c35f655f69913bbef75b562",
+      "createdAt": "2026-09-22T17:40:51.749Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "HEALTHCARE_PROVIDER_DOCTOR",
+      "action": "MEDICAL_RECORD_CREATED",
+      "targetResource": "medical_records",
+      "targetId": "med_09e9ece253903bbff8bfc4f1",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "recordId": "med_09e9ece253903bbff8bfc4f1",
+        "accountId": "acc_904e9075921abdda00959a32",
+        "providerId": "PRV-1082",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "recordType": "PRESCRIPTION",
+        "medicationCount": 2
+      },
+      "id": "aud_bf62fa8f7992a87e39747bac",
+      "createdAt": "2026-09-22T17:40:51.794Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "CONSENT_REVOKED",
+      "targetResource": "consents",
+      "targetId": "cst_1e83c85d916d042e4d1091c2",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "consentId": "cst_1e83c85d916d042e4d1091c2",
+        "providerId": "PRV-1082",
+        "revokedAt": "2026-09-22T17:40:51.843Z"
+      },
+      "id": "aud_6a3b5939b1702057e9e4a1cf",
+      "createdAt": "2026-09-22T17:40:51.845Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "PROVIDER_DOCTOR",
+      "action": "PATIENT_LOOKUP_ATTEMPT",
+      "targetResource": "accounts",
+      "targetId": "acc_904e9075921abdda00959a32",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "clientId": "AHCS-IN-9TRKM3BS",
+        "providerId": "PRV-1082",
+        "providerName": "Apex Super Specialty Care",
+        "doctorName": "Dr. Arjun Kulkarni, MS",
+        "consentActive": false
+      },
+      "id": "aud_df8dc3147ddd866a8652b1cf",
+      "createdAt": "2026-09-22T17:40:51.852Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "ORGANIZATION_REGISTERED",
+      "targetResource": "organizations",
+      "targetId": "org_caa166ff3e51d47dab72",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_caa166ff3e51d47dab72",
+        "orgName": "Acme Technologies Pvt Ltd",
+        "registrationNumber": "U72200KA2021PTC145678"
+      },
+      "id": "aud_72f49bb70390fff8f67f5bc9",
+      "createdAt": "2026-09-22T17:40:51.898Z"
+    },
+    {
+      "actorId": null,
+      "actorRole": "ORGANIZATION_ADMIN",
+      "action": "EMPLOYEE_CARD_SPONSORED",
+      "targetResource": "corporate_sponsorships",
+      "targetId": "spons_b903fc7cafe0777827c5",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orgId": "org_caa166ff3e51d47dab72",
+        "employeeId": "ACME-E-4421",
+        "clientId": "AHCS-IN-9TRKM3BS"
+      },
+      "id": "aud_d9e4e110810b906bf56110b8",
+      "createdAt": "2026-09-22T17:40:51.908Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_CREATED",
+      "targetResource": "payment_orders",
+      "targetId": "ord_42f58db800d2219e86495492",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_42f58db800d2219e86495492",
+        "planId": "AHCS-PLAN-PREMIUM",
+        "amountPaise": 219900,
+        "gatewayOrderId": "order_ra_f777485fbfccaffe"
+      },
+      "id": "aud_27e22fc4c61982e86ba41d46",
+      "createdAt": "2026-09-22T17:40:51.959Z"
+    },
+    {
+      "actorId": "usr_8684db67f2279a6b1905c601",
+      "actorRole": "PATIENT",
+      "action": "PAYMENT_ORDER_VERIFIED_PAID",
+      "targetResource": "payment_orders",
+      "targetId": "ord_42f58db800d2219e86495492",
+      "ipAddress": "::1",
+      "userAgent": "node",
+      "metadata": {
+        "orderId": "ord_42f58db800d2219e86495492",
+        "gatewayPaymentId": "pay_test_1790098851962",
+        "amountPaise": 219900,
+        "planId": "AHCS-PLAN-PREMIUM"
+      },
+      "id": "aud_f959960ef1b8e10237e71034",
+      "createdAt": "2026-09-22T17:40:52.001Z"
     }
   ],
   "providers": [
@@ -4184,10 +4707,10 @@
         "Orthopedics"
       ],
       "rating": 4.8,
-      "verifiedAt": "2026-09-22T15:36:11.054Z",
+      "verifiedAt": "2026-09-22T17:40:51.002Z",
       "verifiedByOfficerId": "usr_officer_ananya_01",
-      "createdAt": "2026-09-22T15:36:11.055Z",
-      "updatedAt": "2026-09-22T15:36:11.055Z"
+      "createdAt": "2026-09-22T17:40:51.002Z",
+      "updatedAt": "2026-09-22T17:40:51.002Z"
     },
     {
       "id": "PRV-102",
@@ -4218,10 +4741,10 @@
         "Pediatrics"
       ],
       "rating": 4.6,
-      "verifiedAt": "2026-09-22T15:36:11.055Z",
+      "verifiedAt": "2026-09-22T17:40:51.002Z",
       "verifiedByOfficerId": "usr_officer_ananya_01",
-      "createdAt": "2026-09-22T15:36:11.055Z",
-      "updatedAt": "2026-09-22T15:36:11.055Z"
+      "createdAt": "2026-09-22T17:40:51.002Z",
+      "updatedAt": "2026-09-22T17:40:51.002Z"
     },
     {
       "id": "PRV-103",
@@ -4253,10 +4776,10 @@
         "Biochemistry"
       ],
       "rating": 4.7,
-      "verifiedAt": "2026-09-22T15:36:11.055Z",
+      "verifiedAt": "2026-09-22T17:40:51.002Z",
       "verifiedByOfficerId": "usr_officer_ananya_01",
-      "createdAt": "2026-09-22T15:36:11.056Z",
-      "updatedAt": "2026-09-22T15:36:11.056Z"
+      "createdAt": "2026-09-22T17:40:51.002Z",
+      "updatedAt": "2026-09-22T17:40:51.002Z"
     },
     {
       "id": "PRV-104",
@@ -4286,10 +4809,10 @@
         "First Aid"
       ],
       "rating": 4.5,
-      "verifiedAt": "2026-09-22T15:36:11.056Z",
+      "verifiedAt": "2026-09-22T17:40:51.002Z",
       "verifiedByOfficerId": "usr_officer_ananya_01",
-      "createdAt": "2026-09-22T15:36:11.056Z",
-      "updatedAt": "2026-09-22T15:36:11.056Z"
+      "createdAt": "2026-09-22T17:40:51.002Z",
+      "updatedAt": "2026-09-22T17:40:51.002Z"
     },
     {
       "name": "Apollo City Care Clinic",
@@ -4412,6 +4935,31 @@
       "id": "PRV-8485",
       "createdAt": "2026-09-22T15:31:48.485Z",
       "updatedAt": "2026-09-22T15:31:48.521Z"
+    },
+    {
+      "name": "Apex Super Specialty Care",
+      "category": "HOSPITAL",
+      "registrationNumber": "KA-MED-APEX-1058",
+      "medicalCouncil": "Karnataka Medical Council",
+      "address": "100 Outer Ring Road, Bellandur",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pinCode": "560103",
+      "phone": "+91 80 9988 7766",
+      "email": "admin@apexhealth.in",
+      "services": [
+        "Critical Care",
+        "Neuro Surgery",
+        "24x7 Trauma"
+      ],
+      "partnerTier": "STANDARD",
+      "operatingHours": "09:00 AM - 08:00 PM",
+      "status": "VERIFIED",
+      "verifiedAt": "2026-09-22T17:40:51.315Z",
+      "verifiedByOfficerId": "usr_officer_ananya_01",
+      "id": "PRV-1082",
+      "createdAt": "2026-09-22T17:40:51.082Z",
+      "updatedAt": "2026-09-22T17:40:51.315Z"
     }
   ],
   "medicalRecords": [
@@ -4483,6 +5031,33 @@
       "recordDate": "2026-09-22",
       "id": "med_5acfe1299a7878887746f3cf",
       "createdAt": "2026-09-22T15:31:48.694Z"
+    },
+    {
+      "accountId": "acc_904e9075921abdda00959a32",
+      "authorProviderId": "PRV-1082",
+      "authorProviderName": "Apex Super Specialty Care",
+      "authorDoctorName": "Dr. Arjun Kulkarni, MS",
+      "recordType": "PRESCRIPTION",
+      "title": "Outpatient Consultation: Acute Gastritis",
+      "clinicalDiagnosis": "Acute Gastritis with Epigastric Pain",
+      "clinicalNotes": "Advised bland diet, adequate hydration and follow up in 5 days.",
+      "medications": [
+        {
+          "medicineName": "Pantoprazole",
+          "dosage": "40mg",
+          "frequency": "1-0-0 (Before food)",
+          "duration": "14 days"
+        },
+        {
+          "medicineName": "Sucralfate Syrup",
+          "dosage": "10ml",
+          "frequency": "1-1-1 (Before food)",
+          "duration": "7 days"
+        }
+      ],
+      "recordDate": "2026-09-22",
+      "id": "med_09e9ece253903bbff8bfc4f1",
+      "createdAt": "2026-09-22T17:40:51.792Z"
     }
   ],
   "consents": [
@@ -4515,6 +5090,21 @@
       "expiresAt": "2026-09-23T15:31:48.674Z",
       "revokedAt": "2026-09-22T15:31:48.712Z",
       "createdAt": "2026-09-22T15:31:48.661Z"
+    },
+    {
+      "accountId": "acc_904e9075921abdda00959a32",
+      "providerId": "PRV-1082",
+      "providerName": "Apex Super Specialty Care",
+      "doctorName": "Dr. Arjun Kulkarni, MS",
+      "purpose": "DIAGNOSIS",
+      "scope": "ALL_RECORDS",
+      "status": "REVOKED",
+      "requestedAt": "2026-09-22T17:40:51.725Z",
+      "id": "cst_1e83c85d916d042e4d1091c2",
+      "grantedAt": "2026-09-22T17:40:51.739Z",
+      "expiresAt": "2026-09-23T17:40:51.739Z",
+      "revokedAt": "2026-09-22T17:40:51.843Z",
+      "createdAt": "2026-09-22T17:40:51.725Z"
     }
   ],
   "paymentOrders": [
@@ -4545,6 +5135,20 @@
       "id": "ord_a48bace1755ab2f8d44343ba",
       "paidAt": "2026-09-22T15:31:48.771Z",
       "createdAt": "2026-09-22T15:31:48.756Z"
+    },
+    {
+      "accountId": "acc_904e9075921abdda00959a32",
+      "planId": "AHCS-PLAN-PREMIUM",
+      "planName": "Smart Physical Card & Family Shield",
+      "amountPaise": 219900,
+      "currency": "INR",
+      "status": "PAID",
+      "gateway": "RAZORPAY",
+      "gatewayOrderId": "order_ra_f777485fbfccaffe",
+      "gatewayPaymentId": "pay_test_1790098851962",
+      "id": "ord_42f58db800d2219e86495492",
+      "paidAt": "2026-09-22T17:40:51.999Z",
+      "createdAt": "2026-09-22T17:40:51.957Z"
     }
   ],
   "organizations": [
@@ -4567,6 +5171,16 @@
       "activePlan": "CORPORATE_ENTERPRISE_SHIELD",
       "id": "org_8c8ec45f8a33d0ba0b1d",
       "createdAt": "2026-09-22T15:31:48.732Z"
+    },
+    {
+      "orgName": "Acme Technologies Pvt Ltd",
+      "registrationNumber": "U72200KA2021PTC145678",
+      "contactEmail": "benefits@acme.com",
+      "contactPhone": "+91 80 4455 6677",
+      "domain": "acme.com",
+      "activePlan": "CORPORATE_ENTERPRISE_SHIELD",
+      "id": "org_caa166ff3e51d47dab72",
+      "createdAt": "2026-09-22T17:40:51.896Z"
     }
   ],
   "corporateSponsorships": [
@@ -4585,6 +5199,14 @@
       "status": "ACTIVE",
       "id": "spons_62fbb2461f23e9837bb8",
       "sponsoredAt": "2026-09-22T15:31:48.739Z"
+    },
+    {
+      "orgId": "org_caa166ff3e51d47dab72",
+      "accountId": "acc_904e9075921abdda00959a32",
+      "employeeId": "ACME-E-4421",
+      "status": "ACTIVE",
+      "id": "spons_b903fc7cafe0777827c5",
+      "sponsoredAt": "2026-09-22T17:40:51.907Z"
     }
   ],
   "appointments": [
