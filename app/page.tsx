@@ -21,26 +21,31 @@ import { HealthCard } from '@/components/HealthCard';
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* HERO SECTION — EXACT MATCH WITH REFERENCE IMAGE */}
-      <section className="relative overflow-hidden min-h-[660px] flex items-center border-b border-slate-100">
-        {/* Background Family Photo matching exact uploaded reference */}
+      {/* HERO SECTION — VIBRANT VISIBLE FAMILY HEALTHCARE HERO */}
+      <section className="relative isolate overflow-hidden min-h-[660px] lg:min-h-[720px] flex items-center border-b border-slate-200 bg-slate-50">
+        {/* Background Family Photo — Positively stacked with z-0 so it is NEVER hidden behind container white background */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat -z-20 transition-all duration-700"
+          className="absolute inset-0 bg-cover bg-[center_right_-3rem] sm:bg-right lg:bg-center bg-no-repeat transition-all duration-700 z-0"
           style={{
-            backgroundImage: "url('/images/hero-family.jpg?v=3')",
+            backgroundImage: "url('/images/hero-family.jpg')",
           }}
         />
 
-        {/* Soft Left Gradient Overlay — preserves full vibrancy and visibility of father, toddler, and child */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 via-35% to-transparent -z-10 pointer-events-none" />
+        {/* Soft Left Gradient Overlay — Crisp white on left for maximum headline legibility, smoothly revealing the family on right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 via-45% to-white/25 lg:to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 z-10 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
+        {/* Ambient Healthcare Glow Orbs */}
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl z-10 pointer-events-none" />
+        <div className="absolute -bottom-20 left-10 w-80 h-80 bg-sky-300/15 rounded-full blur-2xl z-10 pointer-events-none" />
+
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               {/* Badge: India's Digital Health Identity Platform */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-xs font-semibold border border-slate-200 shadow-sm">
-                <span className="font-bold bg-slate-100 text-slate-700 text-[10px] px-1.5 py-0.5 rounded">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-xs font-semibold border border-slate-200 shadow-xs">
+                <span className="font-bold bg-blue-50 text-blue-700 text-[10px] px-1.5 py-0.5 rounded border border-blue-200">
                   IN
                 </span>
                 <span>India&apos;s Digital Health Identity Platform</span>
@@ -91,7 +96,7 @@ export default function HomePage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              <div className="flex flex-wrap items-center gap-4 pt-3">
                 <Link
                   href="/apply"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-blue-700 hover:bg-blue-800 text-white font-bold text-sm shadow-lg shadow-blue-700/25 transition-all transform hover:-translate-y-0.5"
@@ -101,27 +106,47 @@ export default function HomePage() {
 
                 <Link
                   href="/how-it-works"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 text-blue-700 font-bold text-sm border-2 border-blue-600 shadow-sm transition-all"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white hover:bg-slate-50 text-blue-700 font-bold text-sm border-2 border-blue-600 shadow-xs transition-all"
                 >
                   <span>How it works</span>
                 </Link>
               </div>
 
+              {/* Trust Metrics Bar */}
+              <div className="pt-4 border-t border-slate-200/80 grid grid-cols-3 gap-3 max-w-lg">
+                <div>
+                  <div className="text-lg sm:text-xl font-black text-slate-900">100%</div>
+                  <div className="text-[11px] text-slate-500 font-medium">Digital & Paperless</div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl font-black text-blue-700">ISO 7064</div>
+                  <div className="text-[11px] text-slate-500 font-medium">Verified Checksum</div>
+                </div>
+                <div>
+                  <div className="text-lg sm:text-xl font-black text-emerald-600">24x7</div>
+                  <div className="text-[11px] text-slate-500 font-medium">Break-Glass QR</div>
+                </div>
+              </div>
+
               {/* Micro Status Notes */}
-              <div className="pt-2 text-xs text-slate-500 space-y-0.5 font-medium">
+              <div className="pt-1 text-xs text-slate-500 space-y-0.5 font-medium">
                 <div>Live now: Client ID · QR card · Records · Appointments · Emergency gateway</div>
                 <div className="text-slate-600 font-semibold">Free forever: your Health ID and emergency access.</div>
               </div>
             </div>
 
             {/* Right Card Column: Floating Cobalt Blue Health Card */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
-              <HealthCard
-                memberName="Your Name Here"
-                clientId="AHCS-IN-XXXX-XXXX"
-                validThru="set at signup"
-                isVerified={true}
-              />
+            <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
+              <div className="relative">
+                {/* Backlight glow */}
+                <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 to-sky-400/30 rounded-3xl blur-2xl -z-10" />
+                <HealthCard
+                  memberName="Your Name Here"
+                  clientId="AHCS-IN-XXXX-XXXX"
+                  validThru="set at signup"
+                  isVerified={true}
+                />
+              </div>
             </div>
           </div>
         </div>
