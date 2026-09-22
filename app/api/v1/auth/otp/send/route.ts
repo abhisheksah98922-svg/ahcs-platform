@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       success: true,
       message: 'OTP dispatched successfully',
       expiresAt: result.expiresAt,
-      devCode: result.devCode, // populated in non-production for testing
+      devCode: result.devCode, // populated when SMS gateway is pending or in dev/test mode
+      gatewayActive: result.gatewayActive,
     });
   } catch (err: any) {
     console.error('OTP Send Error:', err);

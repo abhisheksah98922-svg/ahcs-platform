@@ -91,7 +91,8 @@ export function requestOtp(mobileNumber: string): {
   cooldownRemaining?: number;
   expiresAt?: string;
   error?: string;
-  devCode?: string; // Only populated in non-production
+  devCode?: string; // Populated when SMS gateway is pending or in dev/test mode
+  gatewayActive?: boolean;
 } {
   const cleanMobile = mobileNumber.replace(/[^0-9+]/g, '');
   if (cleanMobile.length < 10) {
@@ -149,6 +150,7 @@ export function requestOtp(mobileNumber: string): {
     success: true,
     expiresAt: new Date(now + OTP_TTL_MS).toISOString(),
     devCode: shouldExposeDevCode ? rawCode : undefined,
+    gatewayActive: hasLiveSmsGateway,
   };
 }
 

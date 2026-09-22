@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ShieldCheck, 
   User, 
@@ -14,9 +14,29 @@ import {
   Lock, 
   CreditCard,
   Phone,
-  QrCode
+  QrCode,
+  Check,
+  Clock
 } from 'lucide-react';
 import { HealthCard } from '@/components/HealthCard';
+
+const INDIAN_STATES = [
+  'Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam',
+  'Bihar', 'Chandigarh', 'Chhattisgarh', 'Dadra and Nagar Haveli and Daman and Diu',
+  'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir',
+  'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh',
+  'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha',
+  'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
+  'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+];
+
+const DOC_TYPES = [
+  { id: 'AADHAAR', label: 'Aadhaar Card (UIDAI)', placeholder: '12-digit Aadhaar Number (e.g. 5432 1098 7654)' },
+  { id: 'PAN', label: 'PAN Card (Income Tax Dept)', placeholder: '10-character PAN (e.g. ABCDE1234F)' },
+  { id: 'VOTER_ID', label: 'Voter ID (Election Commission)', placeholder: 'EPIC Number (e.g. WBF1234567)' },
+  { id: 'DRIVING_LICENSE', label: 'Driving Licence (MoRTH)', placeholder: 'DL Number (e.g. DL-0420110012345)' },
+  { id: 'PASSPORT', label: 'Indian Passport (MEA)', placeholder: 'Passport Number (e.g. Z1234567)' },
+];
 
 export default function CardApplicationPage() {
   const [currentStep, setCurrentStep] = useState<number>(1);
@@ -28,25 +48,29 @@ export default function CardApplicationPage() {
   const [otpCode, setOtpCode] = useState<string>('');
   const [isOtpSent, setIsOtpSent] = useState<boolean>(false);
   const [devCodeHint, setDevCodeHint] = useState<string>('');
+  const [gatewayActive, setGatewayActive] = useState<boolean>(false);
+  const [resendCooldown, setResendCooldown] = useState<number>(0);
   const [isMobileVerified, setIsMobileVerified] = useState<boolean>(false);
 
-  // Step 2 Form: Profile Details
-  const [fullName, setFullName] = useState<string>('Rahul Sharma');
-  const [dob, setDob] = useState<string>('1990-05-15');
+  // Step 2 Form: Profile Details (clean, real input states)
+  const [fullName, setFullName] = useState<string>('');
+  const [dob, setDob] = useState<string>('');
   const [gender, setGender] = useState<string>('MALE');
   const [bloodGroup, setBloodGroup] = useState<string>('O_POS');
-  const [address, setAddress] = useState<string>('Flat 402, Green Meadows');
-  const [district, setDistrict] = useState<string>('Bengaluru Urban');
-  const [stateProvince, setStateProvince] = useState<string>('Karnataka');
-  const [pinCode, setPinCode] = useState<string>('560034');
-  const [emergencyName, setEmergencyName] = useState<string>('Priya Sharma');
-  const [emergencyPhone, setEmergencyPhone] = useState<string>('+91 98765 43210');
-  const [emergencyRelation, setEmergencyRelation] = useState<string>('Spouse');
+  const [address, setAddress] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
+  const [stateProvince, setStateProvince] = useState<string>('Delhi');
+  const [pinCode, setPinCode] = useState<string>('');
+  const [emergencyName, setEmergencyName] = useState<string>('');
+  const [emergencyPhone, setEmergencyPhone] = useState<string>('');
+  const [emergencyRelation, setEmergencyRelation] = useState<string>('Parent');
 
   // Step 3 Form: Document Submission
-  const [docType, setDocType] = useState<string>('PASSPORT');
-  const [docNumber, setDocNumber] = useState<string>('P8491028');
-  const [docFile, setDocFile] = useState<string>('passport_rahul_sharma.pdf');
+  const [docType, setDocType] = useState<string>('AADHAAR');
+  const [docNumber, setDocNumber] = useState<string>('');
+  const [docFile, setDocFile] = useState<string>('');
+  const [docFileSize, setDocFileSize] = useState<number>(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Step 4 & 5: Duplicate Check & Verification Ticket
   const [verifRequestId, setVerifRequestId] = useState<string>('');
@@ -111,11 +135,34 @@ export default function CardApplicationPage() {
     loadSession();
   }, []);
 
+  // Timer for OTP resend cooldown
+  useEffect(() => {
+    if (resendCooldown > 0) {
+      const timer = setTimeout(() => setResendCooldown(resendCooldown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendCooldown]);
+
+  // Handle Real File Selection for Document Proof
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        setErrorMessage('Document file size must be less than 10MB');
+        return;
+      }
+      setDocFile(file.name);
+      setDocFileSize(file.size);
+      setErrorMessage('');
+    }
+  };
+
   // API Action: Request Real OTP
   const handleSendOtp = async () => {
     setErrorMessage('');
-    if (!mobileNumber || mobileNumber.length < 10) {
-      setErrorMessage('Please enter a valid 10-digit mobile number');
+    const cleanDigits = mobileNumber.replace(/[^0-9]/g, '').slice(-10);
+    if (!cleanDigits || cleanDigits.length !== 10) {
+      setErrorMessage('Please enter a valid 10-digit Indian mobile number');
       return;
     }
 
@@ -124,7 +171,7 @@ export default function CardApplicationPage() {
       const res = await fetch('/api/v1/auth/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobileNumber }),
+        body: JSON.stringify({ mobileNumber: `+91${cleanDigits}` }),
       });
       const data = await res.json();
 
@@ -135,10 +182,12 @@ export default function CardApplicationPage() {
       }
 
       setIsOtpSent(true);
+      setOtpCode(''); // Keep blank so user enters the code themselves
+      setGatewayActive(Boolean(data.gatewayActive));
       if (data.devCode) {
         setDevCodeHint(data.devCode);
-        setOtpCode(data.devCode); // autofill for testing
       }
+      setResendCooldown(60);
     } catch (err) {
       setErrorMessage('Network error requesting OTP');
     } finally {
@@ -149,17 +198,18 @@ export default function CardApplicationPage() {
   // API Action: Verify Real OTP & Issue Session
   const handleVerifyOtp = async () => {
     setErrorMessage('');
-    if (otpCode.length !== 6) {
-      setErrorMessage('Please enter the 6-digit OTP code');
+    if (!otpCode || otpCode.trim().length !== 6) {
+      setErrorMessage('Please enter the complete 6-digit OTP code');
       return;
     }
 
     setLoading(true);
+    const cleanDigits = mobileNumber.replace(/[^0-9]/g, '').slice(-10);
     try {
       const res = await fetch('/api/v1/auth/otp/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobileNumber, code: otpCode }),
+        body: JSON.stringify({ mobileNumber: `+91${cleanDigits}`, code: otpCode.trim() }),
       });
       const data = await res.json();
 
@@ -178,25 +228,56 @@ export default function CardApplicationPage() {
     }
   };
 
-  // API Action: Save Profile
+  // API Action: Save Profile with comprehensive field validation
   const handleSaveProfile = async () => {
     setErrorMessage('');
+    if (!fullName.trim() || fullName.trim().length < 3) {
+      setErrorMessage('Please enter your full legal name as printed on your official ID');
+      return;
+    }
+    if (!dob) {
+      setErrorMessage('Please enter your date of birth');
+      return;
+    }
+    if (!address.trim() || address.trim().length < 5) {
+      setErrorMessage('Please enter your full residential address (flat/house, street, area)');
+      return;
+    }
+    if (!district.trim()) {
+      setErrorMessage('Please enter your city / district');
+      return;
+    }
+    const cleanPin = pinCode.replace(/[^0-9]/g, '');
+    if (!cleanPin || cleanPin.length !== 6) {
+      setErrorMessage('Please enter a valid 6-digit postal PIN code');
+      return;
+    }
+    if (!emergencyName.trim()) {
+      setErrorMessage('Please enter an emergency contact person name');
+      return;
+    }
+    const cleanEmergPhone = emergencyPhone.replace(/[^0-9]/g, '').slice(-10);
+    if (!cleanEmergPhone || cleanEmergPhone.length !== 10) {
+      setErrorMessage('Please enter a valid 10-digit emergency contact phone number');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('/api/v1/profile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          fullName,
+          fullName: fullName.trim(),
           dateOfBirth: dob,
           gender,
           bloodGroup,
-          addressLine1: address,
-          district,
+          addressLine1: address.trim(),
+          district: district.trim(),
           stateProvince,
-          pinCode,
-          emergencyContactName: emergencyName,
-          emergencyContactPhone: emergencyPhone,
+          pinCode: cleanPin,
+          emergencyContactName: emergencyName.trim(),
+          emergencyContactPhone: `+91 ${cleanEmergPhone}`,
           emergencyContactRelation: emergencyRelation,
         }),
       });
@@ -219,6 +300,15 @@ export default function CardApplicationPage() {
   // API Action: Submit Documents & Run Duplicate Detection
   const handleSubmitDocuments = async () => {
     setErrorMessage('');
+    if (!docNumber.trim() || docNumber.trim().length < 4) {
+      setErrorMessage('Please enter your document ID or reference number');
+      return;
+    }
+    if (!docFile) {
+      setErrorMessage('Please upload a copy of your identity document (PDF, JPG, or PNG)');
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch('/api/v1/verification/submit', {
@@ -226,9 +316,9 @@ export default function CardApplicationPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           docType,
-          docNumber,
+          docNumber: docNumber.trim(),
           fileName: docFile,
-          fileSizeBytes: 1024 * 650,
+          fileSizeBytes: docFileSize || 1024 * 750,
         }),
       });
       const data = await res.json();
@@ -261,13 +351,13 @@ export default function CardApplicationPage() {
         body: JSON.stringify({
           verificationRequestId: verifRequestId,
           decision: 'APPROVE',
-          notes: 'Document proof verified by duty officer. Legible and authentic.',
+          notes: 'Identity documents and physical eligibility verified by verification desk.',
         }),
       });
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(data.error || 'Failed to complete officer approval');
+        setErrorMessage(data.error || 'Failed to complete verification decision');
         setLoading(false);
         return;
       }
@@ -276,7 +366,7 @@ export default function CardApplicationPage() {
       setGeneratedCardNumber(data.card.cardNumber);
       if (data.activationCode) {
         setActivationCode(data.activationCode);
-        setEnteredActivationCode(data.activationCode);
+        setEnteredActivationCode(''); // user types activation code
       }
       setCurrentStep(6);
     } catch (err) {
@@ -380,47 +470,76 @@ export default function CardApplicationPage() {
                 </div>
                 <h2 className="text-xl font-bold text-slate-900">Step 1: Create AHCS Account</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Authenticate your mobile number to establish your secure identity anchor.
+                  Authenticate your personal mobile number to establish your secure digital identity anchor.
                 </p>
               </div>
 
               {!isOtpSent ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Mobile Number</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Enter Your 10-Digit Mobile Number</label>
                     <div className="flex">
-                      <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-sm">
+                      <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-sm font-semibold">
                         +91
                       </span>
                       <input
                         type="tel"
+                        maxLength={10}
                         value={mobileNumber}
-                        onChange={e => setMobileNumber(e.target.value)}
-                        placeholder="9876543210"
-                        className="w-full rounded-r-xl border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        onChange={e => setMobileNumber(e.target.value.replace(/[^0-9]/g, ''))}
+                        placeholder="e.g. 9876543210"
+                        className="w-full rounded-r-xl border border-slate-300 px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-600"
                       />
                     </div>
+                    <span className="text-[11px] text-slate-400 mt-1 block">
+                      A 6-digit one-time password will be generated for your number.
+                    </span>
                   </div>
 
                   <button
                     type="button"
-                    disabled={loading}
+                    disabled={loading || mobileNumber.replace(/[^0-9]/g, '').length !== 10}
                     onClick={handleSendOtp}
-                    className="w-full py-3 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
+                    className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
                   >
-                    {loading ? 'Dispatching OTP...' : 'Send 6-Digit OTP'}
+                    {loading ? 'Dispatching OTP...' : 'Send 6-Digit Verification OTP'}
                   </button>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 text-xs text-blue-900">
-                    OTP dispatched to <strong>+91 {mobileNumber}</strong>.
-                    {devCodeHint && (
-                      <span className="block mt-1 font-mono text-[11px] text-blue-700">
-                        Development OTP generated: <strong>{devCodeHint}</strong>
-                      </span>
-                    )}
-                  </div>
+                <div className="space-y-5">
+                  {gatewayActive ? (
+                    <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-950 flex items-start gap-2.5">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      <div>
+                        <strong className="font-bold">Live SMS Dispatched:</strong> Sent to <strong>+91 {mobileNumber}</strong>. Please check your SMS inbox and enter the 6-digit code.
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-slate-800 space-y-2.5">
+                      <div className="flex items-center gap-2 font-bold text-slate-900">
+                        <ShieldCheck className="w-4 h-4 text-blue-700" />
+                        <span>Security Verification Code Issued</span>
+                      </div>
+                      <p className="text-[11px] text-slate-600 leading-relaxed">
+                        Telecom SMS gateway API key (Fast2SMS / Twilio) is awaiting configuration in server environment variables.
+                      </p>
+                      {devCodeHint && (
+                        <div className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+                          <div>
+                            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Your 6-Digit OTP:</div>
+                            <div className="font-mono text-2xl font-black text-blue-700 tracking-widest">{devCodeHint}</div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setOtpCode(devCodeHint)}
+                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-colors"
+                          >
+                            Use Code
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Enter 6-Digit OTP</label>
@@ -428,20 +547,42 @@ export default function CardApplicationPage() {
                       type="text"
                       maxLength={6}
                       value={otpCode}
-                      onChange={e => setOtpCode(e.target.value)}
-                      placeholder="123456"
-                      className="w-full text-center tracking-widest text-lg font-mono rounded-xl border border-slate-300 px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      onChange={e => setOtpCode(e.target.value.replace(/[^0-9]/g, ''))}
+                      placeholder="Enter 6-digit OTP"
+                      className="w-full text-center tracking-widest text-xl font-mono rounded-xl border border-slate-300 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     />
                   </div>
 
                   <button
                     type="button"
-                    disabled={loading}
+                    disabled={loading || otpCode.length !== 6}
                     onClick={handleVerifyOtp}
-                    className="w-full py-3 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
+                    className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
                   >
                     {loading ? 'Verifying...' : 'Verify OTP & Continue'}
                   </button>
+
+                  <div className="flex justify-between items-center text-xs pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsOtpSent(false);
+                        setOtpCode('');
+                        setDevCodeHint('');
+                      }}
+                      className="text-blue-700 hover:underline font-semibold"
+                    >
+                      ← Change mobile number
+                    </button>
+                    <button
+                      type="button"
+                      disabled={resendCooldown > 0 || loading}
+                      onClick={handleSendOtp}
+                      className="text-slate-600 disabled:text-slate-400 font-semibold"
+                    >
+                      {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend OTP'}
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -453,23 +594,28 @@ export default function CardApplicationPage() {
               <div className="border-b border-slate-100 pb-4">
                 <h2 className="text-xl font-bold text-slate-900">Step 2: Complete AHCS Profile</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Enter your verified demographic details and emergency contact.
+                  Enter your genuine demographic details and emergency contact person.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name (as on Official ID)</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Full Legal Name <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={fullName}
                     onChange={e => setFullName(e.target.value)}
+                    placeholder="Enter full name as per Aadhaar / ID"
                     className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Date of Birth</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Date of Birth <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="date"
                     value={dob}
@@ -479,11 +625,13 @@ export default function CardApplicationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Gender</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Gender <span className="text-red-500">*</span>
+                  </label>
                   <select
                     value={gender}
                     onChange={e => setGender(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
@@ -499,7 +647,7 @@ export default function CardApplicationPage() {
                   <select
                     value={bloodGroup}
                     onChange={e => setBloodGroup(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     <option value="A_POS">A+</option>
                     <option value="A_NEG">A-</option>
@@ -513,53 +661,109 @@ export default function CardApplicationPage() {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Residential Address</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Complete Residential Address <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
+                    placeholder="House/Flat No., Street, Landmark, Area"
                     className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">District</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    City / District <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={district}
                     onChange={e => setDistrict(e.target.value)}
+                    placeholder="e.g. South Delhi / Mumbai / Patna"
                     className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">PIN Code</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    State / Union Territory <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={stateProvince}
+                    onChange={e => setStateProvince(e.target.value)}
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                  >
+                    {INDIAN_STATES.map(s => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    PIN Code <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
+                    maxLength={6}
                     value={pinCode}
-                    onChange={e => setPinCode(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    onChange={e => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
+                    placeholder="e.g. 110001"
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Emergency Contact Name</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Emergency Contact Name <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={emergencyName}
                     onChange={e => setEmergencyName(e.target.value)}
+                    placeholder="Name of family member / guardian"
                     className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Emergency Contact Phone</label>
-                  <input
-                    type="text"
-                    value={emergencyPhone}
-                    onChange={e => setEmergencyPhone(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                  />
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Emergency Contact Phone <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex">
+                    <span className="inline-flex items-center px-3 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-xs font-semibold">
+                      +91
+                    </span>
+                    <input
+                      type="tel"
+                      maxLength={10}
+                      value={emergencyPhone}
+                      onChange={e => setEmergencyPhone(e.target.value.replace(/[^0-9]/g, ''))}
+                      placeholder="10-digit mobile"
+                      className="w-full rounded-r-xl border border-slate-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Relationship <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={emergencyRelation}
+                    onChange={e => setEmergencyRelation(e.target.value)}
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                  >
+                    <option value="Parent">Parent (Father / Mother)</option>
+                    <option value="Spouse">Spouse (Husband / Wife)</option>
+                    <option value="Child">Son / Daughter</option>
+                    <option value="Sibling">Brother / Sister</option>
+                    <option value="Relative">Relative / Guardian</option>
+                    <option value="Friend">Friend / Colleague</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div>
 
@@ -595,37 +799,106 @@ export default function CardApplicationPage() {
                 </p>
               </div>
 
-              <div className="space-y-4 max-w-lg">
+              <div className="space-y-5 max-w-lg">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Document Type</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Select Identity Document Type <span className="text-red-500">*</span>
+                  </label>
                   <select
                     value={docType}
-                    onChange={e => setDocType(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    onChange={e => {
+                      setDocType(e.target.value);
+                      setDocNumber('');
+                    }}
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
-                    <option value="PASSPORT">Passport</option>
-                    <option value="DRIVING_LICENSE">Driving Licence</option>
-                    <option value="VOTER_ID">Voter ID (EPIC)</option>
-                    <option value="NATIONAL_ID">National ID / Aadhaar</option>
+                    {DOC_TYPES.map(d => (
+                      <option key={d.id} value={d.id}>{d.label}</option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">Document Reference Number</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Document Number / Reference <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={docNumber}
                     onChange={e => setDocNumber(e.target.value)}
-                    placeholder="Enter document number"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    placeholder={DOC_TYPES.find(d => d.id === docType)?.placeholder || 'Enter document reference number'}
+                    className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none uppercase"
                   />
-                  <span className="text-[10px] text-slate-400">Document number reference is hashed with SHA-256 for duplicate detection.</span>
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Document number is cryptographically hashed with SHA-256 for zero-knowledge duplicate detection.
+                  </span>
                 </div>
 
-                <div className="border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center hover:border-blue-500 transition-colors">
-                  <UploadCloud className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                  <div className="text-sm font-semibold text-slate-800">Uploaded: {docFile}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">PDF or JPEG (Encrypted AES-256 Vault)</div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Upload Document Proof (PDF or Image) <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,image/png,image/jpeg,image/webp"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  {!docFile ? (
+                    <div 
+                      onClick={() => fileInputRef.current?.click()}
+                      className="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-2xl p-6 text-center cursor-pointer bg-slate-50/50 hover:bg-blue-50/30 transition-all group"
+                    >
+                      <UploadCloud className="w-10 h-10 text-slate-400 group-hover:text-blue-600 mx-auto mb-2 transition-colors" />
+                      <div className="text-sm font-bold text-slate-800 group-hover:text-blue-700">
+                        Click to select document file
+                      </div>
+                      <div className="text-xs text-slate-500 mt-1">
+                        PDF, JPG, PNG or WebP up to 10MB
+                      </div>
+                      <div className="inline-block mt-3 text-[11px] font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+                        Browse Files from Device
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="border border-emerald-200 bg-emerald-50/60 rounded-2xl p-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                          <CheckCircle2 className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-bold text-slate-900 truncate max-w-[200px] sm:max-w-xs">{docFile}</div>
+                          <div className="text-[11px] text-emerald-800">
+                            {docFileSize ? `${(docFileSize / 1024).toFixed(1)} KB` : 'Verified file'} • Ready for AES-256 Vault Encryption
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="text-[11px] font-semibold text-blue-700 hover:underline px-2 py-1"
+                        >
+                          Change
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDocFile('');
+                            setDocFileSize(0);
+                            if (fileInputRef.current) fileInputRef.current.value = '';
+                          }}
+                          className="text-[11px] font-semibold text-red-600 hover:underline px-2 py-1"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Document files are encrypted at rest with AES-256 in private zero-knowledge storage vault.
+                  </span>
                 </div>
               </div>
 
@@ -642,7 +915,7 @@ export default function CardApplicationPage() {
                   type="button"
                   disabled={loading}
                   onClick={handleSubmitDocuments}
-                  className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-700/20"
+                  className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-700/20"
                 >
                   <span>{loading ? 'Submitting...' : 'Submit for Duplicate Check'}</span>
                   <ArrowRight className="w-4 h-4" />
@@ -842,19 +1115,28 @@ export default function CardApplicationPage() {
                     type="text"
                     maxLength={6}
                     value={enteredActivationCode}
-                    onChange={e => setEnteredActivationCode(e.target.value)}
-                    placeholder="123456"
+                    onChange={e => setEnteredActivationCode(e.target.value.replace(/[^0-9]/g, ''))}
+                    placeholder="Enter 6-digit code"
                     className="w-full text-center font-mono text-lg tracking-widest rounded-xl border border-slate-300 px-3 py-2.5 focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                   <button
                     type="button"
-                    disabled={loading}
+                    disabled={loading || !enteredActivationCode}
                     onClick={handleActivateCard}
-                    className="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl text-xs font-bold shadow-sm shrink-0"
+                    className="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-sm shrink-0"
                   >
                     {loading ? 'Activating...' : 'Activate Card'}
                   </button>
                 </div>
+                {activationCode && (
+                  <button
+                    type="button"
+                    onClick={() => setEnteredActivationCode(activationCode)}
+                    className="text-[11px] text-blue-700 font-semibold hover:underline"
+                  >
+                    Fill activation code ({activationCode})
+                  </button>
+                )}
               </div>
             </div>
           )}

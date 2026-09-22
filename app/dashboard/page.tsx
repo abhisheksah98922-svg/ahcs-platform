@@ -47,9 +47,11 @@ export default function DashboardPage() {
   const [consentMessage, setConsentMessage] = useState<string>('');
 
   // Authentication states
-  const [loginMobile, setLoginMobile] = useState<string>('+91');
+  const [loginMobile, setLoginMobile] = useState<string>('');
   const [loginOtp, setLoginOtp] = useState<string>('');
   const [otpSent, setOtpSent] = useState<boolean>(false);
+  const [loginDevCode, setLoginDevCode] = useState<string>('');
+  const [loginGatewayActive, setLoginGatewayActive] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
   const [authBusy, setAuthBusy] = useState<boolean>(false);
 
@@ -266,30 +268,37 @@ export default function DashboardPage() {
                 </div>
               )}
 
-              <div className="space-y-3 pt-2 text-left">
+              <div className="space-y-4 pt-2 text-left">
                 {!otpSent ? (
                   <div>
                     <label className="block text-[11px] font-bold text-slate-700 mb-1">
-                      Mobile Number
+                      Registered 10-Digit Mobile Number
                     </label>
-                    <input
-                      type="tel"
-                      value={loginMobile}
-                      onChange={(e) => setLoginMobile(e.target.value)}
-                      placeholder="+919876543210"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-600"
-                    />
+                    <div className="flex">
+                      <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 text-slate-600 text-xs font-bold">
+                        +91
+                      </span>
+                      <input
+                        type="tel"
+                        maxLength={10}
+                        value={loginMobile}
+                        onChange={(e) => setLoginMobile(e.target.value.replace(/[^0-9]/g, ''))}
+                        placeholder="e.g. 9876543210"
+                        className="w-full px-3.5 py-3 rounded-r-xl border border-slate-300 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      />
+                    </div>
                     <button
                       type="button"
-                      disabled={authBusy || loginMobile.length < 10}
+                      disabled={authBusy || loginMobile.replace(/[^0-9]/g, '').length !== 10}
                       onClick={async () => {
                         setAuthBusy(true);
                         setAuthError('');
+                        const cleanDigits = loginMobile.replace(/[^0-9]/g, '').slice(-10);
                         try {
                           const res = await fetch('/api/v1/auth/otp/send', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ mobileNumber: loginMobile }),
+                            body: JSON.stringify({ mobileNumber: `+91${cleanDigits}` }),
                           });
                           const data = await res.json();
                           if (!res.ok) {
@@ -297,6 +306,8 @@ export default function DashboardPage() {
                             return;
                           }
                           setOtpSent(true);
+                          setLoginGatewayActive(Boolean(data.gatewayActive));
+                          setLoginDevCode(data.devCode || '');
                         } catch (e: any) {
                           setAuthError('Network error requesting OTP');
                         } finally {
@@ -309,38 +320,71 @@ export default function DashboardPage() {
                     </button>
                   </div>
                 ) : (
-                  <div>
-                    <div className="flex justify-between items-center mb-1">
-                      <label className="text-[11px] font-bold text-slate-700">
-                        Enter 6-Digit OTP
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => setOtpSent(false)}
-                        className="text-[10px] text-blue-600 font-bold hover:underline"
-                      >
-                        Change number
-                      </button>
+                  <div className="space-y-4">
+                    {loginGatewayActive ? (
+                      <div className="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200 text-xs text-emerald-900 flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span>Live SMS dispatched to <strong>+91 {loginMobile}</strong>. Check your phone.</span>
+                      </div>
+                    ) : (
+                      <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-1.5">
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-slate-700">Security Verification Code:</span>
+                          <span className="font-mono font-bold text-sm text-blue-700 bg-white px-2 py-0.5 rounded border border-slate-200">
+                            {loginDevCode || 'Generated'}
+                          </span>
+                        </div>
+                        {loginDevCode && (
+                          <button
+                            type="button"
+                            onClick={() => setLoginOtp(loginDevCode)}
+                            className="text-[11px] text-blue-600 font-bold hover:underline block text-left"
+                          >
+                            Click to fill code ({loginDevCode})
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <label className="text-[11px] font-bold text-slate-700">
+                          Enter 6-Digit OTP
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setOtpSent(false);
+                            setLoginOtp('');
+                            setLoginDevCode('');
+                          }}
+                          className="text-[10px] text-blue-600 font-bold hover:underline"
+                        >
+                          Change number
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={loginOtp}
+                        onChange={(e) => setLoginOtp(e.target.value.replace(/[^0-9]/g, ''))}
+                        placeholder="Enter 6-digit OTP"
+                        className="w-full px-4 py-3 text-center tracking-widest text-lg font-mono rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      />
                     </div>
-                    <input
-                      type="text"
-                      maxLength={6}
-                      value={loginOtp}
-                      onChange={(e) => setLoginOtp(e.target.value)}
-                      placeholder="XXXXXX"
-                      className="w-full px-4 py-3 text-center tracking-widest text-lg font-mono rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                    />
+
                     <button
                       type="button"
                       disabled={authBusy || loginOtp.length < 6}
                       onClick={async () => {
                         setAuthBusy(true);
                         setAuthError('');
+                        const cleanDigits = loginMobile.replace(/[^0-9]/g, '').slice(-10);
                         try {
                           const res = await fetch('/api/v1/auth/otp/verify', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ mobileNumber: loginMobile, code: loginOtp }),
+                            body: JSON.stringify({ mobileNumber: `+91${cleanDigits}`, code: loginOtp }),
                           });
                           const data = await res.json();
                           if (!res.ok) {
@@ -354,7 +398,7 @@ export default function DashboardPage() {
                           setAuthBusy(false);
                         }
                       }}
-                      className="w-full mt-3 py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-700/25 transition-all"
+                      className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-700/25 transition-all"
                     >
                       <UserCheck className="w-4 h-4" />
                       <span>{authBusy ? 'Verifying...' : 'Verify OTP & Enter Dashboard'}</span>
