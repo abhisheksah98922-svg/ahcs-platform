@@ -21,75 +21,67 @@ import { HealthCard } from '@/components/HealthCard';
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* HERO SECTION — VIBRANT VISIBLE FAMILY HEALTHCARE HERO */}
-      <section className="relative isolate overflow-hidden min-h-[660px] lg:min-h-[720px] flex items-center border-b border-slate-200 bg-slate-50">
-        {/* Background Family Photo — Positively stacked with z-0 so it is NEVER hidden behind container white background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-[center_right_-3rem] sm:bg-right lg:bg-center bg-no-repeat transition-all duration-700 z-0"
-          style={{
-            backgroundImage: "url('/images/hero-family.jpg')",
-          }}
-        />
-
-        {/* Soft Left Gradient Overlay — Crisp white on left for maximum headline legibility, smoothly revealing the family on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 via-45% to-white/25 lg:to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60 z-10 pointer-events-none" />
+      {/* HERO SECTION — ULTRA-PREMIUM DIGITAL HEALTHCARE IDENTITY */}
+      <section className="relative isolate overflow-hidden min-h-[640px] lg:min-h-[700px] flex items-center border-b border-slate-200 bg-gradient-to-b from-slate-50 via-sky-50/20 to-white">
+        {/* Subtle Tech Dot Matrix Grid — Crisp national digital health infrastructure texture */}
+        <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-70 z-0 pointer-events-none" />
 
         {/* Ambient Healthcare Glow Orbs */}
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl z-10 pointer-events-none" />
-        <div className="absolute -bottom-20 left-10 w-80 h-80 bg-sky-300/15 rounded-full blur-2xl z-10 pointer-events-none" />
+        <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-blue-400/20 to-sky-300/20 rounded-full blur-3xl z-0 pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-gradient-to-bl from-indigo-300/15 to-blue-500/15 rounded-full blur-3xl z-0 pointer-events-none" />
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
               {/* Badge: India's Digital Health Identity Platform */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-xs font-semibold border border-slate-200 shadow-xs">
-                <span className="font-bold bg-blue-50 text-blue-700 text-[10px] px-1.5 py-0.5 rounded border border-blue-200">
-                  IN
+                <span className="font-bold bg-blue-50 text-blue-700 text-[10px] px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
+                  AHCS · IN
                 </span>
-                <span>India&apos;s Digital Health Identity Platform</span>
+                <span>India&apos;s Digital Health Security Platform</span>
               </div>
 
               {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
                 Your Health, <br />
-                <span className="text-blue-700">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-600 to-sky-500">
                   Our Priority
                 </span>
               </h1>
 
               {/* Subheading */}
-              <p className="text-base sm:text-lg text-slate-700 font-medium max-w-xl leading-relaxed">
-                One health identity — records, emergency access and verified care. Live today, free to start.
+              <p className="text-base sm:text-lg text-slate-600 font-medium max-w-xl leading-relaxed">
+                One permanent health identity — lifelong clinical records, 24x7 emergency break-glass access, and verified hospital care.
               </p>
 
               {/* 4 Feature Bullet Points in 2x2 Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2 max-w-2xl text-xs sm:text-[13px] text-slate-800 font-medium">
-                <div className="flex items-start gap-2">
-                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-[10px]">✓</span>
+                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-white/60 border border-slate-200/60 shadow-2xs">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-emerald-700 font-bold text-xs">✓</span>
                   </div>
-                  <span>Permanent Health ID (AHCS Client ID) — issued in seconds</span>
+                  <span>Permanent Health ID (AHCS Client ID) — issued instantly</span>
                 </div>
 
-                <div className="flex items-start gap-2">
-                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-[10px]">✓</span>
+                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-white/60 border border-slate-200/60 shadow-2xs">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-emerald-700 font-bold text-xs">✓</span>
                   </div>
                   <span>QR Health Card with rotating secure token</span>
                 </div>
 
-                <div className="flex items-start gap-2">
-                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-[10px]">✓</span>
+                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-white/60 border border-slate-200/60 shadow-2xs">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-emerald-700 font-bold text-xs">✓</span>
                   </div>
-                  <span>Records, appointments & verifiable prescriptions</span>
+                  <span>Verified clinical records & e-prescriptions</span>
                 </div>
 
-                <div className="flex items-start gap-2">
-                  <div className="w-4 h-4 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-[10px]">✓</span>
+                <div className="flex items-start gap-2.5 p-2 rounded-xl bg-white/60 border border-slate-200/60 shadow-2xs">
+                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="text-emerald-700 font-bold text-xs">✓</span>
                   </div>
                   <span>Emergency profile — free for every Indian, forever</span>
                 </div>
@@ -114,15 +106,15 @@ export default function HomePage() {
 
               {/* Trust Metrics Bar */}
               <div className="pt-4 border-t border-slate-200/80 grid grid-cols-3 gap-3 max-w-lg">
-                <div>
+                <div className="bg-white/70 p-3 rounded-2xl border border-slate-200/80">
                   <div className="text-lg sm:text-xl font-black text-slate-900">100%</div>
                   <div className="text-[11px] text-slate-500 font-medium">Digital & Paperless</div>
                 </div>
-                <div>
+                <div className="bg-white/70 p-3 rounded-2xl border border-slate-200/80">
                   <div className="text-lg sm:text-xl font-black text-blue-700">ISO 7064</div>
                   <div className="text-[11px] text-slate-500 font-medium">Verified Checksum</div>
                 </div>
-                <div>
+                <div className="bg-white/70 p-3 rounded-2xl border border-slate-200/80">
                   <div className="text-lg sm:text-xl font-black text-emerald-600">24x7</div>
                   <div className="text-[11px] text-slate-500 font-medium">Break-Glass QR</div>
                 </div>
@@ -135,17 +127,31 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Card Column: Floating Cobalt Blue Health Card */}
+            {/* Right Card Column: Floating Cobalt Blue Health Card with Visual Badges */}
             <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
-              <div className="relative">
-                {/* Backlight glow */}
-                <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 to-sky-400/30 rounded-3xl blur-2xl -z-10" />
+              <div className="relative w-full max-w-md">
+                {/* Floating Top Badge */}
+                <div className="absolute -top-4 -left-4 z-20 hidden sm:flex items-center gap-2 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg border border-slate-200 text-xs font-bold text-slate-800">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>Break-Glass Emergency Ready</span>
+                </div>
+
+                {/* Backlight Ambient Glow */}
+                <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/25 via-sky-400/20 to-indigo-500/25 rounded-3xl blur-2xl -z-10" />
+
+                {/* HealthCard Component */}
                 <HealthCard
                   memberName="Your Name Here"
                   clientId="AHCS-IN-XXXX-XXXX"
                   validThru="set at signup"
                   isVerified={true}
                 />
+
+                {/* Floating Bottom Badge */}
+                <div className="absolute -bottom-4 -right-2 z-20 hidden sm:flex items-center gap-2 bg-slate-900/95 backdrop-blur-md px-4 py-2 rounded-full shadow-xl border border-slate-800 text-xs font-semibold text-white">
+                  <ShieldCheck className="w-4 h-4 text-sky-400" />
+                  <span>AES-256 Vault Encrypted</span>
+                </div>
               </div>
             </div>
           </div>
