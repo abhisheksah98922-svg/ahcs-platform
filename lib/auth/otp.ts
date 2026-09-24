@@ -1,8 +1,64 @@
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
 import { db } from '../db/store';
 
 export interface SmsProviderInterface {
   sendOtp(mobile: string, code: string): Promise<{ success: boolean; messageId?: string; error?: string }>;
+}
+
+// Gmail SMTP Transporter for Real Email OTPs
+const smtpUser = process.env.SMTP_USER || 'abhisheksah98922@gmail.com';
+const smtpPass = (process.env.SMTP_PASS || 'sksvxxffjxcaiqgr').replace(/\s+/g, '');
+
+const gmailTransporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  port: Number(process.env.SMTP_PORT) || 465,
+  secure: true,
+  auth: {
+    user: smtpUser,
+    pass: smtpPass,
+  },
+});
+
+export async function sendEmailOtp(email: string, code: string): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  try {
+    const info = await gmailTransporter.sendMail({
+      from: process.env.SMTP_FROM || `"AHCS Health Security" <${smtpUser}>`,
+      to: email,
+      subject: `Your AHCS Health Verification Code: ${code}`,
+      text: `Your AHCS digital health verification code is: ${code}. Valid for 5 minutes. Do not share this OTP with anyone.`,
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
+          <div style="background: linear-gradient(135deg, #1d4ed8, #1e40af); padding: 26px 24px; text-align: center;">
+            <h1 style="color: #ffffff; font-size: 22px; font-weight: 800; margin: 0; letter-spacing: 0.5px;">AHCS HEALTH PORTAL</h1>
+            <p style="color: #bfdbfe; font-size: 13px; margin: 6px 0 0 0;">Digital Identity & Emergency Care System</p>
+          </div>
+          <div style="padding: 28px 24px;">
+            <p style="font-size: 14px; color: #334155; margin: 0 0 16px 0; line-height: 1.5;">
+              Use the 6-digit one-time security code below to complete your identity verification.
+            </p>
+            <div style="background: #f8fafc; border: 2px dashed #3b82f6; border-radius: 12px; padding: 18px; text-align: center; margin: 20px 0;">
+              <span style="font-family: monospace; font-size: 36px; font-weight: 900; letter-spacing: 8px; color: #1d4ed8; display: inline-block;">${code}</span>
+            </div>
+            <p style="font-size: 12px; color: #64748b; margin: 0 0 8px 0; line-height: 1.6;">
+              • This code is valid for <strong>5 minutes</strong> only.<br />
+              • If you did not request this verification code, please ignore this email.
+            </p>
+          </div>
+          <div style="background: #f8fafc; padding: 14px 24px; text-align: center; border-top: 1px solid #e2e8f0;">
+            <p style="font-size: 11px; color: #94a3b8; margin: 0;">
+              AHCS Digital Health Infrastructure • Sovereign Citizen Identity
+            </p>
+          </div>
+        </div>
+      `,
+    });
+    console.log(`[GMAIL_OTP] Live email dispatched to ${email}: MessageID=${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+  } catch (err: any) {
+    console.error(`[GMAIL_OTP_ERROR] Failed to send email to ${email}:`, err.message);
+    return { success: false, error: err.message };
+  }
 }
 
 // Multi-Provider SMS Gateway implementation (Fast2SMS, Twilio, Console Fallback)
@@ -65,7 +121,8 @@ class HybridSmsProvider implements SmsProviderInterface {
 }
 
 interface OtpEntry {
-  mobileNumber: string;
+  identifier: string; // phone or email
+  email?: string;
   codeHash: string;
   attempts: number;
   expiresAt: number; // timestamp ms
@@ -86,20 +143,27 @@ function hashOtp(code: string): string {
   return crypto.createHash('sha256').update(code).digest('hex');
 }
 
-export function requestOtp(mobileNumber: string): {
+export async function requestOtp(identifier: string, email?: string): Promise<{
   success: boolean;
   cooldownRemaining?: number;
   expiresAt?: string;
   error?: string;
-  devCode?: string; // Populated when SMS gateway is pending or in dev/test mode
+  devCode?: string;
   gatewayActive?: boolean;
-} {
-  const cleanMobile = mobileNumber.replace(/[^0-9+]/g, '');
-  if (cleanMobile.length < 10) {
-    return { success: false, error: 'Invalid mobile number format' };
+  channel?: 'EMAIL' | 'SMS';
+  recipient?: string;
+}> {
+  const isEmail = identifier.includes('@');
+  const targetEmail = (isEmail ? identifier : email)?.trim().toLowerCase();
+  const cleanMobile = !isEmail ? identifier.replace(/[^0-9+]/g, '') : '';
+
+  const lookupKey = isEmail ? targetEmail! : cleanMobile;
+
+  if (!lookupKey || (cleanMobile && cleanMobile.length < 10)) {
+    return { success: false, error: 'Valid mobile number or email address is required' };
   }
 
-  const existing = otpStore.get(cleanMobile);
+  const existing = otpStore.get(lookupKey);
   const now = Date.now();
 
   if (existing && !existing.consumed && now - existing.createdAt < RESEND_COOLDOWN_MS) {
@@ -115,8 +179,9 @@ export function requestOtp(mobileNumber: string): {
   const rawCode = Math.floor(100000 + crypto.randomInt(900000)).toString();
   const codeHash = hashOtp(rawCode);
 
-  otpStore.set(cleanMobile, {
-    mobileNumber: cleanMobile,
+  otpStore.set(lookupKey, {
+    identifier: lookupKey,
+    email: targetEmail,
     codeHash,
     attempts: 0,
     expiresAt: now + OTP_TTL_MS,
@@ -124,8 +189,35 @@ export function requestOtp(mobileNumber: string): {
     consumed: false,
   });
 
-  // Dispatch via SMS Gateway
-  smsProvider.sendOtp(cleanMobile, rawCode);
+  // Also bind to email key if provided alongside mobile
+  if (targetEmail && lookupKey !== targetEmail) {
+    otpStore.set(targetEmail, {
+      identifier: lookupKey,
+      email: targetEmail,
+      codeHash,
+      attempts: 0,
+      expiresAt: now + OTP_TTL_MS,
+      createdAt: now,
+      consumed: false,
+    });
+  }
+
+  let channel: 'EMAIL' | 'SMS' = 'SMS';
+  let emailDispatched = false;
+
+  // 1. Dispatch via Gmail SMTP if email is provided
+  if (targetEmail) {
+    const emailResult = await sendEmailOtp(targetEmail, rawCode);
+    if (emailResult.success) {
+      emailDispatched = true;
+      channel = 'EMAIL';
+    }
+  }
+
+  // 2. Dispatch via SMS if mobile is provided
+  if (cleanMobile) {
+    smsProvider.sendOtp(cleanMobile, rawCode);
+  }
 
   // Log audit event
   try {
@@ -134,55 +226,62 @@ export function requestOtp(mobileNumber: string): {
       actorRole: 'ANONYMOUS',
       action: 'OTP_REQUESTED',
       targetResource: 'MOBILE_AUTH',
-      targetId: cleanMobile,
+      targetId: lookupKey,
       ipAddress: null,
       userAgent: null,
-      metadata: { mobile: cleanMobile },
+      metadata: { identifier: lookupKey, email: targetEmail, channel },
     });
   } catch (err) {
     // Non-blocking audit log
   }
 
   const hasLiveSmsGateway = Boolean(process.env.FAST2SMS_API_KEY || process.env.TWILIO_ACCOUNT_SID);
-  const shouldExposeDevCode = process.env.ALLOW_TEST_OTP === 'true' || !hasLiveSmsGateway || process.env.NODE_ENV !== 'production';
+  const isGatewayActive = emailDispatched || hasLiveSmsGateway;
+
+  // In production, NEVER expose devCode if live email or SMS gateway is active
+  const shouldExposeDevCode = process.env.ALLOW_TEST_OTP === 'true' || (!isGatewayActive && process.env.NODE_ENV !== 'production');
 
   return {
     success: true,
     expiresAt: new Date(now + OTP_TTL_MS).toISOString(),
     devCode: shouldExposeDevCode ? rawCode : undefined,
-    gatewayActive: hasLiveSmsGateway,
+    gatewayActive: isGatewayActive,
+    channel,
+    recipient: targetEmail || cleanMobile,
   };
 }
 
-export function verifyOtp(mobileNumber: string, enteredCode: string): {
+export function verifyOtp(identifier: string, enteredCode: string): {
   success: boolean;
   error?: string;
+  email?: string;
 } {
-  const cleanMobile = mobileNumber.replace(/[^0-9+]/g, '');
+  const isEmail = identifier.includes('@');
+  const cleanKey = isEmail ? identifier.trim().toLowerCase() : identifier.replace(/[^0-9+]/g, '');
 
   // Master testing bypass for automated test suites — strictly restricted to NODE_ENV === 'test'
-  if (process.env.NODE_ENV === 'test' && enteredCode.trim() === '999999' && cleanMobile.startsWith('+9199999')) {
+  if (process.env.NODE_ENV === 'test' && enteredCode.trim() === '999999' && cleanKey.startsWith('+9199999')) {
     return { success: true };
   }
 
-  const entry = otpStore.get(cleanMobile);
+  const entry = otpStore.get(cleanKey);
 
   if (!entry) {
-    return { success: false, error: 'No active OTP request found for this mobile number' };
+    return { success: false, error: 'No active OTP request found. Please request a new code.' };
   }
 
   if (entry.consumed) {
-    return { success: false, error: 'This OTP has already been used' };
+    return { success: false, error: 'This OTP has already been used. Please request a new code.' };
   }
 
   if (Date.now() > entry.expiresAt) {
-    otpStore.delete(cleanMobile);
-    return { success: false, error: 'OTP has expired. Please request a new one' };
+    otpStore.delete(cleanKey);
+    return { success: false, error: 'OTP has expired. Please request a new one.' };
   }
 
   if (entry.attempts >= MAX_ATTEMPTS) {
-    otpStore.delete(cleanMobile);
-    return { success: false, error: 'Maximum verification attempts exceeded. Please request a new OTP' };
+    otpStore.delete(cleanKey);
+    return { success: false, error: 'Maximum verification attempts exceeded. Please request a new OTP.' };
   }
 
   const enteredHash = hashOtp(enteredCode.trim());
@@ -190,24 +289,27 @@ export function verifyOtp(mobileNumber: string, enteredCode: string): {
     entry.attempts++;
     return {
       success: false,
-      error: `Invalid OTP. ${MAX_ATTEMPTS - entry.attempts} attempt(s) remaining`,
+      error: `Invalid OTP. ${MAX_ATTEMPTS - entry.attempts} attempt(s) remaining.`,
     };
   }
 
   // OTP verified successfully -> Invalidate immediately
   entry.consumed = true;
-  otpStore.delete(cleanMobile);
+  otpStore.delete(cleanKey);
+  if (entry.email && cleanKey !== entry.email) {
+    otpStore.delete(entry.email);
+  }
 
   db.logAudit({
     actorId: null,
     actorRole: 'ANONYMOUS',
     action: 'OTP_VERIFIED',
-    targetResource: 'MOBILE_AUTH',
-    targetId: cleanMobile,
+    targetResource: 'AUTH',
+    targetId: cleanKey,
     ipAddress: null,
     userAgent: null,
-    metadata: { mobile: cleanMobile },
+    metadata: { identifier: cleanKey, email: entry.email },
   });
 
-  return { success: true };
+  return { success: true, email: entry.email };
 }

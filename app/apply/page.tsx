@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { 
   ShieldCheck, 
   User, 
@@ -10,13 +11,12 @@ import {
   ArrowRight, 
   ArrowLeft, 
   UploadCloud, 
-  Sparkles, 
-  Lock, 
-  CreditCard,
+  Mail,
   Phone,
-  QrCode,
-  Check,
-  Clock
+  Clock,
+  Lock,
+  Building2,
+  ExternalLink
 } from 'lucide-react';
 import { HealthCard } from '@/components/HealthCard';
 
@@ -42,17 +42,18 @@ export default function CardApplicationPage() {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [successNotice, setSuccessNotice] = useState<string>('');
 
-  // Step 1 Form: Mobile Registration & OTP
+  // Step 1: Account (Mobile & Email OTP)
   const [mobileNumber, setMobileNumber] = useState<string>('');
+  const [emailAddress, setEmailAddress] = useState<string>('');
   const [otpCode, setOtpCode] = useState<string>('');
   const [isOtpSent, setIsOtpSent] = useState<boolean>(false);
-  const [devCodeHint, setDevCodeHint] = useState<string>('');
-  const [gatewayActive, setGatewayActive] = useState<boolean>(false);
+  const [otpChannel, setOtpChannel] = useState<'EMAIL' | 'SMS'>('EMAIL');
+  const [otpRecipient, setOtpRecipient] = useState<string>('');
   const [resendCooldown, setResendCooldown] = useState<number>(0);
-  const [isMobileVerified, setIsMobileVerified] = useState<boolean>(false);
 
-  // Step 2 Form: Profile Details (clean, real input states)
+  // Step 2: Profile Details
   const [fullName, setFullName] = useState<string>('');
   const [dob, setDob] = useState<string>('');
   const [gender, setGender] = useState<string>('MALE');
@@ -65,77 +66,68 @@ export default function CardApplicationPage() {
   const [emergencyPhone, setEmergencyPhone] = useState<string>('');
   const [emergencyRelation, setEmergencyRelation] = useState<string>('Parent');
 
-  // Step 3 Form: Document Submission
+  // Step 3: Identity Document Submission
   const [docType, setDocType] = useState<string>('AADHAAR');
   const [docNumber, setDocNumber] = useState<string>('');
   const [docFile, setDocFile] = useState<string>('');
   const [docFileSize, setDocFileSize] = useState<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Step 4 & 5: Duplicate Check & Verification Ticket
+  // Step 4: Submission Confirmation & Status
   const [verifRequestId, setVerifRequestId] = useState<string>('');
-  const [duplicateScore, setDuplicateScore] = useState<number>(0);
-  const [duplicateStatus, setDuplicateStatus] = useState<string>('NO_MATCH');
+  const [provisionalId, setProvisionalId] = useState<string>('');
+  const [existingCard, setExistingCard] = useState<any>(null);
 
-  // Step 6 & 7: Generated Identifiers & Card
-  const [generatedClientId, setGeneratedClientId] = useState<string>('');
-  const [generatedCardNumber, setGeneratedCardNumber] = useState<string>('');
-  const [activationCode, setActivationCode] = useState<string>('');
-  const [enteredActivationCode, setEnteredActivationCode] = useState<string>('');
-  const [isCardActive, setIsCardActive] = useState<boolean>(false);
-
-  // Check if session already exists
+  // Load existing session if present
   useEffect(() => {
     async function loadSession() {
       try {
         const res = await fetch('/api/v1/auth/me');
         const data = await res.json();
         if (data.authenticated && data.user) {
-          setIsMobileVerified(true);
-          setMobileNumber(data.user.mobileNumber);
+          if (data.user.mobileNumber) setMobileNumber(data.user.mobileNumber.replace('+91', ''));
+          if (data.user.email) setEmailAddress(data.user.email);
 
           if (data.profile) {
-            setFullName(data.profile.fullName);
-            setDob(data.profile.dateOfBirth);
-            setGender(data.profile.gender);
-            setBloodGroup(data.profile.bloodGroup);
-            setDistrict(data.profile.district);
-            setEmergencyName(data.profile.emergencyContactName);
-            setEmergencyPhone(data.profile.emergencyContactPhone);
+            setFullName(data.profile.fullName || '');
+            setDob(data.profile.dateOfBirth || '');
+            setGender(data.profile.gender || 'MALE');
+            setBloodGroup(data.profile.bloodGroup || 'O_POS');
+            setAddress(data.profile.addressLine1 || '');
+            setDistrict(data.profile.district || '');
+            setStateProvince(data.profile.stateProvince || 'Delhi');
+            setPinCode(data.profile.pinCode || '');
+            setEmergencyName(data.profile.emergencyContactName || '');
+            setEmergencyPhone(data.profile.emergencyContactPhone ? data.profile.emergencyContactPhone.replace('+91', '').trim() : '');
+            setEmergencyRelation(data.profile.emergencyContactRelation || 'Parent');
           }
 
           if (data.clientId) {
-            setGeneratedClientId(data.clientId.clientId);
+            setProvisionalId(data.clientId.clientId);
           }
 
-          if (data.card) {
-            setGeneratedCardNumber(data.card.cardNumber);
-            if (data.card.status === 'ACTIVE') {
-              setIsCardActive(true);
-              setCurrentStep(8);
-              return;
-            } else if (data.card.status === 'PENDING_ACTIVATION') {
-              setCurrentStep(7);
-              return;
-            }
-          }
-
-          if (data.account?.state === 'PROFILE_COMPLETED') {
-            setCurrentStep(3);
-          } else if (data.account?.state === 'VERIFICATION_PENDING') {
+          if (data.card && data.card.status === 'ACTIVE') {
+            setExistingCard(data.card);
             setCurrentStep(4);
+            return;
+          }
+
+          if (data.account?.state === 'VERIFICATION_PENDING' || data.account?.state === 'UNDER_REVIEW') {
+            setCurrentStep(4);
+          } else if (data.account?.state === 'PROFILE_COMPLETED') {
+            setCurrentStep(3);
           } else if (data.account?.state === 'REGISTERED') {
             setCurrentStep(2);
           }
         }
       } catch (err) {
-        console.error('Failed to load session:', err);
+        console.error('Session load error:', err);
       }
     }
     loadSession();
   }, []);
 
-  // Timer for OTP resend cooldown
+  // Cooldown countdown
   useEffect(() => {
     if (resendCooldown > 0) {
       const timer = setTimeout(() => setResendCooldown(resendCooldown - 1), 1000);
@@ -143,7 +135,7 @@ export default function CardApplicationPage() {
     }
   }, [resendCooldown]);
 
-  // Handle Real File Selection for Document Proof
+  // Handle document file change
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -157,12 +149,21 @@ export default function CardApplicationPage() {
     }
   };
 
-  // API Action: Request Real OTP
+  // Step 1: Send Real OTP via Gmail SMTP
   const handleSendOtp = async () => {
     setErrorMessage('');
+    setSuccessNotice('');
+
+    const cleanEmail = emailAddress.trim().toLowerCase();
     const cleanDigits = mobileNumber.replace(/[^0-9]/g, '').slice(-10);
-    if (!cleanDigits || cleanDigits.length !== 10) {
-      setErrorMessage('Please enter a valid 10-digit Indian mobile number');
+
+    if (!cleanEmail && (!cleanDigits || cleanDigits.length !== 10)) {
+      setErrorMessage('Please enter a valid email address or 10-digit mobile number.');
+      return;
+    }
+
+    if (cleanEmail && !cleanEmail.includes('@')) {
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
 
@@ -171,68 +172,75 @@ export default function CardApplicationPage() {
       const res = await fetch('/api/v1/auth/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobileNumber: `+91${cleanDigits}` }),
+        body: JSON.stringify({
+          mobileNumber: cleanDigits ? `+91${cleanDigits}` : undefined,
+          email: cleanEmail || undefined,
+        }),
       });
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(data.error || 'Failed to dispatch OTP');
+        setErrorMessage(data.error || 'Failed to dispatch verification code');
         setLoading(false);
         return;
       }
 
       setIsOtpSent(true);
-      setOtpCode(''); // Keep blank so user enters the code themselves
-      setGatewayActive(Boolean(data.gatewayActive));
-      if (data.devCode) {
-        setDevCodeHint(data.devCode);
-      }
+      setOtpCode('');
+      setOtpChannel(data.channel || (cleanEmail ? 'EMAIL' : 'SMS'));
+      setOtpRecipient(data.recipient || cleanEmail || cleanDigits);
+      setSuccessNotice(data.message || `Verification code sent to ${data.recipient || cleanEmail}`);
       setResendCooldown(60);
     } catch (err) {
-      setErrorMessage('Network error requesting OTP');
+      setErrorMessage('Network error while requesting OTP. Please check your connection.');
     } finally {
       setLoading(false);
     }
   };
 
-  // API Action: Verify Real OTP & Issue Session
+  // Step 1: Verify Real OTP
   const handleVerifyOtp = async () => {
     setErrorMessage('');
     if (!otpCode || otpCode.trim().length !== 6) {
-      setErrorMessage('Please enter the complete 6-digit OTP code');
+      setErrorMessage('Please enter the complete 6-digit OTP code received in your inbox.');
       return;
     }
 
     setLoading(true);
+    const cleanEmail = emailAddress.trim().toLowerCase();
     const cleanDigits = mobileNumber.replace(/[^0-9]/g, '').slice(-10);
+
     try {
       const res = await fetch('/api/v1/auth/otp/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mobileNumber: `+91${cleanDigits}`, code: otpCode.trim() }),
+        body: JSON.stringify({
+          mobileNumber: cleanDigits ? `+91${cleanDigits}` : undefined,
+          email: cleanEmail || undefined,
+          code: otpCode.trim(),
+        }),
       });
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(data.error || 'Invalid OTP code');
+        setErrorMessage(data.error || 'Invalid or expired OTP code');
         setLoading(false);
         return;
       }
 
-      setIsMobileVerified(true);
       setCurrentStep(2);
     } catch (err) {
-      setErrorMessage('Network error verifying OTP');
+      setErrorMessage('Network error while verifying OTP');
     } finally {
       setLoading(false);
     }
   };
 
-  // API Action: Save Profile with comprehensive field validation
+  // Step 2: Save Profile
   const handleSaveProfile = async () => {
     setErrorMessage('');
     if (!fullName.trim() || fullName.trim().length < 3) {
-      setErrorMessage('Please enter your full legal name as printed on your official ID');
+      setErrorMessage('Please enter your full legal name as printed on your government identity document');
       return;
     }
     if (!dob) {
@@ -240,7 +248,7 @@ export default function CardApplicationPage() {
       return;
     }
     if (!address.trim() || address.trim().length < 5) {
-      setErrorMessage('Please enter your full residential address (flat/house, street, area)');
+      setErrorMessage('Please enter your complete residential address');
       return;
     }
     if (!district.trim()) {
@@ -297,15 +305,15 @@ export default function CardApplicationPage() {
     }
   };
 
-  // API Action: Submit Documents & Run Duplicate Detection
+  // Step 3: Submit Documents for Official Review
   const handleSubmitDocuments = async () => {
     setErrorMessage('');
     if (!docNumber.trim() || docNumber.trim().length < 4) {
-      setErrorMessage('Please enter your document ID or reference number');
+      setErrorMessage('Please enter your official document identification number');
       return;
     }
     if (!docFile) {
-      setErrorMessage('Please upload a copy of your identity document (PDF, JPG, or PNG)');
+      setErrorMessage('Please select and upload a legible copy of your identity document (PDF or image)');
       return;
     }
 
@@ -324,14 +332,13 @@ export default function CardApplicationPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(data.error || 'Failed to submit documents');
+        setErrorMessage(data.error || 'Failed to submit identity documents');
         setLoading(false);
         return;
       }
 
       setVerifRequestId(data.verificationRequestId);
-      setDuplicateStatus(data.duplicateCheck.status);
-      setDuplicateScore(data.duplicateCheck.score);
+      setProvisionalId(`AHCS-APP-${Date.now().toString().slice(-6)}`);
       setCurrentStep(4);
     } catch (err) {
       setErrorMessage('Network error submitting documents');
@@ -340,144 +347,110 @@ export default function CardApplicationPage() {
     }
   };
 
-  // API Action: Officer Review Trigger
-  const handleOfficerApprove = async () => {
-    setErrorMessage('');
-    setLoading(true);
-    try {
-      const res = await fetch('/api/v1/officer/decision', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          verificationRequestId: verifRequestId,
-          decision: 'APPROVE',
-          notes: 'Identity documents and physical eligibility verified by verification desk.',
-        }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrorMessage(data.error || 'Failed to complete verification decision');
-        setLoading(false);
-        return;
-      }
-
-      setGeneratedClientId(data.clientId);
-      setGeneratedCardNumber(data.card.cardNumber);
-      if (data.activationCode) {
-        setActivationCode(data.activationCode);
-        setEnteredActivationCode(''); // user types activation code
-      }
-      setCurrentStep(6);
-    } catch (err) {
-      setErrorMessage('Network error during officer review');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // API Action: Activate Card
-  const handleActivateCard = async () => {
-    setErrorMessage('');
-    setLoading(true);
-    try {
-      const res = await fetch('/api/v1/cards/activate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ activationCode: enteredActivationCode }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrorMessage(data.error || 'Failed to activate card');
-        setLoading(false);
-        return;
-      }
-
-      setIsCardActive(true);
-      setCurrentStep(8);
-    } catch (err) {
-      setErrorMessage('Network error activating card');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const stepsList = [
+    { num: 1, label: 'Account' },
+    { num: 2, label: 'Profile' },
+    { num: 3, label: 'Identity Proof' },
+    { num: 4, label: 'Verification Status' },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-50 py-10">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Tracker */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-8">
           <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-            Database-Backed Identity Pipeline
+            Official Healthcare Identity Enrollment
           </span>
-          <h1 className="text-3xl font-black text-slate-900 mt-2">Apply for AHCS Health Card</h1>
-          <p className="text-sm text-slate-600 mt-1">
-            Real verification pipeline with server-side validation, duplicate detection, and permanent Client ID issuance.
+          <h1 className="text-3xl font-black text-slate-900 mt-2">Apply for AHCS Digital Health ID</h1>
+          <p className="text-sm text-slate-600 mt-1 max-w-xl mx-auto">
+            Secure digital onboarding with real email OTP authentication, cryptographic document hashing, and verification desk review.
           </p>
         </div>
 
-        {/* Global Error Banner */}
+        {/* Global Error Notice */}
         {errorMessage && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-2 text-xs text-red-800 font-semibold">
-            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-2.5 text-xs text-red-800 font-semibold shadow-xs">
+            <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
             <span>{errorMessage}</span>
           </div>
         )}
 
-        {/* Progress Stepper Indicator */}
-        <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm mb-8 overflow-x-auto">
-          <div className="flex items-center justify-between min-w-[700px] text-xs font-semibold">
-            {[
-              { num: 1, label: 'Account' },
-              { num: 2, label: 'Profile' },
-              { num: 3, label: 'Documents' },
-              { num: 4, label: 'Dup Check' },
-              { num: 5, label: 'Review' },
-              { num: 6, label: 'Client ID' },
-              { num: 7, label: 'Card' },
-              { num: 8, label: 'Active' },
-            ].map(step => (
-              <div key={step.num} className="flex items-center gap-2">
-                <div 
-                  className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
-                    currentStep > step.num 
-                      ? 'bg-blue-700 text-white' 
-                      : currentStep === step.num 
-                        ? 'bg-blue-100 text-blue-800 border-2 border-blue-700' 
-                        : 'bg-slate-100 text-slate-400'
-                  }`}
-                >
-                  {currentStep > step.num ? '✓' : step.num}
+        {/* Global Success Notice */}
+        {successNotice && (
+          <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-2.5 text-xs text-emerald-900 font-medium shadow-xs">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <span>{successNotice}</span>
+          </div>
+        )}
+
+        {/* Stepper Progress Indicator */}
+        <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs mb-8">
+          <div className="flex items-center justify-between text-xs font-semibold">
+            {stepsList.map((step, idx) => (
+              <React.Fragment key={step.num}>
+                <div className="flex items-center gap-2">
+                  <div 
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
+                      currentStep > step.num 
+                        ? 'bg-blue-700 text-white' 
+                        : currentStep === step.num 
+                          ? 'bg-blue-100 text-blue-800 border-2 border-blue-700 shadow-xs' 
+                          : 'bg-slate-100 text-slate-400'
+                    }`}
+                  >
+                    {currentStep > step.num ? '✓' : step.num}
+                  </div>
+                  <span className={`hidden sm:inline ${currentStep === step.num ? 'text-slate-900 font-bold' : 'text-slate-500'}`}>
+                    {step.label}
+                  </span>
                 </div>
-                <span className={currentStep === step.num ? 'text-slate-900 font-bold' : 'text-slate-500'}>
-                  {step.label}
-                </span>
-                {step.num < 8 && <div className="w-6 h-0.5 bg-slate-200" />}
-              </div>
+                {idx < stepsList.length - 1 && (
+                  <div className={`flex-1 h-0.5 mx-3 ${currentStep > step.num ? 'bg-blue-600' : 'bg-slate-200'}`} />
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
 
-        {/* Dynamic Step Content Cards */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
-          {/* STEP 1: ACCOUNT (MOBILE OTP) */}
+        {/* Step Card Container */}
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 sm:p-8">
+
+          {/* STEP 1: ACCOUNT (EMAIL & MOBILE OTP) */}
           {currentStep === 1 && (
             <div className="max-w-md mx-auto space-y-6">
               <div className="text-center">
-                <div className="w-12 h-12 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                  <Phone className="w-6 h-6" />
+                <div className="w-12 h-12 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
+                  <Mail className="w-6 h-6" />
                 </div>
-                <h2 className="text-xl font-bold text-slate-900">Step 1: Create AHCS Account</h2>
+                <h2 className="text-xl font-bold text-slate-900">Step 1: Security Verification</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Authenticate your personal mobile number to establish your secure digital identity anchor.
+                  Authenticate using your personal email address. A real 6-digit verification code will be dispatched to your inbox.
                 </p>
               </div>
 
               {!isOtpSent ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Enter Your 10-Digit Mobile Number</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Email Address <span className="text-blue-600 font-bold">(OTP will arrive here)</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={emailAddress}
+                      onChange={e => setEmailAddress(e.target.value)}
+                      placeholder="e.g. yourname@gmail.com"
+                      className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    />
+                    <span className="text-[11px] text-slate-400 mt-1 block">
+                      Live delivery powered by Gmail SMTP security infrastructure.
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      10-Digit Mobile Number <span className="text-slate-400 font-normal">(Optional)</span>
+                    </label>
                     <div className="flex">
                       <span className="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-sm font-semibold">
                         +91
@@ -491,66 +464,41 @@ export default function CardApplicationPage() {
                         className="w-full rounded-r-xl border border-slate-300 px-3 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-600"
                       />
                     </div>
-                    <span className="text-[11px] text-slate-400 mt-1 block">
-                      A 6-digit one-time password will be generated for your number.
-                    </span>
                   </div>
 
                   <button
                     type="button"
-                    disabled={loading || mobileNumber.replace(/[^0-9]/g, '').length !== 10}
+                    disabled={loading || (!emailAddress.includes('@') && mobileNumber.length !== 10)}
                     onClick={handleSendOtp}
                     className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
                   >
-                    {loading ? 'Dispatching OTP...' : 'Send 6-Digit Verification OTP'}
+                    {loading ? 'Dispatching Live OTP...' : 'Send 6-Digit Verification Code'}
                   </button>
                 </div>
               ) : (
                 <div className="space-y-5">
-                  {gatewayActive ? (
-                    <div className="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-xs text-emerald-950 flex items-start gap-2.5">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                      <div>
-                        <strong className="font-bold">Live SMS Dispatched:</strong> Sent to <strong>+91 {mobileNumber}</strong>. Please check your SMS inbox and enter the 6-digit code.
-                      </div>
+                  <div className="bg-blue-50 p-4 rounded-2xl border border-blue-200 text-xs text-blue-950 flex items-start gap-2.5">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="font-bold">Real OTP Code Dispatched:</strong> Sent to <strong>{otpRecipient}</strong>. Please check your inbox (and spam/promotions folder) and enter the 6-digit code.
                     </div>
-                  ) : (
-                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-slate-800 space-y-2.5">
-                      <div className="flex items-center gap-2 font-bold text-slate-900">
-                        <ShieldCheck className="w-4 h-4 text-blue-700" />
-                        <span>Security Verification Code Issued</span>
-                      </div>
-                      <p className="text-[11px] text-slate-600 leading-relaxed">
-                        Telecom SMS gateway API key (Fast2SMS / Twilio) is awaiting configuration in server environment variables.
-                      </p>
-                      {devCodeHint && (
-                        <div className="bg-white p-3 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
-                          <div>
-                            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Your 6-Digit OTP:</div>
-                            <div className="font-mono text-2xl font-black text-blue-700 tracking-widest">{devCodeHint}</div>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => setOtpCode(devCodeHint)}
-                            className="text-[11px] font-bold text-blue-700 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-colors"
-                          >
-                            Use Code
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Enter 6-Digit OTP</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Enter 6-Digit Verification Code
+                    </label>
                     <input
                       type="text"
                       maxLength={6}
                       value={otpCode}
                       onChange={e => setOtpCode(e.target.value.replace(/[^0-9]/g, ''))}
-                      placeholder="Enter 6-digit OTP"
-                      className="w-full text-center tracking-widest text-xl font-mono rounded-xl border border-slate-300 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                      placeholder="e.g. 482910"
+                      className="w-full text-center tracking-widest text-2xl font-mono rounded-xl border border-slate-300 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-600 font-bold"
                     />
+                    <span className="text-[11px] text-slate-400 mt-1 block text-center">
+                      Code expires in 5 minutes • Maximum 3 verification attempts
+                    </span>
                   </div>
 
                   <button
@@ -559,7 +507,7 @@ export default function CardApplicationPage() {
                     onClick={handleVerifyOtp}
                     className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-bold rounded-full text-xs transition-colors shadow-md shadow-blue-700/20"
                   >
-                    {loading ? 'Verifying...' : 'Verify OTP & Continue'}
+                    {loading ? 'Verifying Code...' : 'Verify OTP & Continue'}
                   </button>
 
                   <div className="flex justify-between items-center text-xs pt-2">
@@ -568,11 +516,10 @@ export default function CardApplicationPage() {
                       onClick={() => {
                         setIsOtpSent(false);
                         setOtpCode('');
-                        setDevCodeHint('');
                       }}
                       className="text-blue-700 hover:underline font-semibold"
                     >
-                      ← Change mobile number
+                      ← Change contact details
                     </button>
                     <button
                       type="button"
@@ -580,7 +527,7 @@ export default function CardApplicationPage() {
                       onClick={handleSendOtp}
                       className="text-slate-600 disabled:text-slate-400 font-semibold"
                     >
-                      {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend OTP'}
+                      {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}
                     </button>
                   </div>
                 </div>
@@ -592,9 +539,9 @@ export default function CardApplicationPage() {
           {currentStep === 2 && (
             <div className="space-y-6">
               <div className="border-b border-slate-100 pb-4">
-                <h2 className="text-xl font-bold text-slate-900">Step 2: Complete AHCS Profile</h2>
+                <h2 className="text-xl font-bold text-slate-900">Step 2: Applicant Profile & Demographics</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Enter your genuine demographic details and emergency contact person.
+                  Enter your genuine demographic information and emergency contact person.
                 </p>
               </div>
 
@@ -607,8 +554,8 @@ export default function CardApplicationPage() {
                     type="text"
                     value={fullName}
                     onChange={e => setFullName(e.target.value)}
-                    placeholder="Enter full name as per Aadhaar / ID"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    placeholder="As printed on government ID"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
@@ -620,7 +567,7 @@ export default function CardApplicationPage() {
                     type="date"
                     value={dob}
                     onChange={e => setDob(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
@@ -631,7 +578,7 @@ export default function CardApplicationPage() {
                   <select
                     value={gender}
                     onChange={e => setGender(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
@@ -647,7 +594,7 @@ export default function CardApplicationPage() {
                   <select
                     value={bloodGroup}
                     onChange={e => setBloodGroup(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     <option value="A_POS">A+</option>
                     <option value="A_NEG">A-</option>
@@ -669,7 +616,7 @@ export default function CardApplicationPage() {
                     value={address}
                     onChange={e => setAddress(e.target.value)}
                     placeholder="House/Flat No., Street, Landmark, Area"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
@@ -681,8 +628,8 @@ export default function CardApplicationPage() {
                     type="text"
                     value={district}
                     onChange={e => setDistrict(e.target.value)}
-                    placeholder="e.g. South Delhi / Mumbai / Patna"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    placeholder="e.g. South Delhi / Mumbai / Bengaluru"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
@@ -693,7 +640,7 @@ export default function CardApplicationPage() {
                   <select
                     value={stateProvince}
                     onChange={e => setStateProvince(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     {INDIAN_STATES.map(s => (
                       <option key={s} value={s}>{s}</option>
@@ -711,20 +658,20 @@ export default function CardApplicationPage() {
                     value={pinCode}
                     onChange={e => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
                     placeholder="e.g. 110001"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Emergency Contact Name <span className="text-red-500">*</span>
+                    Emergency Contact Person Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     value={emergencyName}
                     onChange={e => setEmergencyName(e.target.value)}
-                    placeholder="Name of family member / guardian"
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                    placeholder="Family member / guardian"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none"
                   />
                 </div>
 
@@ -754,7 +701,7 @@ export default function CardApplicationPage() {
                   <select
                     value={emergencyRelation}
                     onChange={e => setEmergencyRelation(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     <option value="Parent">Parent (Father / Mother)</option>
                     <option value="Spouse">Spouse (Husband / Wife)</option>
@@ -771,7 +718,7 @@ export default function CardApplicationPage() {
                 <button
                   type="button"
                   onClick={() => setCurrentStep(1)}
-                  className="px-5 py-2 border border-slate-300 rounded-full text-xs text-slate-600 hover:bg-slate-50 flex items-center gap-1.5"
+                  className="px-5 py-2 border border-slate-300 rounded-full text-xs text-slate-600 hover:bg-slate-50 flex items-center gap-1.5 font-semibold"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Back</span>
@@ -793,9 +740,9 @@ export default function CardApplicationPage() {
           {currentStep === 3 && (
             <div className="space-y-6">
               <div className="border-b border-slate-100 pb-4">
-                <h2 className="text-xl font-bold text-slate-900">Step 3: Identity Verification Documents</h2>
+                <h2 className="text-xl font-bold text-slate-900">Step 3: Identity Verification Proof</h2>
                 <p className="text-xs text-slate-500 mt-1">
-                  Upload an officially accepted identity document. Files are encrypted via AES-256 in private storage.
+                  Upload an officially recognized identity document. Files are encrypted with AES-256 in private vault storage.
                 </p>
               </div>
 
@@ -810,7 +757,7 @@ export default function CardApplicationPage() {
                       setDocType(e.target.value);
                       setDocNumber('');
                     }}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:ring-2 focus:ring-blue-600 focus:outline-none bg-white"
                   >
                     {DOC_TYPES.map(d => (
                       <option key={d.id} value={d.id}>{d.label}</option>
@@ -827,16 +774,16 @@ export default function CardApplicationPage() {
                     value={docNumber}
                     onChange={e => setDocNumber(e.target.value)}
                     placeholder={DOC_TYPES.find(d => d.id === docType)?.placeholder || 'Enter document reference number'}
-                    className="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none uppercase"
+                    className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-mono focus:ring-2 focus:ring-blue-600 focus:outline-none uppercase"
                   />
                   <span className="text-[10px] text-slate-400 mt-1 block">
-                    Document number is cryptographically hashed with SHA-256 for zero-knowledge duplicate detection.
+                    Document number is cryptographically hashed with SHA-256 for zero-knowledge privacy.
                   </span>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Upload Document Proof (PDF or Image) <span className="text-red-500">*</span>
+                    Upload Document Proof (PDF, JPG, or PNG) <span className="text-red-500">*</span>
                   </label>
                   <input
                     ref={fileInputRef}
@@ -870,7 +817,7 @@ export default function CardApplicationPage() {
                         <div>
                           <div className="text-xs font-bold text-slate-900 truncate max-w-[200px] sm:max-w-xs">{docFile}</div>
                           <div className="text-[11px] text-emerald-800">
-                            {docFileSize ? `${(docFileSize / 1024).toFixed(1)} KB` : 'Verified file'} • Ready for AES-256 Vault Encryption
+                            {docFileSize ? `${(docFileSize / 1024).toFixed(1)} KB` : 'Verified file'} • Ready for Vault Encryption
                           </div>
                         </div>
                       </div>
@@ -897,7 +844,7 @@ export default function CardApplicationPage() {
                     </div>
                   )}
                   <span className="text-[10px] text-slate-400 mt-1 block">
-                    Document files are encrypted at rest with AES-256 in private zero-knowledge storage vault.
+                    Document files are stored in private vault storage and accessible only by authorized verification officers.
                   </span>
                 </div>
               </div>
@@ -906,7 +853,7 @@ export default function CardApplicationPage() {
                 <button
                   type="button"
                   onClick={() => setCurrentStep(2)}
-                  className="px-5 py-2 border border-slate-300 rounded-full text-xs text-slate-600 hover:bg-slate-50 flex items-center gap-1.5"
+                  className="px-5 py-2 border border-slate-300 rounded-full text-xs text-slate-600 hover:bg-slate-50 flex items-center gap-1.5 font-semibold"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   <span>Back</span>
@@ -917,267 +864,128 @@ export default function CardApplicationPage() {
                   onClick={handleSubmitDocuments}
                   className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-700/20"
                 >
-                  <span>{loading ? 'Submitting...' : 'Submit for Duplicate Check'}</span>
+                  <span>{loading ? 'Submitting Application...' : 'Submit Application for Review'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
           )}
 
-          {/* STEP 4: DUPLICATE CHECK */}
+          {/* STEP 4: GENUINE VERIFICATION STATUS (NO SIMULATED OFFICER) */}
           {currentStep === 4 && (
-            <div className="space-y-6">
-              <div className="border-b border-slate-100 pb-4">
-                <h2 className="text-xl font-bold text-slate-900">Step 4: Database Duplicate Account Detection</h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  Evaluating duplicate probability across active cards, hashes, and demographic clusters.
-                </p>
-              </div>
-
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-700" />
-                    <span className="text-sm font-semibold text-slate-800">Document Reference SHA-256 Hash</span>
+            <div className="space-y-6 max-w-xl mx-auto py-2">
+              {existingCard ? (
+                /* Card Already Active */
+                <div className="text-center space-y-5">
+                  <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
+                    <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <span className="text-xs font-mono text-blue-700 bg-blue-100 px-2 py-0.5 rounded">NO MATCH (0%)</span>
-                </div>
-
-                <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-700" />
-                    <span className="text-sm font-semibold text-slate-800">Mobile Phone Index</span>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                      Card Active & Operational
+                    </span>
+                    <h2 className="text-2xl font-black text-slate-900 mt-2">Welcome Back, {fullName}!</h2>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Your AHCS Health Card is active with permanent 256-bit emergency break-glass protection.
+                    </p>
                   </div>
-                  <span className="text-xs font-mono text-blue-700 bg-blue-100 px-2 py-0.5 rounded">UNIQUE (0%)</span>
-                </div>
 
-                <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-blue-700" />
-                    <span className="text-sm font-semibold text-slate-800">Levenshtein Name & DOB Cluster</span>
+                  <div className="py-2">
+                    <HealthCard
+                      memberName={fullName.toUpperCase() || 'MEMBER'}
+                      clientId={provisionalId || existingCard.clientIdFk || 'AHCS-IN-2026'}
+                      cardNumber={existingCard.cardNumber}
+                      validThru="12/2030"
+                      bloodGroup={bloodGroup.replace('_', '+').replace('POS', '+').replace('NEG', '-')}
+                      isVerified={true}
+                    />
                   </div>
-                  <span className="text-xs font-mono text-blue-700 bg-blue-100 px-2 py-0.5 rounded">PASSED (Score: {duplicateScore})</span>
+
+                  <div className="pt-2">
+                    <Link
+                      href="/dashboard"
+                      className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 shadow-md"
+                    >
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Open Member Dashboard</span>
+                    </Link>
+                  </div>
                 </div>
+              ) : (
+                /* Under Official Desk Review */
+                <div className="space-y-5">
+                  <div className="text-center">
+                    <div className="w-14 h-14 bg-amber-100 text-amber-700 rounded-3xl flex items-center justify-center mx-auto mb-3 shadow-inner">
+                      <Clock className="w-7 h-7" />
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-amber-800 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                      Application Under Verification
+                    </span>
+                    <h2 className="text-2xl font-black text-slate-900 mt-2">Application Successfully Submitted</h2>
+                    <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto">
+                      Your document proof has been cryptographically sealed and submitted to the AHCS Verification Desk.
+                    </p>
+                  </div>
 
-                <div className="p-3 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-medium flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>Duplicate status: <strong>{duplicateStatus}</strong>. Ticket queued for Verification Officer.</span>
+                  {/* Tracking Card */}
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-xs space-y-3">
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                      <span className="text-slate-500">Applicant Legal Name:</span>
+                      <strong className="text-slate-900">{fullName || 'Registered Applicant'}</strong>
+                    </div>
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                      <span className="text-slate-500">Document Type:</span>
+                      <strong className="text-slate-900">{DOC_TYPES.find(d => d.id === docType)?.label || docType}</strong>
+                    </div>
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                      <span className="text-slate-500">Document Reference:</span>
+                      <span className="font-mono text-slate-800 font-semibold">
+                        XXXX-XXXX-{docNumber.slice(-4) || '9999'}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+                      <span className="text-slate-500">Verification Request ID:</span>
+                      <span className="font-mono text-blue-700 font-bold">{verifRequestId || 'VRQ-PENDING'}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500">Current Status:</span>
+                      <span className="text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full font-bold text-[11px] border border-amber-200">
+                        PENDING_OFFICER_REVIEW
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Information Box */}
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-2xl text-xs space-y-2 text-blue-900 leading-relaxed">
+                    <div className="font-bold flex items-center gap-1.5 text-blue-950">
+                      <ShieldCheck className="w-4 h-4 text-blue-700" />
+                      <span>Next Steps in Official Lifecycle:</span>
+                    </div>
+                    <ul className="list-disc list-inside space-y-1 text-slate-700 text-[11px]">
+                      <li>An authorized Verification Officer audits your uploaded document against official registries.</li>
+                      <li>Upon approval, your **Permanent AHCS Client ID** and **Active Digital Health Card** will be issued.</li>
+                      <li>You will receive an email confirmation at <strong>{emailAddress || 'your registered email'}</strong>.</li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                    <Link
+                      href="/dashboard"
+                      className="flex-1 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-blue-700/20"
+                    >
+                      <User className="w-4 h-4" />
+                      <span>Go to Member Dashboard</span>
+                    </Link>
+                    <Link
+                      href="/officer"
+                      className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 border border-slate-300"
+                    >
+                      <Building2 className="w-4 h-4" />
+                      <span>Officer Desk Login</span>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex justify-end pt-4 border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setCurrentStep(5)}
-                  className="px-7 py-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-700/20"
-                >
-                  <span>Proceed to Officer Review</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 5: VERIFICATION OFFICER REVIEW */}
-          {currentStep === 5 && (
-            <div className="space-y-6">
-              <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-bold text-slate-900">Step 5: Verification Officer Review</h2>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Simulated verification officer review queue interface.
-                  </p>
-                </div>
-                <span className="text-xs bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-semibold border border-indigo-200">
-                  Officer: Ananya Sen (VO-892)
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-5 rounded-2xl border border-slate-200 text-xs">
-                <div className="space-y-2">
-                  <div className="font-bold text-slate-800 text-sm">Submitted Profile</div>
-                  <div><span className="text-slate-500">Full Name:</span> <strong className="text-slate-900">{fullName}</strong></div>
-                  <div><span className="text-slate-500">Date of Birth:</span> <strong className="text-slate-900">{dob}</strong></div>
-                  <div><span className="text-slate-500">Gender:</span> <strong className="text-slate-900">{gender}</strong></div>
-                  <div><span className="text-slate-500">Address:</span> <strong className="text-slate-900">{address}, {district}</strong></div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="font-bold text-slate-800 text-sm">Submitted Identity Document</div>
-                  <div><span className="text-slate-500">Type:</span> <strong className="text-slate-900">{docType}</strong></div>
-                  <div><span className="text-slate-500">Masked Ref:</span> <strong className="text-slate-900">XXXX-XXXX-{docNumber.slice(-4)}</strong></div>
-                  <div><span className="text-slate-500">File Status:</span> <span className="text-blue-700 font-semibold">Legible & Verified</span></div>
-                  <div><span className="text-slate-500">Duplicate Check:</span> <span className="text-emerald-700 font-semibold">{duplicateStatus}</span></div>
-                </div>
-              </div>
-
-              <div className="p-4 bg-blue-50 border border-blue-200 rounded-2xl text-xs space-y-2 text-blue-900">
-                <div className="font-bold flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-blue-700" />
-                  <span>Officer Verification Decision: APPROVE</span>
-                </div>
-                <p>Profile information matches submitted official document. Click below to execute atomic Client ID and Card generation in PostgreSQL.</p>
-              </div>
-
-              <div className="flex justify-end pt-4 border-t border-slate-100">
-                <button
-                  type="button"
-                  disabled={loading}
-                  onClick={handleOfficerApprove}
-                  className="px-7 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md shadow-blue-700/20"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>{loading ? 'Minting ID & Card...' : 'Approve & Issue Permanent Client ID'}</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 6: AHCS CLIENT ID GENERATED */}
-          {currentStep === 6 && (
-            <div className="space-y-6 text-center max-w-lg mx-auto py-4">
-              <div className="w-16 h-16 bg-blue-100 text-blue-700 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
-                <Sparkles className="w-8 h-8" />
-              </div>
-
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-                  Official Healthcare Identifier
-                </span>
-                <h2 className="text-2xl font-black text-slate-900 mt-2">Your Permanent AHCS Client ID</h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  This identifier is permanent, non-transferable, and cryptographically verified with ISO/IEC 7064 check digit.
-                </p>
-              </div>
-
-              <div className="bg-slate-900 text-white py-4 px-6 rounded-2xl shadow-xl border border-slate-800">
-                <div className="text-[10px] font-mono tracking-widest text-sky-400 uppercase">Permanent AHCS Client ID</div>
-                <div className="text-2xl sm:text-3xl font-mono font-black text-white tracking-wider mt-1">
-                  {generatedClientId}
-                </div>
-              </div>
-
-              <div className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left space-y-1">
-                <div>✓ <strong>Permanent:</strong> Never changes upon mobile, address, or card replacement.</div>
-                <div>✓ <strong>Privacy-First:</strong> Contains zero personal data, Aadhaar, or phone slices.</div>
-                <div>✓ <strong>Non-Government:</strong> Independent private healthcare platform ID.</div>
-              </div>
-
-              <div className="pt-4">
-                <button
-                  type="button"
-                  onClick={() => setCurrentStep(7)}
-                  className="w-full py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-2 shadow-md"
-                >
-                  <CreditCard className="w-4 h-4" />
-                  <span>View & Activate Your Health Card</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* STEP 7: CARD GENERATION & ACTIVATION */}
-          {currentStep === 7 && (
-            <div className="space-y-6 flex flex-col items-center">
-              <div className="border-b border-slate-100 pb-4 text-center w-full">
-                <h2 className="text-xl font-bold text-slate-900">Step 7: AHCS Health Card Minted</h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  Card generated conforming to standard ISO/IEC 7810 ID-1 dimensions (85.60 mm × 53.98 mm).
-                </p>
-              </div>
-
-              {/* Vector Health Card Component */}
-              <div className="py-2">
-                <HealthCard
-                  memberName={fullName.toUpperCase()}
-                  clientId={generatedClientId}
-                  cardNumber={generatedCardNumber}
-                  validThru="12/2030"
-                  bloodGroup={bloodGroup.replace('_', '+').replace('POS', '+').replace('NEG', '-')}
-                  isVerified={true}
-                />
-              </div>
-
-              <div className="max-w-md w-full bg-amber-50 p-4 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-2">
-                <div className="flex items-center gap-1.5 font-bold">
-                  <AlertCircle className="w-4 h-4 text-amber-600" />
-                  <span>Card Status: PENDING_ACTIVATION</span>
-                </div>
-                <p>
-                  For security, the generated card is inactive until confirmed by the cardholder. Your card activation code is: <strong className="font-mono text-slate-900 text-sm bg-white px-2 py-0.5 rounded border border-amber-300">{activationCode || '123456'}</strong>.
-                </p>
-              </div>
-
-              <div className="max-w-md w-full space-y-3">
-                <label className="block text-xs font-semibold text-slate-700">Enter Card Activation Code</label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    maxLength={6}
-                    value={enteredActivationCode}
-                    onChange={e => setEnteredActivationCode(e.target.value.replace(/[^0-9]/g, ''))}
-                    placeholder="Enter 6-digit code"
-                    className="w-full text-center font-mono text-lg tracking-widest rounded-xl border border-slate-300 px-3 py-2.5 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                  />
-                  <button
-                    type="button"
-                    disabled={loading || !enteredActivationCode}
-                    onClick={handleActivateCard}
-                    className="px-6 py-2.5 bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white rounded-xl text-xs font-bold shadow-sm shrink-0"
-                  >
-                    {loading ? 'Activating...' : 'Activate Card'}
-                  </button>
-                </div>
-                {activationCode && (
-                  <button
-                    type="button"
-                    onClick={() => setEnteredActivationCode(activationCode)}
-                    className="text-[11px] text-blue-700 font-semibold hover:underline"
-                  >
-                    Fill activation code ({activationCode})
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* STEP 8: CARD ACTIVE & OPERATIONAL */}
-          {currentStep === 8 && (
-            <div className="space-y-6 text-center max-w-lg mx-auto py-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
-                <CheckCircle2 className="w-8 h-8" />
-              </div>
-
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                  Card Active & Operational
-                </span>
-                <h2 className="text-2xl font-black text-slate-900 mt-2">Congratulations, {fullName}!</h2>
-                <p className="text-xs text-slate-500 mt-1">
-                  Your AHCS Health Card is now ACTIVE in the database with dynamic 256-bit emergency break-glass token.
-                </p>
-              </div>
-
-              <div className="py-2">
-                <HealthCard
-                  memberName={fullName.toUpperCase()}
-                  clientId={generatedClientId}
-                  cardNumber={generatedCardNumber}
-                  validThru="12/2030"
-                  bloodGroup={bloodGroup.replace('_', '+').replace('POS', '+').replace('NEG', '-')}
-                  isVerified={true}
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <a
-                  href="/dashboard"
-                  className="flex-1 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md"
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Open Member Dashboard</span>
-                </a>
-              </div>
+              )}
             </div>
           )}
         </div>

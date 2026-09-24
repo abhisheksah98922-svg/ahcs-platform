@@ -62,7 +62,7 @@ export default function HomePage() {
                   <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-emerald-700 font-bold text-xs">✓</span>
                   </div>
-                  <span>Permanent Health ID (AHCS Client ID) — issued instantly</span>
+                  <span>Permanent Health ID (AHCS Client ID) — issued upon verified enrollment</span>
                 </div>
 
                 <div className="flex items-start gap-2.5 p-2 rounded-xl bg-white/60 border border-slate-200/60 shadow-2xs">
@@ -122,8 +122,8 @@ export default function HomePage() {
 
               {/* Micro Status Notes */}
               <div className="pt-1 text-xs text-slate-500 space-y-0.5 font-medium">
-                <div>Live now: Client ID · QR card · Records · Appointments · Emergency gateway</div>
-                <div className="text-slate-600 font-semibold">Free forever: your Health ID and emergency access.</div>
+                <div>Active: Digital Health ID · Emergency Break-Glass QR · Encrypted Clinical Records</div>
+                <div className="text-slate-600 font-semibold">Free forever: your Health ID and emergency break-glass profile.</div>
               </div>
             </div>
 

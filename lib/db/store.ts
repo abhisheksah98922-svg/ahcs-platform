@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { prisma } from './prisma';
 import {
   UserRecord,
   UserSessionRecord,
@@ -178,9 +179,42 @@ class PersistentDataStore {
     }
 
     this.isLoaded = true;
+    this.hydrateFromPostgres();
+  }
+
+  private async hydrateFromPostgres() {
+    try {
+      const dbUsers = await prisma.user.findMany();
+      if (dbUsers && dbUsers.length > 0) {
+        for (const u of dbUsers) {
+          const exists = this.data.users.find(existing => existing.id === u.id || existing.mobileNumber === u.mobileNumber);
+          if (!exists) {
+            this.data.users.push({
+              id: u.id,
+              mobileNumber: u.mobileNumber,
+              mobileVerifiedAt: u.mobileVerifiedAt ? u.mobileVerifiedAt.toISOString() : null,
+              email: u.email,
+              emailVerifiedAt: u.emailVerifiedAt ? u.emailVerifiedAt.toISOString() : null,
+              role: u.role as any,
+              status: u.status as any,
+              authProvider: u.authProvider as any,
+              googleSub: u.googleSub,
+              createdAt: u.createdAt.toISOString(),
+              updatedAt: u.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+    } catch (e) {
+      // Non-blocking sync notice
+    }
   }
 
   private seedInitialProviders() {
+    // In production, do not inject fake hospitals; only seed during automated test runs
+    if (process.env.NODE_ENV !== 'test') {
+      return;
+    }
     const verifiedProviders: ProviderRecord[] = [
       {
         id: 'PRV-101',
@@ -415,6 +449,21 @@ class PersistentDataStore {
 
     this.data.users.push(record);
     this.persistSync();
+
+    // Asynchronous dual-write to Neon PostgreSQL
+    prisma.user.create({
+      data: {
+        id: record.id,
+        mobileNumber: record.mobileNumber,
+        mobileVerifiedAt: record.mobileVerifiedAt ? new Date(record.mobileVerifiedAt) : null,
+        email: record.email || null,
+        emailVerifiedAt: record.emailVerifiedAt ? new Date(record.emailVerifiedAt) : null,
+        role: record.role as any,
+        status: record.status as any,
+        authProvider: record.authProvider as any,
+      },
+    }).catch(err => console.warn('[POSTGRES_USER_WRITE_NOTICE]', err.message));
+
     return record;
   }
 
@@ -424,6 +473,16 @@ class PersistentDataStore {
 
     Object.assign(user, updates, { updatedAt: new Date().toISOString() });
     this.persistSync();
+
+    prisma.user.update({
+      where: { id },
+      data: {
+        email: updates.email,
+        emailVerifiedAt: updates.emailVerifiedAt ? new Date(updates.emailVerifiedAt) : undefined,
+        status: updates.status as any,
+      },
+    }).catch(err => console.warn('[POSTGRES_USER_UPDATE_NOTICE]', err.message));
+
     return user;
   }
 
@@ -437,6 +496,18 @@ class PersistentDataStore {
 
     this.data.sessions.push(record);
     this.persistSync();
+
+    prisma.userSession.create({
+      data: {
+        id: record.id,
+        userId: record.userId,
+        sessionTokenHash: record.sessionTokenHash,
+        ipAddress: record.ipAddress || null,
+        userAgent: record.userAgent || null,
+        expiresAt: new Date(record.expiresAt),
+      },
+    }).catch(err => console.warn('[POSTGRES_SESSION_WRITE_NOTICE]', err.message));
+
     return record;
   }
 
@@ -753,6 +824,21 @@ class PersistentDataStore {
 
     this.data.auditLogs.push(record);
     this.persistSync();
+
+    prisma.auditLog.create({
+      data: {
+        id: record.id,
+        actorId: record.actorId || null,
+        actorRole: record.actorRole || 'SYSTEM',
+        action: record.action,
+        targetResource: record.targetResource,
+        targetId: record.targetId || null,
+        ipAddress: record.ipAddress || null,
+        userAgent: record.userAgent || null,
+        metadata: record.metadata ? JSON.stringify(record.metadata) : undefined,
+      },
+    }).catch(err => console.warn('[POSTGRES_AUDIT_WRITE_NOTICE]', err.message));
+
     return record;
   }
 

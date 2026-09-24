@@ -1,19 +1,23 @@
 import { NextResponse } from 'next/server';
 import { requestOtp } from '@/lib/auth/otp';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { mobileNumber } = body;
+    const { mobileNumber, email } = body;
 
-    if (!mobileNumber || typeof mobileNumber !== 'string') {
+    const identifier = mobileNumber || email;
+
+    if (!identifier || typeof identifier !== 'string') {
       return NextResponse.json(
-        { success: false, error: 'Valid mobile number is required' },
+        { success: false, error: 'Valid mobile number or email address is required' },
         { status: 400 }
       );
     }
 
-    const result = requestOtp(mobileNumber);
+    const result = await requestOtp(identifier, email);
 
     if (!result.success) {
       return NextResponse.json(
@@ -24,10 +28,14 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'OTP dispatched successfully',
+      message: result.channel === 'EMAIL' 
+        ? `Security OTP dispatched to ${result.recipient}. Please check your inbox.`
+        : 'OTP dispatched successfully via SMS.',
       expiresAt: result.expiresAt,
-      devCode: result.devCode, // populated when SMS gateway is pending or in dev/test mode
+      devCode: result.devCode,
       gatewayActive: result.gatewayActive,
+      channel: result.channel,
+      recipient: result.recipient,
     });
   } catch (err: any) {
     console.error('OTP Send Error:', err);
