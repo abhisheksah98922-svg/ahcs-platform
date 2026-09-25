@@ -40,7 +40,6 @@ export const Footer = () => {
               <li><Link href="/how-it-works" className="hover:text-white transition-colors">Verification Process</Link></li>
               <li><Link href="/health-card" className="hover:text-white transition-colors">Card Specifications</Link></li>
               <li><Link href="/emergency-preview" className="hover:text-white transition-colors">Emergency QR System</Link></li>
-              <li><Link href="/officer" className="hover:text-white transition-colors">Verification Officer Queue</Link></li>
             </ul>
           </div>
 

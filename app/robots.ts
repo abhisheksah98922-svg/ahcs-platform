@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/officer', '/officer/', '/provider/portal', '/security'],
+        disallow: ['/api/', '/officer', '/officer/*', '/officer/login', '/provider/portal', '/security'],
       },
     ],
     sitemap: 'https://ahcs.in/sitemap.xml',

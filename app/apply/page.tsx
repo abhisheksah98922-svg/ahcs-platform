@@ -968,20 +968,13 @@ export default function CardApplicationPage() {
                     </ul>
                   </div>
 
-                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                  <div className="pt-2 flex justify-center">
                     <Link
                       href="/dashboard"
-                      className="flex-1 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-blue-700/20"
+                      className="w-full sm:w-auto px-8 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-blue-700/20"
                     >
                       <User className="w-4 h-4" />
                       <span>Go to Member Dashboard</span>
-                    </Link>
-                    <Link
-                      href="/officer"
-                      className="px-5 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full text-xs font-semibold flex items-center justify-center gap-1.5 border border-slate-300"
-                    >
-                      <Building2 className="w-4 h-4" />
-                      <span>Officer Desk Login</span>
                     </Link>
                   </div>
                 </div>

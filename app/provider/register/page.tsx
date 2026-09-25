@@ -196,17 +196,10 @@ export default function ProviderRegisterPage() {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-              <Link
-                href="/officer/login"
-                className="px-6 py-3 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 hover:bg-amber-500/25 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
-              >
-                <span>Check Officer Verification Console</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+            <div className="pt-2 flex justify-center">
               <Link
                 href="/provider/login"
-                className="px-6 py-3 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                className="px-8 py-3 rounded-2xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <span>Go to Staff Login</span>
               </Link>

@@ -295,12 +295,9 @@ export default function ProviderLoginPage() {
             </Link>
           </div>
 
-          <div className="pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-slate-400">
+          <div className="pt-4 border-t border-slate-700/60 flex items-center justify-center text-xs text-slate-400">
             <Link href="/dashboard" className="hover:text-white transition-colors">
-              Patient Login
-            </Link>
-            <Link href="/officer/login" className="text-amber-400 hover:underline font-mono">
-              Govt Officer Portal &rarr;
+              Patient & Member Login &rarr;
             </Link>
           </div>
         </div>

@@ -53,9 +53,6 @@ export const Navbar = () => {
             <Link href="/pricing" className="hover:text-blue-600 transition-colors">
               Pricing
             </Link>
-            <Link href="/officer/login" className="text-amber-800 hover:text-amber-950 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 transition-colors text-xs font-mono font-bold">
-              Officer Portal
-            </Link>
           </nav>
 
           {/* Right Controls */}
