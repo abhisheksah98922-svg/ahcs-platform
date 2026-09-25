@@ -4,6 +4,7 @@ import { getCurrentUser } from '@/lib/auth/sessions';
 import { db } from '@/lib/db/store';
 import { generateAhcsClientId } from '@/lib/client-id';
 import { generateSecureAccessToken, generateCardActivationCode } from '@/lib/tokens';
+import { sendApplicationApprovedEmail, sendApplicationRejectedEmail } from '@/lib/email/mailer';
 
 export async function POST(request: Request) {
   try {
@@ -68,10 +69,15 @@ export async function POST(request: Request) {
         channel: 'IN_APP',
       });
 
-      // 2. Dispatch simulated / actual email to Citizen
+      // 2. Dispatch real email to Citizen via Gmail SMTP
       const targetUser = db.findUserById(account.userId);
-      const recipientContact = targetUser?.email || targetUser?.mobileNumber || 'Citizen';
-      console.log(`[EMAIL_SERVICE] Dispatched KYC Rejection Email to ${recipientContact}: Reason: "${finalReason}"`);
+      const citizenProfile = db.findProfileByAccountId(account.id);
+      if (targetUser?.email) {
+        sendApplicationRejectedEmail(targetUser.email, {
+          fullName: citizenProfile?.fullName || 'Applicant',
+          reason: finalReason,
+        }).catch(err => console.error('[EMAIL_REJECT_NOTICE]', err));
+      }
 
       db.logAudit({
         actorId: auth.user.id,
@@ -81,7 +87,7 @@ export async function POST(request: Request) {
         targetId: verifReq.id,
         ipAddress: request.headers.get('x-forwarded-for'),
         userAgent: request.headers.get('user-agent'),
-        metadata: { rejectionReason: finalReason, recipientContact },
+        metadata: { rejectionReason: finalReason, recipientContact: targetUser?.email || targetUser?.mobileNumber || 'Citizen' },
       });
 
       return NextResponse.json({
@@ -222,6 +228,17 @@ export async function POST(request: Request) {
       userAgent: request.headers.get('user-agent'),
       metadata: { clientId: clientIdRecord.clientId },
     });
+
+    // 9. Dispatch Real Approval Email to Citizen via Gmail SMTP
+    const targetUser = db.findUserById(account.userId);
+    const citizenProfile = db.findProfileByAccountId(account.id);
+    if (targetUser?.email) {
+      sendApplicationApprovedEmail(targetUser.email, {
+        fullName: citizenProfile?.fullName || 'Citizen',
+        clientId: clientIdRecord.clientId,
+        cardNumber: card.cardNumber,
+      }).catch(err => console.error('[EMAIL_APPROVE_NOTICE]', err));
+    }
 
     return NextResponse.json({
       success: true,

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth/sessions';
 import { db } from '@/lib/db/store';
 import { hashDocumentNumber, evaluateDuplicateProbability } from '@/lib/duplicate-detector';
+import { sendApplicationReceivedEmail } from '@/lib/email/mailer';
 
 export async function POST(request: Request) {
   try {
@@ -113,6 +114,15 @@ export async function POST(request: Request) {
         duplicateScore: dupCheck.score,
       },
     });
+
+    // 8. Dispatch Real Confirmation Email to Citizen via Gmail SMTP
+    if (auth.user.email) {
+      sendApplicationReceivedEmail(auth.user.email, {
+        fullName: profile.fullName,
+        requestId: verifRequest.id,
+        docType: docType,
+      }).catch(err => console.error('[EMAIL_SUBMIT_NOTICE]', err));
+    }
 
     return NextResponse.json({
       success: true,
