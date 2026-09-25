@@ -48,8 +48,8 @@ export const Footer = () => {
             <h4 className="text-white font-semibold mb-3">Network & Providers</h4>
             <ul className="space-y-2">
               <li><Link href="/providers" className="hover:text-white transition-colors">Hospital & Clinic Directory</Link></li>
-              <li><Link href="/for-clinics" className="hover:text-white transition-colors">For Clinics & Doctors</Link></li>
-              <li><Link href="/for-companies" className="hover:text-white transition-colors">Corporate Health Plans</Link></li>
+              <li><Link href="/provider/register" className="hover:text-white transition-colors">For Clinics & Doctors</Link></li>
+              <li><Link href="/corporate" className="hover:text-white transition-colors">Corporate Health Plans</Link></li>
               <li><Link href="/pricing" className="hover:text-white transition-colors">Membership Tiers</Link></li>
             </ul>
           </div>
