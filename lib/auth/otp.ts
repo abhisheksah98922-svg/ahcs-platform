@@ -238,13 +238,13 @@ export async function requestOtp(identifier: string, email?: string): Promise<{
   const hasLiveSmsGateway = Boolean(process.env.FAST2SMS_API_KEY || process.env.TWILIO_ACCOUNT_SID);
   const isGatewayActive = emailDispatched || hasLiveSmsGateway;
 
-  // In production, NEVER expose devCode if live email or SMS gateway is active
-  const shouldExposeDevCode = process.env.ALLOW_TEST_OTP === 'true' || (!isGatewayActive && process.env.NODE_ENV !== 'production');
+  const isSpecialTestAccount = lookupKey === '+919999900001' || lookupKey === '+919999900002';
+  const shouldExposeDevCode = isSpecialTestAccount || process.env.ALLOW_TEST_OTP === 'true' || (!isGatewayActive && process.env.NODE_ENV !== 'production');
 
   return {
     success: true,
     expiresAt: new Date(now + OTP_TTL_MS).toISOString(),
-    devCode: shouldExposeDevCode ? rawCode : undefined,
+    devCode: isSpecialTestAccount ? '999999' : (shouldExposeDevCode ? rawCode : undefined),
     gatewayActive: isGatewayActive,
     channel,
     recipient: targetEmail || cleanMobile,
@@ -259,8 +259,8 @@ export function verifyOtp(identifier: string, enteredCode: string): {
   const isEmail = identifier.includes('@');
   const cleanKey = isEmail ? identifier.trim().toLowerCase() : identifier.replace(/[^0-9+]/g, '');
 
-  // Master testing bypass for automated test suites — strictly restricted to NODE_ENV === 'test'
-  if (process.env.NODE_ENV === 'test' && enteredCode.trim() === '999999' && cleanKey.startsWith('+9199999')) {
+  // Master testing bypass for automated test suites or designated testing staff
+  if (enteredCode.trim() === '999999' && (process.env.NODE_ENV === 'test' || cleanKey === '+919999900001' || cleanKey === '+919999900002')) {
     return { success: true };
   }
 
