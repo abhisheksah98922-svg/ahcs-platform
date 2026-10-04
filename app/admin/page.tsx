@@ -20,8 +20,6 @@ import {
   Activity,
   ChevronRight
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function AdminOperationsPage() {
   const [loading, setLoading] = useState(true);
@@ -56,7 +54,6 @@ export default function AdminOperationsPage() {
   if (unauthorized) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-        <Navbar />
         <main className="flex-1 flex items-center justify-center p-4">
           <div className="max-w-md w-full bg-white rounded-2xl border border-slate-200 p-8 text-center shadow-lg">
             <div className="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4">
@@ -82,14 +79,12 @@ export default function AdminOperationsPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Header */}
@@ -411,7 +406,6 @@ export default function AdminOperationsPage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

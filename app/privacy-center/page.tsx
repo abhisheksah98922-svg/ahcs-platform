@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { ShieldCheck, Lock, EyeOff, UserCheck, FileCheck, CheckCircle2, AlertCircle } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Privacy & Data Protection Center | AHCS',
@@ -12,7 +10,6 @@ export const metadata = {
 export default function PrivacyCenterPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -124,7 +121,6 @@ export default function PrivacyCenterPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

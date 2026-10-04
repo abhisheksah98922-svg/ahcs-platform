@@ -14,8 +14,6 @@ import {
   Plus, 
   X 
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function DashboardAppointmentsPage() {
   const [appointments, setAppointments] = useState<any[]>([]);
@@ -35,7 +33,6 @@ export default function DashboardAppointmentsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full space-y-8">
         {/* Header */}
@@ -122,7 +119,6 @@ export default function DashboardAppointmentsPage() {
         )}
       </main>
 
-      <Footer />
     </div>
   );
 }

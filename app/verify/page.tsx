@@ -15,8 +15,6 @@ import {
   User, 
   AlertCircle 
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function PublicVerifyPage() {
   const [query, setQuery] = useState('');
@@ -54,7 +52,6 @@ export default function PublicVerifyPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Header */}
@@ -189,7 +186,6 @@ export default function PublicVerifyPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

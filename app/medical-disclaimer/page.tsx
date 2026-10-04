@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { AlertTriangle, ShieldCheck, Stethoscope, PhoneCall, AlertCircle } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Clinical & Medical Disclaimer | AHCS',
@@ -12,7 +10,6 @@ export const metadata = {
 export default function MedicalDisclaimerPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Header */}
@@ -89,7 +86,6 @@ export default function MedicalDisclaimerPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

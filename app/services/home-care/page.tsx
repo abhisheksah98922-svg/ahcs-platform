@@ -16,8 +16,6 @@ import {
   Activity, 
   Send 
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function HomeCarePage() {
   const [formData, setFormData] = useState({
@@ -78,7 +76,6 @@ export default function HomeCarePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Header */}
@@ -337,7 +334,6 @@ export default function HomeCarePage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

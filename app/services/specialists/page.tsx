@@ -12,8 +12,6 @@ import {
   ArrowRight,
   ShieldCheck
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Specialist Doctor Network | AHCS',
@@ -32,7 +30,6 @@ export default function SpecialistsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -95,7 +92,6 @@ export default function SpecialistsPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

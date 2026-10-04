@@ -15,8 +15,6 @@ import {
   ExternalLink,
   QrCode
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function DashboardEmergencyPage() {
   const [loading, setLoading] = useState(true);
@@ -90,7 +88,6 @@ export default function DashboardEmergencyPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-8">
         {/* Header */}
@@ -245,7 +242,6 @@ export default function DashboardEmergencyPage() {
         </form>
       </main>
 
-      <Footer />
     </div>
   );
 }

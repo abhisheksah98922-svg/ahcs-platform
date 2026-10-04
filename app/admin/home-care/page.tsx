@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Home, ArrowLeft, CheckCircle2, Clock, Phone, MapPin } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function AdminHomeCarePage() {
   const [requests, setRequests] = useState<any[]>([]);
@@ -22,7 +20,6 @@ export default function AdminHomeCarePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full space-y-6">
         <div>
@@ -85,7 +82,6 @@ export default function AdminHomeCarePage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

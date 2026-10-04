@@ -12,8 +12,6 @@ import {
   Sparkles,
   Stethoscope
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Telemedicine Consultations | AHCS',
@@ -23,7 +21,6 @@ export const metadata = {
 export default function TelemedicinePage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Header */}
@@ -114,7 +111,6 @@ export default function TelemedicinePage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

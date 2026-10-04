@@ -11,8 +11,6 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Partner Pharmacy Network | AHCS',
@@ -22,7 +20,6 @@ export const metadata = {
 export default function PharmacyPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -106,7 +103,6 @@ export default function PharmacyPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

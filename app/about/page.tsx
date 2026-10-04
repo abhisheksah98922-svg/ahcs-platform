@@ -12,8 +12,6 @@ import {
   ArrowRight,
   Stethoscope
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'About AHCS | Private Healthcare Access & Assistance Network',
@@ -23,7 +21,6 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -173,7 +170,6 @@ export default function AboutPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

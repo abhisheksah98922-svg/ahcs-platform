@@ -13,8 +13,6 @@ import {
   CheckCircle2, 
   AlertCircle 
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function DashboardSecurityPage() {
   const [sessions, setSessions] = useState<any[]>([]);
@@ -53,7 +51,6 @@ export default function DashboardSecurityPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full space-y-8">
         <div>
@@ -129,7 +126,6 @@ export default function DashboardSecurityPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

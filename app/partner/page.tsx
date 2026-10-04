@@ -15,8 +15,6 @@ import {
   FileText,
   AlertCircle
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Partner with AHCS | Healthcare Provider Onboarding',
@@ -53,7 +51,6 @@ export default function PartnerHubPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -159,7 +156,6 @@ export default function PartnerHubPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, CheckCircle2, CreditCard } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Register for AHCS Client ID | Start Application',
@@ -12,7 +10,6 @@ export const metadata = {
 export default function RegisterLandingPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 shadow-xl p-8 sm:p-10 space-y-6 text-center">
@@ -59,7 +56,6 @@ export default function RegisterLandingPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

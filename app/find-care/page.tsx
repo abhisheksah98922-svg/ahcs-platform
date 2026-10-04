@@ -16,8 +16,6 @@ import {
   CheckCircle2,
   Calendar
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function FindCarePage() {
   const [providers, setProviders] = useState<any[]>([]);
@@ -55,7 +53,6 @@ export default function FindCarePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero Search */}
@@ -211,7 +208,6 @@ export default function FindCarePage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Building2, FileCheck, ShieldCheck, AlertCircle } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Healthcare Partner Terms & Agreement | AHCS',
@@ -12,7 +10,6 @@ export const metadata = {
 export default function PartnerTermsPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         <section className="bg-gradient-to-b from-blue-950 to-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
@@ -59,7 +56,6 @@ export default function PartnerTermsPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

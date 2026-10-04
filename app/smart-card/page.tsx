@@ -14,8 +14,6 @@ import {
   HeartPulse,
   EyeOff
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'AHCS Smart Health Card | QR & NFC Healthcare Credential',
@@ -25,7 +23,6 @@ export const metadata = {
 export default function SmartCardPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
@@ -183,7 +180,6 @@ export default function SmartCardPage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

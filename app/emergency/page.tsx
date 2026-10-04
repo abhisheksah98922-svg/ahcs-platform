@@ -14,8 +14,6 @@ import {
   MapPin,
   CheckCircle2
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export const metadata = {
   title: 'Emergency Healthcare Assistance | AHCS',
@@ -25,7 +23,6 @@ export const metadata = {
 export default function EmergencyHubPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1">
         {/* Urgent 112 Directive Banner */}
@@ -153,7 +150,6 @@ export default function EmergencyHubPage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

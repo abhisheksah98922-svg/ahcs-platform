@@ -28,8 +28,6 @@ import {
   ChevronRight,
   ExternalLink
 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function HomePage() {
   const trustCards = [
@@ -140,7 +138,6 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans text-slate-900">
-      <Navbar />
 
       <main className="flex-1">
         {/* 1. COMPLETELY NEW HERO SECTION */}
@@ -601,7 +598,6 @@ export default function HomePage() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

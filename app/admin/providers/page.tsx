@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Building2, ArrowLeft, CheckCircle2, ShieldCheck, MapPin } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
 
 export default function AdminProvidersPage() {
   const [providers, setProviders] = useState<any[]>([]);
@@ -22,7 +20,6 @@ export default function AdminProvidersPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <Navbar />
 
       <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -98,7 +95,6 @@ export default function AdminProvidersPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }
