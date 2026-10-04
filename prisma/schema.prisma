@@ -206,6 +206,7 @@ model User {
   activatedCards     Card[]                 @relation("UserActivatedCards")
   providerStaff      ProviderStaff[]
   providerVerifications ProviderVerification[] @relation("OfficerProviderVerifications")
+  supportTickets     SupportTicket[]
 
   @@map("users")
 }
@@ -244,6 +245,8 @@ model Account {
   paymentOrders        PaymentOrder[]
   subscriptions        Subscription[]
   sponsorships         CorporateSponsorship[]
+  appointments         Appointment[]
+  claims               ProviderClaim[]
 
   @@map("accounts")
 }
@@ -456,6 +459,8 @@ model Provider {
   medicalRecords     MedicalRecord[]
   consents           Consent[]
   verifications      ProviderVerification[]
+  appointments       Appointment[]
+  claims             ProviderClaim[]
 
   @@map("providers")
 }
@@ -713,3 +718,188 @@ model AuditLog {
   @@index([targetResource, targetId])
   @@map("audit_logs")
 }
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+model Appointment {
+  id             String            @id @default(uuid())
+  accountId      String            @map("account_id")
+  providerId     String            @map("provider_id")
+  doctorName     String?           @map("doctor_name")
+  department     String?
+  scheduledAt    DateTime          @map("scheduled_at")
+  status         AppointmentStatus @default(SCHEDULED)
+  reason         String?
+  notes          String?
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime          @updatedAt @map("updated_at")
+
+  account        Account           @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  provider       Provider          @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+  @@index([providerId])
+  @@map("appointments")
+}
+
+model BenefitRule {
+  id               String   @id @default(uuid())
+  planId           String   @map("plan_id")
+  category         String
+  discountPercent  Int      @default(0) @map("discount_percent")
+  maxDiscountPaise Int      @default(0) @map("max_discount_paise")
+  terms            String?
+  isActive         Boolean  @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@index([planId])
+  @@map("benefit_rules")
+}
+
+enum ClaimStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  SETTLED
+}
+
+model ProviderClaim {
+  id               String      @id @default(uuid())
+  providerId       String      @map("provider_id")
+  accountId        String      @map("account_id")
+  serviceType      String      @map("service_type")
+  billAmountPaise  Int         @map("bill_amount_paise")
+  discountPaise    Int         @default(0) @map("discount_paise")
+  claimAmountPaise Int         @map("claim_amount_paise")
+  status           ClaimStatus @default(SUBMITTED)
+  adjudicatedBy    String?     @map("adjudicated_by")
+  adjudicatedAt    DateTime?   @map("adjudicated_at")
+  notes            String?
+  createdAt        DateTime    @default(now()) @map("created_at")
+
+  provider         Provider    @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  account          Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([providerId])
+  @@index([accountId])
+  @@map("provider_claims")
+}
+
+model SecurityEvent {
+  id         String   @id @default(uuid())
+  eventType  String   @map("event_type")
+  severity   String   @default("INFO")
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @map("user_agent")
+  userId     String?  @map("user_id")
+  details    Json?
+  resolved   Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([eventType])
+  @@index([severity])
+  @@map("security_events")
+}
+
+enum ServiceRequestStatus {
+  REQUESTED
+  REVIEWING
+  APPROVED
+  SCHEDULED
+  ASSIGNED
+  COMPLETED
+  CANCELLED
+}
+
+model MobileMedicalRequest {
+  id               String               @id @default(uuid())
+  organizationName String               @map("organization_name")
+  location         String
+  city             String
+  state            String
+  pinCode          String               @map("pin_code")
+  expectedPeople   Int                  @map("expected_people")
+  preferredDate    DateTime             @map("preferred_date")
+  requiredServices String[]             @map("required_services")
+  contactPerson    String               @map("contact_person")
+  phone            String
+  email            String
+  notes            String?
+  status           ServiceRequestStatus @default(REQUESTED)
+  assignedTeam     String?              @map("assigned_team")
+  createdAt        DateTime             @default(now()) @map("created_at")
+  updatedAt        DateTime             @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([city])
+  @@map("mobile_medical_requests")
+}
+
+model HomeCareRequest {
+  id            String               @id @default(uuid())
+  patientName   String               @map("patient_name")
+  serviceType   String               @map("service_type")
+  location      String
+  city          String
+  state         String
+  pinCode       String               @map("pin_code")
+  preferredDate DateTime             @map("preferred_date")
+  contactPhone  String               @map("contact_phone")
+  contactEmail  String?              @map("contact_email")
+  notes         String?
+  status        ServiceRequestStatus @default(REQUESTED)
+  assignedStaff String?              @map("assigned_staff")
+  createdAt     DateTime             @default(now()) @map("created_at")
+  updatedAt     DateTime             @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@map("home_care_requests")
+}
+
+enum TicketStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model SupportTicket {
+  id           String         @id @default(uuid())
+  ticketNumber String         @unique @map("ticket_number")
+  userId       String?        @map("user_id")
+  fullName     String         @map("full_name")
+  email        String
+  phone        String?
+  category     String
+  subject      String
+  message      String
+  priority     TicketPriority @default(MEDIUM)
+  status       TicketStatus   @default(OPEN)
+  adminNotes   String?        @map("admin_notes")
+  resolvedAt   DateTime?      @map("resolved_at")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([ticketNumber])
+  @@map("support_tickets")
+}
+
+

@@ -45,6 +45,17 @@ export async function POST(request: Request) {
       );
     }
 
+    // Strict Production Rule 11: NO "APPROVE YOURSELF"
+    if (account.userId === auth.user.id) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'CONFLICT OF INTEREST: Verification Officers are strictly prohibited from reviewing or approving their own identity application.',
+        },
+        { status: 403 }
+      );
+    }
+
     // Process Decision
     if (decision === 'REJECT') {
       const finalReason = (body.rejectionReason || body.notes || notes || '').trim();

@@ -184,6 +184,7 @@ class PersistentDataStore {
 
   private async hydrateFromPostgres() {
     try {
+      // 1. Users
       const dbUsers = await prisma.user.findMany();
       if (dbUsers && dbUsers.length > 0) {
         for (const u of dbUsers) {
@@ -205,8 +206,172 @@ class PersistentDataStore {
           }
         }
       }
-    } catch (e) {
-      // Non-blocking sync notice
+
+      // 2. Accounts
+      const dbAccounts = await prisma.account.findMany();
+      if (dbAccounts && dbAccounts.length > 0) {
+        for (const a of dbAccounts) {
+          const exists = this.data.accounts.find(existing => existing.id === a.id);
+          if (!exists) {
+            this.data.accounts.push({
+              id: a.id,
+              userId: a.userId,
+              accountNumber: a.accountNumber,
+              state: a.state as any,
+              createdAt: a.createdAt.toISOString(),
+              updatedAt: a.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 3. Profiles
+      const dbProfiles = await prisma.profile.findMany();
+      if (dbProfiles && dbProfiles.length > 0) {
+        for (const p of dbProfiles) {
+          const exists = this.data.profiles.find(existing => existing.id === p.id);
+          if (!exists) {
+            this.data.profiles.push({
+              id: p.id,
+              accountId: p.accountId,
+              fullName: p.fullName,
+              dateOfBirth: p.dateOfBirth.toISOString().split('T')[0],
+              gender: p.gender as any,
+              bloodGroup: p.bloodGroup as any,
+              bloodGroupSource: (p.bloodGroupSource || 'UNKNOWN') as any,
+              addressLine1: p.addressLine1 || '',
+              addressLine2: p.addressLine2 || '',
+              district: p.district,
+              stateProvince: p.stateProvince,
+              pinCode: p.pinCode,
+              countryCode: 'IN',
+              emergencyContactName: p.emergencyContactName || '',
+              emergencyContactPhone: p.emergencyContactPhone || '',
+              emergencyContactRelation: p.emergencyContactRelation || '',
+              createdAt: p.createdAt.toISOString(),
+              updatedAt: p.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 4. ClientIds
+      const dbClientIds = await prisma.clientId.findMany();
+      if (dbClientIds && dbClientIds.length > 0) {
+        for (const cid of dbClientIds) {
+          const exists = this.data.clientIds.find(existing => existing.id === cid.id);
+          if (!exists) {
+            this.data.clientIds.push({
+              id: cid.id,
+              accountId: cid.accountId,
+              clientId: cid.clientId,
+              checksum: cid.checksum,
+              issuedAt: cid.issuedAt.toISOString(),
+              isActive: cid.isActive,
+            });
+          }
+        }
+      }
+
+      // 5. Cards
+      const dbCards = await prisma.card.findMany();
+      if (dbCards && dbCards.length > 0) {
+        for (const c of dbCards) {
+          const exists = this.data.cards.find(existing => existing.id === c.id);
+          if (!exists) {
+            this.data.cards.push({
+              id: c.id,
+              clientIdFk: c.clientIdFk,
+              accountId: c.accountId,
+              cardNumber: c.cardNumber,
+              version: c.version,
+              status: c.status as any,
+              activationCodeHash: c.activationCodeHash,
+              activatedAt: c.activatedAt ? c.activatedAt.toISOString() : null,
+              activatedByUserId: c.activatedByUserId,
+              expiresAt: c.expiresAt.toISOString(),
+              createdAt: c.createdAt.toISOString(),
+              updatedAt: c.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 6. QrTokens
+      const dbTokens = await prisma.qrToken.findMany();
+      if (dbTokens && dbTokens.length > 0) {
+        for (const qt of dbTokens) {
+          const exists = this.data.qrTokens.find(existing => existing.id === qt.id);
+          if (!exists) {
+            this.data.qrTokens.push({
+              id: qt.id,
+              cardId: qt.cardId,
+              tokenHash: crypto.createHash('sha256').update(qt.token).digest('hex'),
+              tokenRaw: qt.token,
+              tokenType: qt.tokenType as any,
+              isRevoked: qt.isRevoked,
+              scanCount: Number(qt.scanCount),
+              lastScannedAt: qt.lastScannedAt ? qt.lastScannedAt.toISOString() : null,
+              expiresAt: qt.expiresAt.toISOString(),
+              createdAt: qt.createdAt.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 7. EmergencyProfiles
+      const dbEmg = await prisma.emergencyProfile.findMany();
+      if (dbEmg && dbEmg.length > 0) {
+        for (const ep of dbEmg) {
+          const exists = this.data.emergencyProfiles.find(existing => existing.id === ep.id);
+          if (!exists) {
+            this.data.emergencyProfiles.push({
+              id: ep.id,
+              accountId: ep.accountId,
+              isActive: ep.isActive,
+              allergies: ep.allergies,
+              criticalConditions: ep.criticalConditions,
+              currentMedications: ep.currentMedications,
+              organDonor: ep.organDonor,
+              preferredHospital: ep.preferredHospital || null,
+              updatedAt: ep.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+
+      // 8. Providers
+      const dbProviders = await prisma.provider.findMany();
+      if (dbProviders && dbProviders.length > 0) {
+        for (const p of dbProviders) {
+          const exists = this.data.providers.find(existing => existing.id === p.id);
+          if (!exists) {
+            this.data.providers.push({
+              id: p.id,
+              name: p.name,
+              category: p.category as any,
+              registrationNumber: p.registrationNumber,
+              medicalCouncil: p.medicalCouncil,
+              address: p.address,
+              city: p.city,
+              state: p.state,
+              pinCode: p.pinCode,
+              phone: p.phone,
+              email: p.email,
+              services: p.services,
+              partnerTier: p.partnerTier as any,
+              operatingHours: p.operatingHours,
+              status: p.status as any,
+              verifiedAt: p.verifiedAt ? p.verifiedAt.toISOString() : null,
+              verifiedByOfficerId: null,
+              createdAt: p.createdAt.toISOString(),
+              updatedAt: p.updatedAt.toISOString(),
+            });
+          }
+        }
+      }
+    } catch (e: any) {
+      console.warn('[POSTGRES_HYDRATION_NOTICE] Hydration notice:', e.message);
     }
   }
 
@@ -561,6 +726,16 @@ class PersistentDataStore {
 
     this.data.accounts.push(record);
     this.persistSync();
+
+    prisma.account.create({
+      data: {
+        id: record.id,
+        userId: record.userId,
+        accountNumber: record.accountNumber,
+        state: record.state as any,
+      },
+    }).catch(err => console.warn('[POSTGRES_ACCOUNT_WRITE]', err.message));
+
     return record;
   }
 
@@ -571,6 +746,12 @@ class PersistentDataStore {
     account.state = state;
     account.updatedAt = new Date().toISOString();
     this.persistSync();
+
+    prisma.account.update({
+      where: { id: accountId },
+      data: { state: state as any },
+    }).catch(err => console.warn('[POSTGRES_ACCOUNT_STATE]', err.message));
+
     return account;
   }
 
@@ -589,6 +770,19 @@ class PersistentDataStore {
     if (existing) {
       Object.assign(existing, profile, { updatedAt: new Date().toISOString() });
       this.persistSync();
+
+      prisma.profile.update({
+        where: { accountId: profile.accountId },
+        data: {
+          fullName: profile.fullName,
+          bloodGroup: profile.bloodGroup as any,
+          bloodGroupSource: (profile.bloodGroupSource || 'UNKNOWN') as any,
+          district: profile.district,
+          stateProvince: profile.stateProvince,
+          pinCode: profile.pinCode,
+        },
+      }).catch(err => console.warn('[POSTGRES_PROFILE_UPDATE]', err.message));
+
       return existing;
     }
 
@@ -601,6 +795,28 @@ class PersistentDataStore {
 
     this.data.profiles.push(record);
     this.persistSync();
+
+    prisma.profile.create({
+      data: {
+        id: record.id,
+        accountId: record.accountId,
+        fullName: record.fullName,
+        dateOfBirth: new Date(record.dateOfBirth),
+        gender: record.gender as any,
+        bloodGroup: record.bloodGroup as any,
+        bloodGroupSource: (record.bloodGroupSource || 'UNKNOWN') as any,
+        addressLine1: record.addressLine1 || null,
+        addressLine2: record.addressLine2 || null,
+        district: record.district,
+        stateProvince: record.stateProvince,
+        pinCode: record.pinCode,
+        countryCode: 'IN',
+        emergencyContactName: record.emergencyContactName || '',
+        emergencyContactPhone: record.emergencyContactPhone || '',
+        emergencyContactRelation: record.emergencyContactRelation || '',
+      },
+    }).catch(err => console.warn('[POSTGRES_PROFILE_CREATE]', err.message));
+
     return record;
   }
 
@@ -713,6 +929,17 @@ class PersistentDataStore {
 
     this.data.clientIds.push(record);
     this.persistSync();
+
+    prisma.clientId.create({
+      data: {
+        id: record.id,
+        accountId: record.accountId,
+        clientId: record.clientId,
+        checksum: record.checksum,
+        isActive: true,
+      },
+    }).catch(err => console.warn('[POSTGRES_CLIENT_ID_WRITE]', err.message));
+
     return record;
   }
 
@@ -738,6 +965,20 @@ class PersistentDataStore {
 
     this.data.cards.push(record);
     this.persistSync();
+
+    prisma.card.create({
+      data: {
+        id: record.id,
+        clientIdFk: record.clientIdFk,
+        accountId: record.accountId,
+        cardNumber: record.cardNumber,
+        version: record.version,
+        status: record.status as any,
+        activationCodeHash: record.activationCodeHash,
+        expiresAt: new Date(record.expiresAt),
+      },
+    }).catch(err => console.warn('[POSTGRES_CARD_WRITE]', err.message));
+
     return record;
   }
 
@@ -747,6 +988,16 @@ class PersistentDataStore {
 
     Object.assign(card, updates, { updatedAt: new Date().toISOString() });
     this.persistSync();
+
+    prisma.card.update({
+      where: { id },
+      data: {
+        status: updates.status ? (updates.status as any) : undefined,
+        activatedAt: updates.activatedAt ? new Date(updates.activatedAt) : undefined,
+        activatedByUserId: updates.activatedByUserId,
+      },
+    }).catch(err => console.warn('[POSTGRES_CARD_UPDATE]', err.message));
+
     return card;
   }
 
@@ -760,6 +1011,18 @@ class PersistentDataStore {
 
     this.data.qrTokens.push(record);
     this.persistSync();
+
+    prisma.qrToken.create({
+      data: {
+        id: record.id,
+        cardId: record.cardId,
+        token: record.tokenRaw,
+        tokenType: record.tokenType as any,
+        isRevoked: record.isRevoked,
+        expiresAt: new Date(record.expiresAt),
+      },
+    }).catch(err => console.warn('[POSTGRES_QR_WRITE]', err.message));
+
     return record;
   }
 
@@ -778,6 +1041,11 @@ class PersistentDataStore {
       }
     });
     this.persistSync();
+
+    prisma.qrToken.updateMany({
+      where: { cardId },
+      data: { isRevoked: true },
+    }).catch(err => console.warn('[POSTGRES_QR_REVOKE]', err.message));
   }
 
   public incrementQrScanCount(tokenId: string): void {

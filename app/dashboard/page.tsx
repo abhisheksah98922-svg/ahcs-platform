@@ -485,6 +485,75 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* 6 MAIN CORE DASHBOARD ACTION CARDS */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <Link
+            href="/dashboard/card"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-blue-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-blue-50 group-hover:bg-blue-600 group-hover:text-white text-blue-700 flex items-center justify-center mb-2 transition-colors">
+              <CreditCard className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">My Smart Card</div>
+            <div className="text-[10px] text-slate-500">QR & NFC Controls</div>
+          </Link>
+
+          <Link
+            href="/find-care"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-blue-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 group-hover:bg-emerald-600 group-hover:text-white text-emerald-700 flex items-center justify-center mb-2 transition-colors">
+              <Building2 className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">Find Care</div>
+            <div className="text-[10px] text-slate-500">Hospitals & Clinics</div>
+          </Link>
+
+          <Link
+            href="/dashboard/appointments"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-blue-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white text-indigo-700 flex items-center justify-center mb-2 transition-colors">
+              <Calendar className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">Appointments</div>
+            <div className="text-[10px] text-slate-500">Schedule & Reminders</div>
+          </Link>
+
+          <Link
+            href="/dashboard/records"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-blue-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-teal-50 group-hover:bg-teal-600 group-hover:text-white text-teal-700 flex items-center justify-center mb-2 transition-colors">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">Health Records</div>
+            <div className="text-[10px] text-slate-500">Encrypted Vault</div>
+          </Link>
+
+          <Link
+            href="/dashboard/family"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-blue-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-purple-50 group-hover:bg-purple-600 group-hover:text-white text-purple-700 flex items-center justify-center mb-2 transition-colors">
+              <Users className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">Family Health</div>
+            <div className="text-[10px] text-slate-500">Dependents & Parents</div>
+          </Link>
+
+          <Link
+            href="/dashboard/emergency"
+            className="p-4 bg-white rounded-2xl border border-slate-200/90 hover:border-rose-500 hover:shadow-md transition-all text-center group flex flex-col items-center justify-between"
+          >
+            <div className="w-10 h-10 rounded-xl bg-rose-50 group-hover:bg-rose-600 group-hover:text-white text-rose-700 flex items-center justify-center mb-2 transition-colors">
+              <AlertTriangle className="w-5 h-5" />
+            </div>
+            <div className="text-xs font-bold text-slate-900">Emergency Profile</div>
+            <div className="text-[10px] text-slate-500">Break-Glass Settings</div>
+          </Link>
+        </div>
+
         {/* Navigation Tabs */}
         <div className="flex items-center gap-3 border-b border-slate-200 pb-2">
           <button

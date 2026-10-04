@@ -109,3 +109,33 @@ export function validateClientIdChecksum(clientId: string): boolean {
   return validateAhcsClientId(clientId).isValid;
 }
 
+/**
+ * Generates an AHCS Provisional Registration ID:
+ * Format: REG-IN-XXXXXXXX
+ * Used exclusively for registered accounts pending official officer verification.
+ * Clearly distinguished from permanent AHCS Verified Client ID.
+ */
+export function generateAhcsProvisionalId(countryCode: string = 'IN'): {
+  registrationId: string;
+  checksum: string;
+} {
+  const country = countryCode.toUpperCase().slice(0, 2);
+  const randomBytes = crypto.randomBytes(7);
+  let raw7 = '';
+
+  for (let i = 0; i < 7; i++) {
+    const index = randomBytes[i] % CROCKFORD_BASE32.length;
+    raw7 += CROCKFORD_BASE32[index];
+  }
+
+  const checksum = calculateCheckCharacter(`REG${country}${raw7}`);
+  const formattedToken = `${raw7}${checksum}`;
+  const registrationId = `REG-${country}-${formattedToken}`;
+
+  return {
+    registrationId,
+    checksum,
+  };
+}
+
+

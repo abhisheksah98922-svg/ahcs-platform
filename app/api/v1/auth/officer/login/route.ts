@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { 
           success: false, 
-          error: 'ACCESS DENIED: No official Government Verification Officer credential found matching this mobile number.' 
+          error: 'ACCESS DENIED: No authorized AHCS Verification Officer account found matching this mobile number.' 
         },
         { status: 403 }
       );

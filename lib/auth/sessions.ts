@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { cookies } from 'next/headers';
 import { db } from '../db/store';
+import { prisma } from '../db/prisma';
 import { UserRecord, UserSessionRecord, Role, AccountRecord, ProfileRecord, ClientIdRecord, CardRecord } from '../db/types';
 
 export const SESSION_COOKIE_NAME = 'ahcs_session';
@@ -46,7 +47,113 @@ export async function getCurrentUser(): Promise<AuthenticatedContext | null> {
   if (!rawToken) return null;
 
   const sessionTokenHash = hashSessionToken(rawToken);
-  const session = db.findSessionByHash(sessionTokenHash);
+  let session = db.findSessionByHash(sessionTokenHash);
+
+  // Serverless Cold-Start Fallback: Direct PostgreSQL lookup if not in memory cache
+  if (!session) {
+    try {
+      const dbSession = await prisma.userSession.findUnique({
+        where: { sessionTokenHash },
+        include: {
+          user: {
+            include: {
+              accounts: {
+                include: {
+                  profile: true,
+                  clientId: true,
+                  cards: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (dbSession && !dbSession.revokedAt && new Date(dbSession.expiresAt) > new Date()) {
+        const u = dbSession.user;
+        if (!u || u.status === 'SUSPENDED' || u.status === 'LOCKED') return null;
+
+        const primaryAccount = u.accounts?.[0];
+        return {
+          user: {
+            id: u.id,
+            mobileNumber: u.mobileNumber,
+            mobileVerifiedAt: u.mobileVerifiedAt ? u.mobileVerifiedAt.toISOString() : null,
+            email: u.email,
+            emailVerifiedAt: u.emailVerifiedAt ? u.emailVerifiedAt.toISOString() : null,
+            role: u.role as any,
+            status: u.status as any,
+            authProvider: u.authProvider as any,
+            googleSub: u.googleSub,
+            createdAt: u.createdAt.toISOString(),
+            updatedAt: u.updatedAt.toISOString(),
+          },
+          session: {
+            id: dbSession.id,
+            userId: dbSession.userId,
+            sessionTokenHash: dbSession.sessionTokenHash,
+            ipAddress: dbSession.ipAddress,
+            userAgent: dbSession.userAgent,
+            expiresAt: dbSession.expiresAt.toISOString(),
+            createdAt: dbSession.createdAt.toISOString(),
+            revokedAt: null,
+          },
+          account: primaryAccount ? {
+            id: primaryAccount.id,
+            userId: primaryAccount.userId,
+            accountNumber: primaryAccount.accountNumber,
+            state: primaryAccount.state as any,
+            createdAt: primaryAccount.createdAt.toISOString(),
+            updatedAt: primaryAccount.updatedAt.toISOString(),
+          } : undefined,
+          profile: primaryAccount?.profile ? {
+            id: primaryAccount.profile.id,
+            accountId: primaryAccount.profile.accountId,
+            fullName: primaryAccount.profile.fullName,
+            dateOfBirth: primaryAccount.profile.dateOfBirth.toISOString().split('T')[0],
+            gender: primaryAccount.profile.gender as any,
+            bloodGroup: primaryAccount.profile.bloodGroup as any,
+            bloodGroupSource: (primaryAccount.profile.bloodGroupSource || 'UNKNOWN') as any,
+            addressLine1: primaryAccount.profile.addressLine1 || '',
+            addressLine2: primaryAccount.profile.addressLine2 || '',
+            district: primaryAccount.profile.district,
+            stateProvince: primaryAccount.profile.stateProvince,
+            pinCode: primaryAccount.profile.pinCode,
+            countryCode: 'IN',
+            emergencyContactName: primaryAccount.profile.emergencyContactName || '',
+            emergencyContactPhone: primaryAccount.profile.emergencyContactPhone || '',
+            emergencyContactRelation: primaryAccount.profile.emergencyContactRelation || '',
+            createdAt: primaryAccount.profile.createdAt.toISOString(),
+            updatedAt: primaryAccount.profile.updatedAt.toISOString(),
+          } : undefined,
+          clientId: primaryAccount?.clientId ? {
+            id: primaryAccount.clientId.id,
+            accountId: primaryAccount.clientId.accountId,
+            clientId: primaryAccount.clientId.clientId,
+            checksum: primaryAccount.clientId.checksum,
+            issuedAt: primaryAccount.clientId.issuedAt.toISOString(),
+            isActive: primaryAccount.clientId.isActive,
+          } : undefined,
+          card: primaryAccount?.cards?.[0] ? {
+            id: primaryAccount.cards[0].id,
+            clientIdFk: primaryAccount.cards[0].clientIdFk,
+            accountId: primaryAccount.cards[0].accountId,
+            cardNumber: primaryAccount.cards[0].cardNumber,
+            version: primaryAccount.cards[0].version,
+            status: primaryAccount.cards[0].status as any,
+            activationCodeHash: primaryAccount.cards[0].activationCodeHash,
+            activatedAt: primaryAccount.cards[0].activatedAt ? primaryAccount.cards[0].activatedAt.toISOString() : null,
+            activatedByUserId: primaryAccount.cards[0].activatedByUserId,
+            expiresAt: primaryAccount.cards[0].expiresAt.toISOString(),
+            createdAt: primaryAccount.cards[0].createdAt.toISOString(),
+            updatedAt: primaryAccount.cards[0].updatedAt.toISOString(),
+          } : undefined,
+        };
+      }
+    } catch (e: any) {
+      console.warn('[SESSION_PG_LOOKUP_NOTICE]', e.message);
+    }
+  }
 
   if (!session) return null;
 
