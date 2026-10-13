@@ -62,7 +62,7 @@ export default function HealthCardSpecPage() {
             </p>
           </div>
 
-          <SmartCardInteractive initialDisplayMode="side-by-side" initialTheme="platinum" />
+          <SmartCardInteractive initialTheme="platinum" />
         </div>
 
         {/* Feature Highlights Grid */}
