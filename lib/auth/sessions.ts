@@ -1,7 +1,8 @@
 import crypto from 'crypto';
 import { cookies } from 'next/headers';
 import { db } from '../db/store';
-import { prisma } from '../db/prisma';
+import { prisma as basePrisma } from '../db/prisma';
+const prisma = basePrisma as any;
 import { UserRecord, UserSessionRecord, Role, AccountRecord, ProfileRecord, ClientIdRecord, CardRecord } from '../db/types';
 
 export const SESSION_COOKIE_NAME = 'ahcs_session';

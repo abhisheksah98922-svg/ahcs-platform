@@ -6,23 +6,22 @@ import { Footer } from '@/components/Footer';
 export const metadata: Metadata = {
   metadataBase: new URL('https://ahcs.in'),
   title: {
-    default: 'AHCS — Advanced Health Care System | Verified Healthcare Identity & Smart Card',
+    default: 'AHCS — Advanced Health Care System | Private Healthcare Identity & Smart Card',
     template: '%s | AHCS',
   },
-  description: 'National Healthcare Identity, Verified Smart Cards, Dynamic Emergency QR, and Integrated Clinical Network in India.',
+  description:
+    'AHCS is an independent, private healthcare identity, card verification, and emergency access platform. Not a government agency or insurance scheme.',
   keywords: [
     'AHCS',
     'Health Card',
-    'Healthcare Identity',
-    'Emergency Medical QR',
-    'Ayushman Bharat Digital Health',
-    'Medical Vault',
-    'Doctor Portal',
-    'Hospital Network India'
+    'Private Healthcare Identity',
+    'Emergency Health QR',
+    'Client ID',
+    'Health Record Management',
   ],
-  authors: [{ name: 'AHCS National Health Network' }],
-  creator: 'AHCS Health Authority',
-  publisher: 'AHCS Inc.',
+  authors: [{ name: 'AHCS Technical Team' }],
+  creator: 'AHCS',
+  publisher: 'AHCS',
   alternates: {
     canonical: 'https://ahcs.in',
   },
@@ -30,25 +29,20 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: 'https://ahcs.in',
-    title: 'AHCS — Advanced Health Care System | Verified Healthcare Identity',
-    description: 'National Healthcare Identity, Verified Smart Cards, Dynamic Emergency QR, and Integrated Clinical Network in India.',
+    title: 'AHCS — Private Healthcare Identity & Smart Health Card',
+    description:
+      'Independent private healthcare identity, verified smart health card, and emergency break-glass records platform.',
     siteName: 'AHCS',
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'AHCS — Advanced Health Care System',
-    description: 'National Healthcare Identity & Verified Smart Health Cards.',
+    card: 'summary',
+    title: 'AHCS — Private Healthcare Identity Platform',
+    description:
+      'Independent private healthcare identity, verified smart health card, and emergency break-glass records platform.',
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
 };
 
@@ -59,11 +53,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen bg-slate-50 text-slate-900 antialiased">
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

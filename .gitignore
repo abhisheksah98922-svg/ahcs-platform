@@ -34,3 +34,6 @@ powershell.cmd
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# untracked external folders
+factorynerve/

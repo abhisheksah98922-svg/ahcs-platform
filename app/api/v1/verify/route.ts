@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db/prisma';
+import { prisma as basePrisma } from '@/lib/db/prisma';
+const prisma = basePrisma as any;
 
 export async function POST(req: NextRequest) {
   try {
@@ -72,7 +73,7 @@ export async function POST(req: NextRequest) {
 
     const account = clientIdRecord.account;
     const cards = account?.cards || [];
-    const activeCard = cards.find(c => c.status === 'ACTIVE') || cards[0];
+    const activeCard = cards.find((c: any) => c.status === 'ACTIVE') || cards[0];
     const profile = account?.profile;
 
     const isRevoked = !clientIdRecord.isActive || (activeCard && activeCard.status === 'REVOKED');

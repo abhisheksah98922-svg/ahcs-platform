@@ -15,6 +15,8 @@ import {
   EyeOff
 } from 'lucide-react';
 
+import { SmartCardInteractive } from '@/components/SmartCardInteractive';
+
 export const metadata = {
   title: 'AHCS Smart Health Card | QR & NFC Healthcare Credential',
   description: 'Your physical and digital healthcare access card with contactless NFC and dynamic emergency QR. Private, encrypted, and recognized across participating network providers.',
@@ -63,65 +65,9 @@ export default function SmartCardPage() {
                 </div>
               </div>
 
-              {/* Realistic Debit-Card-Size Card Preview (Front & Back) */}
-              <div className="lg:col-span-5 space-y-6">
-                {/* Front Side */}
-                <div className="w-full max-w-sm mx-auto aspect-[1.586/1] rounded-2xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 p-6 shadow-2xl border border-blue-400/30 flex flex-col justify-between text-white relative overflow-hidden">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-xl font-black tracking-tight leading-none">AHCS</div>
-                      <div className="text-[9px] uppercase tracking-wider text-blue-200 mt-0.5">Advanced Health Care System</div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono border border-white/30 px-2 py-0.5 rounded bg-white/10">NFC</span>
-                      <div className="w-5 h-5 rounded-full border border-blue-400/50 flex items-center justify-center text-[10px]">
-                        📶
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="my-2">
-                    <div className="text-[9px] uppercase tracking-wider text-blue-200">Member Identity</div>
-                    <div className="text-base font-black tracking-wider text-white">RAHUL S. VERMA</div>
-                    <div className="text-xs font-mono text-blue-300 mt-0.5">AHCS-DEL-2025-1042</div>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-white/20 text-[10px] text-blue-200">
-                    <div>ISSUED: 01/2025 · EXP: 01/2029</div>
-                    <div className="font-bold text-emerald-300 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>ACTIVE</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back Side Preview */}
-                <div className="w-full max-w-sm mx-auto aspect-[1.586/1] rounded-2xl bg-slate-900 p-5 shadow-xl border border-slate-700 flex flex-col justify-between text-slate-300 text-[10px]">
-                  <div className="h-7 bg-slate-950 -mx-5 -mt-5 mb-2 border-b border-slate-800 flex items-center px-4">
-                    <span className="text-[9px] font-mono text-slate-500">MAGNETIC EMV STRIP ENCODING LAYER</span>
-                  </div>
-
-                  <div className="grid grid-cols-12 gap-3 items-center">
-                    <div className="col-span-8 space-y-1">
-                      <div><strong>Emergency Contact:</strong> +91 98765 43210 (Spouse)</div>
-                      <div><strong>Blood Group:</strong> O POSITIVE (Self-Reported)</div>
-                      <div><strong>Known Allergies:</strong> Penicillin (Severe)</div>
-                      <div className="text-slate-400 text-[9px] leading-tight pt-1">
-                        Scan QR code with any camera to open temporary break-glass profile in critical emergency.
-                      </div>
-                    </div>
-                    <div className="col-span-4 flex flex-col items-center justify-center p-1.5 bg-white rounded-xl">
-                      <QrCode className="w-14 h-14 text-slate-900" />
-                      <span className="text-[8px] font-mono text-slate-700 mt-0.5">EMERGENCY QR</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-800 text-[8px] text-slate-400 flex justify-between">
-                    <span>Helpline: 1800-242-7000</span>
-                    <span>support@ahcs.in</span>
-                    <span>PRIVATE IDENTIFIER</span>
-                  </div>
-                </div>
+              {/* Interactive 3D Smart Card Preview (Deep Navy & Emerald Themes) */}
+              <div className="lg:col-span-5 flex justify-center">
+                <SmartCardInteractive initialTheme="navy" showControls={true} />
               </div>
 
             </div>

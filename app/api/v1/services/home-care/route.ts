@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db/prisma';
+import { prisma as basePrisma } from '@/lib/db/prisma';
+const prisma = basePrisma as any;
 import { getCurrentUser } from '@/lib/auth/sessions';
 
 export async function POST(req: NextRequest) {

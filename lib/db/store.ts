@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { prisma } from './prisma';
+import { prisma as basePrisma } from './prisma';
+const prisma = basePrisma as any;
 import {
   UserRecord,
   UserSessionRecord,
@@ -627,7 +628,7 @@ class PersistentDataStore {
         status: record.status as any,
         authProvider: record.authProvider as any,
       },
-    }).catch(err => console.warn('[POSTGRES_USER_WRITE_NOTICE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_USER_WRITE_NOTICE]', err.message));
 
     return record;
   }
@@ -646,7 +647,7 @@ class PersistentDataStore {
         emailVerifiedAt: updates.emailVerifiedAt ? new Date(updates.emailVerifiedAt) : undefined,
         status: updates.status as any,
       },
-    }).catch(err => console.warn('[POSTGRES_USER_UPDATE_NOTICE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_USER_UPDATE_NOTICE]', err.message));
 
     return user;
   }
@@ -671,7 +672,7 @@ class PersistentDataStore {
         userAgent: record.userAgent || null,
         expiresAt: new Date(record.expiresAt),
       },
-    }).catch(err => console.warn('[POSTGRES_SESSION_WRITE_NOTICE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_SESSION_WRITE_NOTICE]', err.message));
 
     return record;
   }
@@ -734,7 +735,7 @@ class PersistentDataStore {
         accountNumber: record.accountNumber,
         state: record.state as any,
       },
-    }).catch(err => console.warn('[POSTGRES_ACCOUNT_WRITE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_ACCOUNT_WRITE]', err.message));
 
     return record;
   }
@@ -750,7 +751,7 @@ class PersistentDataStore {
     prisma.account.update({
       where: { id: accountId },
       data: { state: state as any },
-    }).catch(err => console.warn('[POSTGRES_ACCOUNT_STATE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_ACCOUNT_STATE]', err.message));
 
     return account;
   }
@@ -781,7 +782,7 @@ class PersistentDataStore {
           stateProvince: profile.stateProvince,
           pinCode: profile.pinCode,
         },
-      }).catch(err => console.warn('[POSTGRES_PROFILE_UPDATE]', err.message));
+      }).catch((err: any) => console.warn('[POSTGRES_PROFILE_UPDATE]', err.message));
 
       return existing;
     }
@@ -815,7 +816,7 @@ class PersistentDataStore {
         emergencyContactPhone: record.emergencyContactPhone || '',
         emergencyContactRelation: record.emergencyContactRelation || '',
       },
-    }).catch(err => console.warn('[POSTGRES_PROFILE_CREATE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_PROFILE_CREATE]', err.message));
 
     return record;
   }
@@ -938,7 +939,7 @@ class PersistentDataStore {
         checksum: record.checksum,
         isActive: true,
       },
-    }).catch(err => console.warn('[POSTGRES_CLIENT_ID_WRITE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_CLIENT_ID_WRITE]', err.message));
 
     return record;
   }
@@ -977,7 +978,7 @@ class PersistentDataStore {
         activationCodeHash: record.activationCodeHash,
         expiresAt: new Date(record.expiresAt),
       },
-    }).catch(err => console.warn('[POSTGRES_CARD_WRITE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_CARD_WRITE]', err.message));
 
     return record;
   }
@@ -996,7 +997,7 @@ class PersistentDataStore {
         activatedAt: updates.activatedAt ? new Date(updates.activatedAt) : undefined,
         activatedByUserId: updates.activatedByUserId,
       },
-    }).catch(err => console.warn('[POSTGRES_CARD_UPDATE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_CARD_UPDATE]', err.message));
 
     return card;
   }
@@ -1021,7 +1022,7 @@ class PersistentDataStore {
         isRevoked: record.isRevoked,
         expiresAt: new Date(record.expiresAt),
       },
-    }).catch(err => console.warn('[POSTGRES_QR_WRITE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_QR_WRITE]', err.message));
 
     return record;
   }
@@ -1045,7 +1046,7 @@ class PersistentDataStore {
     prisma.qrToken.updateMany({
       where: { cardId },
       data: { isRevoked: true },
-    }).catch(err => console.warn('[POSTGRES_QR_REVOKE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_QR_REVOKE]', err.message));
   }
 
   public incrementQrScanCount(tokenId: string): void {
@@ -1105,7 +1106,7 @@ class PersistentDataStore {
         userAgent: record.userAgent || null,
         metadata: record.metadata ? JSON.stringify(record.metadata) : undefined,
       },
-    }).catch(err => console.warn('[POSTGRES_AUDIT_WRITE_NOTICE]', err.message));
+    }).catch((err: any) => console.warn('[POSTGRES_AUDIT_WRITE_NOTICE]', err.message));
 
     return record;
   }

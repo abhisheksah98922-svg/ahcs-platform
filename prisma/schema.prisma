@@ -7,899 +7,383 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Role {
-  PATIENT
+// ----------------------------------------------------
+// ENUMS
+// ----------------------------------------------------
+
+enum SystemRole {
+  CITIZEN
   VERIFICATION_OFFICER
   DOCTOR
-  PROVIDER_ADMIN
-  ADMIN
-  SUPER_ADMIN
+  NURSE_CLINICAL
+  RECEPTION
+  ORG_ADMIN
+  PLATFORM_ADMIN
 }
 
-enum UserStatus {
+enum ClientIdStatus {
+  APPLICATION
   PENDING_VERIFICATION
+  VERIFICATION_REQUIRED
+  VERIFIED
   ACTIVE
   SUSPENDED
-  LOCKED
+  DEACTIVATED
 }
 
-enum AuthProvider {
-  MOBILE_OTP
-  GOOGLE
-  HYBRID
-}
-
-enum AccountState {
-  REGISTERED
-  PROFILE_COMPLETED
-  VERIFICATION_PENDING
+enum VerificationCaseStatus {
+  UNASSIGNED
   UNDER_REVIEW
-  CORRECTION_REQUIRED
-  APPROVED_FOR_ID_GENERATION
-  CLIENT_ID_ACTIVE
-  SUSPENDED
-}
-
-enum Gender {
-  MALE
-  FEMALE
-  NON_BINARY
-  OTHER
-  PREFER_NOT_TO_SAY
-}
-
-enum BloodGroup {
-  A_POS
-  A_NEG
-  B_POS
-  B_NEG
-  AB_POS
-  AB_NEG
-  O_POS
-  O_NEG
-  UNKNOWN
-}
-
-enum BloodGroupSource {
-  USER_DECLARED
-  DOCUMENT_VERIFIED
-  LAB_VERIFIED
-  PROVIDER_VERIFIED
-  UNKNOWN
-}
-
-enum VerificationStatus {
-  DRAFT
-  SUBMITTED
-  PENDING
-  UNDER_REVIEW
-  VERIFIED
+  INFO_REQUESTED
+  APPROVED
   REJECTED
-  EXPIRED
-  RE_VERIFICATION_REQUIRED
 }
 
-enum DuplicateCheckResult {
-  NO_MATCH
-  POSSIBLE_DUPLICATE
-  CONFIRMED_DUPLICATE
-}
-
-enum DocumentType {
-  AADHAAR
+enum DocType {
+  AADHAAR_CARD
+  PAN_CARD
+  VOTER_ID
   PASSPORT
   DRIVING_LICENSE
-  VOTER_ID
-  PAN
-  OTHER_OFFICIAL
+  BIRTH_CERTIFICATE
 }
 
-enum DocumentStatus {
+enum DocVerificationStatus {
   PENDING
   VERIFIED
   REJECTED
-  RE_UPLOAD_REQUIRED
-}
-
-enum CardStatus {
-  REQUESTED
-  PRINTING
-  DISPATCHED
-  DELIVERED
-  GENERATED
-  PENDING_ACTIVATION
-  ACTIVE
-  SUSPENDED
-  LOST
-  STOLEN
-  EXPIRED
-  REVOKED
-  REPLACEMENT_REQUESTED
-  REPLACED
-}
-
-enum TokenType {
-  EMERGENCY_QR
-  PORTAL_ACCESS_NFC
-}
-
-enum ConsentPurpose {
-  GENERAL_CONSULTATION
-  DIAGNOSIS
-  SECOND_OPINION
-  EMERGENCY_REVIEW
 }
 
 enum ConsentScope {
-  ALL_RECORDS
-  PRESCRIPTIONS_ONLY
-  LABS_ONLY
+  FULL_RECORDS
+  EMERGENCY_ONLY
+  ALLERGIES_AND_MEDS
+  SPECIFIC_FACILITY
 }
 
 enum ConsentStatus {
-  REQUESTED
-  GRANTED
   ACTIVE
-  EXPIRED
   REVOKED
-  REJECTED
-}
-
-enum ProviderCategory {
-  HOSPITAL
-  CLINIC
-  LAB
-  PHARMACY
-  DOCTOR
-}
-
-enum ProviderStatus {
-  REGISTERED
-  PENDING_VERIFICATION
-  UNDER_REVIEW
-  VERIFIED
-  REJECTED
-  SUSPENDED
   EXPIRED
 }
 
-enum MedicalRecordType {
-  CONSULTATION
-  PRESCRIPTION
-  LAB_REPORT
-  DISCHARGE_SUMMARY
+enum FamilyRelationType {
+  SPOUSE
+  CHILD_MINOR
+  CHILD_ADULT
+  PARENT
+  LEGAL_GUARDIAN
 }
 
-enum PaymentOrderStatus {
-  CREATED
-  PAID
-  FAILED
-  REFUNDED
-}
-
-enum RefundStatus {
-  INITIATED
-  PROCESSED
-  FAILED
-}
+// ----------------------------------------------------
+// CORE IDENTITY & AUTHENTICATION MODELS
+// ----------------------------------------------------
 
 model User {
-  id                 String       @id @default(uuid())
-  mobileNumber       String       @unique @map("mobile_number")
-  mobileVerifiedAt   DateTime?    @map("mobile_verified_at")
-  email              String?      @unique
-  emailVerifiedAt    DateTime?    @map("email_verified_at")
-  passwordHash       String?      @map("password_hash")
-  authProvider       AuthProvider @default(MOBILE_OTP) @map("auth_provider")
-  googleSub          String?      @unique @map("google_sub")
-  role               Role         @default(PATIENT)
-  status             UserStatus   @default(PENDING_VERIFICATION)
-  createdAt          DateTime     @default(now()) @map("created_at")
-  updatedAt          DateTime     @updatedAt @map("updated_at")
+  id              String       @id @default(uuid())
+  phone           String       @unique // E.164 format (+91...)
+  phoneVerifiedAt DateTime?
+  isActive        Boolean      @default(true)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
-  accounts           Account[]
-  sessions           UserSession[]
-  auditLogs          AuditLog[]
-  notifications      Notification[]
-  verifiedDocuments  VerificationDocument[] @relation("OfficerVerifiedDocuments")
-  assignedRequests   VerificationRequest[]  @relation("AssignedOfficerRequests")
-  activatedCards     Card[]                 @relation("UserActivatedCards")
-  providerStaff      ProviderStaff[]
-  providerVerifications ProviderVerification[] @relation("OfficerProviderVerifications")
-  supportTickets     SupportTicket[]
+  // Relationships
+  userRoles       UserRole[]
+  sessions        Session[]
+  profile         Profile?
+  clientIdRecord  ClientId?
 
-  @@map("users")
+  // Assigned/Reviewed Verification Cases (distinct relations)
+  assignedCases   VerificationCase[] @relation("OfficerAssignedCases")
+  reviewedCases   VerificationCase[] @relation("OfficerReviewedCases")
+
+  // Consent & Family
+  consentsGranted  ConsentGrant[]    @relation("Granter")
+  consentsReceived ConsentGrant[]    @relation("Grantee")
+  familyMembers    FamilyLink[]      @relation("FamilySubject")
+  linkedByFamily   FamilyLink[]      @relation("FamilyRelative")
+
+  // Emergency Break-Glass (Clinical Staff vs Patient)
+  breakGlassStaffSessions   EmergencyAccessSession[] @relation("BreakGlassStaff")
+  breakGlassPatientSessions EmergencyAccessSession[] @relation("BreakGlassPatient")
+
+  // Auditing: NO CASCADE DELETE
+  auditLogs        AuditLog[]        @relation("ActionActor")
+
+  @@index([phone])
 }
 
-model UserSession {
+model Session {
   id               String    @id @default(uuid())
-  userId           String    @map("user_id")
-  sessionTokenHash String    @unique @map("session_token_hash")
-  ipAddress        String?   @map("ip_address")
-  userAgent        String?   @map("user_agent")
-  expiresAt        DateTime  @map("expires_at")
-  revokedAt        DateTime? @map("revoked_at")
-  createdAt        DateTime  @default(now()) @map("created_at")
+  userId           String
+  sessionTokenHash String    @unique
+  ipAddress        String?
+  userAgent        String?
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  lastActiveAt     DateTime  @default(now())
+  createdAt        DateTime  @default(now())
 
   user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("user_sessions")
+  @@index([userId])
+  @@index([sessionTokenHash])
 }
 
-model Account {
-  id                   String               @id @default(uuid())
-  userId               String               @map("user_id")
-  accountNumber        String               @unique @map("account_number")
-  state                AccountState         @default(REGISTERED)
-  createdAt            DateTime             @default(now()) @map("created_at")
-  updatedAt            DateTime             @updatedAt @map("updated_at")
+model OtpAttempt {
+  id           String    @id @default(uuid())
+  phone        String    // E.164 (+91...)
+  otpHash      String    // Salted SHA-256 HMAC
+  attemptCount Int       @default(0)
+  expiresAt    DateTime
+  consumedAt   DateTime?
+  ipAddress    String?
+  createdAt    DateTime  @default(now())
 
-  user                 User                 @relation(fields: [userId], references: [id], onDelete: Restrict)
-  profile              Profile?
-  clientId             ClientId?
-  cards                Card[]
-  emergencyProfile     EmergencyProfile?
-  verificationRequests VerificationRequest[]
-  consents             Consent[]
-  medicalRecords       MedicalRecord[]
-  paymentOrders        PaymentOrder[]
-  subscriptions        Subscription[]
-  sponsorships         CorporateSponsorship[]
-  appointments         Appointment[]
-  claims               ProviderClaim[]
-
-  @@map("accounts")
+  @@index([phone, createdAt])
 }
+
+model UserRole {
+  id             String        @id @default(uuid())
+  userId         String
+  role           SystemRole
+  organizationId String?
+  assignedAt     DateTime      @default(now())
+  revokedAt      DateTime?
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+
+  // Partial unique indexes enforced at DB level for nullable organizationId
+  @@index([userId, role])
+  @@index([organizationId])
+}
+
+model Organization {
+  id           String     @id @default(uuid())
+  name         String
+  code         String     @unique // Unique short slug or facility code
+  facilityType String     // Hospital, Clinic, Diagnostic, VerificationCenter
+  address      String
+  city         String
+  state        String
+  pincode      String
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  userRoles    UserRole[]
+  breakGlassSessions EmergencyAccessSession[]
+
+  @@index([code])
+}
+
+// ----------------------------------------------------
+// PROFILE & VERIFICATION
+// ----------------------------------------------------
 
 model Profile {
-  id                      String           @id @default(uuid())
-  accountId               String           @unique @map("account_id")
-  fullName                String           @map("full_name")
-  dateOfBirth             DateTime         @map("date_of_birth")
-  gender                  Gender           @default(PREFER_NOT_TO_SAY)
-  bloodGroup              BloodGroup       @default(UNKNOWN) @map("blood_group")
-  bloodGroupSource        BloodGroupSource @default(UNKNOWN) @map("blood_group_source")
-  addressLine1            String?          @map("address_line_1")
-  addressLine2            String?          @map("address_line_2")
-  district                String
-  stateProvince           String           @map("state_province")
-  pinCode                 String           @map("pin_code")
-  countryCode             String           @default("IN") @map("country_code")
-  emergencyContactName    String           @map("emergency_contact_name")
-  emergencyContactPhone   String           @map("emergency_contact_phone")
-  emergencyContactRelation String          @map("emergency_contact_relation")
-  createdAt               DateTime         @default(now()) @map("created_at")
-  updatedAt               DateTime         @updatedAt @map("updated_at")
+  id                    String            @id @default(uuid())
+  userId                String            @unique
+  fullName              String
+  dateOfBirth           DateTime
+  gender                String
+  bloodGroup            String?
+  bloodGroupVerified    Boolean           @default(false)
+  bloodGroupVerifiedAt  DateTime?
+  bloodGroupVerifiedById String?
+  addressLine1          String
+  city                  String
+  state                 String
+  pincode               String
+  emergencyContactName  String
+  emergencyContactPhone String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
 
-  account                 Account          @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documents             IdentityDocument[]
+  verificationCase      VerificationCase?
 
-  @@map("profiles")
+  @@index([fullName, dateOfBirth])
 }
 
-model VerificationRequest {
-  id                   String               @id @default(uuid())
-  accountId            String               @map("account_id")
-  status               VerificationStatus   @default(DRAFT)
-  assignedOfficerId    String?              @map("assigned_officer_id")
-  duplicateCheckResult DuplicateCheckResult @default(NO_MATCH) @map("duplicate_check_result")
-  duplicateScore       Int                  @default(0) @map("duplicate_score")
-  duplicateMatchDetails Json?               @map("duplicate_match_details")
-  reviewNotes          String?              @map("review_notes")
-  reviewedAt           DateTime?            @map("reviewed_at")
-  createdAt            DateTime             @default(now()) @map("created_at")
-  updatedAt            DateTime             @updatedAt @map("updated_at")
+model IdentityDocument {
+  id                 String                @id @default(uuid())
+  profileId          String
+  docType            DocType
+  documentNumberMasked String?             // e.g. "XXXX-XXXX-1234" (UIDAI masked standard)
+  documentNumberHash String?               // HMAC-SHA256 with server-side pepper for duplicate detection
+  storagePath        String                // Private bucket path: docs/{userId}/{uuid}
+  mimeType           String                // application/pdf, image/jpeg, image/png
+  fileSizeBytes      Int
+  status             DocVerificationStatus @default(PENDING)
+  rejectionReason    String?
+  uploadedAt         DateTime              @default(now())
+  verifiedAt         DateTime?
 
-  account              Account              @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  assignedOfficer      User?                @relation("AssignedOfficerRequests", fields: [assignedOfficerId], references: [id], onDelete: SetNull)
-  documents            VerificationDocument[]
+  profile            Profile               @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  @@map("verification_requests")
-}
-
-model VerificationDocument {
-  id                    String             @id @default(uuid())
-  verificationRequestId String             @map("verification_request_id")
-  documentType          DocumentType       @map("document_type")
-  documentNumberHash    String             @map("document_number_hash")
-  documentNumberMasked  String             @map("document_number_masked")
-  s3ObjectKey           String             @map("s3_object_key")
-  fileMimeType          String             @map("file_mime_type")
-  fileSizeBytes         Int                @map("file_size_bytes")
-  issuedBy              String?            @map("issued_by")
-  issueDate             DateTime?          @map("issue_date")
-  expiryDate            DateTime?          @map("expiry_date")
-  status                DocumentStatus     @default(PENDING)
-  verificationNotes     String?            @map("verification_notes")
-  verifiedBy            String?            @map("verified_by")
-  verifiedAt            DateTime?          @map("verified_at")
-  createdAt             DateTime           @default(now()) @map("created_at")
-
-  verificationRequest   VerificationRequest @relation(fields: [verificationRequestId], references: [id], onDelete: Cascade)
-  verifier              User?               @relation("OfficerVerifiedDocuments", fields: [verifiedBy], references: [id], onDelete: SetNull)
-
+  @@index([profileId])
   @@index([documentNumberHash])
-  @@map("verification_documents")
 }
+
+model VerificationCase {
+  id                String                 @id @default(uuid())
+  profileId         String                 @unique
+  assignedOfficerId String?
+  reviewedById      String?
+  status            VerificationCaseStatus @default(UNASSIGNED)
+  notes             String?
+  infoRequestNote   String?
+  duplicateFlag     Boolean                @default(false)
+  duplicateNotes    String?
+  reviewedAt        DateTime?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+
+  profile           Profile                @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  assignedOfficer   User?                  @relation("OfficerAssignedCases", fields: [assignedOfficerId], references: [id], onDelete: SetNull)
+  reviewedBy        User?                  @relation("OfficerReviewedCases", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([assignedOfficerId])
+  @@index([reviewedById])
+}
+
+// ----------------------------------------------------
+// CLIENT ID & SMART HEALTH CARD
+// ----------------------------------------------------
 
 model ClientId {
-  id        String   @id @default(uuid())
-  accountId String   @unique @map("account_id")
-  clientId  String   @unique @map("client_id")
-  checksum  String   @map("checksum")
-  issuedAt  DateTime @default(now()) @map("issued_at")
-  isActive  Boolean  @default(true) @map("is_active")
+  id               String         @id @default(uuid())
+  userId           String         @unique
+  clientId         String         @unique // Format: AHCS-XXXX-XXXX-XXXX (secure random non-sequential)
+  status           ClientIdStatus @default(APPLICATION)
+  issuedAt         DateTime?
+  lastStatusChange DateTime       @default(now())
+  statusReason     String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
-  account   Account  @relation(fields: [accountId], references: [id], onDelete: Restrict)
-  cards     Card[]
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardTokens       CardToken[]
 
-  @@map("client_ids")
+  @@index([clientId])
+  @@index([status])
 }
 
-model Card {
-  id                 String     @id @default(uuid())
-  clientIdFk         String     @map("client_id_fk")
-  accountId          String     @map("account_id")
-  cardNumber         String     @unique @map("card_number")
-  version            Int        @default(1)
-  status             CardStatus @default(GENERATED)
-  activationCodeHash String     @map("activation_code_hash")
-  activatedAt        DateTime?  @map("activated_at")
-  activatedByUserId  String?    @map("activated_by_user_id")
-  expiresAt          DateTime   @map("expires_at")
-  createdAt          DateTime   @default(now()) @map("created_at")
-  updatedAt          DateTime   @updatedAt @map("updated_at")
+model CardToken {
+  id         String    @id @default(uuid())
+  clientIdId String
+  tokenHash  String    @unique // Hashed rotating reference
+  signature  String    // Signed payload
+  nonce      String    @unique
+  expiresAt  DateTime
+  isRevoked  Boolean   @default(false)
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
 
-  clientId           ClientId   @relation(fields: [clientIdFk], references: [id], onDelete: Restrict)
-  account            Account    @relation(fields: [accountId], references: [id], onDelete: Restrict)
-  activatedBy        User?      @relation("UserActivatedCards", fields: [activatedByUserId], references: [id], onDelete: SetNull)
-  qrTokens           QrToken[]
-  nfcCredentials     NfcCredential[]
-  cardEvents         CardEvent[]
+  clientIdRecord ClientId @relation(fields: [clientIdId], references: [id], onDelete: Cascade)
 
-  @@map("cards")
+  @@index([tokenHash])
+  @@index([expiresAt])
 }
 
-model CardEvent {
-  id        String     @id @default(uuid())
-  cardId    String     @map("card_id")
-  eventType CardStatus @map("event_type")
-  actorId   String?    @map("actor_id")
-  reason    String?
-  metadata  Json?
-  createdAt DateTime   @default(now()) @map("created_at")
+// ----------------------------------------------------
+// CONSENT, FAMILY & EMERGENCY ACCESS
+// ----------------------------------------------------
 
-  card      Card       @relation(fields: [cardId], references: [id], onDelete: Cascade)
+model ConsentGrant {
+  id         String        @id @default(uuid())
+  granterId  String        // Patient granting access
+  granteeId  String        // Recipient user
+  scope      ConsentScope
+  status     ConsentStatus @default(ACTIVE)
+  validFrom  DateTime      @default(now())
+  validUntil DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime      @default(now())
 
-  @@map("card_events")
+  granter    User          @relation("Granter", fields: [granterId], references: [id], onDelete: Cascade)
+  grantee    User          @relation("Grantee", fields: [granteeId], references: [id], onDelete: Cascade)
+
+  @@index([granterId, status])
+  @@index([granteeId, status])
 }
 
-model QrToken {
-  id            String    @id @default(uuid())
-  cardId        String    @map("card_id")
-  token         String    @unique
-  tokenType     TokenType @default(EMERGENCY_QR) @map("token_type")
-  isRevoked     Boolean   @default(false) @map("is_revoked")
-  scanCount     BigInt    @default(0) @map("scan_count")
-  lastScannedAt DateTime? @map("last_scanned_at")
-  expiresAt     DateTime  @map("expires_at")
-  createdAt     DateTime  @default(now()) @map("created_at")
+model FamilyLink {
+  id             String             @id @default(uuid())
+  subjectUserId  String             // Primary account holder
+  relativeUserId String             // Family member account
+  relationType   FamilyRelationType
+  isVerified     Boolean            @default(false)
+  verifiedAt     DateTime?
+  createdAt      DateTime           @default(now())
 
-  card          Card      @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  subjectUser    User               @relation("FamilySubject", fields: [subjectUserId], references: [id], onDelete: Cascade)
+  relativeUser   User               @relation("FamilyRelative", fields: [relativeUserId], references: [id], onDelete: Cascade)
 
-  @@index([token])
-  @@map("qr_tokens")
+  @@unique([subjectUserId, relativeUserId])
+  @@index([subjectUserId])
 }
 
-model NfcCredential {
-  id             String    @id @default(uuid())
-  cardId         String    @map("card_id")
-  credentialHash String    @unique @map("credential_hash")
-  uidHash        String    @map("uid_hash")
-  isRevoked      Boolean   @default(false) @map("is_revoked")
-  lastTappedAt   DateTime? @map("last_tapped_at")
-  createdAt      DateTime  @default(now()) @map("created_at")
+model EmergencyAccessSession {
+  id               String                 @id @default(uuid())
+  actorUserId      String
+  patientUserId    String
+  organizationId   String
+  justification    String
+  ipAddress        String
+  userAgent        String
+  sessionStartedAt DateTime               @default(now())
+  sessionExpiresAt DateTime
+  patientNotified  Boolean                @default(false)
+  notifiedAt       DateTime?
+  createdAt        DateTime               @default(now())
 
-  card           Card      @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  actor            User                   @relation("BreakGlassStaff", fields: [actorUserId], references: [id], onDelete: Restrict)
+  patient          User                   @relation("BreakGlassPatient", fields: [patientUserId], references: [id], onDelete: Restrict)
+  organization     Organization           @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  events           EmergencyAccessEvent[]
 
-  @@map("nfc_credentials")
+  @@index([actorUserId])
+  @@index([patientUserId])
+  @@index([sessionStartedAt])
 }
 
-model EmergencyProfile {
-  id                 String             @id @default(uuid())
-  accountId          String             @unique @map("account_id")
-  isActive           Boolean            @default(true) @map("is_active")
-  allergies          String[]
-  criticalConditions String[]           @map("critical_conditions")
-  currentMedications String[]           @map("current_medications")
-  organDonor         Boolean            @default(false) @map("organ_donor")
-  preferredHospital  String?            @map("preferred_hospital")
-  updatedAt          DateTime           @updatedAt @map("updated_at")
+model EmergencyAccessEvent {
+  id         String                 @id @default(uuid())
+  sessionId  String
+  fieldGroup String                 // e.g. "ALLERGIES", "BLOOD_GROUP", "CRITICAL_CONDITIONS", "CURRENT_MEDS"
+  action     String                 @default("VIEW")
+  accessedAt DateTime               @default(now())
 
-  account            Account            @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  contacts           EmergencyContact[]
+  session    EmergencyAccessSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
-  @@map("emergency_profiles")
+  @@index([sessionId])
+  @@index([fieldGroup])
 }
 
-model EmergencyContact {
-  id                 String           @id @default(uuid())
-  emergencyProfileId String           @map("emergency_profile_id")
-  name               String
-  phone              String
-  relation           String
-  isPrimary          Boolean          @default(false) @map("is_primary")
-  createdAt          DateTime         @default(now()) @map("created_at")
-
-  emergencyProfile   EmergencyProfile @relation(fields: [emergencyProfileId], references: [id], onDelete: Cascade)
-
-  @@map("emergency_contacts")
-}
-
-model Provider {
-  id                 String           @id @default(uuid())
-  name               String
-  category           ProviderCategory
-  registrationNumber String           @unique @map("registration_number")
-  medicalCouncil     String           @map("medical_council")
-  address            String
-  city               String
-  state              String
-  pinCode            String           @map("pin_code")
-  phone              String
-  email              String
-  services           String[]
-  partnerTier        String           @default("STANDARD") @map("partner_tier")
-  operatingHours     String           @map("operating_hours")
-  status             ProviderStatus   @default(PENDING_VERIFICATION)
-  verifiedAt         DateTime?        @map("verified_at")
-  createdAt          DateTime         @default(now()) @map("created_at")
-  updatedAt          DateTime         @updatedAt @map("updated_at")
-
-  staff              ProviderStaff[]
-  medicalRecords     MedicalRecord[]
-  consents           Consent[]
-  verifications      ProviderVerification[]
-  appointments       Appointment[]
-  claims             ProviderClaim[]
-
-  @@map("providers")
-}
-
-model ProviderStaff {
-  id            String   @id @default(uuid())
-  providerId    String   @map("provider_id")
-  userId        String   @map("user_id")
-  staffRole     String   @default("DOCTOR") @map("staff_role")
-  licenseNumber String?  @map("license_number")
-  createdAt     DateTime @default(now()) @map("created_at")
-
-  provider      Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([providerId, userId])
-  @@map("provider_staff")
-}
-
-model ProviderVerification {
-  id                  String         @id @default(uuid())
-  providerId          String         @map("provider_id")
-  verifiedByOfficerId String?        @map("verified_by_officer_id")
-  decision            ProviderStatus
-  notes               String?
-  decidedAt           DateTime       @default(now()) @map("decided_at")
-
-  provider            Provider       @relation(fields: [providerId], references: [id], onDelete: Cascade)
-  officer             User?          @relation("OfficerProviderVerifications", fields: [verifiedByOfficerId], references: [id], onDelete: SetNull)
-
-  @@map("provider_verifications")
-}
-
-model MedicalRecord {
-  id                 String            @id @default(uuid())
-  accountId          String            @map("account_id")
-  authorProviderId   String            @map("author_provider_id")
-  authorDoctorName   String            @map("author_doctor_name")
-  recordType         MedicalRecordType @default(CONSULTATION) @map("record_type")
-  title              String
-  clinicalDiagnosis  String            @map("clinical_diagnosis")
-  clinicalNotes      String            @map("clinical_notes")
-  labObservations    String?           @map("lab_observations")
-  recordDate         DateTime          @default(now()) @map("record_date")
-  createdAt          DateTime          @default(now()) @map("created_at")
-
-  account            Account           @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  authorProvider     Provider          @relation(fields: [authorProviderId], references: [id], onDelete: Restrict)
-  prescriptions      Prescription[]
-  documents          MedicalDocument[]
-
-  @@map("medical_records")
-}
-
-model Prescription {
-  id              String        @id @default(uuid())
-  medicalRecordId String        @map("medical_record_id")
-  medicineName    String        @map("medicine_name")
-  dosage          String
-  frequency       String
-  duration        String
-  instructions    String?
-  createdAt       DateTime      @default(now()) @map("created_at")
-
-  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
-
-  @@map("prescriptions")
-}
-
-model MedicalDocument {
-  id              String        @id @default(uuid())
-  medicalRecordId String        @map("medical_record_id")
-  documentKey     String        @map("document_key")
-  fileMimeType    String        @map("file_mime_type")
-  fileSizeBytes   Int           @map("file_size_bytes")
-  documentHash    String        @map("document_hash")
-  createdAt       DateTime      @default(now()) @map("created_at")
-
-  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
-
-  @@map("medical_documents")
-}
-
-model Consent {
-  id         String         @id @default(uuid())
-  accountId  String         @map("account_id")
-  providerId String         @map("provider_id")
-  purpose    ConsentPurpose @default(GENERAL_CONSULTATION)
-  dataScope  ConsentScope   @default(ALL_RECORDS) @map("data_scope")
-  status     ConsentStatus  @default(REQUESTED)
-  validFrom  DateTime       @default(now()) @map("valid_from")
-  expiresAt  DateTime       @map("expires_at")
-  revokedAt  DateTime?      @map("revoked_at")
-  createdAt  DateTime       @default(now()) @map("created_at")
-
-  account    Account        @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  provider   Provider       @relation(fields: [providerId], references: [id], onDelete: Restrict)
-  events     ConsentEvent[]
-
-  @@map("consents")
-}
-
-model ConsentEvent {
-  id        String        @id @default(uuid())
-  consentId String        @map("consent_id")
-  eventType ConsentStatus @map("event_type")
-  actorId   String?       @map("actor_id")
-  ipAddress String?       @map("ip_address")
-  metadata  Json?
-  createdAt DateTime      @default(now()) @map("created_at")
-
-  consent   Consent       @relation(fields: [consentId], references: [id], onDelete: Cascade)
-
-  @@map("consent_events")
-}
-
-model SubscriptionPlan {
-  id           String         @id @default(uuid())
-  planCode     String         @unique @map("plan_code")
-  name         String
-  pricePaise   Int            @map("price_paise")
-  billingCycle String         @default("ANNUAL") @map("billing_cycle")
-  features     String[]
-  createdAt    DateTime       @default(now()) @map("created_at")
-
-  subscriptions Subscription[]
-
-  @@map("subscription_plans")
-}
-
-model Subscription {
-  id                 String           @id @default(uuid())
-  accountId          String           @map("account_id")
-  planId             String           @map("plan_id")
-  status             String           @default("ACTIVE")
-  currentPeriodStart DateTime         @default(now()) @map("current_period_start")
-  currentPeriodEnd   DateTime         @map("current_period_end")
-  createdAt          DateTime         @default(now()) @map("created_at")
-
-  account            Account          @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  plan               SubscriptionPlan @relation(fields: [planId], references: [id], onDelete: Restrict)
-
-  @@map("subscriptions")
-}
-
-model PaymentOrder {
-  id               String             @id @default(uuid())
-  accountId        String             @map("account_id")
-  planId           String             @map("plan_id")
-  planName         String             @map("plan_name")
-  amountPaise      Int                @map("amount_paise")
-  currency         String             @default("INR")
-  status           PaymentOrderStatus @default(CREATED)
-  gateway          String             @default("RAZORPAY")
-  gatewayOrderId   String             @unique @map("gateway_order_id")
-  gatewayPaymentId String?            @map("gateway_payment_id")
-  paidAt           DateTime?          @map("paid_at")
-  createdAt        DateTime           @default(now()) @map("created_at")
-
-  account          Account            @relation(fields: [accountId], references: [id], onDelete: Restrict)
-  transactions     PaymentTransaction[]
-  refunds          Refund[]
-
-  @@map("payment_orders")
-}
-
-model PaymentTransaction {
-  id             String       @id @default(uuid())
-  paymentOrderId String       @map("payment_order_id")
-  transactionRef String       @unique @map("transaction_ref")
-  gateway        String
-  amountPaise    Int          @map("amount_paise")
-  status         String
-  rawResponse    Json?        @map("raw_response")
-  createdAt      DateTime     @default(now()) @map("created_at")
-
-  paymentOrder   PaymentOrder @relation(fields: [paymentOrderId], references: [id], onDelete: Cascade)
-
-  @@map("payment_transactions")
-}
-
-model Refund {
-  id             String       @id @default(uuid())
-  paymentOrderId String       @map("payment_order_id")
-  refundRef      String       @unique @map("refund_ref")
-  amountPaise    Int          @map("amount_paise")
-  reason         String?
-  status         RefundStatus @default(INITIATED)
-  createdAt      DateTime     @default(now()) @map("created_at")
-
-  paymentOrder   PaymentOrder @relation(fields: [paymentOrderId], references: [id], onDelete: Restrict)
-
-  @@map("refunds")
-}
-
-model Company {
-  id                 String                 @id @default(uuid())
-  orgName            String                 @map("org_name")
-  registrationNumber String                 @unique @map("registration_number")
-  contactEmail       String                 @map("contact_email")
-  contactPhone       String                 @map("contact_phone")
-  domain             String                 @unique
-  activePlan         String                 @default("ENTERPRISE_CORE") @map("active_plan")
-  createdAt          DateTime               @default(now()) @map("created_at")
-
-  sponsorships       CorporateSponsorship[]
-
-  @@map("companies")
-}
-
-model CorporateSponsorship {
-  id          String   @id @default(uuid())
-  orgId       String   @map("org_id")
-  accountId   String   @map("account_id")
-  employeeId  String   @map("employee_id")
-  status      String   @default("ACTIVE")
-  sponsoredAt DateTime @default(now()) @map("sponsored_at")
-
-  company     Company  @relation(fields: [orgId], references: [id], onDelete: Cascade)
-  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
-
-  @@unique([orgId, accountId])
-  @@map("corporate_sponsorships")
-}
-
-model Notification {
-  id        String   @id @default(uuid())
-  userId    String   @map("user_id")
-  title     String
-  message   String
-  type      String   @default("SYSTEM")
-  isRead    Boolean  @default(false) @map("is_read")
-  createdAt DateTime @default(now()) @map("created_at")
-
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("notifications")
-}
+// ----------------------------------------------------
+// APPEND-ONLY AUDIT LOG (NO CASCADE DELETE)
+// ----------------------------------------------------
 
 model AuditLog {
-  id             String   @id @default(uuid())
-  actorId        String?  @map("actor_id")
-  actorRole      String?  @map("actor_role")
-  action         String
-  targetResource String   @map("target_resource")
-  targetId       String?  @map("target_id")
-  ipAddress      String?  @map("ip_address")
-  userAgent      String?  @map("user_agent")
-  metadata       Json?
-  createdAt      DateTime @default(now()) @map("created_at")
+  id             String    @id @default(uuid())
+  actorId        String?   // User who performed the action (SetNull on user deletion)
+  action         String    // E.g. "AUTH.OTP_REQUEST", "CARD.TOKEN_SCANNED", "RECEPTION.VERIFY_IDENTITY"
+  entityType     String    // E.g. "Profile", "IdentityDocument", "ClientId", "EmergencyAccessSession"
+  entityId       String?
+  organizationId String?
+  ipAddress      String?
+  userAgent      String?
+  metadata       Json?     // Strictly sanitized: NO OTPs, NO passwords, NO full Aadhaar, NO credentials
+  timestamp      DateTime  @default(now())
 
-  actor          User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actor          User?     @relation("ActionActor", fields: [actorId], references: [id], onDelete: SetNull)
 
-  @@index([action])
-  @@index([targetResource, targetId])
-  @@map("audit_logs")
+  @@index([actorId, timestamp])
+  @@index([action, timestamp])
+  @@index([entityType, entityId])
 }
-
-enum AppointmentStatus {
-  SCHEDULED
-  CONFIRMED
-  COMPLETED
-  CANCELLED
-  NO_SHOW
-}
-
-model Appointment {
-  id             String            @id @default(uuid())
-  accountId      String            @map("account_id")
-  providerId     String            @map("provider_id")
-  doctorName     String?           @map("doctor_name")
-  department     String?
-  scheduledAt    DateTime          @map("scheduled_at")
-  status         AppointmentStatus @default(SCHEDULED)
-  reason         String?
-  notes          String?
-  createdAt      DateTime          @default(now()) @map("created_at")
-  updatedAt      DateTime          @updatedAt @map("updated_at")
-
-  account        Account           @relation(fields: [accountId], references: [id], onDelete: Cascade)
-  provider       Provider          @relation(fields: [providerId], references: [id], onDelete: Cascade)
-
-  @@index([accountId])
-  @@index([providerId])
-  @@map("appointments")
-}
-
-model BenefitRule {
-  id               String   @id @default(uuid())
-  planId           String   @map("plan_id")
-  category         String
-  discountPercent  Int      @default(0) @map("discount_percent")
-  maxDiscountPaise Int      @default(0) @map("max_discount_paise")
-  terms            String?
-  isActive         Boolean  @default(true) @map("is_active")
-  createdAt        DateTime @default(now()) @map("created_at")
-
-  @@index([planId])
-  @@map("benefit_rules")
-}
-
-enum ClaimStatus {
-  SUBMITTED
-  UNDER_REVIEW
-  APPROVED
-  REJECTED
-  SETTLED
-}
-
-model ProviderClaim {
-  id               String      @id @default(uuid())
-  providerId       String      @map("provider_id")
-  accountId        String      @map("account_id")
-  serviceType      String      @map("service_type")
-  billAmountPaise  Int         @map("bill_amount_paise")
-  discountPaise    Int         @default(0) @map("discount_paise")
-  claimAmountPaise Int         @map("claim_amount_paise")
-  status           ClaimStatus @default(SUBMITTED)
-  adjudicatedBy    String?     @map("adjudicated_by")
-  adjudicatedAt    DateTime?   @map("adjudicated_at")
-  notes            String?
-  createdAt        DateTime    @default(now()) @map("created_at")
-
-  provider         Provider    @relation(fields: [providerId], references: [id], onDelete: Cascade)
-  account          Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
-
-  @@index([providerId])
-  @@index([accountId])
-  @@map("provider_claims")
-}
-
-model SecurityEvent {
-  id         String   @id @default(uuid())
-  eventType  String   @map("event_type")
-  severity   String   @default("INFO")
-  ipAddress  String?  @map("ip_address")
-  userAgent  String?  @map("user_agent")
-  userId     String?  @map("user_id")
-  details    Json?
-  resolved   Boolean  @default(false)
-  createdAt  DateTime @default(now()) @map("created_at")
-
-  @@index([eventType])
-  @@index([severity])
-  @@map("security_events")
-}
-
-enum ServiceRequestStatus {
-  REQUESTED
-  REVIEWING
-  APPROVED
-  SCHEDULED
-  ASSIGNED
-  COMPLETED
-  CANCELLED
-}
-
-model MobileMedicalRequest {
-  id               String               @id @default(uuid())
-  organizationName String               @map("organization_name")
-  location         String
-  city             String
-  state            String
-  pinCode          String               @map("pin_code")
-  expectedPeople   Int                  @map("expected_people")
-  preferredDate    DateTime             @map("preferred_date")
-  requiredServices String[]             @map("required_services")
-  contactPerson    String               @map("contact_person")
-  phone            String
-  email            String
-  notes            String?
-  status           ServiceRequestStatus @default(REQUESTED)
-  assignedTeam     String?              @map("assigned_team")
-  createdAt        DateTime             @default(now()) @map("created_at")
-  updatedAt        DateTime             @updatedAt @map("updated_at")
-
-  @@index([status])
-  @@index([city])
-  @@map("mobile_medical_requests")
-}
-
-model HomeCareRequest {
-  id            String               @id @default(uuid())
-  patientName   String               @map("patient_name")
-  serviceType   String               @map("service_type")
-  location      String
-  city          String
-  state         String
-  pinCode       String               @map("pin_code")
-  preferredDate DateTime             @map("preferred_date")
-  contactPhone  String               @map("contact_phone")
-  contactEmail  String?              @map("contact_email")
-  notes         String?
-  status        ServiceRequestStatus @default(REQUESTED)
-  assignedStaff String?              @map("assigned_staff")
-  createdAt     DateTime             @default(now()) @map("created_at")
-  updatedAt     DateTime             @updatedAt @map("updated_at")
-
-  @@index([status])
-  @@map("home_care_requests")
-}
-
-enum TicketStatus {
-  OPEN
-  ASSIGNED
-  IN_PROGRESS
-  RESOLVED
-  CLOSED
-}
-
-enum TicketPriority {
-  LOW
-  MEDIUM
-  HIGH
-  CRITICAL
-}
-
-model SupportTicket {
-  id           String         @id @default(uuid())
-  ticketNumber String         @unique @map("ticket_number")
-  userId       String?        @map("user_id")
-  fullName     String         @map("full_name")
-  email        String
-  phone        String?
-  category     String
-  subject      String
-  message      String
-  priority     TicketPriority @default(MEDIUM)
-  status       TicketStatus   @default(OPEN)
-  adminNotes   String?        @map("admin_notes")
-  resolvedAt   DateTime?      @map("resolved_at")
-  createdAt    DateTime       @default(now()) @map("created_at")
-  updatedAt    DateTime       @updatedAt @map("updated_at")
-
-  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
-
-  @@index([status])
-  @@index([ticketNumber])
-  @@map("support_tickets")
-}
-
-
