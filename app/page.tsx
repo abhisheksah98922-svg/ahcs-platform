@@ -304,7 +304,7 @@ export default function HomePage() {
                 <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/30 via-sky-400/20 to-indigo-500/30 rounded-3xl blur-2xl -z-10" />
 
                 {/* Interactive Flippable Smart Card Component */}
-                <SmartCardInteractive initialTheme="navy" showControls={true} />
+                <SmartCardInteractive initialTheme="platinum" showControls={true} />
               </div>
             </div>
 

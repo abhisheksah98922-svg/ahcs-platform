@@ -50,7 +50,7 @@ const PLANS: Plan[] = [
     popular: true,
     features: [
       'All Basic Plan features included',
-      'Physical ID-1 Smart Card ($85.60 \\times 53.98$ mm)',
+      'Physical ID-1 Smart Card (85.60 mm × 53.98 mm)',
       'Doorstep Delivery Across India via Tracked Courier',
       'Unlimited Encrypted Clinical Records & Prescriptions',
       'Verified Partner Discounts at Network Hospitals',
