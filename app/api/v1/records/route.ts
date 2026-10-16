@@ -11,8 +11,21 @@ export async function GET(request: NextRequest) {
     const targetAccountId = searchParams.get('accountId');
     const providerId = searchParams.get('providerId');
 
+    // Authenticated session is strictly required
+    const context = await getCurrentUser();
+    if (!context || !context.user) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
+
     // Case 1: Provider fetching records for a patient
     if (targetAccountId && providerId) {
+      const isClinicianOrAdmin = ['DOCTOR', 'PROVIDER_ADMIN', 'ADMIN', 'SUPER_ADMIN'].includes(context.user.role);
+      if (!isClinicianOrAdmin) {
+        return NextResponse.json({
+          error: 'Access forbidden: Only verified healthcare providers or administrators may query patient records',
+        }, { status: 403 });
+      }
+
       if (!db.hasActiveConsent(targetAccountId, providerId)) {
         return NextResponse.json({
           error: 'Access forbidden: Active patient consent required to view clinical records',
@@ -20,6 +33,18 @@ export async function GET(request: NextRequest) {
       }
 
       const records = db.getMedicalRecordsByAccountId(targetAccountId);
+
+      db.logAudit({
+        actorId: context.user.id,
+        actorRole: context.user.role,
+        action: 'CLINICAL_RECORDS_VIEWED',
+        targetResource: 'medical_records',
+        targetId: targetAccountId,
+        ipAddress: request.headers.get('x-forwarded-for') || null,
+        userAgent: request.headers.get('user-agent') || null,
+        metadata: { providerId, recordCount: records.length },
+      });
+
       return NextResponse.json({
         success: true,
         accountId: targetAccountId,
@@ -28,11 +53,6 @@ export async function GET(request: NextRequest) {
     }
 
     // Case 2: Authenticated patient fetching their own records
-    const context = await getCurrentUser();
-    if (!context || !context.user) {
-      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
-    }
-
     const account = context.account;
     if (!account) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
@@ -52,6 +72,18 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    const context = await getCurrentUser();
+    if (!context || !context.user) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+    }
+
+    const isClinicianOrAdmin = ['DOCTOR', 'PROVIDER_ADMIN', 'ADMIN', 'SUPER_ADMIN'].includes(context.user.role);
+    if (!isClinicianOrAdmin) {
+      return NextResponse.json({
+        error: 'Forbidden: Clinical records can only be authored by verified clinicians or administrators',
+      }, { status: 403 });
+    }
+
     const body = await request.json();
     const {
       accountId,
@@ -104,8 +136,8 @@ export async function POST(request: NextRequest) {
     });
 
     db.logAudit({
-      actorId: null,
-      actorRole: 'HEALTHCARE_PROVIDER_DOCTOR',
+      actorId: context.user.id,
+      actorRole: context.user.role,
       action: 'MEDICAL_RECORD_CREATED',
       targetResource: 'medical_records',
       targetId: record.id,

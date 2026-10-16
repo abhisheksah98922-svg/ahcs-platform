@@ -8,21 +8,28 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const providerId = searchParams.get('providerId');
-
-    // If providerId query param provided
-    if (providerId) {
-      const consents = db.getConsentsForProvider(providerId);
-      return NextResponse.json({ success: true, consents });
-    }
-
-    // Otherwise, retrieve for logged in patient
     const context = await getCurrentUser();
     if (!context || !context.user) {
       return NextResponse.json({ error: 'Unauthorized session' }, { status: 401 });
     }
 
+    const { searchParams } = new URL(request.url);
+    const providerId = searchParams.get('providerId');
+
+    // If providerId query param provided, verify caller is provider/admin
+    if (providerId) {
+      const isClinicianOrAdmin = ['DOCTOR', 'PROVIDER_ADMIN', 'ADMIN', 'SUPER_ADMIN'].includes(context.user.role);
+      if (!isClinicianOrAdmin) {
+        return NextResponse.json({
+          error: 'Access forbidden: Only healthcare providers and administrators may query provider consent records',
+        }, { status: 403 });
+      }
+
+      const consents = db.getConsentsForProvider(providerId);
+      return NextResponse.json({ success: true, consents });
+    }
+
+    // Otherwise, retrieve for logged in patient
     const account = context.account;
     if (!account) {
       return NextResponse.json({ error: 'Account not found' }, { status: 404 });
@@ -47,6 +54,18 @@ export async function POST(request: NextRequest) {
 
     // Action 1: Doctor requests consent from patient
     if (action === 'REQUEST') {
+      const context = await getCurrentUser();
+      if (!context || !context.user) {
+        return NextResponse.json({ error: 'Authentication required to request clinical consent' }, { status: 401 });
+      }
+
+      const isClinicianOrAdmin = ['DOCTOR', 'PROVIDER_ADMIN', 'ADMIN', 'SUPER_ADMIN'].includes(context.user.role);
+      if (!isClinicianOrAdmin) {
+        return NextResponse.json({
+          error: 'Access forbidden: Only verified doctors or healthcare providers may request patient consent',
+        }, { status: 403 });
+      }
+
       const {
         clientId,
         accountId: directAccountId,
@@ -95,8 +114,8 @@ export async function POST(request: NextRequest) {
       });
 
       db.logAudit({
-        actorId: null,
-        actorRole: 'HEALTHCARE_PROVIDER',
+        actorId: context.user.id,
+        actorRole: context.user.role,
         action: 'CONSENT_REQUESTED',
         targetResource: 'consents',
         targetId: consent.id,

@@ -1,17 +1,21 @@
 import nodemailer from 'nodemailer';
 
-const smtpUser = process.env.SMTP_USER || 'abhisheksah98922@gmail.com';
-const smtpPass = (process.env.SMTP_PASS || 'sksvxxffjxcaiqgr').replace(/\s+/g, '');
+const smtpUser = process.env.SMTP_USER || '';
+const smtpPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: smtpUser,
-    pass: smtpPass,
-  },
-});
+const isSmtpConfigured = Boolean(smtpUser && smtpPass);
+
+const transporter = isSmtpConfigured
+  ? nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: Number(process.env.SMTP_PORT) === 465,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    })
+  : null;
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://ahcs.in';
 
@@ -22,6 +26,10 @@ export async function sendApplicationReceivedEmail(
   toEmail: string,
   details: { fullName: string; requestId: string; docType: string }
 ) {
+  if (!transporter) {
+    console.warn(`[MAILER_NOTICE] SMTP not configured. Application received for ${toEmail} (Request: ${details.requestId})`);
+    return { success: false, error: 'SMTP not configured' };
+  }
   try {
     const info = await transporter.sendMail({
       from: process.env.SMTP_FROM || `"AHCS Health Desk" <${smtpUser}>`,
@@ -90,6 +98,10 @@ export async function sendApplicationApprovedEmail(
   toEmail: string,
   details: { fullName: string; clientId: string; cardNumber: string }
 ) {
+  if (!transporter) {
+    console.warn(`[MAILER_NOTICE] SMTP not configured. Application approved for ${toEmail} (Client ID: ${details.clientId})`);
+    return { success: false, error: 'SMTP not configured' };
+  }
   try {
     const info = await transporter.sendMail({
       from: process.env.SMTP_FROM || `"AHCS Health Desk" <${smtpUser}>`,
@@ -145,6 +157,10 @@ export async function sendApplicationRejectedEmail(
   toEmail: string,
   details: { fullName: string; reason: string }
 ) {
+  if (!transporter) {
+    console.warn(`[MAILER_NOTICE] SMTP not configured. Application rejected for ${toEmail} (Reason: ${details.reason})`);
+    return { success: false, error: 'SMTP not configured' };
+  }
   try {
     const info = await transporter.sendMail({
       from: process.env.SMTP_FROM || `"AHCS Health Desk" <${smtpUser}>`,

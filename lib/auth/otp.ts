@@ -7,20 +7,28 @@ export interface SmsProviderInterface {
 }
 
 // Gmail SMTP Transporter for Real Email OTPs
-const smtpUser = process.env.SMTP_USER || 'abhisheksah98922@gmail.com';
-const smtpPass = (process.env.SMTP_PASS || 'sksvxxffjxcaiqgr').replace(/\s+/g, '');
+const smtpUser = process.env.SMTP_USER || '';
+const smtpPass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
 
-const gmailTransporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true,
-  auth: {
-    user: smtpUser,
-    pass: smtpPass,
-  },
-});
+const isSmtpConfigured = Boolean(smtpUser && smtpPass);
+
+const gmailTransporter = isSmtpConfigured
+  ? nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: Number(process.env.SMTP_PORT) === 465,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    })
+  : null;
 
 export async function sendEmailOtp(email: string, code: string): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  if (!gmailTransporter || !isSmtpConfigured) {
+    console.warn(`[GMAIL_OTP_NOTICE] SMTP credentials not configured. OTP for ${email}: ${code}`);
+    return { success: false, error: 'SMTP gateway not configured' };
+  }
   try {
     const info = await gmailTransporter.sendMail({
       from: process.env.SMTP_FROM || `"AHCS Health Security" <${smtpUser}>`,

@@ -31,8 +31,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Cryptographic signature verification:
-    // When Razorpay secret is set, HMAC SHA-256 signature is mandatory
+    // Live payment verification strictly requires RAZORPAY_KEY_SECRET
     const secret = process.env.RAZORPAY_KEY_SECRET;
+    const isTestBypassAllowed = process.env.NODE_ENV === 'test' && process.env.ALLOW_TEST_PAYMENTS === 'true';
+
+    if (!secret && !isTestBypassAllowed) {
+      return NextResponse.json(
+        { error: 'Payment verification unavailable: RAZORPAY_KEY_SECRET is not configured on the server' },
+        { status: 503 }
+      );
+    }
+
     if (secret) {
       if (!gatewaySignature || !gatewayOrderId) {
         return NextResponse.json(

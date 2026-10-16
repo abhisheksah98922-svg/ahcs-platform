@@ -200,7 +200,7 @@ export default function ServicesHubPage() {
                 Are you a Healthcare Provider or Corporate Employer?
               </h3>
               <p className="text-slate-400 text-sm mt-1 max-w-2xl">
-                Join the verified AHCS healthcare access network to deliver cashless benefits, streamline patient identity, and organize worksite wellness programs.
+                Join the verified AHCS healthcare access network to deliver coordinated member assistance, streamline patient identity, and organize worksite wellness programs.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">

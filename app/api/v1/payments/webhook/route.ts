@@ -10,8 +10,16 @@ const processedWebhookEvents = new Set<string>();
 export async function POST(request: NextRequest) {
   try {
     const rawBody = await request.text();
+    const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET || process.env.RAZORPAY_KEY_SECRET;
+
+    if (!webhookSecret) {
+      return NextResponse.json(
+        { error: 'Payment webhook unavailable: webhook secret is not configured on the server' },
+        { status: 503 }
+      );
+    }
+
     const signature = request.headers.get('x-razorpay-signature');
-    const webhookSecret = process.env.RAZORPAY_KEY_SECRET || 'ahcs_prod_webhook_secret_hmac';
 
     // 1. Mandatory Cryptographic Signature Verification
     if (!signature) {

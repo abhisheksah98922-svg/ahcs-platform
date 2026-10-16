@@ -153,6 +153,18 @@ export default function ProvidersPage() {
           </div>
         </div>
 
+        {/* Network Pilot & Regulatory Notice */}
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-2.5">
+            <span className="font-bold uppercase tracking-wider bg-amber-200 text-amber-800 text-[10px] px-2 py-0.5 rounded-full shrink-0 mt-0.5">
+              Notice
+            </span>
+            <p className="leading-relaxed">
+              <strong>Pilot Enrollment Phase:</strong> Healthcare providers, clinics, and diagnostic centres are being onboarded and verified under formal compliance agreements. Listings represent pilot empanelment stages. AHCS operates as an independent digital health network and does not substitute for licensed healthcare providers or emergency services.
+            </p>
+          </div>
+        </div>
+
         {/* Search & Category Filter Bar */}
         <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
           <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3">

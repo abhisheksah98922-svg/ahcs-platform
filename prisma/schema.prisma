@@ -110,6 +110,16 @@ model User {
   // Auditing: NO CASCADE DELETE
   auditLogs        AuditLog[]        @relation("ActionActor")
 
+  // Clinical, Records, Memberships & Corporate
+  medicalRecords          MedicalRecord[]
+  medicalDocuments        MedicalDocument[]
+  appointments            Appointment[]
+  subscriptions           MemberSubscription[]
+  payments                Payment[]
+  notifications           Notification[]
+  employeeMemberships     EmployeeMembership[]
+  providerStaff           ProviderStaff[]
+
   @@index([phone])
 }
 
@@ -386,4 +396,308 @@ model AuditLog {
   @@index([actorId, timestamp])
   @@index([action, timestamp])
   @@index([entityType, entityId])
+}
+
+// ----------------------------------------------------
+// CLINICAL RECORDS & DOCUMENT VAULT
+// ----------------------------------------------------
+
+model MedicalRecord {
+  id                 String   @id @default(uuid())
+  userId             String
+  authorProviderId   String?
+  authorDoctorName   String
+  recordType         String   // PRESCRIPTION, LAB_REPORT, CONSULTATION_NOTE, DISCHARGE_SUMMARY
+  title              String
+  clinicalDiagnosis  String?
+  clinicalNotes      String?
+  medications        Json?
+  labObservations    String?
+  recordDate         DateTime @default(now())
+  verificationStatus String   @default("CLINICALLY_VERIFIED")
+  source             String   @default("PROVIDER")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([authorProviderId])
+}
+
+model MedicalDocument {
+  id           String   @id @default(uuid())
+  userId       String
+  documentType String   // LAB_REPORT, PRESCRIPTION, DISCHARGE_SUMMARY, SCAN_XRAY, INSURANCE_DOC
+  title        String
+  storagePath  String   // S3 or private bucket key
+  mimeType     String
+  fileSizeBytes Int
+  documentHash String
+  uploadedAt   DateTime @default(now())
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([documentHash])
+}
+
+// ----------------------------------------------------
+// HEALTHCARE PROVIDER NETWORK & APPOINTMENTS
+// ----------------------------------------------------
+
+model Provider {
+  id                 String                 @id @default(uuid())
+  name               String
+  category           String                 // HOSPITAL, CLINIC, LAB, PHARMACY
+  registrationNumber String                 @unique
+  medicalCouncil     String
+  address            String
+  city               String
+  state              String
+  pinCode            String
+  phone              String
+  email              String
+  services           String[]
+  partnerTier        String                 @default("STANDARD")
+  status             String                 @default("PENDING_VERIFICATION") // PENDING_VERIFICATION, VERIFIED, SUSPENDED, REJECTED
+  verifiedAt         DateTime?
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+
+  staff              ProviderStaff[]
+  verification       ProviderVerification?
+
+  @@index([category])
+  @@index([city])
+  @@index([status])
+}
+
+model ProviderStaff {
+  id                         String    @id @default(uuid())
+  providerId                 String
+  userId                     String
+  role                       String    // DOCTOR, NURSE, RECEPTION, ADMIN
+  doctorRegistrationNumber   String?
+  isActive                   Boolean   @default(true)
+  createdAt                  DateTime  @default(now())
+
+  provider                   Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  user                       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([providerId])
+  @@index([userId])
+}
+
+model ProviderVerification {
+  id                  String    @id @default(uuid())
+  providerId          String    @unique
+  reviewedById        String?
+  status              String    @default("PENDING")
+  licenseDocumentPath String?
+  notes               String?
+  reviewedAt          DateTime?
+  createdAt           DateTime  @default(now())
+
+  provider            Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+}
+
+model HealthcareService {
+  id             String   @id @default(uuid())
+  providerId     String?
+  serviceCode    String   @unique
+  name           String
+  category       String
+  description    String?
+  basePricePaise Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  @@index([category])
+}
+
+model Appointment {
+  id              String   @id @default(uuid())
+  userId          String
+  providerId      String?
+  doctorName      String
+  appointmentDate DateTime
+  status          String   @default("CONFIRMED") // CONFIRMED, COMPLETED, CANCELLED
+  reason          String?
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([providerId])
+}
+
+// ----------------------------------------------------
+// MEMBERSHIPS, SUBSCRIPTIONS & ENTITLEMENTS
+// ----------------------------------------------------
+
+model MembershipPlan {
+  id                            String               @id @default(uuid())
+  code                          String               @unique // AHCS-PLAN-CORE, AHCS-PLAN-PREMIUM, etc.
+  name                          String
+  description                   String?
+  tier                          String               // INDIVIDUAL, FAMILY, CORPORATE
+  pricePaise                    Int
+  durationMonths                Int
+  consultationDiscountPercent   Int                  @default(0)
+  diagnosticDiscountPercent     Int                  @default(0)
+  emergencyCoveragePaise        Int                  @default(0)
+  isActive                      Boolean              @default(true)
+  createdAt                     DateTime             @default(now())
+
+  subscriptions                 MemberSubscription[]
+}
+
+model MemberSubscription {
+  id            String               @id @default(uuid())
+  userId        String
+  planId        String
+  status        String               @default("ACTIVE") // ACTIVE, EXPIRED, CANCELLED
+  startDate     DateTime             @default(now())
+  endDate       DateTime
+  autoRenew     Boolean              @default(false)
+  createdAt     DateTime             @default(now())
+
+  user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan          MembershipPlan       @relation(fields: [planId], references: [id])
+  entitlements  ServiceEntitlement[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model ServiceEntitlement {
+  id              String             @id @default(uuid())
+  subscriptionId  String
+  serviceCategory String             // CONSULTATION, DIAGNOSTICS, EMERGENCY, HOME_CARE
+  maxUsageCount   Int?
+  remainingCount  Int?
+  discountPercent Int                @default(0)
+  createdAt       DateTime           @default(now())
+
+  subscription    MemberSubscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([subscriptionId])
+}
+
+// ----------------------------------------------------
+// CORPORATE HEALTHCARE COORDINATION
+// ----------------------------------------------------
+
+model CorporateOrganisation {
+  id                 String               @id @default(uuid())
+  name               String
+  registrationNumber String               @unique
+  domain             String?
+  contactEmail       String
+  contactPhone       String
+  activePlan         String               @default("ENTERPRISE_SHIELD")
+  isActive           Boolean              @default(true)
+  createdAt          DateTime             @default(now())
+
+  employees          EmployeeMembership[]
+}
+
+model EmployeeMembership {
+  id              String                @id @default(uuid())
+  corporateOrgId  String
+  userId          String
+  employeeId      String
+  status          String                @default("ACTIVE") // ACTIVE, SUSPENDED, TERMINATED
+  sponsoredAt     DateTime              @default(now())
+
+  corporate       CorporateOrganisation @relation(fields: [corporateOrgId], references: [id], onDelete: Cascade)
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([corporateOrgId, employeeId])
+  @@index([userId])
+}
+
+// ----------------------------------------------------
+// BILLING, PAYMENTS & NOTIFICATIONS
+// ----------------------------------------------------
+
+model Payment {
+  id               String   @id @default(uuid())
+  userId           String
+  amountPaise      Int
+  currency         String   @default("INR")
+  status           String   @default("CREATED") // CREATED, PAID, FAILED, REFUNDED
+  gateway          String   @default("RAZORPAY")
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  gatewaySignature String?
+  planId           String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([gatewayOrderId])
+}
+
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String
+  title     String
+  message   String
+  category  String    @default("SYSTEM") // SYSTEM, EMERGENCY, VERIFICATION, APPOINTMENT
+  channel   String    @default("IN_APP") // IN_APP, EMAIL, SMS
+  isRead    Boolean   @default(false)
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+}
+
+// ----------------------------------------------------
+// SERVICE VERTICAL BOOKINGS & REQUESTS
+// ----------------------------------------------------
+
+model MobileMedicalRequest {
+  id               String   @id @default(uuid())
+  organizationName String
+  contactPerson    String
+  phone            String
+  email            String?
+  expectedPeople   Int      @default(50)
+  location         String
+  city             String
+  state            String
+  pinCode          String
+  preferredDate    DateTime
+  requiredServices String[]
+  notes            String?
+  status           String   @default("REQUESTED") // REQUESTED, SCHEDULED, DISPATCHED, COMPLETED, CANCELLED
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([city, status])
+}
+
+model HomeCareRequest {
+  id            String   @id @default(uuid())
+  patientName   String
+  serviceType   String
+  location      String
+  city          String
+  state         String
+  pinCode       String
+  preferredDate DateTime
+  contactPhone  String
+  contactEmail  String?
+  notes         String?
+  status        String   @default("REQUESTED") // REQUESTED, ASSIGNED, COMPLETED, CANCELLED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([city, status])
 }

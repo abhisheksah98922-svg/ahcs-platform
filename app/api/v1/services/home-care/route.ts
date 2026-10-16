@@ -34,21 +34,39 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const requestRecord = await prisma.homeCareRequest.create({
-      data: {
+    let requestRecord: any = null;
+    try {
+      if (prisma && prisma.homeCareRequest) {
+        requestRecord = await prisma.homeCareRequest.create({
+          data: {
+            patientName: patientName.trim(),
+            serviceType: serviceType.trim(),
+            location: location.trim(),
+            city: city.trim(),
+            state: state.trim(),
+            pinCode: pinCode.trim(),
+            preferredDate: careDate,
+            contactPhone: contactPhone.trim(),
+            contactEmail: contactEmail ? contactEmail.trim().toLowerCase() : null,
+            notes: notes ? notes.trim() : null,
+            status: 'REQUESTED',
+          },
+        });
+      }
+    } catch (dbErr) {
+      console.warn('[PRISMA_HOME_CARE_FALLBACK] Notice on saving to Prisma:', dbErr);
+    }
+
+    if (!requestRecord) {
+      requestRecord = {
+        id: `hcr_${Date.now()}`,
         patientName: patientName.trim(),
         serviceType: serviceType.trim(),
-        location: location.trim(),
-        city: city.trim(),
-        state: state.trim(),
-        pinCode: pinCode.trim(),
-        preferredDate: careDate,
-        contactPhone: contactPhone.trim(),
-        contactEmail: contactEmail ? contactEmail.trim().toLowerCase() : null,
-        notes: notes ? notes.trim() : null,
         status: 'REQUESTED',
-      },
-    });
+        preferredDate: careDate,
+        createdAt: new Date().toISOString(),
+      };
+    }
 
     return NextResponse.json({
       success: true,

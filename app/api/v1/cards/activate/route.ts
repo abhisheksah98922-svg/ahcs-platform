@@ -37,13 +37,23 @@ export async function POST(request: Request) {
     } catch (e) {
       body = {};
     }
-    const activationCode = body?.activationCode || '123456';
+
+    const activationCode = body?.activationCode;
+    if (!activationCode || typeof activationCode !== 'string' || !activationCode.trim()) {
+      return NextResponse.json(
+        { success: false, error: 'Card activation code is required' },
+        { status: 400 }
+      );
+    }
 
     // Verify Activation Code Hash
     const enteredHash = crypto.createHash('sha256').update(activationCode.trim()).digest('hex');
-    if (enteredHash !== card.activationCodeHash && activationCode.trim() !== '123456') {
+    const isDevTestAllowed = process.env.NODE_ENV !== 'production' && process.env.ALLOW_TEST_OTP === 'true';
+    const isCodeMatch = enteredHash === card.activationCodeHash || (isDevTestAllowed && activationCode.trim() === '123456');
+
+    if (!isCodeMatch) {
       return NextResponse.json(
-        { success: false, error: 'Invalid card activation code' },
+        { success: false, error: 'Invalid card activation code. Please check the code provided with your physical card kit.' },
         { status: 400 }
       );
     }
