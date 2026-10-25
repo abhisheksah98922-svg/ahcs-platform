@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ShieldCheck, Phone, Lock, ArrowRight, Building2, Stethoscope, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Phone, Lock, ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,7 +32,7 @@ export default function LoginPage() {
         setOtpSent(true);
       }
     } catch (err) {
-      setError('Network communication failure. Please check connection.');
+      setError('Network communication failure. Please check your connection.');
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ export default function LoginPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || 'Invalid or expired OTP code');
+        setError(data.error || 'Invalid or expired verification code');
       } else {
         router.push('/dashboard');
       }
@@ -75,10 +75,10 @@ export default function LoginPage() {
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h1 className="text-2xl font-black text-[#102A43] tracking-tight">
-              Sign In to AHCS
+              Member Sign In
             </h1>
             <p className="text-xs text-[#62748A]">
-              Access your digital health card, encrypted records, and family health profile.
+              Access your AHCS Smart Health Card, personal medical vault, and family health profile.
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function LoginPage() {
                 disabled={loading || mobileNumber.length < 10}
                 className="w-full py-3 bg-[#102A43] hover:bg-[#1769AA] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-sm disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {loading ? 'Dispatching OTP...' : 'Send Verification OTP'}
+                {loading ? 'Dispatching Verification Code...' : 'Send Verification OTP'}
               </button>
             </form>
           ) : (
@@ -124,7 +124,7 @@ export default function LoginPage() {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-xs font-semibold text-[#172B4D]">
-                    Enter 6-Digit OTP
+                    Enter 6-Digit OTP Code
                   </label>
                   <button
                     type="button"
@@ -155,21 +155,11 @@ export default function LoginPage() {
             </form>
           )}
 
-          {/* Role Links */}
-          <div className="pt-4 border-t border-[#DFE7F0] space-y-2 text-center text-xs">
-            <div className="text-[#62748A]">Are you a healthcare provider or clinician?</div>
-            <Link
-              href="/provider/login"
-              className="text-[#1769AA] font-bold hover:underline inline-flex items-center gap-1"
-            >
-              <span>Doctor & Clinic Portal Login</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
-
-            <div className="pt-2 text-[#62748A] text-[11px]">
-              Don&apos;t have an AHCS account yet?{' '}
-              <Link href="/apply" className="text-[#1769AA] font-semibold hover:underline">
-                Create Account (Get Started)
+          <div className="pt-4 border-t border-[#DFE7F0] text-center text-xs">
+            <div className="text-[#62748A]">
+              Don&apos;t have an AHCS Health Card yet?{' '}
+              <Link href="/apply" className="text-[#1769AA] font-bold hover:underline">
+                Create Your Account (Get Started)
               </Link>
             </div>
           </div>

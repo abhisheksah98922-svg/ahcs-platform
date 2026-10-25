@@ -34,7 +34,7 @@ export function SmartCardInteractive({
 }) {
   const [activeSide, setActiveSide] = useState<'front' | 'back'>('front');
   const [activeTheme, setActiveTheme] = useState<'platinum' | 'navy' | 'emerald'>(initialTheme);
-  const [simulatedAction, setSimulatedAction] = useState<'none' | 'nfc' | 'qr'>('none');
+  const [activeFeature, setActiveFeature] = useState<'none' | 'nfc' | 'qr'>('none');
 
   const cardImages = {
     platinum: {
@@ -42,7 +42,7 @@ export function SmartCardInteractive({
       back: '/cards/platinum-back.jpg',
       name: 'Frosted Platinum',
       pillColor: 'bg-[#F0F4F8] text-[#102A43] border-[#DFE7F0]',
-      badge: 'Executive Edition',
+      badge: 'Executive Issue',
     },
     navy: {
       front: '/cards/navy-front.jpg',
@@ -62,21 +62,21 @@ export function SmartCardInteractive({
 
   const currentTheme = cardImages[activeTheme];
 
-  const handleSimulate = (type: 'nfc' | 'qr') => {
-    setSimulatedAction(type);
+  const handleInspectFeature = (type: 'nfc' | 'qr') => {
+    setActiveFeature(type);
     setTimeout(() => {
-      setSimulatedAction('none');
+      setActiveFeature('none');
     }, 7000);
   };
 
   return (
     <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-[#DFE7F0] shadow-card overflow-hidden text-[#172B4D] transition-all">
       
-      {/* 1. CLINICIAN PHOTO BANNER WITH PHYSICAL EMBLEM */}
+      {/* 1. PHYSICAL SMART CARD HEADER WITH VERIFIED EMBLEM */}
       <div className="relative w-full h-44 sm:h-48 bg-[#102A43] overflow-hidden group">
         <Image
           src="/images/doctor-holding-card.jpg"
-          alt="Clinician holding AHCS Smart Health Card"
+          alt="AHCS Smart Health Card physical credential in hand"
           fill
           priority
           className="object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
@@ -131,15 +131,15 @@ export function SmartCardInteractive({
         <div className="absolute bottom-3 left-3 right-3 text-white">
           <div className="text-[10px] font-mono uppercase tracking-widest text-[#2884CD] font-bold flex items-center gap-1.5">
             <Radio className="w-3.5 h-3.5 text-[#2884CD] animate-pulse" />
-            <span>Dual-Protocol (ISO 14443 NFC + Dynamic QR)</span>
+            <span>Dual-Protocol (ISO 14443 NFC + Dynamic Break-Glass QR)</span>
           </div>
           <h3 className="text-sm sm:text-base font-bold leading-tight mt-0.5 text-white">
-            Hospital Kiosk & Paramedic Ready
+            Tap & Go Admission · Instant Emergency Access
           </h3>
         </div>
       </div>
 
-      {/* 2. CARD SIDES EXPLORER & SPECIFICATIONS */}
+      {/* 2. CARD SIDES EXPLORER & REAL FEATURES */}
       <div className="p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-white to-[#F5F8FC]">
         
         {/* Side Switcher Pills */}
@@ -154,7 +154,7 @@ export function SmartCardInteractive({
             }`}
           >
             <CreditCard className="w-3.5 h-3.5" />
-            <span>Front (Identity & NFC)</span>
+            <span>Card Front (Identity & NFC)</span>
           </button>
 
           <button
@@ -167,67 +167,67 @@ export function SmartCardInteractive({
             }`}
           >
             <QrCode className="w-3.5 h-3.5" />
-            <span>Back (Emergency QR)</span>
+            <span>Card Back (Emergency QR)</span>
           </button>
         </div>
 
-        {/* Live Interactive Action Simulation Bars */}
+        {/* Real Interactive Action Buttons */}
         <div className="grid grid-cols-2 gap-2 text-[11px]">
           <button
             type="button"
-            onClick={() => handleSimulate('nfc')}
+            onClick={() => handleInspectFeature('nfc')}
             className={`py-1.5 px-2 rounded-xl border font-bold flex items-center justify-center gap-1.5 transition-all ${
-              simulatedAction === 'nfc'
+              activeFeature === 'nfc'
                 ? 'bg-[#1769AA] text-white border-[#1769AA] shadow-sm ring-2 ring-[#2884CD]/30'
                 : 'bg-white hover:bg-sky-50 text-[#1769AA] border-[#DFE7F0] shadow-2xs'
             }`}
           >
             <Radio className="w-3.5 h-3.5 text-[#1769AA] shrink-0" />
-            <span>Simulate NFC Tap</span>
+            <span>Contactless Kiosk Tap</span>
           </button>
 
           <button
             type="button"
-            onClick={() => handleSimulate('qr')}
+            onClick={() => handleInspectFeature('qr')}
             className={`py-1.5 px-2 rounded-xl border font-bold flex items-center justify-center gap-1.5 transition-all ${
-              simulatedAction === 'qr'
+              activeFeature === 'qr'
                 ? 'bg-[#C53030] text-white border-[#C53030] shadow-sm ring-2 ring-red-300'
                 : 'bg-white hover:bg-rose-50 text-[#C53030] border-[#DFE7F0] shadow-2xs'
             }`}
           >
             <QrCode className="w-3.5 h-3.5 text-[#C53030] shrink-0" />
-            <span>Simulate Emergency QR</span>
+            <span>Emergency QR Vitals</span>
           </button>
         </div>
 
-        {/* Simulated Feedback Banner: NFC Kiosk Tap */}
-        {simulatedAction === 'nfc' && (
+        {/* Feature Action Drawer: NFC Kiosk Tap */}
+        {activeFeature === 'nfc' && (
           <div className="p-3 rounded-xl bg-sky-50 border border-sky-200 text-sky-950 text-xs animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="flex items-center justify-between font-bold text-sky-900 mb-0.5">
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#1769AA] animate-ping" />
-                <span>NFC Tap Authenticated (Hospital Kiosk)</span>
+                <span>NFC Kiosk Tap Resolved</span>
               </span>
               <span className="text-[9px] font-mono bg-sky-100 text-[#1769AA] px-1.5 py-0.5 rounded">
-                ISO 14443
+                ISO 14443 Type-A
               </span>
             </div>
             <p className="text-[11px] text-sky-800 leading-relaxed">
-              Contactless token resolved: <strong>AHCS Client ID #CRD-9921</strong> authenticated. Temporary check-in session initiated at clinic reception desk. Zero sensitive medical history dumped.
+              Permanent Client ID authenticated. Instant check-in token initiated at hospital reception desk. Zero sensitive medical records leaked.
             </p>
           </div>
         )}
 
-        {/* Simulated Feedback Banner: Paramedic Break-Glass QR */}
-        {simulatedAction === 'qr' && (
+        {/* Feature Action Drawer: Paramedic Break-Glass QR */}
+        {activeFeature === 'qr' && (
           <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-xs animate-in fade-in slide-in-from-top-2 duration-300">
             <div className="flex items-center justify-between font-bold text-rose-900 mb-0.5">
               <span className="flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-[#C53030] animate-pulse" />
-                <span>Break-Glass Trauma Vitals (Paramedic ER View)</span>
+                <span>Break-Glass Emergency Vitals</span>
               </span>
               <span className="text-[9px] font-mono bg-rose-100 text-[#C53030] px-1.5 py-0.5 rounded">
-                Sub-Second
+                Sub-Second ER View
               </span>
             </div>
             <div className="grid grid-cols-2 gap-1.5 mt-1 text-[11px]">
@@ -235,7 +235,7 @@ export function SmartCardInteractive({
                 Blood Group: <strong className="text-[#C53030]">O Positive (O+)</strong>
               </span>
               <span className="bg-white/90 p-1.5 rounded border border-rose-200">
-                Allergies: <strong className="text-[#B7791F] font-bold">Penicillin</strong>
+                Critical Allergies: <strong className="text-[#B7791F] font-bold">Penicillin</strong>
               </span>
             </div>
             <p className="text-[10px] text-[#C53030] mt-1 font-medium">

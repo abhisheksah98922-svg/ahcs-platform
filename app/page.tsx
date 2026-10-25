@@ -167,33 +167,37 @@ export default function HomePage() {
     {
       step: '01',
       title: 'Create Your Account',
-      desc: 'Initiate signup via mobile phone ownership verification with cryptographic 6-digit OTP.',
-      status: 'Operational'
+      desc: 'Initiate signup using your mobile phone number with secure 6-digit OTP verification.',
+      status: 'Step 1'
     },
     {
       step: '02',
-      title: 'Submit Information & Documents',
-      desc: 'Provide essential demographic details, emergency contacts, and required government KYC documentation.',
-      status: 'Operational'
+      title: 'Submit Profile & Emergency Details',
+      desc: 'Provide essential demographics, emergency contacts, and required government KYC documentation.',
+      status: 'Step 2'
     },
     {
       step: '03',
-      title: 'Complete Verification Review',
-      desc: 'Submitted records undergo automated duplicate collision checks followed by human verification officer review.',
-      status: 'Active Review Queue'
+      title: 'Identity & Security Verification',
+      desc: 'Your profile and identity documentation undergo automated duplicate collision checks and verification audit.',
+      status: 'Step 3'
     },
     {
       step: '04',
-      title: 'Access AHCS Identity & Smart Card',
-      desc: 'Upon formal officer approval, an immutable AHCS Client ID is atomically minted and smart health card is issued.',
-      status: 'Issuance Available'
+      title: 'Access Your Health Identity & Smart Card',
+      desc: 'Upon verification approval, your permanent AHCS Client ID is minted and your Smart Health Card is activated.',
+      status: 'Step 4'
     }
   ];
 
   const faqs = [
     {
-      q: 'What is AHCS and how does it work?',
-      a: 'AHCS (Advanced Health Care System) is an independent private healthcare identity, card verification, and emergency access platform. It provides individuals with a permanent AHCS Client ID, an encrypted medical records vault, and a physical smart health card (NFC/QR) for streamlined hospital admission and break-glass emergency vitals access.'
+      q: 'What is AHCS and how does it work for me?',
+      a: 'AHCS (Advanced Health Care System) is an independent private healthcare identity, card verification, and emergency access platform. It gives you a permanent AHCS Client ID, an encrypted medical records vault, and a physical smart health card (NFC/QR) for streamlined clinic check-ins and life-saving break-glass emergency vitals access.'
+    },
+    {
+      q: 'How do I use my AHCS Smart Health Card when visiting a clinic or hospital?',
+      a: 'When you arrive at a participating hospital or clinic, simply present your Smart Health Card. Reception staff or attending physicians tap the contactless NFC chip or scan your card to initiate check-in. You retain 100% control over which medical records they can view by granting temporary, time-bound consent from your phone.'
     },
     {
       q: 'Is AHCS affiliated with government schemes like Aadhaar, ABHA, or Ayushman Bharat?',
@@ -206,10 +210,6 @@ export default function HomePage() {
     {
       q: 'Are my medical records visible to anyone scanning my smart health card QR code?',
       a: 'No. The QR code and NFC tap on your AHCS Smart Health Card contain zero medical records or diagnosis history. In non-emergency scenarios, accessing records requires your explicit patient consent PIN. In critical emergency break-glass triage, only vital emergency information (blood group, critical allergies, emergency contact) is disclosed, and an immutable audit log is generated with instant SMS alerts to your family.'
-    },
-    {
-      q: 'How do healthcare providers participate in the AHCS network?',
-      a: 'Clinics, hospitals, diagnostic centers, and treating physicians can apply to participate in the AHCS network through our verified provider onboarding portal. Every provider undergoes credential inspection and formal agreement review before receiving authorized clinical portal access.'
     }
   ];
 
@@ -230,12 +230,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 1. HERO SECTION: Balanced 2-Column Layout */}
+      {/* 1. HERO SECTION: Balanced 2-Column Client Showcase */}
       <section className="relative overflow-hidden min-h-[580px] lg:min-h-[660px] flex items-center border-b border-[#DFE7F0] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
-            {/* Left Column: Core Positioning & Identity Gateway */}
+            {/* Left Column: Client Core Positioning */}
             <div className="lg:col-span-7 space-y-6">
               
               {/* Trust Badge */}
@@ -247,14 +247,14 @@ export default function HomePage() {
                 <span>Private Healthcare Identity & Access</span>
               </div>
 
-              {/* Exact Master Prompt Headline */}
+              {/* Master Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-5xl font-black text-[#102A43] tracking-tight leading-[1.12]">
                 Your Health Identity. <br />
                 <span className="text-[#1769AA]">Connected Care.</span> <br />
                 Greater Confidence.
               </h1>
 
-              {/* Exact Master Prompt Supporting Text */}
+              {/* Master Supporting Text */}
               <p className="text-base sm:text-lg text-[#62748A] font-normal max-w-xl leading-relaxed">
                 AHCS is building a private healthcare identity and access platform designed to help individuals manage essential health information and connect with participating healthcare providers.
               </p>
@@ -436,12 +436,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. HOW AHCS WORKS: Clean 4-Step Visual Flow */}
+      {/* 3. HOW AHCS WORKS: Clean 4-Step Client Visual Flow */}
       <section className="py-16 bg-white border-b border-[#DFE7F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-[#1769AA] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-              Workflow Pipeline
+              Simple Enrollment
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight mt-3">
               How AHCS Works
@@ -610,7 +610,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. DOCTOR CONSULTATIONS & DIGITAL CLINICAL RECORDS (Rich Image Showcase) */}
+      {/* 5. DOCTOR CONSULTATIONS & DIGITAL CLINICAL RECORDS (Client-Centered Consent) */}
       <section className="py-16 bg-white border-b border-[#DFE7F0] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
@@ -620,7 +620,7 @@ export default function HomePage() {
               <div className="relative rounded-2xl overflow-hidden shadow-card border border-[#DFE7F0] group">
                 <Image
                   src="/images/doctor-consult.jpg"
-                  alt="Doctor consulting patient in modern clinic"
+                  alt="Patient consulting doctor in modern clinic"
                   width={700}
                   height={450}
                   className="w-full h-[360px] sm:h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
@@ -654,7 +654,7 @@ export default function HomePage() {
 
               <h2 className="text-3xl sm:text-4xl font-black text-[#102A43] tracking-tight leading-tight">
                 Your Lifelong Medical History, <br />
-                <span className="text-[#1769AA]">Accessible Only With Consent</span>
+                <span className="text-[#1769AA]">Accessible Only With Your Consent</span>
               </h2>
 
               <p className="text-[#62748A] text-sm sm:text-base leading-relaxed">
@@ -678,10 +678,10 @@ export default function HomePage() {
 
               <div className="pt-2">
                 <Link
-                  href="/providers"
+                  href="/network"
                   className="inline-flex items-center gap-2 text-[#1769AA] font-bold text-sm hover:text-[#102A43] transition-colors"
                 >
-                  <span>Explore Verified Hospital Directory →</span>
+                  <span>Explore Participating Healthcare Facilities →</span>
                 </Link>
               </div>
             </div>
@@ -864,7 +864,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. NATIONWIDE NETWORK OF VERIFIED HOSPITALS & LABS (Hospital Network Showcase) */}
+      {/* 8. NATIONWIDE NETWORK OF PARTICIPATING HOSPITALS & LABS */}
       <section className="py-16 bg-[#F5F8FC] border-b border-[#DFE7F0] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-2xl overflow-hidden shadow-card border border-[#DFE7F0]">
@@ -894,10 +894,10 @@ export default function HomePage() {
                   Search Verified Providers
                 </Link>
                 <Link
-                  href="/partner"
+                  href="/find-care"
                   className="px-5 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-xl font-bold text-xs backdrop-blur-md transition-all"
                 >
-                  Partner Onboarding
+                  Find Nearby Care
                 </Link>
               </div>
             </div>
