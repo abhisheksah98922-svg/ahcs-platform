@@ -35,7 +35,12 @@ import {
   Search,
   UserCheck,
   Fingerprint,
-  Share2
+  Share2,
+  Radio,
+  BadgeCheck,
+  ExternalLink,
+  Shield,
+  HelpCircle
 } from 'lucide-react';
 import { SmartCardInteractive } from '@/components/SmartCardInteractive';
 
@@ -44,13 +49,18 @@ export default function HomePage() {
   const [activeServiceTab, setActiveServiceTab] = useState<'ALL' | 'CARE' | 'CLINICAL' | 'EMERGENCY'>('ALL');
   const [activeStep, setActiveStep] = useState<number>(1);
   const [quickVerifyInput, setQuickVerifyInput] = useState<string>('');
+  const [searchMode, setSearchMode] = useState<'ID' | 'EMERGENCY'>('ID');
 
   const handleQuickVerify = (e: React.FormEvent) => {
     e.preventDefault();
-    if (quickVerifyInput.trim()) {
-      router.push(`/verify?query=${encodeURIComponent(quickVerifyInput.trim())}`);
+    if (searchMode === 'ID') {
+      if (quickVerifyInput.trim()) {
+        router.push(`/verify?query=${encodeURIComponent(quickVerifyInput.trim())}`);
+      } else {
+        router.push('/verify');
+      }
     } else {
-      router.push('/verify');
+      router.push('/emergency-preview');
     }
   };
 
@@ -63,7 +73,8 @@ export default function HomePage() {
       icon: Truck,
       href: '/services/mobile-medical',
       tag: 'On-Demand Van',
-      tagColor: 'bg-blue-50 text-blue-700 border-blue-200'
+      tagColor: 'bg-blue-50 text-blue-700 border-blue-200',
+      highlights: ['Digital Vitals Station', 'Worksite Camps', 'Society Visits']
     },
     {
       id: 'home-care',
@@ -73,7 +84,8 @@ export default function HomePage() {
       icon: Home,
       href: '/services/home-care',
       tag: 'Doorstep Care',
-      tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      highlights: ['Post-Op Attendants', 'Physiotherapy', 'Elder Assistance']
     },
     {
       id: 'diagnostics',
@@ -83,7 +95,8 @@ export default function HomePage() {
       icon: FlaskConical,
       href: '/services/diagnostics',
       tag: 'Home Sample Collection',
-      tagColor: 'bg-amber-50 text-amber-700 border-amber-200'
+      tagColor: 'bg-amber-50 text-amber-700 border-amber-200',
+      highlights: ['Doorstep Phlebotomy', 'NABL Accredited Labs', 'Direct Vault Sync']
     },
     {
       id: 'telemedicine',
@@ -92,8 +105,9 @@ export default function HomePage() {
       desc: 'Connect remotely with verified medical specialists and receive authenticated digital prescriptions directly to your vault.',
       icon: Video,
       href: '/services/telemedicine',
-      tag: 'Remote Care',
-      tagColor: 'bg-purple-50 text-purple-700 border-purple-200'
+      tag: 'Remote Specialists',
+      tagColor: 'bg-purple-50 text-purple-700 border-purple-200',
+      highlights: ['Verified MD Clinicians', 'Encrypted Video Gateway', 'E-Prescription Sync']
     },
     {
       id: 'pharmacy',
@@ -103,7 +117,8 @@ export default function HomePage() {
       icon: Pill,
       href: '/services/pharmacy',
       tag: 'Medicine Savings',
-      tagColor: 'bg-rose-50 text-rose-700 border-rose-200'
+      tagColor: 'bg-rose-50 text-rose-700 border-rose-200',
+      highlights: ['E-Prescription Delivery', 'Network Concessions', 'Genuine Batch Proof']
     },
     {
       id: 'health-camps',
@@ -113,7 +128,8 @@ export default function HomePage() {
       icon: HeartPulse,
       href: '/services/health-camps',
       tag: 'Preventive Drives',
-      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-200'
+      tagColor: 'bg-indigo-50 text-indigo-700 border-indigo-200',
+      highlights: ['Corporate Campus Drives', 'Vitals Triage', 'Mass ID Enrollment']
     },
     {
       id: 'senior-care',
@@ -123,7 +139,8 @@ export default function HomePage() {
       icon: Stethoscope,
       href: '/services/senior-care',
       tag: 'Elderly Wellness',
-      tagColor: 'bg-teal-50 text-teal-700 border-teal-200'
+      tagColor: 'bg-teal-50 text-teal-700 border-teal-200',
+      highlights: ['Routine Vitals Log', 'Emergency SOS Node', 'Caregiver Continuity']
     },
     {
       id: 'emergency',
@@ -133,7 +150,8 @@ export default function HomePage() {
       icon: ShieldAlert,
       href: '/emergency',
       tag: '24x7 Gateway',
-      tagColor: 'bg-red-50 text-red-700 border-red-200'
+      tagColor: 'bg-red-50 text-red-700 border-red-200',
+      highlights: ['Sub-Second QR Access', 'Blood Group & Allergies', 'Next-of-Kin SMS']
     }
   ];
 
@@ -146,37 +164,55 @@ export default function HomePage() {
       num: '01',
       title: 'Mobile Ownership Authentication',
       desc: 'Secure signup via cryptographic 6-digit OTP verifying actual SIM possession with server-side rate limits.',
-      badge: 'Step 1'
+      badge: 'Step 1',
+      mechanism: 'Argon2 / SHA-256 HMAC + SIM ownership check',
+      sla: 'Instant (< 60s)',
+      userAction: 'Verify via Mobile SMS OTP'
     },
     {
       num: '02',
       title: 'Demographic Profile & Document Vault',
       desc: 'Submit legal identity details, emergency contacts, and KYC documents stored in an AES-256 private vault.',
-      badge: 'Step 2'
+      badge: 'Step 2',
+      mechanism: 'Client-side encrypted file stream to isolated storage',
+      sla: 'Self-paced (2-5 mins)',
+      userAction: 'Upload Government Photo ID & Medical Emergency Vitals'
     },
     {
       num: '03',
       title: 'Algorithmic Duplicate Check',
       desc: 'Automated hash matching ensures no duplicate accounts or fragmented records exist under multiple names.',
-      badge: 'Step 3'
+      badge: 'Step 3',
+      mechanism: 'Multi-field fuzzy hashing & phone/identity collision indexing',
+      sla: 'Automated (< 3s)',
+      userAction: 'Background validation (no action required)'
     },
     {
       num: '04',
       title: 'Verification Officer Review',
       desc: 'Authorised human Verification Officers inspect submitted records before approval or correction requests.',
-      badge: 'Step 4'
+      badge: 'Step 4',
+      mechanism: 'Multi-officer RBAC audit queue with immutable decision logs',
+      sla: '24 to 48 Hours',
+      userAction: 'Review officer feedback if clarification requested'
     },
     {
       num: '05',
       title: 'Permanent Client ID Generation',
       desc: 'Unique ISO 7064 MOD 97-10 check-digit verified AHCS Client ID atomically minted upon officer approval.',
-      badge: 'Step 5'
+      badge: 'Step 5',
+      mechanism: 'Atomic sequential sequence generator with Luhn/MOD-97 checksum',
+      sla: 'Instant upon Approval',
+      userAction: 'Permanent AHCS Client ID assigned to account'
     },
     {
       num: '06',
       title: 'Smart Card & Dynamic QR Issuance',
       desc: 'Physical CR80 card dispatch and instant dynamic QR token activation with 24x7 break-glass safety.',
-      badge: 'Step 6'
+      badge: 'Step 6',
+      mechanism: 'Rotating 256-bit signed token + ISO 14443 NFC chip provisioning',
+      sla: 'Physical Dispatch: 3-5 Days',
+      userAction: 'Activate card token via member dashboard'
     }
   ];
 
@@ -184,27 +220,28 @@ export default function HomePage() {
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
       
       {/* TOP REGULATORY ADVISORY TAPE */}
-      <section className="bg-blue-50/70 border-b border-blue-100 px-4 py-2.5 text-xs text-blue-950 font-medium">
+      <section className="bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border-b border-blue-100 px-4 py-2 text-xs text-blue-950 font-medium">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span><strong>Independent Healthcare Identity:</strong> AHCS is a private digital health ID and assistance network. Not affiliated with UIDAI, ABHA, or government schemes.</span>
           </div>
-          <Link href="/how-it-works" className="text-blue-700 hover:text-blue-900 font-bold underline underline-offset-2 shrink-0">
-            Read Security Architecture →
+          <Link href="/how-it-works" className="text-blue-700 hover:text-blue-900 font-bold underline underline-offset-2 shrink-0 flex items-center gap-1">
+            <span>Read Security Architecture</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
       </section>
 
       {/* 1. HERO SECTION: Light Theme with Navy Blue, Royal Blue & Subtle Mesh */}
-      <section className="relative isolate overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center border-b border-slate-200 bg-gradient-to-b from-white via-sky-50/30 to-slate-50">
+      <section className="relative isolate overflow-hidden min-h-[660px] lg:min-h-[740px] flex items-center border-b border-slate-200 bg-gradient-to-b from-white via-sky-50/25 to-slate-50">
         
         {/* Subtle Tech Dot Matrix Grid Texture */}
         <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px] opacity-25 z-0 pointer-events-none" />
         
         {/* Subtle Blue & Sky Ambient Lighting Orbs */}
         <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-sky-200/30 rounded-full blur-3xl pointer-events-none -z-10" />
-        <div className="absolute top-1/2 right-10 w-[400px] h-[300px] bg-blue-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
+        <div className="absolute top-1/2 right-10 w-[420px] h-[320px] bg-blue-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -213,55 +250,67 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-6">
               
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-slate-800 text-xs font-semibold border border-slate-200/80 shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-slate-800 text-xs font-semibold border border-slate-200/90 shadow-2xs">
                 <span className="font-bold bg-blue-50 text-blue-700 text-[10px] px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-                  AHCS · NETWORK
+                  AHCS · TRUST NETWORK
                 </span>
-                <span className="text-slate-700">Private Healthcare Identity & Assistance Ecosystem</span>
+                <span className="text-slate-700 font-medium">Private Healthcare Identity & Smart Health Card</span>
               </div>
 
               {/* Main Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.08]">
-                Your Health Identity, <br />
+                Your Sovereign Health Identity. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600">
-                  Connected & Protected.
+                  Connected, Verified & Protected.
                 </span>
               </h1>
 
               {/* Subheading */}
               <p className="text-base sm:text-lg text-slate-600 font-normal max-w-xl leading-relaxed">
-                One verified healthcare identity connecting your personal digital health records, care services, participating clinical network, and 24x7 emergency assistance.
+                One permanent AHCS Client ID connecting your personal encrypted medical records, care services, participating clinical network, and 24x7 break-glass trauma profile.
               </p>
 
               {/* 4 Feature Bullet Points in 2x2 Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 max-w-2xl text-xs sm:text-[13px] text-slate-800 font-medium">
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/90 border border-slate-200 shadow-2xs backdrop-blur-sm">
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-xs">✓</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                   </div>
-                  <span><strong>Permanent Client ID:</strong> Issued after human KYC verification</span>
+                  <div>
+                    <strong className="text-slate-900">Permanent Client ID:</strong>
+                    <span className="text-slate-600 block text-xs">Issued after human KYC verification</span>
+                  </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/90 border border-slate-200 shadow-2xs backdrop-blur-sm">
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-xs">✓</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                   </div>
-                  <span><strong>Smart Health Card:</strong> Contactless NFC & dynamic rotating QR</span>
+                  <div>
+                    <strong className="text-slate-900">Smart Health Card:</strong>
+                    <span className="text-slate-600 block text-xs">Contactless NFC & dynamic rotating QR</span>
+                  </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/90 border border-slate-200 shadow-2xs backdrop-blur-sm">
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-xs">✓</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                   </div>
-                  <span><strong>Patient Consent Vault:</strong> Granular control over clinical record sharing</span>
+                  <div>
+                    <strong className="text-slate-900">Patient Consent Vault:</strong>
+                    <span className="text-slate-600 block text-xs">Granular control over medical record sharing</span>
+                  </div>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/90 border border-slate-200 shadow-2xs backdrop-blur-sm">
+                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="text-emerald-700 font-bold text-xs">✓</span>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                   </div>
-                  <span><strong>Break-Glass Profile:</strong> 24x7 trauma vitals access for paramedics</span>
+                  <div>
+                    <strong className="text-slate-900">Break-Glass Profile:</strong>
+                    <span className="text-slate-600 block text-xs">24x7 trauma vitals access for paramedics</span>
+                  </div>
                 </div>
               </div>
 
@@ -293,31 +342,92 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Quick Card Verification Input Field */}
+              {/* Quick Card Verification Input Field & Emergency Mode Switcher */}
               <div className="pt-2">
-                <form onSubmit={handleQuickVerify} className="flex flex-col sm:flex-row gap-2 max-w-xl">
-                  <div className="relative flex-1">
-                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="text"
-                      value={quickVerifyInput}
-                      onChange={(e) => setQuickVerifyInput(e.target.value)}
-                      placeholder="Enter AHCS Client ID to verify (e.g. AHCS-IN-2026-9921)"
-                      className="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent font-mono shadow-xs"
-                    />
+                <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs max-w-xl">
+                  {/* Mode Selector Tabs */}
+                  <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setSearchMode('ID')}
+                      className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1.5 ${
+                        searchMode === 'ID'
+                          ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                          : 'text-slate-500 hover:text-slate-800'
+                      }`}
+                    >
+                      <Search className="w-3.5 h-3.5" />
+                      <span>Verify AHCS ID</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSearchMode('EMERGENCY')}
+                      className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1.5 ${
+                        searchMode === 'EMERGENCY'
+                          ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                          : 'text-slate-500 hover:text-slate-800'
+                      }`}
+                    >
+                      <Activity className="w-3.5 h-3.5 text-rose-600" />
+                      <span>Paramedic Emergency Lookup</span>
+                    </button>
                   </div>
-                  <button
-                    type="submit"
-                    className="px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shrink-0 shadow-sm"
-                  >
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span>Verify Now</span>
-                  </button>
-                </form>
+
+                  {/* Form */}
+                  <form onSubmit={handleQuickVerify} className="flex flex-col sm:flex-row gap-2">
+                    <div className="relative flex-1">
+                      <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        value={quickVerifyInput}
+                        onChange={(e) => setQuickVerifyInput(e.target.value)}
+                        placeholder={
+                          searchMode === 'ID'
+                            ? 'Enter AHCS Client ID to verify (e.g. AHCS-IN-2026-9921)'
+                            : 'Enter Emergency Token or Scan Card QR'
+                        }
+                        className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white font-mono transition-all"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className={`px-5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all shrink-0 text-white shadow-sm ${
+                        searchMode === 'ID'
+                          ? 'bg-slate-900 hover:bg-slate-800'
+                          : 'bg-rose-600 hover:bg-rose-700'
+                      }`}
+                    >
+                      {searchMode === 'ID' ? (
+                        <>
+                          <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                          <span>Verify Card</span>
+                        </>
+                      ) : (
+                        <>
+                          <Activity className="w-4 h-4 text-white animate-pulse" />
+                          <span>Emergency Vitals</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+
+                  {/* Quick Helper Chips */}
+                  <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500">
+                    <span>Try sample:</span>
+                    <button
+                      type="button"
+                      onClick={() => setQuickVerifyInput('AHCS-IN-2026-9921')}
+                      className="font-mono text-blue-700 hover:underline font-semibold"
+                    >
+                      AHCS-IN-2026-9921
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* Trust Metrics Bar */}
-              <div className="pt-3 border-t border-slate-200/80 grid grid-cols-3 gap-3 max-w-xl">
+              <div className="pt-2 border-t border-slate-200/80 grid grid-cols-3 gap-3 max-w-xl">
                 <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
                   <div className="text-base sm:text-lg font-black text-slate-900">Zero Leak</div>
                   <div className="text-[11px] text-slate-500 font-medium">No medical data in QR/NFC</div>
@@ -378,7 +488,7 @@ export default function HomePage() {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                All Services
+                All Services (8)
               </button>
               <button
                 type="button"
@@ -440,13 +550,22 @@ export default function HomePage() {
                       {service.title}
                     </h3>
 
-                    <p className="text-xs text-slate-500 leading-relaxed mb-5">
+                    <p className="text-xs text-slate-500 leading-relaxed mb-4">
                       {service.desc}
                     </p>
+
+                    {/* Highlights bullet chips */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {service.highlights.map((h, i) => (
+                        <span key={i} className="text-[10px] font-medium px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-600">
+                          {h}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-blue-700 group-hover:translate-x-0.5 transition-transform">
-                    <span>Explore Details</span>
+                    <span>Explore Service</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </Link>
@@ -485,26 +604,26 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
+              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>A private healthcare identity verification and assistance network.</span>
+                  <span><strong>A private healthcare identity platform</strong> built around an immutable permanent AHCS Client ID.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Unique Client ID issued only after human officer document validation.</span>
+                  <span><strong>A physical Smart Health Card (NFC + QR)</strong> and citizen-controlled digital health vault.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Smart Health Card (QR & NFC) carrying rotating, revocable tokens.</span>
+                  <span><strong>Patient Consent Vault:</strong> Granular time-bound clinical record sharing with verified treating physicians.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Patient-directed consent vault for sharing clinical records with doctors.</span>
+                  <span><strong>Break-Glass Emergency Protocol:</strong> Paramedic triage access to critical blood group and allergies with immutable audit logs.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>24x7 break-glass emergency profile access with immutable audit logging.</span>
+                  <span><strong>Healthcare Assistance Network:</strong> Transparent discounted diagnostic, home care, and telemedicine coordination.</span>
                 </li>
               </ul>
             </div>
@@ -521,14 +640,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <ul className="space-y-3 text-xs sm:text-sm text-slate-700">
+              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
                 <li className="flex items-start gap-2.5">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>NOT a government scheme</strong>, Aadhaar, ABHA, or Ayushman Bharat.</span>
+                  <span><strong>NOT a government scheme</strong>, Aadhaar, ABHA, NDHM, or Ayushman Bharat PM-JAY.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>NOT an insurance company</strong> and does not guarantee insurance payouts.</span>
+                  <span><strong>NOT an insurance company</strong> and does not underwrite policies or guarantee insurance claims.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
@@ -536,72 +655,137 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>Does NOT guarantee hospital admissions</strong> or clinical medical outcomes.</span>
+                  <span><strong>Does NOT guarantee hospital admissions</strong>, cashless beds, or clinical outcomes.</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span>Never makes unsupported claims like &quot;100% cashless everywhere&quot;.</span>
+                  <span><strong>Never uses deceptive claims</strong> like &quot;100% free surgery everywhere&quot; or fake partner hospital badges.</span>
                 </li>
               </ul>
             </div>
           </div>
+
+          {/* Statutory Guarantee Badge */}
+          <div className="mt-8 max-w-5xl mx-auto p-4 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-blue-900">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-blue-700 shrink-0" />
+              <span><strong>Statutory Integrity Guarantee:</strong> AHCS strictly complies with India&apos;s Digital Personal Data Protection (DPDP) Act 2023.</span>
+            </div>
+            <Link href="/privacy" className="font-bold underline text-blue-700 hover:text-blue-900 shrink-0">
+              Review Privacy Architecture →
+            </Link>
+          </div>
+
         </div>
       </section>
 
-      {/* 4. THE 6-STEP VERIFICATION TO ISSUANCE PIPELINE */}
+      {/* 4. THE 6-STEP VERIFICATION TO ISSUANCE PIPELINE WITH DYNAMIC INSPECTOR */}
       <section className="py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-              Trust & Issuance Pipeline
+              Trust & Issuance Lifecycle
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mt-3">
               How You Get Your Verified AHCS ID
             </h2>
             <p className="text-sm text-slate-600 mt-2">
-              Every permanent AHCS Client ID is bound to an authentic identity through server-side verification and fraud checks.
+              Every permanent AHCS Client ID is bound to an authentic identity through cryptographic verification, fraud detection, and human verification review.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pipelineSteps.map((step, idx) => (
-              <div
-                key={step.num}
-                onClick={() => setActiveStep(idx + 1)}
-                className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                  activeStep === idx + 1
-                    ? 'bg-blue-50/60 border-blue-400 shadow-md ring-2 ring-blue-500/20'
-                    : 'bg-slate-50/70 border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-mono font-black text-blue-700 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-                      {step.num}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase text-slate-400">
-                      {step.badge}
-                    </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Steps Grid: 6 Steps */}
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {pipelineSteps.map((step, idx) => (
+                <div
+                  key={step.num}
+                  onClick={() => setActiveStep(idx + 1)}
+                  className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                    activeStep === idx + 1
+                      ? 'bg-blue-50/80 border-blue-500 shadow-md ring-2 ring-blue-500/20'
+                      : 'bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`text-xs font-mono font-black px-2.5 py-1 rounded-lg border ${
+                        activeStep === idx + 1
+                          ? 'bg-blue-700 text-white border-blue-700'
+                          : 'bg-white text-blue-700 border-slate-200'
+                      }`}>
+                        {step.num}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase text-slate-400">
+                        {step.badge}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-900 mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {step.desc}
+                    </p>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {step.desc}
-                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Dynamic Step Detail Inspector Panel */}
+            <div className="lg:col-span-4 bg-gradient-to-br from-slate-900 to-slate-950 text-white p-6 rounded-3xl shadow-xl border border-slate-800 space-y-5 sticky top-24">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider">
+                  Live Stage Inspector
+                </span>
+                <span className="text-xs font-bold bg-blue-600/80 px-2.5 py-0.5 rounded-full text-white">
+                  Step {activeStep} of 6
+                </span>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-black text-white">
+                  {pipelineSteps[activeStep - 1].title}
+                </h4>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  {pipelineSteps[activeStep - 1].desc}
+                </p>
+              </div>
+
+              <div className="space-y-3 pt-2 text-xs border-t border-slate-800">
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Technical Mechanism:</span>
+                  <span className="text-sky-300 font-mono text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].mechanism}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Turnaround SLA:</span>
+                  <span className="text-emerald-400 font-bold text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].sla}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Required User Action:</span>
+                  <span className="text-slate-200 text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].userAction}
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
 
-          <div className="mt-10 text-center">
-            <Link
-              href="/apply"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all transform hover:-translate-y-0.5"
-            >
-              <span>Begin Verified Enrollment</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <div className="pt-2">
+                <Link
+                  href="/apply"
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+                >
+                  <span>Begin Step 1 Enrollment</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -621,7 +805,14 @@ export default function HomePage() {
                   height={450}
                   className="w-full h-[380px] sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+                
+                {/* Overlaid Floating Badge */}
+                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold shadow-md border border-slate-200">
+                  <Lock className="w-3.5 h-3.5 text-blue-700" />
+                  <span>Sub-1s Record Retrieval · AES-256 Vault</span>
+                </div>
+
                 <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
                   <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-blue-600 font-bold">
                     Doctor Consultation Gateway
@@ -742,7 +933,14 @@ export default function HomePage() {
                   height={450}
                   className="w-full h-[380px] sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+                
+                {/* Overlaid Floating Badge */}
+                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600/95 backdrop-blur-md text-white text-xs font-bold shadow-md">
+                  <Activity className="w-3.5 h-3.5 text-white animate-pulse" />
+                  <span>Paramedic Trauma Fast-Track · Protocol 112</span>
+                </div>
+
                 <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
                   <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-rose-600/90 font-bold">
                     Emergency Protocol 112
@@ -774,7 +972,14 @@ export default function HomePage() {
                   height={450}
                   className="w-full h-[380px] sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+                
+                {/* Overlaid Floating Badge */}
+                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold shadow-md border border-slate-200">
+                  <CreditCard className="w-3.5 h-3.5 text-blue-700" />
+                  <span>ISO/IEC 7810 ID-1 Standard · NFC Forum Type 4</span>
+                </div>
+
                 <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
                   <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full bg-emerald-600/90 font-bold">
                     Physical Credential
