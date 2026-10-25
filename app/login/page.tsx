@@ -12,7 +12,6 @@ export default function LoginPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [devCode, setDevCode] = useState('');
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,9 +30,6 @@ export default function LoginPage() {
         setError(data.error || 'Failed to dispatch verification code');
       } else {
         setOtpSent(true);
-        if (data.devCode) {
-          setDevCode(data.devCode);
-        }
       }
     } catch (err) {
       setError('Network communication failure. Please check connection.');
@@ -71,25 +67,24 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-
+    <div className="min-h-screen bg-[#F5F8FC] flex flex-col font-sans">
       <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-        <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-10 space-y-6">
+        <div className="max-w-md w-full bg-white rounded-3xl border border-[#DFE7F0] shadow-card p-7 sm:p-9 space-y-6">
           <div className="text-center space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center mx-auto mb-3">
-              <ShieldCheck className="w-7 h-7" />
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1769AA] flex items-center justify-center mx-auto mb-3 border border-blue-100">
+              <ShieldCheck className="w-6 h-6" />
             </div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-black text-[#102A43] tracking-tight">
               Sign In to AHCS
             </h1>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-[#62748A]">
               Access your digital health card, encrypted records, and family health profile.
             </p>
           </div>
 
           {error && (
-            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-[#C53030] text-xs flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-[#C53030] shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -97,11 +92,11 @@ export default function LoginPage() {
           {!otpSent ? (
             <form onSubmit={handleSendOtp} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                  Mobile Number
+                <label className="block text-xs font-semibold text-[#172B4D] mb-1.5">
+                  Registered Mobile Number
                 </label>
                 <div className="relative">
-                  <div className="absolute left-3.5 top-3 text-xs font-bold text-slate-500">
+                  <div className="absolute left-3.5 top-2.5 text-xs font-bold text-[#62748A]">
                     +91
                   </div>
                   <input
@@ -111,7 +106,7 @@ export default function LoginPage() {
                     value={mobileNumber}
                     onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ''))}
                     placeholder="Enter 10-digit mobile"
-                    className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 font-mono text-slate-800"
+                    className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-[#DFE7F0] text-sm focus:outline-none focus:ring-2 focus:ring-[#1769AA] font-mono text-[#172B4D]"
                   />
                 </div>
               </div>
@@ -119,7 +114,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading || mobileNumber.length < 10}
-                className="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-blue-700/20 disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#102A43] hover:bg-[#1769AA] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-sm disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {loading ? 'Dispatching OTP...' : 'Send Verification OTP'}
               </button>
@@ -128,13 +123,13 @@ export default function LoginPage() {
             <form onSubmit={handleVerifyOtp} className="space-y-4">
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-semibold text-slate-700">
+                  <label className="block text-xs font-semibold text-[#172B4D]">
                     Enter 6-Digit OTP
                   </label>
                   <button
                     type="button"
                     onClick={() => { setOtpSent(false); setOtp(''); }}
-                    className="text-[11px] text-blue-600 hover:underline"
+                    className="text-[11px] text-[#1769AA] hover:underline"
                   >
                     Change Number
                   </button>
@@ -145,47 +140,41 @@ export default function LoginPage() {
                   maxLength={6}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                  placeholder="6-digit code"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-center tracking-widest text-lg font-mono font-bold focus:outline-none focus:ring-2 focus:ring-blue-600 text-slate-900"
+                  placeholder="••••••"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#DFE7F0] text-center tracking-widest text-lg font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#1769AA] text-[#102A43]"
                 />
-                {devCode && (
-                  <div className="mt-2 text-[11px] text-slate-500 bg-slate-100 p-2 rounded-lg text-center font-mono">
-                    Development Bypass OTP: <strong className="text-blue-700">{devCode}</strong>
-                  </div>
-                )}
               </div>
 
               <button
                 type="submit"
                 disabled={loading || otp.length < 6}
-                className="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-blue-700/20 disabled:opacity-50"
+                className="w-full py-3 bg-[#102A43] hover:bg-[#1769AA] text-white font-bold text-xs sm:text-sm rounded-xl transition-all shadow-sm disabled:opacity-50"
               >
                 {loading ? 'Validating Token...' : 'Verify & Enter Dashboard'}
               </button>
             </form>
           )}
 
-          {/* Quick Links for other roles */}
-          <div className="pt-4 border-t border-slate-200 space-y-2 text-center text-xs">
-            <div className="text-slate-500">Are you a healthcare provider or doctor?</div>
+          {/* Role Links */}
+          <div className="pt-4 border-t border-[#DFE7F0] space-y-2 text-center text-xs">
+            <div className="text-[#62748A]">Are you a healthcare provider or clinician?</div>
             <Link
               href="/provider/login"
-              className="text-blue-700 font-bold hover:underline inline-flex items-center gap-1"
+              className="text-[#1769AA] font-bold hover:underline inline-flex items-center gap-1"
             >
               <span>Doctor & Clinic Portal Login</span>
               <ArrowRight className="w-3 h-3" />
             </Link>
 
-            <div className="pt-2 text-slate-400 text-[11px]">
-              Don&apos;t have an AHCS Client ID?{' '}
-              <Link href="/apply" className="text-blue-700 font-semibold hover:underline">
-                Apply here
+            <div className="pt-2 text-[#62748A] text-[11px]">
+              Don&apos;t have an AHCS account yet?{' '}
+              <Link href="/apply" className="text-[#1769AA] font-semibold hover:underline">
+                Create Account (Get Started)
               </Link>
             </div>
           </div>
         </div>
       </main>
-
     </div>
   );
 }

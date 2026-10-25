@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   Menu,
   X,
@@ -20,213 +21,181 @@ import {
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'How It Works', href: '/how-it-works' },
+    { label: 'Smart Health Card', href: '/health-card' },
+    { label: 'Healthcare Network', href: '/network' },
+    { label: 'Security', href: '/security' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
 
   return (
     <>
-      {/* 1. TOP UTILITY TAPE: Trust, Security Protocol, Helpline */}
-      <div className="bg-slate-900 text-slate-300 text-[11px] font-medium border-b border-slate-800">
+      {/* 1. TOP UTILITY TAPE: Trust, Security Protocol, Verification */}
+      <div className="bg-[#102A43] text-slate-300 text-[11px] font-medium border-b border-[#0B1D2F]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block" />
-              <span className="hidden sm:inline font-mono">AHCS CORE LEDGER:</span>
-              <span className="text-emerald-400 font-semibold">100% OPERATIONAL</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#16835F] animate-pulse inline-block" />
+              <span className="hidden sm:inline font-mono text-[10px] text-slate-400">LEDGER STATUS:</span>
+              <span className="text-[#13BBA4] font-semibold text-[11px]">ACTIVE & AUDITED</span>
             </span>
-            <span className="hidden md:inline text-slate-600">|</span>
-            <span className="hidden md:flex items-center gap-1 text-slate-400">
-              <Lock className="w-3 h-3 text-slate-400" />
-              <span>AES-256 Vault Encryption</span>
+            <span className="hidden md:inline text-slate-700">|</span>
+            <span className="hidden md:flex items-center gap-1 text-slate-400 text-[11px]">
+              <Lock className="w-3 h-3 text-[#13BBA4]" />
+              <span>AES-256 Vault-Isolated</span>
             </span>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             <Link
               href="/verify"
-              className="text-slate-300 hover:text-white transition-colors flex items-center gap-1"
+              className="text-slate-300 hover:text-white transition-colors flex items-center gap-1 text-[11px]"
             >
-              <Search className="w-3 h-3 text-sky-400" />
-              <span className="font-semibold">Verify Any Card</span>
+              <Search className="w-3 h-3 text-[#2884CD]" />
+              <span className="font-medium">Verify Card</span>
             </Link>
-            <span className="text-slate-600">|</span>
+            <span className="text-slate-700">|</span>
             <Link
               href="/emergency-preview"
-              className="text-rose-400 hover:text-rose-300 transition-colors flex items-center gap-1 font-semibold"
+              className="text-rose-300 hover:text-white transition-colors flex items-center gap-1 font-medium text-[11px]"
             >
               <ShieldAlert className="w-3 h-3 text-rose-400" />
-              <span>Break-Glass Emergency</span>
+              <span>Emergency Gateway</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* 2. MAIN FLOATING-STYLE PROFESSIONAL HEADER */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs transition-all">
+      {/* 2. MAIN PROFESSIONAL HEALTHCARE HEADER */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#DFE7F0] shadow-xs transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Brand Logo with Premium Badge Look */}
+            {/* Brand Logo with Restrained Medical Authority */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-slate-950 via-[#0f3b56] to-sky-600 text-white flex items-center justify-center font-black text-base shadow-md shadow-sky-950/20 group-hover:scale-105 transition-transform duration-200 border border-sky-400/30">
+              <div className="w-10 h-10 rounded-xl bg-[#102A43] text-white flex items-center justify-center font-black text-lg shadow-sm border border-[#1769AA]/30 group-hover:bg-[#1769AA] transition-colors">
                 A
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl sm:text-2xl font-black text-slate-950 tracking-tight leading-none group-hover:text-blue-700 transition-colors">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xl font-black text-[#102A43] tracking-tight leading-none group-hover:text-[#1769AA] transition-colors">
                     AHCS
                   </span>
-                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase bg-blue-50 text-blue-700 border border-blue-200">
-                    Smart Card
+                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase bg-[#F5F8FC] text-[#1769AA] border border-[#DFE7F0]">
+                    Health Identity
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-500 font-medium tracking-tight mt-0.5">
+                <span className="text-[10px] text-[#62748A] font-medium tracking-tight mt-0.5">
                   Advanced Health Care System
                 </span>
               </div>
             </Link>
 
             {/* Desktop Nav Items */}
-            <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold text-slate-700">
-              <Link
-                href="/"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/health-card"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors flex items-center gap-1.5"
-              >
-                <CreditCard className="w-3.5 h-3.5 text-blue-600" />
-                <span>Smart Health Card</span>
-              </Link>
-              <Link
-                href="/how-it-works"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors"
-              >
-                How It Works
-              </Link>
-              <Link
-                href="/pricing"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors"
-              >
-                Plans & Pricing
-              </Link>
-              <Link
-                href="/network"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors"
-              >
-                Network
-              </Link>
-              <Link
-                href="/contact"
-                className="px-3 py-2 rounded-lg hover:text-blue-700 hover:bg-slate-50 transition-colors"
-              >
-                Contact
-              </Link>
+            <nav className="hidden lg:flex items-center space-x-1 text-xs font-semibold text-[#172B4D]">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-3 py-2 rounded-lg transition-colors ${
+                      active
+                        ? 'text-[#1769AA] bg-[#F5F8FC] font-bold'
+                        : 'text-[#172B4D] hover:text-[#1769AA] hover:bg-[#F5F8FC]'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Desktop Right CTAs */}
-            <div className="hidden sm:flex items-center space-x-3">
+            <div className="hidden sm:flex items-center space-x-2.5">
               <Link
                 href="/login"
-                className="text-xs font-semibold text-slate-800 hover:text-blue-700 px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors"
+                className="text-xs font-semibold text-[#172B4D] hover:text-[#1769AA] px-3.5 py-2 rounded-lg hover:bg-[#F5F8FC] transition-colors"
               >
                 Sign In
               </Link>
 
               <Link
                 href="/apply"
-                className="relative inline-flex items-center gap-2 text-xs font-bold text-white bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600 hover:from-blue-800 hover:to-sky-700 px-5 py-2.5 rounded-xl shadow-md shadow-blue-700/25 hover:shadow-lg hover:shadow-blue-700/35 transition-all transform hover:-translate-y-0.5"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#102A43] hover:bg-[#1769AA] px-4 py-2.5 rounded-xl shadow-sm transition-all transform hover:-translate-y-0.5"
               >
-                <Sparkles className="w-3.5 h-3.5 text-sky-200" />
-                <span>Get Health Card</span>
+                <span>Get Started</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             {/* Mobile Hamburger Toggle */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <Link
                 href="/apply"
-                className="text-xs font-bold text-white bg-blue-700 px-3.5 py-1.5 rounded-lg shadow-xs"
+                className="text-xs font-bold text-white bg-[#102A43] px-3 py-1.5 rounded-lg shadow-xs sm:hidden"
               >
-                Get Card
+                Get Started
               </Link>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
-                aria-label="Toggle navigation"
+                className="p-2 rounded-xl text-[#172B4D] hover:bg-[#F5F8FC] border border-[#DFE7F0] transition-colors"
+                aria-label="Toggle navigation menu"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl px-4 py-6 space-y-4 shadow-xl">
-            <div className="grid grid-cols-2 gap-2 text-xs font-semibold">
-              <Link
-                href="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                href="/health-card"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors flex items-center gap-1.5"
-              >
-                <CreditCard className="w-3.5 h-3.5 text-blue-600" />
-                <span>Smart Card</span>
-              </Link>
-              <Link
-                href="/how-it-works"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                How It Works
-              </Link>
-              <Link
-                href="/pricing"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                Plans & Pricing
-              </Link>
-              <Link
-                href="/verify"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-slate-50 text-slate-800 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-              >
-                Verify Card
-              </Link>
-              <Link
-                href="/emergency-preview"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl bg-rose-50 text-rose-700 transition-colors flex items-center gap-1.5"
-              >
-                <ShieldAlert className="w-3.5 h-3.5" />
-                <span>Emergency QR</span>
-              </Link>
-            </div>
+          <div className="lg:hidden border-t border-[#DFE7F0] bg-white px-4 pt-3 pb-6 space-y-2 animate-in fade-in duration-200">
+            <nav className="flex flex-col space-y-1">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between ${
+                      active
+                        ? 'bg-[#F5F8FC] text-[#1769AA] font-bold'
+                        : 'text-[#172B4D] hover:bg-[#F5F8FC] hover:text-[#1769AA]'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-[#62748A]">→</span>
+                  </Link>
+                );
+              })}
+            </nav>
 
-            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+            <div className="pt-3 border-t border-[#DFE7F0] flex flex-col gap-2">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800"
+                className="w-full py-2.5 text-center text-xs font-semibold text-[#172B4D] bg-[#F5F8FC] rounded-xl border border-[#DFE7F0]"
               >
-                Member Sign In
+                Sign In
               </Link>
               <Link
                 href="/apply"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-3 rounded-xl bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-700/20"
+                className="w-full py-2.5 text-center text-xs font-bold text-white bg-[#102A43] hover:bg-[#1769AA] rounded-xl shadow-sm"
               >
-                Apply for Smart Health Card →
+                Create Account (Get Started)
               </Link>
             </div>
           </div>

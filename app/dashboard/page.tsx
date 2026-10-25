@@ -321,31 +321,10 @@ export default function DashboardPage() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    {loginGatewayActive ? (
-                      <div className="bg-emerald-50 p-3.5 rounded-xl border border-emerald-200 text-xs text-emerald-900 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span>Live SMS dispatched to <strong>+91 {loginMobile}</strong>. Check your phone.</span>
-                      </div>
-                    ) : (
-                      <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-1.5">
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-slate-700">Security Verification Code:</span>
-                          <span className="font-mono font-bold text-sm text-blue-700 bg-white px-2 py-0.5 rounded border border-slate-200">
-                            {loginDevCode || 'Generated'}
-                          </span>
-                        </div>
-                        {loginDevCode && (
-                          <button
-                            type="button"
-                            onClick={() => setLoginOtp(loginDevCode)}
-                            className="text-[11px] text-blue-600 font-bold hover:underline block text-left"
-                          >
-                            Click to fill code ({loginDevCode})
-                          </button>
-                        )}
-                      </div>
-                    )}
-
+                    <div className="bg-blue-50 p-3.5 rounded-xl border border-blue-200 text-xs text-blue-900 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#1769AA] shrink-0" />
+                      <span>Security verification code dispatched to <strong>+91 {loginMobile}</strong>. Check your phone.</span>
+                    </div>
                     <div>
                       <div className="flex justify-between items-center mb-1">
                         <label className="text-[11px] font-bold text-slate-700">
