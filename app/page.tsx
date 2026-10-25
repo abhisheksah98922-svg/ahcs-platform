@@ -40,7 +40,8 @@ import {
   BadgeCheck,
   ExternalLink,
   Shield,
-  HelpCircle
+  HelpCircle,
+  Smartphone
 } from 'lucide-react';
 import { SmartCardInteractive } from '@/components/SmartCardInteractive';
 
@@ -219,7 +220,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white">
       
-      {/* TOP REGULATORY ADVISORY TAPE */}
+      {/* 1. TOP REGULATORY ADVISORY TAPE */}
       <section className="bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border-b border-blue-100 px-4 py-2 text-xs text-blue-950 font-medium">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
@@ -233,8 +234,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 1. HERO SECTION: Light Theme with Navy Blue, Royal Blue & Subtle Mesh */}
-      <section className="relative isolate overflow-hidden min-h-[660px] lg:min-h-[740px] flex items-center border-b border-slate-200 bg-gradient-to-b from-white via-sky-50/25 to-slate-50">
+      {/* 2. HERO SECTION: Ultra-Modern Light Theme Presentation */}
+      <section className="relative isolate overflow-hidden min-h-[660px] lg:min-h-[740px] flex items-center border-b border-slate-200 bg-gradient-to-b from-white via-sky-50/20 to-slate-50">
         
         {/* Subtle Tech Dot Matrix Grid Texture */}
         <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px] opacity-25 z-0 pointer-events-none" />
@@ -244,18 +245,18 @@ export default function HomePage() {
         <div className="absolute top-1/2 right-10 w-[420px] h-[320px] bg-blue-100/40 rounded-full blur-3xl pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
-            {/* Left Content Column */}
+            {/* Left Column: Core Positioning & Identity Gateway */}
             <div className="lg:col-span-7 space-y-6">
               
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-slate-800 text-xs font-semibold border border-slate-200/90 shadow-2xs">
                 <span className="font-bold bg-blue-50 text-blue-700 text-[10px] px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
-                  AHCS · TRUST NETWORK
+                  AHCS · TRUST PROTOCOL
                 </span>
-                <span className="text-slate-700 font-medium">Private Healthcare Identity & Smart Health Card</span>
+                <span className="text-slate-700 font-medium">Sovereign Healthcare Identity & Smart Card</span>
               </div>
 
               {/* Main Headline */}
@@ -268,54 +269,11 @@ export default function HomePage() {
 
               {/* Subheading */}
               <p className="text-base sm:text-lg text-slate-600 font-normal max-w-xl leading-relaxed">
-                One permanent AHCS Client ID connecting your personal encrypted medical records, care services, participating clinical network, and 24x7 break-glass trauma profile.
+                One permanent AHCS Client ID connecting your personal encrypted medical vault, participating hospital network, and 24x7 break-glass emergency vitals.
               </p>
 
-              {/* 4 Feature Bullet Points in 2x2 Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 max-w-2xl text-xs sm:text-[13px] text-slate-800 font-medium">
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
-                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900">Permanent Client ID:</strong>
-                    <span className="text-slate-600 block text-xs">Issued after human KYC verification</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
-                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900">Smart Health Card:</strong>
-                    <span className="text-slate-600 block text-xs">Contactless NFC & dynamic rotating QR</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
-                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900">Patient Consent Vault:</strong>
-                    <span className="text-slate-600 block text-xs">Granular control over medical record sharing</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5 p-3 rounded-2xl bg-white/95 border border-slate-200 shadow-2xs backdrop-blur-sm">
-                  <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900">Break-Glass Profile:</strong>
-                    <span className="text-slate-600 block text-xs">24x7 trauma vitals access for paramedics</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+              {/* Primary Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <Link
                   href="/apply"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600 hover:from-blue-800 hover:to-sky-700 text-white font-bold text-sm shadow-lg shadow-blue-700/25 transition-all transform hover:-translate-y-0.5"
@@ -344,9 +302,9 @@ export default function HomePage() {
 
               {/* Quick Card Verification Input Field & Emergency Mode Switcher */}
               <div className="pt-2">
-                <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs max-w-xl">
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs max-w-xl">
                   {/* Mode Selector Tabs */}
-                  <div className="flex items-center gap-2 mb-2 pb-2 border-b border-slate-100 text-xs">
+                  <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-slate-100 text-xs">
                     <button
                       type="button"
                       onClick={() => setSearchMode('ID')}
@@ -414,7 +372,7 @@ export default function HomePage() {
 
                   {/* Quick Helper Chips */}
                   <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500">
-                    <span>Try sample:</span>
+                    <span>Try sample ID:</span>
                     <button
                       type="button"
                       onClick={() => setQuickVerifyInput('AHCS-IN-2026-9921')}
@@ -426,31 +384,35 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Trust Metrics Bar */}
-              <div className="pt-2 border-t border-slate-200/80 grid grid-cols-3 gap-3 max-w-xl">
-                <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="text-base sm:text-lg font-black text-slate-900">Zero Leak</div>
-                  <div className="text-[11px] text-slate-500 font-medium">No medical data in QR/NFC</div>
+              {/* 4 Trust Metric Cards in Grid */}
+              <div className="pt-2 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-xl text-center sm:text-left">
+                <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <div className="text-sm font-black text-slate-900">Zero Leak</div>
+                  <div className="text-[10px] text-slate-500">No medical data in QR</div>
                 </div>
-                <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="text-base sm:text-lg font-black text-blue-700">AES-256</div>
-                  <div className="text-[11px] text-slate-500 font-medium">Encrypted Record Vault</div>
+                <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <div className="text-sm font-black text-blue-700">AES-256</div>
+                  <div className="text-[10px] text-slate-500">Encrypted Vault</div>
                 </div>
-                <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="text-base sm:text-lg font-black text-emerald-600">ISO 7810</div>
-                  <div className="text-[11px] text-slate-500 font-medium">Standard CR80 Credential</div>
+                <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <div className="text-sm font-black text-emerald-600">ISO 7810</div>
+                  <div className="text-[10px] text-slate-500">CR80 Credential</div>
+                </div>
+                <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-2xs">
+                  <div className="text-sm font-black text-sky-700">Sub-1s</div>
+                  <div className="text-[10px] text-slate-500">Break-Glass Vitals</div>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Card Column: Revamped Smart Card Interactive Component */}
+            {/* Right Column: Smart Card Interactive Experience */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <div className="relative w-full max-w-md">
                 {/* Backlight Ambient Glow */}
                 <div className="absolute -inset-4 bg-gradient-to-tr from-blue-400/20 via-sky-300/20 to-indigo-300/20 rounded-3xl blur-2xl -z-10" />
 
-                {/* Interactive Flippable Smart Card Component */}
+                {/* Flippable Smart Card Component */}
                 <SmartCardInteractive initialTheme="platinum" showControls={true} />
               </div>
             </div>
@@ -459,7 +421,221 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. CONNECTED HEALTHCARE SERVICES NETWORK: Interactive Filterable Hub */}
+      {/* 3. WHAT AHCS IS vs WHAT AHCS IS NOT: Transparent Demarcation Matrix */}
+      <section className="py-20 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
+              Transparent Demarcation
+            </span>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight mt-3">
+              Clear Boundaries. Absolute Integrity.
+            </h2>
+            <p className="text-sm text-slate-600 mt-2">
+              We operate with uncompromising clarity. Know exactly what AHCS delivers and how your sovereign healthcare rights are governed.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* What AHCS IS */}
+            <div className="bg-slate-50/70 p-8 rounded-3xl border border-emerald-200 shadow-sm space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700">
+                  <CheckCircle2 className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-slate-900">What AHCS Is</h3>
+                  <p className="text-xs text-emerald-700 font-semibold">Private Healthcare Infrastructure</p>
+                </div>
+              </div>
+
+              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>A private healthcare identity platform</strong> built around an immutable permanent AHCS Client ID.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>A physical Smart Health Card (NFC + QR)</strong> and citizen-controlled digital health vault.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Patient Consent Vault:</strong> Granular time-bound clinical record sharing with verified treating physicians.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Break-Glass Emergency Protocol:</strong> Paramedic triage access to critical blood group and allergies with immutable audit logs.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <span><strong>Healthcare Assistance Network:</strong> Transparent discounted diagnostic, home care, and telemedicine coordination.</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* What AHCS IS NOT */}
+            <div className="bg-slate-50/70 p-8 rounded-3xl border border-rose-200 shadow-sm space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-rose-700">
+                  <XCircle className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-slate-900">What AHCS Is NOT</h3>
+                  <p className="text-xs text-rose-700 font-semibold">Strict Regulatory Boundaries</p>
+                </div>
+              </div>
+
+              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
+                <li className="flex items-start gap-2.5">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>NOT a government scheme</strong>, Aadhaar, ABHA, NDHM, or Ayushman Bharat PM-JAY.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>NOT an insurance company</strong> and does not underwrite policies or guarantee insurance claims.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>NOT a hospital or clinic</strong>; does not employ treating physicians directly.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>Does NOT guarantee hospital admissions</strong>, cashless beds, or clinical outcomes.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                  <span><strong>Never uses deceptive claims</strong> like &quot;100% free surgery everywhere&quot; or fake partner hospital badges.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Statutory Guarantee Badge */}
+          <div className="mt-8 max-w-5xl mx-auto p-4 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-blue-900">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-blue-700 shrink-0" />
+              <span><strong>Statutory Integrity Guarantee:</strong> AHCS strictly complies with India&apos;s Digital Personal Data Protection (DPDP) Act 2023.</span>
+            </div>
+            <Link href="/privacy" className="font-bold underline text-blue-700 hover:text-blue-900 shrink-0">
+              Review Privacy Architecture →
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. THE 6-STEP VERIFICATION TO ISSUANCE PIPELINE WITH DYNAMIC INSPECTOR */}
+      <section className="py-20 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
+              Trust & Issuance Lifecycle
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mt-3">
+              How You Get Your Verified AHCS ID
+            </h2>
+            <p className="text-sm text-slate-600 mt-2">
+              Every permanent AHCS Client ID is bound to an authentic identity through cryptographic verification, fraud detection, and human verification review.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Steps Grid: 6 Steps */}
+            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {pipelineSteps.map((step, idx) => (
+                <div
+                  key={step.num}
+                  onClick={() => setActiveStep(idx + 1)}
+                  className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                    activeStep === idx + 1
+                      ? 'bg-blue-50/90 border-blue-500 shadow-md ring-2 ring-blue-500/20'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className={`text-xs font-mono font-black px-2.5 py-1 rounded-lg border ${
+                        activeStep === idx + 1
+                          ? 'bg-blue-700 text-white border-blue-700'
+                          : 'bg-slate-100 text-blue-700 border-slate-200'
+                      }`}>
+                        {step.num}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase text-slate-400">
+                        {step.badge}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-900 mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Dynamic Step Detail Inspector Panel */}
+            <div className="lg:col-span-4 bg-gradient-to-br from-slate-900 to-slate-950 text-white p-6 rounded-3xl shadow-xl border border-slate-800 space-y-5 sticky top-24">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider">
+                  Live Stage Inspector
+                </span>
+                <span className="text-xs font-bold bg-blue-600/80 px-2.5 py-0.5 rounded-full text-white">
+                  Step {activeStep} of 6
+                </span>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-black text-white">
+                  {pipelineSteps[activeStep - 1].title}
+                </h4>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  {pipelineSteps[activeStep - 1].desc}
+                </p>
+              </div>
+
+              <div className="space-y-3 pt-2 text-xs border-t border-slate-800">
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Technical Mechanism:</span>
+                  <span className="text-sky-300 font-mono text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].mechanism}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Turnaround SLA:</span>
+                  <span className="text-emerald-400 font-bold text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].sla}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Required User Action:</span>
+                  <span className="text-slate-200 text-xs mt-0.5 block">
+                    {pipelineSteps[activeStep - 1].userAction}
+                  </span>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  href="/apply"
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
+                >
+                  <span>Begin Step 1 Enrollment</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 5. CONNECTED HEALTHCARE SERVICES NETWORK: Interactive Bento Directory */}
       <section className="py-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -576,221 +752,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. WHAT AHCS IS vs WHAT AHCS IS NOT: Clean Side-by-Side Comparison */}
-      <section className="py-20 bg-slate-50 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-              Transparent Demarcation
-            </span>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight mt-3">
-              Clear Boundaries. Absolute Integrity.
-            </h2>
-            <p className="text-sm text-slate-600 mt-2">
-              We operate with uncompromising clarity. Know exactly what AHCS delivers and how your sovereign healthcare rights are governed.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* What AHCS IS */}
-            <div className="bg-white p-8 rounded-3xl border border-emerald-200 shadow-sm space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-black text-slate-900">What AHCS Is</h3>
-                  <p className="text-xs text-emerald-700 font-semibold">Private Healthcare Infrastructure</p>
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>A private healthcare identity platform</strong> built around an immutable permanent AHCS Client ID.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>A physical Smart Health Card (NFC + QR)</strong> and citizen-controlled digital health vault.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Patient Consent Vault:</strong> Granular time-bound clinical record sharing with verified treating physicians.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Break-Glass Emergency Protocol:</strong> Paramedic triage access to critical blood group and allergies with immutable audit logs.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Healthcare Assistance Network:</strong> Transparent discounted diagnostic, home care, and telemedicine coordination.</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* What AHCS IS NOT */}
-            <div className="bg-white p-8 rounded-3xl border border-rose-200 shadow-sm space-y-5">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-rose-100 flex items-center justify-center text-rose-700">
-                  <XCircle className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-black text-slate-900">What AHCS Is NOT</h3>
-                  <p className="text-xs text-rose-700 font-semibold">Strict Regulatory Boundaries</p>
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 text-xs sm:text-sm text-slate-700">
-                <li className="flex items-start gap-2.5">
-                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>NOT a government scheme</strong>, Aadhaar, ABHA, NDHM, or Ayushman Bharat PM-JAY.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>NOT an insurance company</strong> and does not underwrite policies or guarantee insurance claims.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>NOT a hospital or clinic</strong>; does not employ treating physicians directly.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>Does NOT guarantee hospital admissions</strong>, cashless beds, or clinical outcomes.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                  <span><strong>Never uses deceptive claims</strong> like &quot;100% free surgery everywhere&quot; or fake partner hospital badges.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Statutory Guarantee Badge */}
-          <div className="mt-8 max-w-5xl mx-auto p-4 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-blue-900">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-blue-700 shrink-0" />
-              <span><strong>Statutory Integrity Guarantee:</strong> AHCS strictly complies with India&apos;s Digital Personal Data Protection (DPDP) Act 2023.</span>
-            </div>
-            <Link href="/privacy" className="font-bold underline text-blue-700 hover:text-blue-900 shrink-0">
-              Review Privacy Architecture →
-            </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 4. THE 6-STEP VERIFICATION TO ISSUANCE PIPELINE WITH DYNAMIC INSPECTOR */}
-      <section className="py-20 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-3 py-1 rounded-full">
-              Trust & Issuance Lifecycle
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight mt-3">
-              How You Get Your Verified AHCS ID
-            </h2>
-            <p className="text-sm text-slate-600 mt-2">
-              Every permanent AHCS Client ID is bound to an authentic identity through cryptographic verification, fraud detection, and human verification review.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Steps Grid: 6 Steps */}
-            <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {pipelineSteps.map((step, idx) => (
-                <div
-                  key={step.num}
-                  onClick={() => setActiveStep(idx + 1)}
-                  className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                    activeStep === idx + 1
-                      ? 'bg-blue-50/80 border-blue-500 shadow-md ring-2 ring-blue-500/20'
-                      : 'bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className={`text-xs font-mono font-black px-2.5 py-1 rounded-lg border ${
-                        activeStep === idx + 1
-                          ? 'bg-blue-700 text-white border-blue-700'
-                          : 'bg-white text-blue-700 border-slate-200'
-                      }`}>
-                        {step.num}
-                      </span>
-                      <span className="text-[10px] font-bold uppercase text-slate-400">
-                        {step.badge}
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-bold text-slate-900 mb-1.5">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {step.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Dynamic Step Detail Inspector Panel */}
-            <div className="lg:col-span-4 bg-gradient-to-br from-slate-900 to-slate-950 text-white p-6 rounded-3xl shadow-xl border border-slate-800 space-y-5 sticky top-24">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-sky-400 font-bold uppercase tracking-wider">
-                  Live Stage Inspector
-                </span>
-                <span className="text-xs font-bold bg-blue-600/80 px-2.5 py-0.5 rounded-full text-white">
-                  Step {activeStep} of 6
-                </span>
-              </div>
-
-              <div>
-                <h4 className="text-lg font-black text-white">
-                  {pipelineSteps[activeStep - 1].title}
-                </h4>
-                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                  {pipelineSteps[activeStep - 1].desc}
-                </p>
-              </div>
-
-              <div className="space-y-3 pt-2 text-xs border-t border-slate-800">
-                <div>
-                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Technical Mechanism:</span>
-                  <span className="text-sky-300 font-mono text-xs mt-0.5 block">
-                    {pipelineSteps[activeStep - 1].mechanism}
-                  </span>
-                </div>
-
-                <div>
-                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Turnaround SLA:</span>
-                  <span className="text-emerald-400 font-bold text-xs mt-0.5 block">
-                    {pipelineSteps[activeStep - 1].sla}
-                  </span>
-                </div>
-
-                <div>
-                  <span className="text-slate-400 block text-[11px] uppercase tracking-wider font-semibold">Required User Action:</span>
-                  <span className="text-slate-200 text-xs mt-0.5 block">
-                    {pipelineSteps[activeStep - 1].userAction}
-                  </span>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link
-                  href="/apply"
-                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-1.5"
-                >
-                  <span>Begin Step 1 Enrollment</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 5. DOCTOR CONSULTATIONS & DIGITAL CLINICAL RECORDS (Rich Image Showcase) */}
+      {/* 6. DOCTOR CONSULTATIONS & DIGITAL CLINICAL RECORDS (Rich Image Showcase) */}
       <section className="py-20 bg-slate-50 border-b border-slate-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -870,7 +832,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. BREAK-GLASS EMERGENCY & AMBULANCE RESPONSE (Golden Hour Protection) */}
+      {/* 7. BREAK-GLASS EMERGENCY & AMBULANCE RESPONSE (Golden Hour Protection) */}
       <section className="py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -957,7 +919,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. PHYSICAL SMART CARD & HOSPITAL TAP (Card-in-Hand Showcase) */}
+      {/* 8. PHYSICAL SMART CARD & HOSPITAL TAP (Card-in-Hand Showcase) */}
       <section className="py-20 bg-slate-50 border-b border-slate-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -1044,7 +1006,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. NATIONWIDE NETWORK OF VERIFIED HOSPITALS & LABS (Hospital Network Showcase) */}
+      {/* 9. NATIONWIDE NETWORK OF VERIFIED HOSPITALS & LABS (Hospital Network Showcase) */}
       <section className="py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 mb-10">
@@ -1085,7 +1047,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. LIFE-SAFETY ADVISORY / 112 EMERGENCY BANNER */}
+      {/* 10. LIFE-SAFETY ADVISORY / 112 EMERGENCY BANNER */}
       <section className="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
