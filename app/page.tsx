@@ -215,21 +215,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#F5F8FC] text-[#172B4D] selection:bg-[#1769AA] selection:text-white">
-      
-      {/* TOP REGULATORY ADVISORY TAPE */}
-      <section className="bg-[#EEF3F9] border-b border-[#DFE7F0] px-4 py-2 text-xs text-[#102A43] font-medium">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#16835F] animate-pulse shrink-0" />
-            <span><strong>Private Healthcare Identity:</strong> AHCS is an independent identity and healthcare access platform. Not affiliated with UIDAI, ABHA, or government schemes.</span>
-          </div>
-          <Link href="/how-it-works" className="text-[#1769AA] hover:text-[#102A43] font-bold underline underline-offset-2 shrink-0 flex items-center gap-1">
-            <span>Security Architecture</span>
-            <ArrowRight className="w-3 h-3" />
-          </Link>
-        </div>
-      </section>
-
       {/* 1. HERO SECTION: Balanced 2-Column Client Showcase */}
       <section className="relative overflow-hidden min-h-[580px] lg:min-h-[660px] flex items-center border-b border-[#DFE7F0] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 w-full">
@@ -738,7 +723,7 @@ export default function HomePage() {
                   href="/emergency-preview"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 text-[#172B4D] font-bold text-xs transition-all border border-[#DFE7F0]"
                 >
-                  <span>Test Emergency Simulator</span>
+                  <span>Test Emergency Gateway</span>
                 </Link>
               </div>
             </div>
@@ -830,8 +815,8 @@ export default function HomePage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
                 <div className="p-3.5 rounded-xl bg-[#F5F8FC] border border-[#DFE7F0]">
-                  <h4 className="font-bold text-[#102A43] text-xs sm:text-sm">Gold EMV Security</h4>
-                  <p className="text-xs text-[#62748A] mt-0.5">Embedded chip simulation architecture ready for cryptographic smart-card terminals.</p>
+                  <h4 className="font-bold text-[#102A43] text-xs sm:text-sm">Gold Contact Microchip</h4>
+                  <p className="text-xs text-[#62748A] mt-0.5">Embedded 6-pin contact chip architecture adhering to ISO/IEC 7816 hospital terminal standards.</p>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-[#F5F8FC] border border-[#DFE7F0]">
@@ -948,41 +933,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. FINAL CALL TO ACTION */}
-      <section className="py-16 bg-[#102A43] text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#13BBA4] text-xs font-semibold border border-white/20">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Lifelong Sovereign Healthcare Identity</span>
-          </div>
+      {/* 10. FINAL CALL TO ACTION (Contained Light & Navy Card) */}
+      <section className="py-16 bg-[#F5F8FC] border-b border-[#DFE7F0]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-[#102A43] via-[#1769AA] to-[#102A43] text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-lg border border-blue-900/30">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#36C5D8] text-xs font-semibold border border-white/20">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Lifelong Sovereign Healthcare Identity</span>
+            </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-            Take Control of Your Medical Identity Today
-          </h2>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white max-w-2xl mx-auto leading-tight">
+              Take Control of Your Medical Identity Today
+            </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Join thousands of individuals and families who rely on AHCS for verified medical identification, encrypted clinical records, and 24x7 emergency protection.
-          </p>
+            <p className="text-sm sm:text-base text-slate-200 max-w-xl mx-auto leading-relaxed">
+              Join thousands of individuals and families who rely on AHCS for verified medical identification, encrypted clinical records, and 24x7 emergency protection.
+            </p>
 
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/apply"
-              className="px-7 py-3.5 bg-[#1769AA] hover:bg-[#2884CD] text-white rounded-xl font-bold text-sm shadow-sm transition-all"
-            >
-              Create Your Health ID
-            </Link>
-            <Link
-              href="/membership"
-              className="px-6 py-3.5 bg-white text-[#102A43] hover:bg-slate-100 rounded-xl font-bold text-sm shadow-sm transition-all"
-            >
-              Membership Packages
-            </Link>
-            <Link
-              href="/contact"
-              className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-sm transition-all border border-white/20"
-            >
-              Contact Support
-            </Link>
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/apply"
+                className="px-7 py-3.5 bg-white text-[#102A43] hover:bg-slate-100 rounded-xl font-bold text-sm shadow-sm transition-all"
+              >
+                Create Your Health ID
+              </Link>
+              <Link
+                href="/membership"
+                className="px-6 py-3.5 bg-[#2389D7] hover:bg-[#1769AA] text-white rounded-xl font-bold text-sm shadow-sm transition-all"
+              >
+                Membership Packages
+              </Link>
+              <Link
+                href="/contact"
+                className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-sm transition-all border border-white/20"
+              >
+                Contact Support
+              </Link>
+            </div>
           </div>
         </div>
       </section>

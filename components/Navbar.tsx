@@ -40,18 +40,18 @@ export const Navbar = () => {
 
   return (
     <>
-      {/* 1. TOP UTILITY TAPE: Trust, Security Protocol, Verification */}
-      <div className="bg-[#102A43] text-slate-300 text-[11px] font-medium border-b border-[#0B1D2F]">
+      {/* 1. TOP UTILITY TAPE: Trust, Security Protocol, Verification (Crisp Light Theme) */}
+      <div className="bg-[#F8FAFC] text-[#172B4D] text-[11px] font-medium border-b border-[#E2E8F0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <span className="flex items-center gap-1.5 text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#16835F] animate-pulse inline-block" />
-              <span className="hidden sm:inline font-mono text-[10px] text-slate-400">LEDGER STATUS:</span>
-              <span className="text-[#13BBA4] font-semibold text-[11px]">ACTIVE & AUDITED</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#16865C] animate-pulse inline-block" />
+              <span className="hidden sm:inline font-mono text-[10px] text-[#66788A]">LEDGER STATUS:</span>
+              <span className="text-[#16865C] font-bold text-[11px]">ACTIVE & AUDITED</span>
             </span>
-            <span className="hidden md:inline text-slate-700">|</span>
-            <span className="hidden md:flex items-center gap-1 text-slate-400 text-[11px]">
-              <Lock className="w-3 h-3 text-[#13BBA4]" />
+            <span className="hidden md:inline text-slate-300">|</span>
+            <span className="hidden md:flex items-center gap-1.5 text-[#66788A] text-[11px]">
+              <Lock className="w-3 h-3 text-[#1769AA]" />
               <span>AES-256 Vault-Isolated</span>
             </span>
           </div>
@@ -59,17 +59,17 @@ export const Navbar = () => {
           <div className="flex items-center space-x-3 sm:space-x-4">
             <Link
               href="/verify"
-              className="text-slate-300 hover:text-white transition-colors flex items-center gap-1 text-[11px]"
+              className="text-[#1769AA] hover:text-[#102A43] transition-colors flex items-center gap-1 text-[11px] font-semibold"
             >
-              <Search className="w-3 h-3 text-[#2884CD]" />
-              <span className="font-medium">Verify Card</span>
+              <Search className="w-3 h-3 text-[#1769AA]" />
+              <span>Verify Card</span>
             </Link>
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-300">|</span>
             <Link
               href="/emergency-preview"
-              className="text-rose-300 hover:text-white transition-colors flex items-center gap-1 font-medium text-[11px]"
+              className="text-[#D64545] hover:text-red-700 transition-colors flex items-center gap-1 font-bold text-[11px]"
             >
-              <ShieldAlert className="w-3 h-3 text-rose-400" />
+              <ShieldAlert className="w-3.5 h-3.5 text-[#D64545]" />
               <span>Emergency Gateway</span>
             </Link>
           </div>
