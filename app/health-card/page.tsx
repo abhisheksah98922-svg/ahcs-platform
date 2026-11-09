@@ -2,13 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { 
-  CreditCard, 
-  ShieldCheck, 
-  QrCode, 
-  Cpu, 
-  CheckCircle2, 
-  Lock, 
+import {
+  CreditCard,
+  ShieldCheck,
+  QrCode,
+  Cpu,
+  CheckCircle2,
+  Lock,
   ArrowRight,
   Layers,
   Sparkles,
@@ -16,7 +16,14 @@ import {
   FileText,
   Printer,
   ExternalLink,
-  ShieldAlert
+  ShieldAlert,
+  Wifi,
+  Smartphone,
+  EyeOff,
+  Clock,
+  Ban,
+  Activity,
+  FileCheck2,
 } from 'lucide-react';
 import { SmartCardInteractive } from '@/components/SmartCardInteractive';
 
@@ -34,96 +41,255 @@ export default function HealthCardSpecPage() {
     { label: 'Cryptographic Rotation', value: 'Instant one-click QR token invalidation and re-minting from citizen dashboard' },
   ];
 
+  const frontFeatures = [
+    { title: 'AHCS Healthcare Logo', desc: 'Embossed high-definition medical insignia with holographic anti-counterfeit overlay.' },
+    { title: 'Cardholder Legal Name', desc: 'Laser-printed full legal name matching government-verified proof of identity.' },
+    { title: 'Permanent Client ID', desc: 'ISO/IEC 7064 Mod 97-10 validated unique identifier preventing accidental duplication.' },
+    { title: 'Dynamic QR Identity', desc: 'High-contrast 2D matrix for rapid optical scanner reading at partner clinic kiosks.' },
+    { title: 'Real-Time Card Status', desc: 'Visual indicator of active verification ledger status.' },
+  ];
+
+  const backFeatures = [
+    { title: 'Blood Group Identification', desc: 'Prominently displayed ABO & Rh blood type for instant transfusion matching.' },
+    { title: 'Emergency Contact Telephone', desc: 'Direct dial numbers for primary family guardians and designated emergency responders.' },
+    { title: 'Break-Glass Instructions', desc: 'Clear clinical directives guiding EMTs on how to scan and access critical allergy vitals.' },
+    { title: 'NFC Contactless Indicator', desc: 'Standard ISO/IEC 14443 13.56 MHz proximity tap area for rapid kiosk intake.' },
+    { title: 'Gold-Plated Contact Microchip', desc: 'ISO/IEC 7816 micro-module interface for offline hospital card readers.' },
+  ];
+
+  const digitalCardFeatures = [
+    {
+      title: 'Real-Time Ledger Status',
+      desc: 'Instant verification of card validity, whether ACTIVE, PENDING_RENEWAL, or SUSPENDED.',
+      icon: Activity,
+    },
+    {
+      title: 'Dynamic Rotating QR',
+      desc: 'Cryptographic access tokens that rotate periodically to prevent unauthorized screenshot misuse.',
+      icon: QrCode,
+    },
+    {
+      title: 'Offline Emergency Cache',
+      desc: 'Encrypted local device storage allowing emergency vitals display even when internet connectivity is lost.',
+      icon: Wifi,
+    },
+  ];
+
+  const securityGuarantees = [
+    {
+      title: 'Zero On-Card Sensitive Diagnosis',
+      desc: 'Full medical history, clinical diagnoses, and prescriptions are NEVER printed on the card or encoded in raw QR. Lost cards reveal zero private medical history.',
+      icon: EyeOff,
+    },
+    {
+      title: 'Immutable Break-Glass Audit Trail',
+      desc: 'Every scan of the emergency QR triggers an automated audit entry capturing timestamp, IP address, and location attempt, immediately alerting the cardholder via SMS.',
+      icon: Clock,
+    },
+    {
+      title: '1-Click Remote Card Freeze / Lock',
+      desc: 'If your physical card is lost or stolen, immediately click "Freeze Card" in your dashboard to instantly revoke the QR code and NFC token in real time.',
+      icon: Ban,
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200">
-            Card Engineering Specifications
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-4 tracking-tight">
+    <div className="min-h-screen bg-[#F5F8FC] flex flex-col font-sans">
+      {/* 1. HERO SECTION */}
+      <section className="bg-[#102A43] text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-[#0B1D2F]">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1769AA]/30 text-[#36C5D8] text-xs font-semibold border border-[#2389D7]/30">
+            <CreditCard className="w-4 h-4" />
+            <span>Card Engineering Specifications</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
             The AHCS Smart Health Card
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-            Standard ISO/IEC 7810 ID-1 form factor featuring Frosted Platinum Silver styling, dual-interface contactless NFC, gold contact chip, and tamper-evident break-glass emergency QR code.
+
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Standard ISO/IEC 7810 ID-1 form factor featuring Frosted Platinum styling, dual-interface contactless NFC, gold contact chip, and tamper-evident break-glass emergency QR code.
           </p>
         </div>
+      </section>
 
-        {/* Visual Dual-Side Card Interactive Component */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-xs">
+      {/* 2. INTERACTIVE 3D & DUAL-SIDE CARD STUDIO */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+        <div className="bg-white rounded-3xl border border-[#DFE7F0] p-6 sm:p-10 shadow-xs">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#1769AA] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+              Interactive Card Studio
+            </span>
+            <h2 className="text-xl sm:text-2xl font-black text-[#172B4D] mt-3">
               Interactive 3D & Side-by-Side Dual View
             </h2>
-            <p className="text-xs text-slate-500 mt-1">
-              Switch themes, rotate in 3D, or view both Front and Back faces simultaneously.
+            <p className="text-xs text-[#66788A] mt-1">
+              Switch finishes, rotate in 3D, inspect chip architecture, or view Front and Back faces simultaneously.
             </p>
           </div>
 
           <SmartCardInteractive initialTheme="platinum" />
         </div>
 
-        {/* Feature Highlights Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h3 className="text-base font-bold text-slate-900">Dual-Interface Architecture</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Equipped with both high-frequency 13.56 MHz contactless NFC and ISO 7816 contact smart chip for hospital kiosk check-ins.
+        {/* 3. PHYSICAL CARD ANATOMY: FRONT VS BACK */}
+        <div className="bg-white rounded-3xl border border-[#DFE7F0] p-6 sm:p-10 shadow-xs space-y-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#1769AA] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+              Card Architecture
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#172B4D] mt-3">
+              Physical Card Layout & Anatomy
+            </h3>
+            <p className="text-xs sm:text-sm text-[#66788A] mt-1">
+              Manufactured with durable composite polycarbonate and PVC substrates engineered for daily pocket wear.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center">
-              <ShieldAlert className="w-5 h-5" />
-            </div>
-            <h3 className="text-base font-bold text-slate-900">Break-Glass Emergency QR</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Paramedics scan the back-side QR to access life-critical blood group and emergency contacts in under 3 seconds without app login.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Front Face Breakdown */}
+            <div className="p-6 rounded-2xl bg-[#F5F8FC] border border-[#DFE7F0] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#102A43] text-white flex items-center justify-center font-bold text-xs">
+                  FRONT
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-[#102A43]">Front Face Elements</h4>
+                  <span className="text-[11px] text-[#66788A]">Patient Identity & Visual Verification</span>
+                </div>
+              </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-2xs space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
-              <Lock className="w-5 h-5" />
+              <div className="space-y-3 pt-2">
+                {frontFeatures.map((f, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-[#172B4D]">
+                    <CheckCircle2 className="w-4 h-4 text-[#1769AA] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="font-bold text-[#102A43]">{f.title}: </strong>
+                      <span className="text-[#66788A]">{f.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <h3 className="text-base font-bold text-slate-900">Zero On-Card Diagnosis</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Medical history is never printed on the physical card. In case of physical card loss, sensitive diagnoses remain strictly private.
-            </p>
+
+            {/* Back Face Breakdown */}
+            <div className="p-6 rounded-2xl bg-[#F5F8FC] border border-[#DFE7F0] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#1769AA] text-white flex items-center justify-center font-bold text-xs">
+                  BACK
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-[#102A43]">Back Face Elements</h4>
+                  <span className="text-[11px] text-[#66788A]">Emergency Triage & Contactless Interface</span>
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-2">
+                {backFeatures.map((b, idx) => (
+                  <div key={idx} className="flex items-start gap-2.5 text-xs text-[#172B4D]">
+                    <CheckCircle2 className="w-4 h-4 text-[#16865C] shrink-0 mt-0.5" />
+                    <div>
+                      <strong className="font-bold text-[#102A43]">{b.title}: </strong>
+                      <span className="text-[#66788A]">{b.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Technical Specification Table */}
-        <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-xs">
-          <div className="border-b border-slate-100 pb-4 mb-6">
-            <h3 className="text-xl font-bold text-slate-900">Technical Specifications Matrix</h3>
-            <p className="text-xs text-slate-500 mt-1">Full architectural parameters adhering to global digital health benchmarks.</p>
+        {/* 4. DIGITAL CARD CAPABILITIES */}
+        <div>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#1769AA] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+              Mobile Portal Capabilities
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#172B4D] mt-3">
+              Digital Smart Card Features
+            </h3>
+            <p className="text-xs sm:text-sm text-[#66788A] mt-1">
+              Available instantly inside your secure member portal on any smartphone or browser.
+            </p>
           </div>
-          <div className="divide-y divide-slate-100 text-xs">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {digitalCardFeatures.map((feat, idx) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white rounded-3xl border border-[#DFE7F0] p-6 sm:p-7 shadow-xs space-y-3"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#F5F8FC] border border-[#DFE7F0] text-[#1769AA] flex items-center justify-center">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-base font-bold text-[#172B4D]">{feat.title}</h4>
+                  <p className="text-xs text-[#66788A] leading-relaxed">{feat.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 5. PRIVACY & SECURITY GUARANTEES */}
+        <div className="bg-[#102A43] text-white rounded-3xl p-8 sm:p-12 shadow-sm border border-[#0B1D2F]">
+          <div className="max-w-3xl mx-auto text-center mb-10 space-y-3">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#36C5D8] bg-[#1769AA]/30 px-3.5 py-1 rounded-full border border-[#2389D7]/30">
+              Strict Security Standards
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              Privacy and Security Guarantees
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Designed according to Zero-Trust principles to prevent medical identity theft, unwanted data harvesting, and fraud.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {securityGuarantees.map((sec, idx) => {
+              const Icon = sec.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-[#0B1D2F]/70 rounded-2xl p-6 border border-slate-700/60 space-y-3"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#1769AA]/40 text-[#36C5D8] flex items-center justify-center">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-sm font-bold text-white">{sec.title}</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">{sec.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 6. TECHNICAL SPECIFICATIONS TABLE */}
+        <div className="bg-white rounded-3xl border border-[#DFE7F0] p-6 sm:p-10 shadow-xs">
+          <div className="border-b border-[#DFE7F0] pb-4 mb-6">
+            <h3 className="text-xl font-bold text-[#172B4D]">Technical Specifications Matrix</h3>
+            <p className="text-xs text-[#66788A] mt-1">Full architectural parameters adhering to global digital health benchmarks.</p>
+          </div>
+          <div className="divide-y divide-[#DFE7F0] text-xs">
             {specs.map((s, idx) => (
               <div key={idx} className="py-3.5 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <div className="font-semibold text-slate-500">{s.label}</div>
-                <div className="sm:col-span-2 font-mono font-medium text-slate-800">{s.value}</div>
+                <div className="font-semibold text-[#66788A]">{s.label}</div>
+                <div className="sm:col-span-2 font-mono font-medium text-[#172B4D]">{s.value}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Direct Download & Print Sheet Options */}
-        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-lg border border-slate-800">
+        {/* 7. PRINT & DOWNLOAD ASSETS */}
+        <div className="bg-white rounded-3xl border border-[#DFE7F0] p-8 sm:p-10 shadow-xs">
           <div className="max-w-3xl mx-auto text-center space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950/60 px-3 py-1 rounded-full border border-sky-800">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#1769AA] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
               Print-Ready Assets
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black">
-              Download Official Card Artwork & Print PDFs
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+            <h3 className="text-2xl sm:text-3xl font-black text-[#172B4D]">
+              Official Card Artwork & Print PDFs
+            </h3>
+            <p className="text-xs sm:text-sm text-[#66788A] max-w-xl mx-auto leading-relaxed">
               Standardized CR80 direct-to-card PVC thermal print files and 1:1 real-world physical scale A4 verification sheets.
             </p>
 
@@ -131,33 +297,32 @@ export default function HealthCardSpecPage() {
               <a
                 href="/downloads/ahcs_smart_card_cr80.pdf"
                 download
-                className="px-6 py-3 bg-white text-blue-950 hover:bg-slate-100 font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-[#102A43] hover:bg-[#1769AA] text-white font-bold rounded-xl text-xs shadow-sm transition-all flex items-center gap-2"
               >
-                <Download className="w-4 h-4 text-blue-700" />
+                <Download className="w-4 h-4 text-[#36C5D8]" />
                 <span>CR80 PVC Direct Print (PDF)</span>
               </a>
 
               <a
                 href="/downloads/ahcs_smart_card_a4_sheet.pdf"
                 download
-                className="px-6 py-3 bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-[#F5F8FC] hover:bg-[#DFE7F0] text-[#172B4D] font-bold rounded-xl text-xs border border-[#DFE7F0] transition-all flex items-center gap-2"
               >
-                <Download className="w-4 h-4 text-white" />
+                <Download className="w-4 h-4 text-[#1769AA]" />
                 <span>A4 Verification Sheet (PDF)</span>
               </a>
 
               <Link
                 href="/apply"
-                className="px-6 py-3 border border-slate-700 hover:border-slate-500 text-slate-200 hover:text-white font-bold rounded-xl text-xs transition-all flex items-center gap-2"
+                className="px-6 py-3 bg-[#1769AA] hover:bg-[#2389D7] text-white font-bold rounded-xl text-xs transition-all flex items-center gap-2 shadow-xs"
               >
-                <span>Apply for Client ID</span>
+                <span>Apply for Health ID</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
         </div>
-
-      </div>
+      </main>
     </div>
   );
 }

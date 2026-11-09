@@ -25,11 +25,11 @@ export const Navbar = () => {
 
   const navLinks = [
     { label: 'Home', href: '/' },
+    { label: 'About AHCS', href: '/about' },
     { label: 'How It Works', href: '/how-it-works' },
     { label: 'Smart Health Card', href: '/health-card' },
     { label: 'Healthcare Network', href: '/network' },
-    { label: 'Security', href: '/security' },
-    { label: 'About', href: '/about' },
+    { label: 'Membership', href: '/membership' },
     { label: 'Contact', href: '/contact' },
   ];
 

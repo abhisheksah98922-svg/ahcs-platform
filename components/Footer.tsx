@@ -81,6 +81,11 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/membership" className="hover:text-white transition-colors text-[#2884CD]">
+                  Membership Packages
+                </Link>
+              </li>
+              <li>
                 <Link href="/verify" className="hover:text-white transition-colors">
                   Verify Card Online
                 </Link>

@@ -50,7 +50,6 @@ export default function DashboardPage() {
   const [loginMobile, setLoginMobile] = useState<string>('');
   const [loginOtp, setLoginOtp] = useState<string>('');
   const [otpSent, setOtpSent] = useState<boolean>(false);
-  const [loginDevCode, setLoginDevCode] = useState<string>('');
   const [loginGatewayActive, setLoginGatewayActive] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
   const [authBusy, setAuthBusy] = useState<boolean>(false);
@@ -307,7 +306,6 @@ export default function DashboardPage() {
                           }
                           setOtpSent(true);
                           setLoginGatewayActive(Boolean(data.gatewayActive));
-                          setLoginDevCode(data.devCode || '');
                         } catch (e: any) {
                           setAuthError('Network error requesting OTP');
                         } finally {
@@ -335,7 +333,6 @@ export default function DashboardPage() {
                           onClick={() => {
                             setOtpSent(false);
                             setLoginOtp('');
-                            setLoginDevCode('');
                           }}
                           className="text-[10px] text-blue-600 font-bold hover:underline"
                         >

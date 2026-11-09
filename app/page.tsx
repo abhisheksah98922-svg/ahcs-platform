@@ -250,13 +250,13 @@ export default function HomePage() {
               {/* Master Headline */}
               <h1 className="text-4xl sm:text-5xl lg:text-5xl font-black text-[#102A43] tracking-tight leading-[1.12]">
                 Your Health Identity. <br />
-                <span className="text-[#1769AA]">Connected Care.</span> <br />
-                Greater Confidence.
+                <span className="text-[#1769AA]">Connected. Secure.</span> <br />
+                Accessible.
               </h1>
 
               {/* Master Supporting Text */}
               <p className="text-base sm:text-lg text-[#62748A] font-normal max-w-xl leading-relaxed">
-                AHCS is building a private healthcare identity and access platform designed to help individuals manage essential health information and connect with participating healthcare providers.
+                AHCS brings your essential health information, emergency access, and healthcare identity together in one secure digital platform.
               </p>
 
               {/* Primary & Secondary Action CTAs */}
@@ -265,7 +265,7 @@ export default function HomePage() {
                   href="/apply"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#102A43] hover:bg-[#1769AA] text-white font-bold text-sm shadow-sm transition-all transform hover:-translate-y-0.5"
                 >
-                  <span>Create Your Account</span>
+                  <span>Create Your Health ID</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
@@ -273,7 +273,7 @@ export default function HomePage() {
                   href="/how-it-works"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-[#F5F8FC] text-[#172B4D] font-bold text-sm border border-[#DFE7F0] transition-all"
                 >
-                  <span>Explore How It Works</span>
+                  <span>Explore AHCS</span>
                 </Link>
               </div>
 
@@ -969,7 +969,13 @@ export default function HomePage() {
               href="/apply"
               className="px-7 py-3.5 bg-[#1769AA] hover:bg-[#2884CD] text-white rounded-xl font-bold text-sm shadow-sm transition-all"
             >
-              Create Your Account
+              Create Your Health ID
+            </Link>
+            <Link
+              href="/membership"
+              className="px-6 py-3.5 bg-white text-[#102A43] hover:bg-slate-100 rounded-xl font-bold text-sm shadow-sm transition-all"
+            >
+              Membership Packages
             </Link>
             <Link
               href="/contact"
